@@ -1,4 +1,4 @@
-package com.pretzl.pretzl;
+package com.pretzl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.pretzl.pretzl;
+package com.pretzl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
