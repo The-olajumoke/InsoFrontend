@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+<form>
+    <div class="row">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login">
+        <input type="submit" value="Sign up">
+    </div>
+</form>
+<div id="response"></div>
+<script>
+function UserAction() {
+console.log("Test");
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+alert(this.responseText);
+}
+};
+var params = 'username=username&password=password';
+xhttp.open("POST", "http://localhost:8080/api/auth/signin", true);
+xhttp.setRequestHeader("Content-type", "application/json");
+xhttp.send(params);
+}
+</script>
+</body>
+</html>
+
+
