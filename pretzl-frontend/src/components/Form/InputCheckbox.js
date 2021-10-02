@@ -1,25 +1,24 @@
-import React from 'react'
+import React from "react";
 import { Field } from "formik";
-import FormErrorMessage from './FormErrorMessage';
+import FormErrorMessage from "./FormErrorMessage";
 
-const InputCheckbox=({ children, ...props }) => {
+const InputCheckbox = ({ children, ...props }) => {
+  const { name,onClick } = props;
 
-  const {name} = props;
-
-    return (
-        <label className="flex items-center space-x-2 text-primary">
-         <Field 
+  return (
+    <label className="mb-3 flex items-center text-primary">
+        <input
         type="checkbox"
-        name={name}
-        className="form-checkbox  text-black border-primary rounded-sm focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer"
+        onClick={onClick}
+        className="checkbox 
+        appearance-none text-black border-black rounded-sm focus:outline-none focus:ring-0 focus:ring-offset-0 cursor-pointer"
       />
-      <span className="text-textBody">{children}</span>
-          </label>
-    )
-}
+      <span className="text-textBody text-xs sm:text-base ml-2">
+        {" "}
+        {children}
+      </span>
+    </label>
+  );
+};
 
 export default InputCheckbox;
-
-
-
-  

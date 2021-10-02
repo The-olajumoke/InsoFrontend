@@ -1,9 +1,10 @@
-import { Field, field } from "formik";
-
+import { Field } from "formik";
+import '../../Styling/CustomInput.css'
 const Input = ({ name, type, placeholder }) => {
   return (
     <Field
-      className=" p-3 rounded-md outline-none my-1  h-12 ring-1 ring-border bg-white  text-placeholder"
+      className=" input-box outline-none"
+      
       name={name}
       type={type}
       placeholder={placeholder}
@@ -12,3 +13,16 @@ const Input = ({ name, type, placeholder }) => {
   );
 };
 export default Input;
+
+
+
+
+
+
+
+
+
+
+
+
+// box-shadow: 1px 2px 10px rgba(169, 169, 169, 0.12);

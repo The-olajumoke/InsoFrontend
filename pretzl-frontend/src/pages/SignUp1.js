@@ -2,29 +2,43 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 
 import { MdClose } from "react-icons/md";
+import { FiArrowLeft } from "react-icons/fi";
+
 import SignInCont from "../components/SignInCont";
+import "../Styling/SignUp.css";
+import "../Styling/Login.css";
 import { Form, Formik } from "formik";
 import CustomField from "../components/Form/CustomInput";
 import Button from "../components/SignUp/Button";
+import Page from "../components/SignUp/Page";
+import history from "../utils/history";
+import axios from "axios";
+import {signUpOne} from "../redux/User/userSlice"
+import {useDispatch}from "react-redux"
 function SignUp1({ activeModal, setactiveModal }) {
-  const [guest, setGuest] = useState(false);
-  const [user, setUser] = useState(false);
-  const [continueBtn, setContinueBtn] = useState(false);
-  const [loginBtn, setLoginBtn] = useState(false);
-  const [chosenOption, setChosenOption] = useState(false);
+  const dispatch = useDispatch();
 
 
-  const handleSubmit = (values, { setSubmitting, resetForm,}) => {
-    setTimeout(() => {
-      // STORE VALUES SOMEWHERE
-       
-      resetForm();
-      setSubmitting(false);
-      setactiveModal("signUp2");
-    }, 2000);
+  const handleSubmit = (values, { setSubmitting }) => {
+    // STORE VALUES SOMEWHERE
+    // setSubmitting(false);
+         const newUser = {
+           firstName:values.firstName,
+           lastName:values.lastName,
+           userName:values.userName,
+           phoneNumber: values.phoneNumber
+        
+         };
+        //  console.log(newUser);
+      dispatch(signUpOne(newUser));
+         // actions.setSubmitting(false);
+    // {
+    //   alert(JSON.stringify(values, null, 2));
+    // }
+    setactiveModal("signUp2");
   };
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
   const validationSchema = Yup.object({
     firstName: Yup.string()
       .min(3, "Must be at least 3 characters")
@@ -35,38 +49,69 @@ function SignUp1({ activeModal, setactiveModal }) {
     userName: Yup.string()
       .min(3, "Must be at least 3 characters")
       .required("Required"),
-    phoneNumber: Yup.string()
-      .matches(phoneRegExp, "Invalid phone number")
-      
-  });
 
+    //  .test('Unique Username', 'Username has already been taken',
+    //             function (value) {
+    //                 return new Promise((resolve, reject) => {
+    //                     axios.get(`http://localhost:8003/api/u/user/${value}/available`)
+    //                         .then((res) => {
+    //                             resolve(true)
+    //                         })
+    //                         .catch((error) => {
+    //                             if (error.response.data.content === "The username has already been taken.") {
+    //                                 resolve(false);
+    //                             }
+    //                         })
+    //                 })
+    //             }
+    //         )
+    phoneNumber: Yup.string().matches(phoneRegExp, "Invalid phone number"),
+  });
+  const handleBack = () => {
+    history.push("./sign-up");
+  };
   return (
     <SignInCont
       title="Sign Up"
       largeText="Say something different."
       extraText="Sign up to all Inso features."
       setactiveModal={setactiveModal}
+      previousModal="chooseUser"
+      backBtnFunction={handleBack}
     >
-      <div className="border sm:border-btnText my-2 sm:my-0  flex flex-col justify-around bg-white col-span-3 w-full  rounded-r-3xl   p-0 sm:px-20 sm:py-7 sm:pb-8">
-        <MdClose
-          onClick={() => setactiveModal(false)}
-          className="hidden lg:flex text-black absolute right-5 top-3 sm:right-10 sm:top-10 cursor-pointer  h-8 w-8"
-        />
-
-        <div className="h-auto sm:h-full flex flex-col justify-evenly p-2 sm:pt-5">
-          <Formik
-            initialValues={{
-              firstName: "",
-              lastName: "",
-              userName: "",
-              phoneNumber: "",
+      <div className="signUp-content">
+        <div className="desktopCancel ml-0">
+          <div
+            onClick={() => {
+              history.push("./sign-up");
             }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-            isValid={false}
+            className="backBtn flex items-center"
           >
-            {({ isSubmitting, isValid, isValidating, dirty }) => (
-              <Form className="  flex flex-col">
+            <FiArrowLeft className="backIcon cursor-pointer" />
+            <h3>Back</h3>
+          </div>
+
+          <MdClose
+            onClick={() => {
+              history.push("./");
+            }}
+            className=" cursor-pointer h-8 w-8"
+          />
+        </div>
+        <Formik
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            userName: "",
+            phoneNumber: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+          isValid={false}
+        >
+          {({ isSubmitting, isValid, isValidating, dirty }) => (
+            <Form className="sign-form ">
+              <div className="frame">
                 <CustomField
                   label="First Name"
                   name="firstName"
@@ -92,27 +137,55 @@ function SignUp1({ activeModal, setactiveModal }) {
                   placeholder="Enter phone number"
                   req="(optional)"
                 />
+              </div>
 
-                <div className="">
-                  <Button enable={!(isValid && dirty)}>Continue</Button>
+              <div className="btn-holder">
+                <Button mt="mt-2" disabled={!(isValid && dirty)}>
+                  Continue
+                </Button>
 
-                  <h3 className=" text-base text-textBody text-center my-4">
-                    If you don't have an account,
-                    <button
-                      onClick={() => setactiveModal("logInGuest")}
-                      className="text-primary"
-                    >
-                      Log in
-                    </button>
-                  </h3>
+                <div className=" account-text">
+                  <h3 className="">Already have an account?</h3>
+                  <button onClick={() => history.push("./log-in")}>
+                    Log in
+                  </button>
                 </div>
-              </Form>
-            )}
-          </Formik>
-          {/* button */}
-        </div>
+              </div>
+            </Form>
+          )}
+        </Formik>
+        {/* button */}
       </div>
     </SignInCont>
   );
 }
 export default SignUp1;
+
+// const validationSchema = Yup.object().shape({
+//   username: Yup.string().test('checkDuplUsername', 'same name exists', function (value) {
+//     if (!value) {
+//       const isDuplicateExists = await checkDuplicate(value);
+//       console.log("isDuplicateExists = ", isDuplicateExists);
+//       return !isDuplicateExists;
+//     }
+//     // WHEN THE VALUE IS EMPTY RETURN `true` by default
+//     return true;
+//   }),
+// });
+
+// function checkDuplicate(valueToCheck) {
+//   return new Promise(async (resolve, reject) => {
+//     let isDuplicateExists;
+
+//     // EXECUTE THE API CALL TO CHECK FOR DUPLICATE VALUE
+//     api.post('url', valueToCheck)
+//     .then((valueFromAPIResponse) => {
+//       isDuplicateExists = valueFromAPIResponse; // boolean: true or false
+//       resolve(isDuplicateExists);
+//     })
+//     .catch(() => {
+//       isDuplicateExists = false;
+//       resolve(isDuplicateExists);
+//     })
+//   });
+// }

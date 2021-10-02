@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-
-import firstIcon from "../Exports/firstIcon.svg";
-import secondIcon from "../Exports/secondIcon.svg";
-import whiteicon from "../Exports/whiteicon.svg";
+import "../Styling/Login.css";
 import { MdClose } from "react-icons/md";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 import SignInCont from "../components/SignInCont";
 import { Form, Formik } from "formik";
 import CustomField from "../components/Form/CustomInput";
-import ChooseUser from "./ChooseUser";
 import Button from "../components/SignUp/Button";
+import Page from "../components/SignUp/Page";
+import history from "../utils/history";
 import axios from "axios";
+
 var apiBaseUrl = "http://localhost:8080/api/auth/login";
+
 function LogInUser({ activeModal, setactiveModal }) {
   const [guest, setGuest] = useState(false);
   const [user, setUser] = useState(false);
 
+  const handleBack = () => {
+    history.push("./");
+  };
   const handleSubmit = (e) => {
     console.log(e.password);
     console.log(e.email);
@@ -66,20 +69,34 @@ function LogInUser({ activeModal, setactiveModal }) {
         }
       });
   };
-  return (
-    <SignInCont
-      title="Log in"
-      largeText="Say something different."
-      extraText="Enter login details."
-      setactiveModal={setactiveModal}
-    >
-      <div className="border sm:border-btnText my-5 sm:my-0  flex flex-col justify-around bg-white col-span-3 w-full  rounded-r-3xl  p-0 sm:p-20 sm:pb-12">
-        <MdClose
-          onClick={() => setactiveModal(false)}
-          className="hidden lg:flex text-black absolute right-5 top-3 sm:right-10 sm:top-10 cursor-pointer  h-8 w-8"
-        />
 
-        <div className="h-auto sm:h-full flex flex-col justify-evenly p-2 sm:pt-5">
+  return (
+    <Page>
+      <SignInCont
+        title="Log in"
+        largeText="Say something different."
+        extraText="Enter login details."
+        setactiveModal={setactiveModal}
+        backBtnFunction={handleBack}
+      >
+        <div className="logInUser-content ">
+          <div className=" ml-0 desktopCancel">
+            <div
+              onClick={() => {
+                history.push("./");
+              }}
+              className="backBtn flex cursor-pointer items-center  "
+            >
+              <FiArrowLeft className=" backIcon" />
+              <h3>Back</h3>
+            </div>
+            <MdClose
+              onClick={() => {
+                history.push("./");
+              }}
+              className="text-primary cursor-pointer  h-8 w-8"
+            />
+          </div>
           <Formik
             initialValues={{
               email: "",
@@ -96,39 +113,44 @@ function LogInUser({ activeModal, setactiveModal }) {
             })}
           >
             {({ isSubmitting, isValid, dirty }) => (
-              <Form>
-                <CustomField
-                  label="Email address"
-                  placeholder="Enter email..."
-                  type="email"
-                  name="email"
-                />
-                <CustomField
-                  label="Password"
-                  placeholder="Enter password..."
-                  type="password"
-                  name="password"
-                />
-                <div className="">
-                  <Button disabled={!(isValid && dirty)}>Log In</Button>
+              <Form className="log-form">
+                <div className="form-cont ring-red">
+                  <CustomField
+                    label="Email address"
+                    placeholder="Enter email..."
+                    type="email"
+                    name="email"
+                  />
+                  <CustomField
+                    label="Password"
+                    placeholder="Enter password..."
+                    type="password"
+                    name="password"
+                  />
+                </div>
 
-                  <h3 className=" text-base text-textBody text-center my-4">
-                    If you don't have an account,
+                <div className="btn-holder">
+                  <Button mt="mt-16" disabled={!(isValid && dirty)}>
+                    Log In
+                  </Button>
+
+                  <div className="account-text ">
+                    <h3 className="">If you don't have an account, </h3>
                     <button
-                      onClick={() => setactiveModal("chooseUser")}
+                      onClick={() => history.push("./sign-up")}
                       className="text-primary"
                     >
                       Sign up
                     </button>
-                  </h3>
+                  </div>
                 </div>
               </Form>
             )}
           </Formik>
           {/* button */}
         </div>
-      </div>
-    </SignInCont>
+      </SignInCont>
+    </Page>
   );
 }
 

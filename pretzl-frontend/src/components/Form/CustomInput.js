@@ -1,12 +1,14 @@
 import React from "react";
 import Input from "./Input";
+import "../../Styling/CustomInput.css";
+
 import FormErrorMessage from "./FormErrorMessage";
 
 export const CustomField = (props) => {
   const { name, label, req } = props;
   return (
-    <div className=" h-auto mb-5 sm:mb-5 flex flex-col">
-      <label className="text-primary" htmlFor="name">
+    <div className=" input-container">
+      <label  className="label " htmlFor="name">
         {label}
         {req ? (
           <span className=" text-btnText">{req}</span>
@@ -14,7 +16,7 @@ export const CustomField = (props) => {
           <span style={{ color: "red" }}>*</span>
         )}
       </label>
-      <Input {...props} />
+      <Input  {...props} />
       <FormErrorMessage name={name} />
     </div>
   );

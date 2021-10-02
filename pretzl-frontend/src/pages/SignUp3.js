@@ -1,137 +1,171 @@
 import React, { useState } from "react";
-import * as Yup from "yup";
-
+import "../Styling/SignUp.css";
+import { FiArrowLeft } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import SignInCont from "../components/SignInCont";
-import { FiArrowRight } from "react-icons/fi";
-
-import { Field, Form, Formik } from "formik";
-import CustomField from "../components/Form/CustomInput";
 import InputCheckbox from "../components/Form/InputCheckbox";
-import FormErrorMessage from "../components/Form/FormErrorMessage";
-import CustomSelect from "../components/Form/CustomSelect";
-import Option from "../components/Form/Option";
+import { useDispatch, useSelector } from "react-redux";
+// import FormErrorMessage from "../components/Form/FormErrorMessage";
 import Dropdown from "../components/Form/Dropdown";
 import Button from "../components/SignUp/Button";
+import history from "../utils/history";
+import { signUpThree } from "../redux/User/userSlice";
 
 function SignUp3({ activeModal, setactiveModal }) {
+  const userInfo = useSelector((state) => state.user);
+
   const [guest, setGuest] = useState(false);
-  const [selected, setSelected] = useState("Select One");
-  const [selected2, setSelected2] = useState("Select One");
-  const [selected3, setSelected3] = useState("Where do you work");
+  const [isActive1, setIsActive1] = useState(false);
+  const [isActive2, setIsActive2] = useState(false);
+  const [isActive3, setIsActive3] = useState(false);
+  const [checkDisabled, setCheckDisabled] = useState(true);
+  const [check, setCheck] = useState(false);
+  const [selected, setSelected] = useState("");
+  const [selected2, setSelected2] = useState("");
+  const [selected3, setSelected3] = useState("");
+  const [terms, setTerms] = useState(true);
 
-  const [loginBtn, setLoginBtn] = useState(false);
+  const [allSelected, setallSelected] = useState(false);
+  const dispatch = useDispatch();
 
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-  const validationSchema = Yup.object({
-    acceptedTerms: Yup.boolean()
-      .oneOf([true], "Please check to proceed")
-      .required("Required"),
-  });
+  const handleBack = () => {
+    setactiveModal("signUp2");
+  };
 
+  const handleValidity = (terms) => {
+    {
+      (selected !== "" && selected2 !== "" && selected3 !== ""
+        ? true
+        : false) && terms == true
+        ? setCheckDisabled((checkDisabled) => !checkDisabled)
+        : console.log("still needs validation");
+    }
+    console.log(`terms is ${terms}`);
+  };
+
+  const handleSubmit = () => {
+    const newUser = {
+      primaryUse: selected,
+      profession: selected2,
+      work: selected3,
+      terms: "true",
+    };
+    console.log(newUser);
+    dispatch(signUpThree(newUser));
+
+    console.log(userInfo);
+    {
+      alert(JSON.stringify(userInfo, null, 2));
+    }
+    
+  };
+  const handleCheckbox = () => {
+    setTerms(!terms);
+    handleValidity(terms);
+  };
   return (
     <SignInCont
       title="Sign Up"
       largeText="Final Questions"
+      extraText=""
       setactiveModal={setactiveModal}
+      backBtnFunction={handleBack}
     >
-      <div className="border sm:border-btnText my-5 sm:my-0  flex flex-col justify-around bg-white col-span-3 w-full  rounded-r-3xl   p-0 sm:px-20 sm:py-7 sm:pb-8">
-        <MdClose
-          onClick={() => setactiveModal(false)}
-          className="hidden lg:flex text-black absolute right-5 top-3 sm:right-10 sm:top-10 cursor-pointer  h-8 w-8"
-        />
-
-        <div className="h-auto sm:h-full flex flex-col   justify-between p-2 sm:pt-5">
-          <Formik
-            initialValues={{
-              acceptedTerms: false,
-            }}
-            validationSchema={validationSchema}
-            // onSubmit={handleSubmit}
+      <div className="signUp-content">
+        <div className="desktopCancel ml-0 ">
+          <div
+            onClick={() => setactiveModal("signUp2")}
+            className="backBtn items-center flex cursor-pointer  "
           >
-            {({ isSubmitting, isValid, dirty }) => (
-              <Form className="flex flex-col justify-between h-full">
-                <div className="">
-                  <Dropdown
-                    name="primaryUse"
-                    label="I plan to primarily use Inso for:"
-                    selected={selected}
-                    setSelected={setSelected}
-                    initial="Select One"
-                    options={[
-                      "Education",
-                      "Presentations",
-                      "Team work",
-                      "Other",
-                    ]}
-                  />
-                  <Dropdown
-                    name="user"
-                    label="I am a:"
-                    selected={selected2}
-                    setSelected={setSelected2}
-                    initial="Select One"
-                    options={[
-                      "Student",
-                      "Teacher",
-                      "Instructional Designer/Technologist",
-                      "Presenter",
-                      "Director/Administrator",
-                      "Manager",
-                      "Team Member",
-                      "Other",
-                    ]}
-                  />
-                  <Dropdown
-                    name="work"
-                    label="I am a:"
-                    selected={selected3}
-                    setSelected={setSelected3}
-                    initial="Where do you work"
-                    options={[
-                      "Elementary Education (K-6)",
-                      "Secondary Education (7-12)",
-                      "Higher Education",
-                      "Government",
-                      "Non-profit",
-                      "Other",
-                    ]}
-                  />
-                </div>
+            <FiArrowLeft className=" backIcon" />
+            <h3>Back</h3>
+          </div>
 
-                <div
-                  className=" flex flex-col justify-end
-                "
-                >
-                  <div className="my-3 py-2 flex flex-col">
-                    <InputCheckbox name=" acceptedTerms">
-                      I agree to <a href="">terms & conditions</a>
-                    </InputCheckbox>
-                    <FormErrorMessage name="acceptedTerms" />
-                  </div>
+          <MdClose
+            onClick={() => {
+              history.push("./");
+            }}
+            className="hidden lg:flex text-primary cursor-pointer  h-8 w-8"
+          />
+        </div>
 
-                  <InputCheckbox name="recieveInfo">
-                    I agree to receive Inso news and updates
-                  </InputCheckbox>
-                  <Button mt="mt-2" disabled={!(isValid && dirty)}>
-                    Continue
-                  </Button>
+        <div className="sign-form3">
+          <div className="frame-3">
+            <Dropdown
+              name="primaryUse"
+              handleValidity={handleValidity}
+              label="I plan to primarily use Inso for:"
+              selected={selected}
+              setSelected={setSelected}
+              initial="Select One"
+              options={["Education", "Presentations", "Team work", "Other"]}
+              isActive1={isActive1}
+              setIsActive1={setIsActive1}
+              setIsActive2={setIsActive2}
+              setIsActive3={setIsActive3}
+              initial="select one"
+            />
+            <Dropdown
+              name="user"
+              handleValidity={handleValidity}
+              label="I am a:"
+              selected={selected2}
+              setSelected={setSelected2}
+              initial="Select one"
+              options={[
+                "Student",
+                "Teacher",
+                "Instructional Designer/Technologist",
+                "Presenter",
+                "Director/Administrator",
+                "Manager",
+                "Team Member",
+                "Other",
+              ]}
+              isActive1={isActive2}
+              setIsActive1={setIsActive2}
+              setIsActive2={setIsActive1}
+              setIsActive3={setIsActive3}
+            />
+            <Dropdown
+              name="work"
+              handleValidity={handleValidity}
+              label="I work in:"
+              selected={selected3}
+              setSelected={setSelected3}
+              initial="Where do you work"
+              options={[
+                "Elementary Education (K-6)",
+                "Secondary Education (7-12)",
+                "Higher Education",
+                "Government",
+                "Non-profit",
+                "Other",
+              ]}
+              isActive1={isActive3}
+              setIsActive1={setIsActive3}
+              setIsActive2={setIsActive2}
+              setIsActive3={setIsActive1}
+            />
+          </div>
 
-                  <h3 className=" text-base text-textBody text-center my-4">
-                    If you don't have an account,
-                    <button
-                      onClick={() => setactiveModal("signUp")}
-                      className="text-primary"
-                    >
-                      Sign up
-                    </button>
-                  </h3>
-                </div>
-              </Form>
-            )}
-          </Formik>
-          {/* button */}
+          <div className="other-part">
+            <div className="checkboxCont">
+              <InputCheckbox onClick={handleCheckbox} name=" acceptedTerms">
+                I agree to <a href="">terms & conditions</a>
+              </InputCheckbox>
+              {/* <FormErrorMessage name="acceptedTerms" />  */}
+
+              <InputCheckbox name="recieveInfo">
+                I agree to receive Inso news and updates
+              </InputCheckbox>
+            </div>
+            <div className="">
+              <Button mt="mt-8" onClick={handleSubmit} disabled={checkDisabled}>
+                Continue
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </SignInCont>

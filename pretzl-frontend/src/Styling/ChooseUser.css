@@ -1,0 +1,159 @@
+.main-content {
+  width: 426.65px;
+  height: 100%;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.section-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 45px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #011b25;
+  background: #ffffff;
+  width: 100%;
+  justify-content: center;
+}
+.chooseBtn {
+  width: 100%;
+  height: 108px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-left: 27px;
+  padding: 17px 0 17px 0;
+  cursor: pointer;
+}
+.img {
+  width: 52px;
+  height: 52px;
+}
+.btn-textCont {
+  width: 249.39px;
+  height: 74px;
+}
+.btn-mainText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 7px;
+}
+.btn-subText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  text-align: left;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+}
+.ctnBtn {
+  border-radius: 107px;
+  margin-top: 30px;
+  width: 426px;
+  height: 64px;
+  background: #0eb4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  padding: 17px 153px;
+}
+.right-icon {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+}
+.btn-Cont {
+  height: 371px;
+}
+@media (min-width:1500px) {
+
+}
+@media (max-width: 1440px) {
+
+}
+@media (max-width: 1024px) {
+ 
+  .section-title {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-size:25px ;
+  }
+  .btn-Cont {
+    width: 100%;
+  }
+  .chooseBtn {
+    width: 100%;
+    height: 108px;
+    justify-self: center;
+  }
+}
+@media (max-width: 815px) {
+  .main-content {
+    margin: 0px;
+    width: 100%;
+  }
+}
+@media (max-width: 515px) {
+  
+
+  .img {
+    width: 40px;
+    height: 40px;
+  }
+  .btn-mainText {
+    font-size: 14px;
+
+  }
+  .btn-textCont {
+    width: 183.83px;
+  }
+  .btn-subText {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .section-title {
+    height: 27px;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+  }
+  .ctnBtn {
+    height: 54px;
+  }
+}
+
+@media (max-width: 380px) {
+  .section-title {
+    margin: 20px 0;
+  }
+  .btn-Cont {
+    margin: 0;
+    height: auto;
+  }
+  .main-content{
+    justify-content: flex-start;
+  }
+  
+}

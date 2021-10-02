@@ -2,30 +2,53 @@ import React from "react";
 import { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import FormErrorMessage from "./FormErrorMessage";
-function Dropdown({name, label, selected, initial, setSelected ,options}) {
-
+import "../../Styling/CustomInput.css";
+function Dropdown({
+  name,
+  label,
+  selected,
+  initial,
+  setSelected,
+  options,
+  isActive1,
+  setIsActive1,
+  setIsActive2,
+  setIsActive3,
+  handleValidity,
+}) {
   const [isActive, setIsActive] = useState(false);
-// console.log(selected,initial)
+  // console.log(selected,initial)
   return (
-    <div className="my-2">
-      <label className="text-primary">{label}</label>
-      <div className=" dropdown bg-none rounded-md ring-1 ring-border w-full">
+    <div className="drop-container ">
+      <label className="">{label}</label>
+      <div className="dropdown">
         <div
-          className="dropdown-btn text-textBody"
-          onClick={(e) => setIsActive(!isActive)}
-        >
-          {selected}
+          className=" dropdown-btn"
+          // onChange={handleOnchange}
 
-          <MdKeyboardArrowDown />
+          onClick={(e) => {
+            setIsActive1(!isActive1);
+            setIsActive2(false);
+            setIsActive3(false);
+          }}
+        >
+          {selected == "" ? (
+            <h2 className="placeholder">{initial}</h2>
+          ) : (
+            <h2 className="selected">{selected}</h2>
+          )}
+          <MdKeyboardArrowDown style={{ width: "24px", height: "24px" }} />
         </div>
-        {isActive && (
-          <div className="dropdown-content  bg-white  z-10 w-3/4">
+        {isActive1 && (
+          <div className=" dropdown-content  bg-white  z-10 w-3/4 p-0">
             {options.map((option, index) => (
               <div
                 key={index}
                 onClick={(e) => {
                   setSelected(option);
-                  setIsActive(false);
+
+                  setIsActive1(false);
+                  handleValidity();
                 }}
                 className="dropdown-item  border-b-2 text-textBody border-placeholder border-opacity-5"
               >
@@ -38,7 +61,7 @@ function Dropdown({name, label, selected, initial, setSelected ,options}) {
       {/* {selected === initial ? (
         <FormErrorMessage name={name} />
       ) : null} */}
-      <FormErrorMessage name={name}/>
+      {/* <FormErrorMessage name={name} /> */}
     </div>
   );
 }
