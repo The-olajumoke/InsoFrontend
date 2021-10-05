@@ -54,9 +54,7 @@ function SignUp3({ activeModal, setactiveModal }) {
     dispatch(signUpThree(newUser));
 
     console.log(userInfo);
-    {
-      alert(JSON.stringify(userInfo, null, 2));
-    }
+    // {alert(JSON.stringify(userInfo, null, 2));}
     
   };
   const handleCheckbox = () => {

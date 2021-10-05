@@ -1,28 +1,18 @@
 import { Field } from "formik";
-import '../../Styling/CustomInput.css'
+import { useState } from "react";
+import "../../Styling/CustomInput.css";
 const Input = ({ name, type, placeholder }) => {
+  const [value, setvalue] = useState("");
   return (
     <Field
-      className=" input-box outline-none"
-      
+      className=" input-box"
+      // value={value}
       name={name}
       type={type}
       placeholder={placeholder}
-     
     />
   );
 };
 export default Input;
-
-
-
-
-
-
-
-
-
-
-
 
 // box-shadow: 1px 2px 10px rgba(169, 169, 169, 0.12);

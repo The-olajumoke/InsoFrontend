@@ -1,88 +1,323 @@
-.maintext{
+/* BODY STYLING */
+.bodyCont {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-left: 24px;
+  margin-bottom: 80px;
+  margin-top: 20px;
+  height: 650px;
+  height: 600px;
+}
+.landingLeft {
+  width: 50%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.maintext {
   font-style: normal;
-font-weight: 500;
-font-size: 56px;
-line-height: 84px;
-align-items: center;
-color: #011B25;
-margin-bottom:10px;
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 80px;
+  align-items: center;
+  color: #011b25;
+  margin-bottom: 20px;
 }
-.subText{
-font-style: normal;
-font-weight: normal;
-font-size: 20px;
-line-height: 151.5%;
-display: flex;
-align-items: center;
-color: #686868;
-
-}
-.landingImg {
-  width: 139.7px;
-  height: 71.17px;
-  
-}
-.chooseUser{
-    width: 133px;
-height: 44px;
-}
-.chooseUser:hover{
-    color: white;
-    
-}
-@media (max-width:1380px) {
-.maintext{
-  font-size: 43px;
-}
-.subText{
-font-size: 18px;
-}
-}
-@media (max-width:1068px) {
-.maintext{
-  font-size: 40px;
-line-height: 55px;
-
-}
-.subText{
-font-size: 15px;
-}
-}
-@media (max-width:815px) {
-.maintext{
-  font-size: 30px;
-line-height: 50px;
-
-}
-.subText{
+.subText {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 151.5%;
+  display: flex;
+  align-items: center;
+  color: #686868;
   width: 70%;
+  margin-bottom: 60px;
 }
+
+.createDisCont {
+  width: 100%;
+  display: flex;
 }
-@media (max-width:515px) {
-  .landingImg {
-    width: 87.1px;
-    height: 40.84px;
+
+.createBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 15px 20px 15px 25px;
+  width: 265px;
+  height: 55px;
+  background: #07a098;
+  border-radius: 60px;
+  margin-right: 24px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  color: #ffffff;
+}
+.createBtn2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 20px 15px 25px;
+  width: 270px;
+  height: 55px;
+  border: 2px solid #0eb4f6;
+  box-sizing: border-box;
+  border-radius: 60px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  margin-right: 24px;
+  outline: none;
+}
+.createBtn2 input {
+  width: 100%;
+}
+.joinBtn {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 30, 47, 0.4);
+}
+/*RIGHT CONTAINER*/
+.mockupCont {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.contRel {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 90%;
+  width: auto;
+  position: relative;
+  right: -10%;
+}
+.landingCircle {
+  width: 100%;
+  height: 100%;
+}
+.mockup {
+  position: absolute;
+  right: -5%;
+  height: 100%;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  top: 0;
+}
+@media (max-width: 1380px) {
+  .maintext {
+    font-size: 45px;
+    line-height: 60px;
   }
-  .maintext{
+  .subText {
+    font-size: 16px;
+  }
+  .createDisCont {
+    flex-wrap: wrap;
+  }
+  .createBtn {
+    width: 240px;
+    font-size: 18px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  .createBtn2 {
+    width: 250px;
+    font-size: 18px;
+    margin-right: 16px;
+    margin-bottom: 20px;
+  }
+  .joinBtn {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .landingLeft {
+    width: 45%;
+  }
+  .mockupCont {
+    width: 55%;
+  }
+}
+@media (max-width: 1024px) {
+  .bodyCont {
+    height: 550px;
+  }
+  .maintext {
+    font-size: 40px;
+    line-height: 55px;
+  }
+
+  .subText {
+    font-size: 15px;
+    margin-bottom: 40px;
+    width: 90%;
+  }
+
+  .mockup {
+    right: -5%;
+  }
+  .createBtn {
+    width: 265px;
+  }
+  .createBtn2 {
+    width: 270px;
+  }
+  .maintext {
+    font-size: 38px;
+    line-height: 55px;
+  }
+}
+@media (max-width: 820px) {
+  .bodyCont {
+    flex-direction: column;
+    height: auto;
+    margin-top: 50px;
+    padding-left: 16px;
+  }
+
+  .landingLeft {
+    width: 100%;
+    margin: 50px 0;
+  }
+
+  .createBtn,
+  .createBtn2 {
+    margin-right: 24px;
+  }
+  .mockupCont {
+    width: 100%;
+    position: relative;
+  }
+  .contRel {
+    height: 90%;
+    width: 600px;
+    right: -30%;
+  }
+
+  .landingCircle {
+    width: 80%;
+    height: 80%;
+  }
+  .mockup {
+    right: -15%;
+  }
+
+  .maintext {
+    font-size: 43px;
+    line-height: 55px;
+  }
+  .subText {
+    width: 65%;
+  }
+}
+@media (max-width: 515px) {
+  .bodyCont {
+    margin-top: 30px;
+    height: auto;
+    margin-bottom: 0;
+  }
+  .landingLeft {
+    margin: 0;
+  }
+  .mockupCont {
+  }
+  .contRel {
+    height: 500px;
+    width: 100%;
+    right: -35%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .landingCircle {
+    width: 90%;
+    height: 100%;
+  }
+  .mockup {
+    width: 100%;
+    right: -5%;
+  }
+  .maintext {
     font-style: normal;
-font-weight: 500;
-font-size: 30px;
-color: red;
-line-height: 45px;
-align-items: center;
-color: #011B25;
-margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 33px;
+    line-height: 45px;
+    align-items: center;
+    color: #011b25;
+    margin-bottom: 10px;
   }
-  .subText{
-font-style: normal;
-font-weight: normal;
-font-size: 13.19px;
-line-height: 20px;
-display: flex;
-align-items: center;
-color: #686868;
-width: 90%;
-
+  .subText {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13.19px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    color: #686868;
+    width: 90%;
   }
 }
 
+@media (max-width: 350px) {
+  .maintext {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 45px;
+  }
+  .subText {
+    font-size: 14px;
+    line-height: 20px;
+    width: 90%;
+  }
+
+  .createBtn {
+    width: 220px;
+    height: 45px;
+    font-size: 13px;
+    line-height: 24px;
+  }
+  .createBtn2 {
+    width: 270px;
+    width: 220px;
+    height: 45px;
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .joinBtn {
+    font-size: 13.19px;
+    line-height: 20px;
+  }
+  .mockupCont {
+    height: auto;
+  }
+  .contRel {
+    height: auto;
+    width: 100%;
+    right: -30%;
+  }
+  .landingCircle {
+    height: 100%;
+    width: 100%;
+  }
+  .mockup {
+    right: -5%;
+    height: 100%;
+  }
+}
