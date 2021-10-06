@@ -13,7 +13,6 @@ import { MdChatBubbleOutline } from "react-icons/md";
 import NavIcon from "./NavIcon";
 import downloadImg from "../../Exports/downloadimg.svg";
 function Sidebar({ navSize, setNavSize }) {
-
   return (
     <>
       <nav
@@ -26,7 +25,7 @@ function Sidebar({ navSize, setNavSize }) {
               navSize == "small" ? "justify-end" : "justify-center"
             }    ${navSize == "small" ? "pr-3" : ""}  `}
           >
-            <img className={`user-img`} src={avatar} alt="" />
+            <img className={`user-img ${navSize =="small"? "mb-5": ""}`} src={avatar} alt="" />
             <div
               className={`details ${navSize == "small" ? "hidden" : "flex"} `}
             >
@@ -93,24 +92,24 @@ function Sidebar({ navSize, setNavSize }) {
           />
         </div>
         <div
-          className={`downBtnCont
-         ${navSize == "small" ? "" : "px-12"}
-            ${navSize == "small" ? "pr-3" : ""}
-    ${navSize == "small" ? "justify-end" : "justify-items-start"}`}
+          className={` downBtnCont 
+         ${navSize == "small" ? "px-0" : "px-12"}
+         ${navSize == "small" ?"mt-16" : "mt-10"}
+            ${navSize == "small" ? " pl-10" : ""}
+    ${navSize == "small" ? "justify-end" : "justify-items-start"}
+    ${navSize == "small" ? "" : "mr-4"}
+    `}
         >
           <button
-            className={`upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
-            style={{ width: `${navSize == "small" ? "auto" : "230px"}` }}
+            className={`upgradeBtn  ${navSize == "small" ? "" : "p-3"} flex 
+                ${navSize =="small" ? "justify-items-end": "justify-items-start"}
+            `}
+            style={{
+              width: `${navSize == "small" ? "auto" : "230px"}
+            `,
+            }}
           >
-          {/* <button
-            className={`upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
-            style={{ width: `${navSize == "small" ? "auto" : "230px"}` }}
-          > */}
-            <img
-              src={downloadImg}
-              className="test-svg"
-              alt=""
-            />
+            <img src={downloadImg} alt="" />
             <h3
               className={` ${navSize == "small" ? "hidden" : "flex"}
           `}

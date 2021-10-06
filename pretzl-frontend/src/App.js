@@ -16,9 +16,7 @@ const App = () => {
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          {/* <Landing /> */}
-          {/* <Notification /> */}
-          <Discussion />
+          <Landing />
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />

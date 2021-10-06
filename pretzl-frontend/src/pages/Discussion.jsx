@@ -12,6 +12,10 @@ import CreateNewDis from "../components/Discussion/CreateNewDis";
 
 function Discussion() {
   const [showcreateMenu, setshowcreateMenu] = useState(false);
+  const handleClick =()=>{
+    // setshowcreateMenu(false)
+    alert('clkiue')
+  }
   const DiscussionCont = [];
   // const DiscussionCont = [
   //   {
@@ -61,13 +65,14 @@ function Discussion() {
     <BodyWrapper>
       <ResponsiveTop title="Discussion Title" />
       <div className="disMain ">
-        <div className="disCont ">
-          <div className="discBtnCont ring">
-            <button className="discBtn">
+        <div className="disCont">
+          <div className="discBtnCont">
+            <button className="discBtn" onMouseOver={handleClick}>
               <FiPlus className="icn" />
               Create new discussion
               <IoMdArrowDropdown className="icn" />
               {showcreateMenu ? <CreateNewDis /> : null}
+             {/* <CreateNewDis /> */}
             </button>
             <div className="flex">
               <div className="filterAndsort">
