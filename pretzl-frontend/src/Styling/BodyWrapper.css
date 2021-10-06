@@ -29,8 +29,9 @@
 .sideHeading-logoCont {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 285px;
+  justify-content: flex-start;
+  /* width: 285px; */
+width:50%;
 
   height: 100%;
 }
@@ -40,8 +41,9 @@
 }
 .heading-logo {
   width: 119.49px;
-  height: 60.87px;
-  margin: 0px 56px;
+  /* height:100%; */
+  margin: 0px 56px 0 78px;
+
 }
 
 /* RESPONSIVE HEADER */

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../Styling/BodyWrapper.css";
 import "../../Styling/SideBar.css";
 import avatar from "../../Exports/Avatar.svg";
@@ -11,105 +11,115 @@ import { FaRegCalendar } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdChatBubbleOutline } from "react-icons/md";
 import NavIcon from "./NavIcon";
-import ResponsiveSideBar from "./ResponsiveSideBar";
-
+import downloadImg from "../../Exports/downloadimg.svg";
 function Sidebar({ navSize, setNavSize }) {
+
   return (
     <>
-    <nav
-      style={{ width: `${navSize == "small" ? "109px" : "25%"}` }}
-      className="side-Cont font-Poppins"
-    >
-      <div
-        className={`userDetailsCont     ${
-          navSize == "small" ? "justify-end" : "justify-center"
-        }    ${navSize == "small" ? "pr-3" : ""}  `}
+      <nav
+        style={{ width: `${navSize == "small" ? "109px" : "25%"}` }}
+        className="side-Cont font-Poppins"
       >
-        <img className={`user-img`} src={avatar} alt="" />
-        <div className={`details ${navSize == "small" ? "hidden" : "flex"} `}>
-          <h3>Patrick Dempsey</h3>
-          <span>@patrick</span>
+        <div className="flex flex-col ">
+          <div
+            className={`userDetailsCont ${
+              navSize == "small" ? "justify-end" : "justify-center"
+            }    ${navSize == "small" ? "pr-3" : ""}  `}
+          >
+            <img className={`user-img`} src={avatar} alt="" />
+            <div
+              className={`details ${navSize == "small" ? "hidden" : "flex"} `}
+            >
+              <h3>Patrick Dempsey</h3>
+              <span>@patrick</span>
+            </div>
+          </div>
+          <h2 className={`starter ${navSize == "small" ? "hidden" : "flex"}`}>
+            Starter
+          </h2>
         </div>
-      </div>
 
-      <div className=" allNavItems">
-        <NavItem
-          navSize={navSize}
-          title="Discussions"
-          icon={<MdChatBubbleOutline />}
-          path="/discussion"
-          active
-        />
-        <NavItem
-          navSize={navSize}
-          title="Nofications"
-          icon={<IoMdNotificationsOutline />}
-          path="/notifications"
-        />
-        <NavItem
-          navSize={navSize}
-          title="Analytics"
-          icon={<MdChatBubbleOutline />}
-          path="/analytics"
-          active
-        />
+        <div className=" allNavItems">
+          <NavItem
+            navSize={navSize}
+            title="Discussions"
+            icon={<MdChatBubbleOutline />}
+            path="/discussion"
+            active
+          />
+          <NavItem
+            navSize={navSize}
+            title="Nofications"
+            icon={<IoMdNotificationsOutline />}
+            path="/notifications"
+          />
+          <NavItem
+            navSize={navSize}
+            title="Analytics"
+            icon={<MdChatBubbleOutline />}
+            path="/analytics"
+            active
+          />
 
-        <NavItem
-          navSize={navSize}
-          title="Charts "
-          icon={<FiBarChart />}
-          path="/charts"
-        />
-        <NavItem
-          navSize={navSize}
-          title="Calendar"
-          icon={<FaRegCalendar />}
-          path="/calendar"
-        />
-        <NavItem
-          navSize={navSize}
-          title="Grades"
-          icon={<MdShowChart />}
-          path="/grades"
-        />
-        <NavItem
-          navSize={navSize}
-          title="Contact us"
-          icon={<MdHeadsetMic />}
-          path="/contact"
-        />
-        <NavItem
-          navSize={navSize}
-          title="Settings"
-          icon={<IoSettingsOutline />}
-          path="/settings"
-        />
-      </div>
-      <div
-        className={`downBtnCont
+          <NavItem
+            navSize={navSize}
+            title="Charts "
+            icon={<FiBarChart />}
+            path="/charts"
+          />
+          <NavItem
+            navSize={navSize}
+            title="Calendar"
+            icon={<FaRegCalendar />}
+            path="/calendar"
+          />
+          <NavItem
+            navSize={navSize}
+            title="Grades"
+            icon={<MdShowChart />}
+            path="/grades"
+          />
+          <NavItem
+            navSize={navSize}
+            title="Contact us"
+            icon={<MdHeadsetMic />}
+            path="/contact"
+          />
+          <NavItem
+            navSize={navSize}
+            title="Settings"
+            icon={<IoSettingsOutline />}
+            path="/settings"
+          />
+        </div>
+        <div
+          className={`downBtnCont
          ${navSize == "small" ? "" : "px-12"}
             ${navSize == "small" ? "pr-3" : ""}
     ${navSize == "small" ? "justify-end" : "justify-items-start"}`}
-      >
-        <button
-          className={`upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
-          style={{ width: `${navSize == "small" ? "auto" : "230px"}` }}
         >
-          <NavIcon
-            className={`nav-icon ${navSize == "small" ? "" : "mr-4"}
-            
-            `}
-            icon={<FaRegCalendar />}
-          />
-          <h3
-            className={` ${navSize == "small" ? "hidden" : "flex"}
-          `}
+          <button
+            className={`upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
+            style={{ width: `${navSize == "small" ? "auto" : "230px"}` }}
           >
-            Upgrade
-          </h3>
-        </button>
-      </div>
-    </nav>
+          {/* <button
+            className={`upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
+            style={{ width: `${navSize == "small" ? "auto" : "230px"}` }}
+          > */}
+            <img
+              src={downloadImg}
+              className="test-svg"
+              alt=""
+            />
+            <h3
+              className={` ${navSize == "small" ? "hidden" : "flex"}
+          `}
+            >
+              Upgrade
+            </h3>
+          </button>
+        </div>
+      </nav>
     </>
   );
 }

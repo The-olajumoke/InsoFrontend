@@ -1,97 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { RiInboxArchiveLine } from "react-icons/ri";
+import { BsFilterLeft } from "react-icons/bs";
 import BodyWrapper from "../components/BodyWrapper";
-import DiscussionBox from "../components/DiscussionBox";
-import ResponsiveTop from "../components/ResponsiveTop"
+import DiscussionBox from "../components/Discussion/DiscussionBox";
+import ResponsiveTop from "../components/ResponsiveTop";
 import "../Styling/Discussion.css";
-
+import NoMessageYet from "../components/Discussion/NoMessageYet";
+import CreateNewDis from "../components/Discussion/CreateNewDis";
 
 function Discussion() {
+  const [showcreateMenu, setshowcreateMenu] = useState(false);
+  const DiscussionCont = [];
+  // const DiscussionCont = [
+  //   {
+  //     title: "Price Action in Foreign Exchange",
+  //     date: "Mar 21",
+  //     numberOfPeople: "4",
+  //     name: "Patrick Dempsey",
+  //     code: "51RP70F",
+  //   },
+  //   {
+  //     title: "Types of Mineral Resources",
+  //     date: "Mar 21",
+  //     numberOfPeople: "2",
+  //     name: "Fakomi Idowu",
+  //     code: "89RWT2",
+  //   },
+  //   {
+  //     title: "Benefits of Foreign Exchange",
+  //     date: "Mar 21",
+  //     numberOfPeople: "3",
+  //     name: "Patrick Dempsey",
+  //     code: "51RP70F",
+  //   },
+  //   {
+  //     title: "Types of Mineral Resources",
+  //     date: "Mar 21",
+  //     numberOfPeople: "2",
+  //     name: "Patrick Dempsey",
+  //     code: "51RP70F",
+  //   },
+  //   {
+  //     title: "Price Action in Foreign Exchange",
+  //     date: "Mar 21",
+  //     numberOfPeople: "4",
+  //     name: "Patrick Dempsey",
+  //     code: "51RP70F",
+  //   },
+  //   {
+  //     title: "Price Action in Foreign Exchange",
+  //     date: "Mar 21",
+  //     numberOfPeople: "4",
+  //     name: "Patrick Dempsey",
+  //     code: "51RP70F",
+  //   },
+  // ];
   return (
     <BodyWrapper>
-        <ResponsiveTop title="Discussion Title"/>
+      <ResponsiveTop title="Discussion Title" />
       <div className="disMain ">
         <div className="disCont ">
-          <div className="discBtnCont">
-            <button 
-            className="discBtn">
-                <FiPlus/>
-                Create new discussion
-                <IoMdArrowDropdown/>
-                </button>
+          <div className="discBtnCont ring">
+            <button className="discBtn">
+              <FiPlus className="icn" />
+              Create new discussion
+              <IoMdArrowDropdown className="icn" />
+              {showcreateMenu ? <CreateNewDis /> : null}
+            </button>
+            <div className="flex">
+              <div className="filterAndsort">
+                <RiInboxArchiveLine className="topIcon" />
+                Archives
+              </div>
+              <div className="filterAndsort">
+                <BsFilterLeft className="topIcon" />
+                Sort by...
+              </div>
+            </div>
           </div>
           <div className="allDisCont">
-            <DiscussionBox
-              title="Price Action in Foreign Exchange"
-              date="Mar 21"
-              numberOfPeople="4"
-              name="Patrick Dempsey"
-              code="51RP70F"
-            />
-            <DiscussionBox
-              title="Price Action in Foreign Exchange"
-              date="Mar 21"
-              numberOfPeople="4"
-              name="Patrick Dempsey"
-              code="51RP70F"
-            />
-            <DiscussionBox
-              title="Price Action in Foreign Exchange"
-              date="Mar 21"
-              numberOfPeople="4"
-              name="Patrick Dempsey"
-              code="51RP70F"
-            />
-            <DiscussionBox
-              title="Types of Mineral Resources"
-              date="Mar 21"
-              numberOfPeople="2"
-              name="Fakomi Idowu"
-              code="89RWT2"
-            />
-            <DiscussionBox
-              title="Benefits of Foreign Exchange"
-              date="Mar 21"
-              numberOfPeople="6"
-              name="Patrick Dempsey"
-              code="46FG0H"
-            />
-            <DiscussionBox
-              title="Types of Mineral Resources"
-              date="Mar 21"
-              numberOfPeople="2"
-              name="Fakomi Idowu"
-              code="89RWT2"
-            />
-            <DiscussionBox
-              title="Price Action in Foreign Exchange"
-              date="Mar 21"
-              numberOfPeople="4"
-              name="Patrick Dempsey"
-              code="51RP70F"
-            />
-            <DiscussionBox
-              title="Types of Mineral Resources"
-              date="Mar 21"
-              numberOfPeople="2"
-              name="Fakomi Idowu"
-              code="89RWT2"
-            />
-            <DiscussionBox
-              title="Price Action in Foreign Exchange"
-              date="Mar 21"
-              numberOfPeople="4"
-              name="Patrick Dempsey"
-              code="51RP70F"
-            />
-            <DiscussionBox
-              title="Price Action in Foreign Exchange"
-              date="Mar 21"
-              numberOfPeople="4"
-              name="Patrick Dempsey"
-              code="51RP70F"
-            />
+            {DiscussionCont.length < 1 ? (
+              <NoMessageYet />
+            ) : (
+              DiscussionCont.map((dis, index) => (
+                <DiscussionBox
+                  title={dis.title}
+                  date={dis.date}
+                  numberOfPeople={dis.numberOfPeople}
+                  name={dis.name}
+                  code={dis.code}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

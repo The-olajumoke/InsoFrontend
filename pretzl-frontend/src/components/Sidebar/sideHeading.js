@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import toggleBtn3 from "../../Exports/Toggle.svg";
-import Logo2 from "../../Exports/inso 4.svg";
+// import Logo2 from "../../Exports/inso 4.svg";
+import Logo2 from "../../Exports/newLogo.svg"
+
 import Logo from "../../Exports/inso 4.png";
 import toggleBtnClosed from "../../Exports/Hamburger.svg";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -23,11 +25,11 @@ ResponsiveHandleClick
 
       `}
       >
-        <div className="sideHeading-logoCont">
+        <div className=" sideHeading-logoCont">
           <button onClick={handleClick}>
             <img className="toggleBtn" src={icon} alt="" />
           </button>
-          <img className="heading-logo" src={Logo2} alt="" />
+          <img className="heading-logo " src={Logo2} alt="" />
         </div>
       </div>
       {/* RESPONSIVE SIDEBAR */}

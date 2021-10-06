@@ -14,11 +14,11 @@ import Contact from "./pages/Contact";
 const App = () => {
   return (
     <Router history={history}>
-
       <Switch>
         <Route exact path="/">
-          <Landing />
+          {/* <Landing /> */}
           {/* <Notification /> */}
+          <Discussion />
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />

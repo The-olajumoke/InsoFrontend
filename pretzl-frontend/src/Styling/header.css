@@ -86,8 +86,7 @@
     height: auto;
     width: 80%;
   }
-  .buttonCont {
-  }
+
   .headerBtn {
     padding: 5px 15px;
     width: 90px;
@@ -100,3 +99,7 @@
     margin-right:15px;
   }
 }
+/* 
+git remote add second https://github.com/The-olajumoke/ibnsoFrontend.git
+git branch -M main
+git push -u origin main */

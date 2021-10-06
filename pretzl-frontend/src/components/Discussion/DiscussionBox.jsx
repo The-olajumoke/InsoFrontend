@@ -1,7 +1,7 @@
 import React from "react";
 import { MdChatBubbleOutline, MdContentCopy, MdLock, MdLockOpen } from "react-icons/md";
-import "../Styling/Discussion.css";
-import img from "../Exports/DisIcon.svg";
+import "../../Styling/Discussion.css";
+import img from "../../Exports/DisIcon.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 function DiscussionBox({ title, code,name, numberOfPeople, date }) {
   return (

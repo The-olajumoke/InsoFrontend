@@ -49,6 +49,7 @@ function LogInUser({ activeModal, setactiveModal }) {
               "Roles : " +
               response.data.roles
           );
+          history.push("./discussion");
         } else if (response.status == 401) {
           console.log("Username password do not match");
           alert("Username password do not match");
