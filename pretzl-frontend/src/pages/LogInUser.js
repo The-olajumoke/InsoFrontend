@@ -10,6 +10,7 @@ import Button from "../components/SignUp/Button";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
 import axios from "axios";
+import NotiPopUp from "../components/NotiPopUp";
 
 var apiBaseUrl = "http://localhost:8080/api/auth/login";
 
@@ -49,6 +50,8 @@ function LogInUser({ activeModal, setactiveModal }) {
               "Roles : " +
               response.data.roles
           );
+        // <NotiPopUp/>
+
           history.push("./discussion");
         } else if (response.status == 401) {
           console.log("Username password do not match");

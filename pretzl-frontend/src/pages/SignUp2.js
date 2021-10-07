@@ -9,23 +9,22 @@ import { Form, Formik } from "formik";
 import CustomField from "../components/Form/CustomInput";
 import { useDispatch } from "react-redux";
 import Button from "../components/SignUp/Button";
-import {signUpTwo} from "../redux/User/userSlice"
+import { signUpTwo } from "../redux/User/userSlice";
 import history from "../utils/history";
 function SignUp2({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
 
-  
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = (values, { resetForm }) => {
     // STORE VALUES SOMEWHERE
-    // setSubmitting(false);
-    // resetForm();
-const newUser = {
-email: values.email,
-  alternativeEmail: values.alternativeEmail,
-  password: values.password,
-  repeatPassword: values.repeatPassword,
-};
-dispatch(signUpTwo(newUser))
+
+    const newUser = {
+      email: values.email,
+      alternativeEmail: values.alternativeEmail,
+      password: values.password,
+      repeatPassword: values.repeatPassword,
+    };
+    dispatch(signUpTwo(newUser));
+    resetForm();
     setactiveModal("signUp3");
   };
 
@@ -36,21 +35,19 @@ dispatch(signUpTwo(newUser))
       .required("Required"),
     password: Yup.string()
       .min(8, "Must be at least 8 characters")
-      .required("Required")
-      // .matches(
-      //   /^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/,
-      //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-      // )
-      ,
-
+      .required("Required"),
+    // .matches(
+    //   /^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/,
+    //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+    // )
     repeatPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Passwords must match")
       .required("Required"),
   });
 
- const handleBack = () => {
-   setactiveModal("signUp1");
- };
+  const handleBack = () => {
+    setactiveModal("signUp1");
+  };
   return (
     <SignInCont
       title="Sign Up"

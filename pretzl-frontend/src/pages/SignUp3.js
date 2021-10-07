@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Styling/SignUp.css";
 import { FiArrowLeft } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import SignInCont from "../components/SignInCont";
 import InputCheckbox from "../components/Form/InputCheckbox";
-import { useDispatch, useSelector } from "react-redux";
-// import FormErrorMessage from "../components/Form/FormErrorMessage";
+import { useDispatch } from "react-redux";
 import Dropdown from "../components/Form/Dropdown";
 import Button from "../components/SignUp/Button";
 import history from "../utils/history";
 import { signUpThree } from "../redux/User/userSlice";
-
+var apiBaseUrl = "http://localhost:8080/api/auth/signup";
 function SignUp3({ activeModal, setactiveModal }) {
-  const userInfo = useSelector((state) => state.user);
 
+
+  
+
+  // DISPLAY SUCCESS MESSAGE
   const [guest, setGuest] = useState(false);
   const [isActive1, setIsActive1] = useState(false);
   const [isActive2, setIsActive2] = useState(false);
@@ -24,7 +26,6 @@ function SignUp3({ activeModal, setactiveModal }) {
   const [selected2, setSelected2] = useState("");
   const [selected3, setSelected3] = useState("");
   const [terms, setTerms] = useState(true);
-
   const [allSelected, setallSelected] = useState(false);
   const dispatch = useDispatch();
 
@@ -52,10 +53,13 @@ function SignUp3({ activeModal, setactiveModal }) {
     };
     console.log(newUser);
     dispatch(signUpThree(newUser));
-
-    console.log(userInfo);
+    // console.log(userInfo);
+    // PostUser();
     // {alert(JSON.stringify(userInfo, null, 2));}
-    
+    setSelected("");
+    setSelected2("");
+    setSelected3("");
+    setCheckDisabled(false);
   };
   const handleCheckbox = () => {
     setTerms(!terms);

@@ -8,6 +8,7 @@ function SignUpModal() {
   const [activeModal, setactiveModal] = useState("signUp1");
   return (
     <Page>
+
       {activeModal === "signUp1" ? (
         <SignUp1 activeModal={activeModal} setactiveModal={setactiveModal} />
       ) : null}

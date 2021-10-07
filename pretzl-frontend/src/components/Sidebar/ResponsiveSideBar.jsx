@@ -12,11 +12,11 @@ function ResponsiveSideBar({ navSize, avatar }) {
     <nav className="responNav">
       <div
         className={`userDetailsCont  ring    ${
-          navSize == "small" ? "justify-end" : "justify-center"
-        }    ${navSize == "small" ? "pr-3" : ""}  `}
+          navSize ==="small" ? "justify-end" : "justify-center"
+        }    ${navSize === "small" ? "pr-3" : ""}  `}
       >
         {/* <img className={`user-img`} src={avatar} alt="" /> */}
-        <div className={`details ${navSize == "small" ? "hidden" : "flex"} `}>
+        <div className={`details ${navSize === "small" ? "hidden" : "flex"} `}>
           <h3>Patrick Dempsey</h3>
           <span>@patrick</span>
         </div>

@@ -13,31 +13,25 @@ import Button from "../components/SignUp/Button";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
 import axios from "axios";
-import {signUpOne} from "../redux/User/userSlice"
-import {useDispatch}from "react-redux"
+import { signUpOne } from "../redux/User/userSlice";
+import { useDispatch } from "react-redux";
 function SignUp1({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
 
-
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = (values, { resetForm }) => {
     // STORE VALUES SOMEWHERE
-    // setSubmitting(false);
-         const newUser = {
-           firstName:values.firstName,
-           lastName:values.lastName,
-           userName:values.userName,
-           phoneNumber: values.phoneNumber
-        
-         };
-        //  console.log(newUser);
-      dispatch(signUpOne(newUser));
-         // actions.setSubmitting(false);
-    // {
-    //   alert(JSON.stringify(values, null, 2));
-    // }
+    const newUser = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      userName: values.userName,
+      phoneNumber: values.phoneNumber,
+    };
+    dispatch(signUpOne(newUser));
+    resetForm();
     setactiveModal("signUp2");
   };
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   const validationSchema = Yup.object({
     firstName: Yup.string()
