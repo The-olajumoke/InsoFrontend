@@ -60,7 +60,7 @@ const Landing = () => {
             <img className="mockup" src={landingimg} draggable="false" alt="" />
           </div>
         </div>
-        <NotiPopUp/>
+        {/* <NotiPopUp/> */}
       </div>
       <Footer />
     </div>
