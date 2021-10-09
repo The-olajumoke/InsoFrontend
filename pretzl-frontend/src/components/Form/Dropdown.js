@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import FormErrorMessage from "./FormErrorMessage";
+
 import "../../Styling/CustomInput.css";
 function Dropdown({
-  name,
   label,
   selected,
   initial,
@@ -24,7 +23,6 @@ function Dropdown({
       <div className="dropdown">
         <div
           className=" dropdown-btn"
-          // onChange={handleOnchange}
 
           onClick={(e) => {
             setIsActive1(!isActive1);

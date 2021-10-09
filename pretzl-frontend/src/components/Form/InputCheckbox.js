@@ -1,6 +1,5 @@
 import React from "react";
-import { Field } from "formik";
-import FormErrorMessage from "./FormErrorMessage";
+
 
 const InputCheckbox = ({ children, ...props }) => {
   const { name,onClick } = props;
