@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../Styling/SignUp.css";
 import { FiArrowLeft } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
@@ -8,14 +8,14 @@ import { useDispatch } from "react-redux";
 import Dropdown from "../components/Form/Dropdown";
 import Button from "../components/SignUp/Button";
 import history from "../utils/history";
+import store from "../redux/store";
 import { signUpThree } from "../redux/User/userSlice";
+import CustomizedSnackbars from "../components/NotiPopUp";
 var apiBaseUrl = "http://localhost:8080/api/auth/signup";
 function SignUp3({ activeModal, setactiveModal }) {
-
-
-  
-
   // DISPLAY SUCCESS MESSAGE
+  console.log(store);
+
   const [guest, setGuest] = useState(false);
   const [isActive1, setIsActive1] = useState(false);
   const [isActive2, setIsActive2] = useState(false);
@@ -28,6 +28,7 @@ function SignUp3({ activeModal, setactiveModal }) {
   const [terms, setTerms] = useState(true);
   const [allSelected, setallSelected] = useState(false);
   const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleBack = () => {
     setactiveModal("signUp2");
@@ -52,10 +53,25 @@ function SignUp3({ activeModal, setactiveModal }) {
       terms: "true",
     };
     console.log(newUser);
-    dispatch(signUpThree(newUser));
-    // console.log(userInfo);
-    // PostUser();
-    // {alert(JSON.stringify(userInfo, null, 2));}
+    // THIS IS THE DISPATCH ACTION
+   dispatch(signUpThree(newUser));
+
+    // THIS IS ACTION THAT SHOULD HAPPEN AFTER GETTING THE API RESPONSE
+    const currentStore = store.getState();
+    console.log(currentStore);
+    const currentSignedState = currentStore.user.signedState;
+    console.log(currentSignedState);
+    alert(`current signed state is ${currentSignedState}`);
+
+    if (currentSignedState) {
+      setShowAlert(true);
+      setTimeout(() => {
+        // history.push("./log-in");
+      }, 2000);
+    } else {
+      setShowAlert(false);
+    }
+
     setSelected("");
     setSelected2("");
     setSelected3("");
@@ -169,6 +185,14 @@ function SignUp3({ activeModal, setactiveModal }) {
             </div>
           </div>
         </div>
+        {showAlert ? (
+          <CustomizedSnackbars
+            title="Account created Successfully"
+            text="Log in to start a discussion."
+          />
+        ) : (
+          ""
+        )}
       </div>
     </SignInCont>
   );

@@ -9,6 +9,7 @@ import { FiArrowRight } from "react-icons/fi";
 import SignInCont from "../components/SignInCont";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
+
 function ChooseUser({ activeModal, setactiveModal }) {
   const [guest, setGuest] = useState(false);
   const [user, setUser] = useState(false);
@@ -58,7 +59,7 @@ function ChooseUser({ activeModal, setactiveModal }) {
               <div className=" btn-textCont">
                 <h3
                   className={`btn-mainText  ${
-                    user ? "text-white" :"text-textBody"
+                    user ? "text-white" : "text-textBody"
                   }`}
                 >
                   As User

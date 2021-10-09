@@ -2,9 +2,7 @@ import { FiArrowRight } from "react-icons/fi";
 
 const Button = ({ children, ...props }) => {
   const { disabled, onClick, mt } = props;
-  // console.log(isValid);
-  // console.log(isValidating);
-  console.log(`disabled is${disabled}`);
+  
 
   return (
     <button

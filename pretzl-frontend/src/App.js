@@ -10,6 +10,8 @@ import Analytics from "./pages/Analytics.jsx";
 import Notification from "./pages/Notification";
 import Discussion from "./pages/Discussion.jsx";
 import Contact from "./pages/Contact";
+import NotiPopUp from "./components/NotiPopUp";
+import CustomizedSnackbars from "./components/NotiPopUp";
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Landing />
+          {/* <CustomizedSnackbars /> */}
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />

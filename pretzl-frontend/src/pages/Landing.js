@@ -5,15 +5,19 @@ import landingimg from "../Exports/landingimg.svg";
 import landingCircle from "../Exports/landingcircle.svg";
 import { FiMessageSquare } from "react-icons/fi";
 import "../Styling/Landing.css";
-import NotiPopUp from "../components/NotiPopUp";
+import CustomizedSnackbars from "../components/NotiPopUp";
+// import NotiPopUp from "../components/NotiPopUp";
+
 const Landing = () => {
   const [value, setValue] = useState("");
   const handleKey = (e) => {
     setValue(e.target.value);
   };
+
   return (
     <div className=" h-auto sm:h-auto font-Poppins w-full p-0 flex flex-col items-center justify-between ">
       <Header />
+
       <div className=" bodyCont">
         <div className="landingLeft   ">
           <div className=" textCont">
@@ -60,11 +64,9 @@ const Landing = () => {
             <img className="mockup" src={landingimg} draggable="false" alt="" />
           </div>
         </div>
-        {/* <NotiPopUp/> */}
       </div>
       <Footer />
     </div>
   );
 };
-
 export default Landing;

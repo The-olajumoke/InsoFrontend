@@ -11,6 +11,7 @@ import Page from "../components/SignUp/Page";
 import history from "../utils/history";
 import axios from "axios";
 import NotiPopUp from "../components/NotiPopUp";
+import CustomizedSnackbars from "../components/NotiPopUp";
 
 var apiBaseUrl = "http://localhost:8080/api/auth/login";
 
@@ -154,6 +155,10 @@ function LogInUser({ activeModal, setactiveModal }) {
           {/* button */}
         </div>
       </SignInCont>
+      <CustomizedSnackbars
+        title="Account created Successfully"
+        text="Log in to start a discussion."
+      />
     </Page>
   );
 }

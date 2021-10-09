@@ -17,7 +17,9 @@ import { signUpOne } from "../redux/User/userSlice";
 import { useDispatch } from "react-redux";
 function SignUp1({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
-
+const showResult = () => {
+  alert("hello world");
+};
   const handleSubmit = (values, { resetForm }) => {
     // STORE VALUES SOMEWHERE
     const newUser = {
@@ -26,10 +28,11 @@ function SignUp1({ activeModal, setactiveModal }) {
       userName: values.userName,
       phoneNumber: values.phoneNumber,
     };
-    dispatch(signUpOne(newUser));
+    dispatch(signUpOne(newUser,showResult));
     resetForm();
     setactiveModal("signUp2");
   };
+  
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -64,6 +67,7 @@ function SignUp1({ activeModal, setactiveModal }) {
   const handleBack = () => {
     history.push("./sign-up");
   };
+  
   return (
     <SignInCont
       title="Sign Up"
