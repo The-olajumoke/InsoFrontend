@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import history from "../../utils/history";
 import axios from "axios";
 import PopIcon from "../../components/PopIcon";
@@ -20,7 +20,6 @@ const initialState = {
     terms: false,
   },
   signedState: false,
-  loading: false,
 };
 
 const userSlice = createSlice({
@@ -62,13 +61,13 @@ const userSlice = createSlice({
     },
   },
 });
-export const signUpOne = (newUser) => (dispatch) => {
+export const signUpOne = (newUser, showResult) => (dispatch) => {
   dispatch(setCurrentUser(newUser));
 };
 export const signUpTwo = (newUser) => (dispatch) => {
   dispatch(setCurrentUsertwo(newUser));
 };
-export const signUpThree = (newUser) => async (dispatch, getState) => {
+export const signUpThree = (newUser) => (dispatch, getState) => {
   dispatch(setCurrentUserthree(newUser));
   const currentState = getState();
   const userDetails = currentState.user.user;
@@ -90,7 +89,13 @@ export const signUpThree = (newUser) => async (dispatch, getState) => {
     receiveInsoUpdates: userDetails.terms,
   };
   console.log(payload);
-//  await dispatch(SignUpUser(payload));
+  dispatch(SignUpUser(payload));
+};
+export const SignUpUser = (payload) => (dispatch) => {
+  console.log(payload);
+  {
+    alert(JSON.stringify(payload, null, 2));
+  }
 
   var apiBaseUrl = "http://localhost:8080/api/auth/signup";
 
@@ -99,39 +104,28 @@ export const signUpThree = (newUser) => async (dispatch, getState) => {
   axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
   axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
 
-  try {
-    const res = await axios.post(apiBaseUrl, payload);
-    console.log(res);
-    console.log(res.data.message);
-    console.log(res.status);
-    dispatch(setSignedTrue());
-  } catch (error) {
-    console.log(error.res);
-  }
-
-};
-
-// export const signUpThree =createAsyncThunk()
-
-export const SignUpUser = (payload) => async (dispatch) => {
-  console.log(payload);
-  {
-    alert(JSON.stringify(payload, null, 2));
-  }
-
-  // var apiBaseUrl = "http://localhost:8080/api/auth/signup";
-
-  // axios.defaults.headers.post["Content-Type"] =
-  //   "application/json;charset=utf-8";
-  // axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-  // axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
+  axios.post(apiBaseUrl, payload).then(function (response) {
+    console.log(response);
+    if (response.status == 200) {
+      console.log("SignUp Successful");
+      alert("SignUp Successful" + `\n`);
+      dispatch(setSignedTrue());
+      history.push("./log-in");
+    } else if (response.status == 401) {
+      console.log("error from payload");
+      alert("error from payload");
+      dispatch(setSignedFalse());
+    } else {
+      console.log("Unsuccessful SignUp");
+      alert("Unsuccessful SignUp");
+      dispatch(setSignedFalse());
+    }
+  });
 
   // try {
-  //   const res = await axios.post(apiBaseUrl, payload);
+  //   const res = await axios.post(apiBaseUrl,payload)
   //   console.log(res);
-  //   console.log(res.data.message);
   //   console.log(res.status);
-  //   dispatch(setSignedTrue());
   // } catch (error) {
   //   console.log(error.res);
   // }
@@ -145,21 +139,3 @@ export const {
   setSignedFalse,
 } = userSlice.actions;
 export default userSlice.reducer;
-
-// axios.post(apiBaseUrl, payload).then(function (response) {
-//   console.log(response);
-//   if (response.status == 200) {
-//     console.log("SignUp Successful");
-//     alert("SignUp Successful" + `\n`);
-//     dispatch(setSignedTrue());
-//     // history.push("./log-in");
-//   } else if (response.status == 401) {
-//     console.log("error from payload");
-//     alert("error from payload");
-//     dispatch(setSignedFalse());
-//   } else {
-//     console.log("Unsuccessful SignUp");
-//     alert("Unsuccessful SignUp");
-//     dispatch(setSignedFalse());
-//   }
-// });

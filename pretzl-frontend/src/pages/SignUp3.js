@@ -54,14 +54,15 @@ function SignUp3({ activeModal, setactiveModal }) {
     };
     console.log(newUser);
     // THIS IS THE DISPATCH ACTION
-   dispatch(signUpThree(newUser));
+    dispatch(signUpThree(newUser));
 
     // THIS IS ACTION THAT SHOULD HAPPEN AFTER GETTING THE API RESPONSE
     const currentStore = store.getState();
     console.log(currentStore);
-    const currentSignedState = currentStore.user.signedState;
-    console.log(currentSignedState);
-    alert(`current signed state is ${currentSignedState}`);
+    // const currentSignedState = currentStore.user.signedState;
+    // console.log(currentSignedState);
+    const currentSignedState = true;
+    // alert(`current signed state is ${currentSignedState}`);
 
     if (currentSignedState) {
       setShowAlert(true);
