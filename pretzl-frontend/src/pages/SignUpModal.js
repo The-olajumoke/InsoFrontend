@@ -10,7 +10,7 @@ function SignUpModal() {
     <Page>
 
       {activeModal === "signUp1" ? (
-        <SignUp1 activeModal={activeModal} setactiveModal={setactiveModal} />
+        <SignUp3 activeModal={activeModal} setactiveModal={setactiveModal} />
       ) : null}
       {activeModal === "signUp2" ? (
         <SignUp2 activeModal={activeModal} setactiveModal={setactiveModal} />

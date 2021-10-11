@@ -59,16 +59,10 @@ function SignUp3({ activeModal, setactiveModal }) {
     // THIS IS ACTION THAT SHOULD HAPPEN AFTER GETTING THE API RESPONSE
     const currentStore = store.getState();
     console.log(currentStore);
-    // const currentSignedState = currentStore.user.signedState;
-    // console.log(currentSignedState);
-    const currentSignedState = true;
-    // alert(`current signed state is ${currentSignedState}`);
-
+    const currentSignedState = currentStore.user.signedState;
+    console.log(currentSignedState);
     if (currentSignedState) {
       setShowAlert(true);
-      setTimeout(() => {
-        // history.push("./log-in");
-      }, 2000);
     } else {
       setShowAlert(false);
     }
@@ -186,14 +180,14 @@ function SignUp3({ activeModal, setactiveModal }) {
             </div>
           </div>
         </div>
-        {showAlert ? (
+        {/* {showAlert ? ( */}
           <CustomizedSnackbars
             title="Account created Successfully"
             text="Log in to start a discussion."
           />
-        ) : (
+        {/* ) : (
           ""
-        )}
+        )} */}
       </div>
     </SignInCont>
   );

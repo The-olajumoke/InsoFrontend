@@ -51,8 +51,7 @@ function LogInUser({ activeModal, setactiveModal }) {
               "Roles : " +
               response.data.roles
           );
-        // <NotiPopUp/>
-
+          const token = response.data.accessToken;
           history.push("./discussion");
         } else if (response.status == 401) {
           console.log("Username password do not match");
@@ -155,10 +154,10 @@ function LogInUser({ activeModal, setactiveModal }) {
           {/* button */}
         </div>
       </SignInCont>
-      <CustomizedSnackbars
+      {/* <CustomizedSnackbars
         title="Account created Successfully"
         text="Log in to start a discussion."
-      />
+      /> */}
     </Page>
   );
 }

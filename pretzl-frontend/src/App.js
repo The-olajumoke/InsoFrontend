@@ -18,8 +18,8 @@ const App = () => {
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          <Landing />
-          {/* <CustomizedSnackbars /> */}
+          {/* <Landing /> */}
+          <Discussion />
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />
