@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import BodyWrapper from "../components/BodyWrapper";
 import TopDiscusionText from "../components/Analytics/TopDiscusionText";
-import "../Styling/Analytics.css";
+import "../Styling/Analytics/Analytics.css";
 import OverviewImg from "../Exports/dashboard/Pie Circular@2x.png";
 import Courses from "../components/Analytics/Courses";
 import ResponsiveTop from "../components/ResponsiveTop";
 import { IoMdArrowDropdown } from "react-icons/io";
+import Discussion from "../components/Analytics/Discussion";
+import Threads from "../components/Analytics/Threads";
 function Overview() {
+  const [active, setActive] = useState("courses");
+
+  const handleClick = (e) => {
+    console.log(e.target.name);
+    setActive(e.target.name);
+  };
   return (
     <BodyWrapper>
       <ResponsiveTop title="Analytics" />
       <div className=" overMain ">
-        <div className=" overviewCont ">
+        <div className=" overviewCont">
           {/* first section */}
-          {/*Courses  */}
           <div className="courses-overview">
             <div className="contForWidth">
               <div className="course-item">
@@ -46,16 +53,32 @@ function Overview() {
                 </button>
               </div>
 
-              <Courses />
+              {active == "courses" && <Courses handleClick={handleClick} />}
+              {active == "discussions" && (
+                <Discussion handleClick={handleClick} />
+              )}
+              {active == "threads" && <Threads handleClick={handleClick} />}
             </div>
-            <div className="ring sect2">
-              <div>
+            <div className="sect2">
+              <div className="postTypes">
                 <input type="radio" name="type" id="" />
                 <label>Users</label>
               </div>
-              <div>
+              <div className="postTypes">
                 <input type="radio" name="type" id="" />
                 <label>Posts</label>
+              </div>
+              <div className="postTypes">
+                <input type="radio" name="type" id="" />
+                <label>Reactions</label>
+              </div>
+              <div className="postTypes">
+                <input type="radio" name="type" id="" />
+                <label>Likes</label>
+              </div>
+              <div className="postTypes">
+                <input type="radio" name="type" id="" />
+                <label>Upvotes</label>
               </div>
             </div>
           </div>
@@ -67,11 +90,11 @@ function Overview() {
               <div className="">
                 <TopDiscusionText
                   topic="The Economics of Democracy."
-                  category="Economics & Politics"
+                  category=""
                 />
                 <TopDiscusionText
                   topic="The Economics of Democracy."
-                  category="Economics & Politics"
+                  category="/Economics & Politics"
                 />
               </div>
             </div>

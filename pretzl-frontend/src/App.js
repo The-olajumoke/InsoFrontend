@@ -12,6 +12,8 @@ import Discussion from "./pages/Discussion.jsx";
 import Contact from "./pages/Contact";
 import NotiPopUp from "./components/NotiPopUp";
 import CustomizedSnackbars from "./components/NotiPopUp";
+import Settings from "./pages/Settings";
+import Grades from "./pages/Grades";
 
 const App = () => {
   return (
@@ -52,13 +54,13 @@ const App = () => {
           <Analytics />
         </Route>
         <Route exact path="/grades">
-          <Analytics />
+         <Grades/>
         </Route>
         <Route exact path="/contact">
           <Contact />
         </Route>
         <Route exact path="/settings">
-          <Analytics />
+          <Settings/>
         </Route>
       </Switch>
     </Router>

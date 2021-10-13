@@ -7,11 +7,10 @@
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-.test-svg path{
+.test-svg path {
   fill: red;
-
-background-color:grey;
-  }
+  background-color: grey;
+}
 .userDetailsCont {
   display: flex;
   align-items: center;
@@ -25,7 +24,7 @@ background-color:grey;
 }
 .details {
   flex-direction: column;
-  margin-top:0;
+  margin-top: 0;
 }
 .details h3 {
   width: 181.92px;
@@ -36,7 +35,6 @@ background-color:grey;
   line-height: 137.15%;
   display: flex;
   align-items: center;
-
 }
 .details span {
   font-style: normal;
@@ -45,15 +43,15 @@ background-color:grey;
   line-height: 137.15%;
   display: flex;
   align-items: center;
-color: #07A098;
+  color: #07a098;
 }
-.starter{
+.starter {
   font-style: normal;
-font-weight: normal;
-font-size: 18px;
-line-height: 27px;
-padding-left: 105px;
-color: #04BE00;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  padding-left: 105px;
+  color: #04be00;
 }
 
 .upgradeBtn {
@@ -121,16 +119,16 @@ color: #04BE00;
 /* RESPONSIVE SIDEBAR */
 .responNav {
   position: fixed;
-  top: 0;
+  top:50px;
   bottom: 0;
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  z-index: 50;
-  background-color:#ffffff;
+  z-index: 90;
+  order: 1;
+  background-color: #ffffff;
   width: 32%;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.08);
-
 }
 
 @media (max-width: 1064px) {
@@ -165,24 +163,23 @@ color: #04BE00;
 @media (max-width: 1000px) {
   .side-Cont {
     display: none;
-    
   }
-  .responNav{display: flex;}
+  .responNav {
+    display: flex;
+  }
 }
 @media (max-width: 815px) {
   .responNav {
-  width: 40%;
-
-}}
+    width: 40%;
+  }
+}
 @media (max-width: 620px) {
   .responNav {
-  width: 50%;
-
-}
+    width: 50%;
+  }
 }
 @media (max-width: 425px) {
   .responNav {
-  width: 100%;
-
-}
+    width: 100%;
+  }
 }

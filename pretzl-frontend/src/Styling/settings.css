@@ -1,0 +1,41 @@
+.setMain {
+  padding: 42px 35px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.setCont {
+  height: 100%;
+}
+.settingHeader {
+  display: flex;
+  flex-direction: row;
+  /*align-items: flex-start;*/
+  justify-content: space-between;
+  padding: 0px;
+  width: 701px;
+  height: 30px;
+  flex: none;
+  margin: 0px 15px;
+  margin-bottom: 34px;
+}
+.settingHeader button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+  width: 164px;
+  height: 30px;
+  background: #f9f9f9;
+  border-radius: 30px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  text-align: center;
+  color: #686868;
+}

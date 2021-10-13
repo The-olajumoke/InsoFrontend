@@ -20,6 +20,8 @@ const initialState = {
     terms: false,
   },
   signedState: false,
+  navSize:"large",
+  // icon:"large",
 };
 
 const userSlice = createSlice({
@@ -57,6 +59,11 @@ const userSlice = createSlice({
 
     //   console.log(state.signedState);
     // },
+    setCurrentNavSize:(state,{payload})=>{
+      console.log("previous state is" + state.navSize)
+      state.navSize=payload
+      console.log("new state is" + state.navSize);
+    }
   },
 });
 export const signUpOne = (newUser, showResult) => (dispatch) => {
@@ -172,11 +179,16 @@ export const signUpThree = createAsyncThunk(
 //   // }
 // };
 
+export const setNavSize=(size)=>(dispatch)=>{
+  dispatch(setCurrentNavSize(size));
+}
 export const {
   setCurrentUser,
   setCurrentUsertwo,
   setCurrentUserthree,
   setSignedTrue,
+  setCurrentNavSize,
+
   // setSignedFalse,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import toggleBtn3 from "../../Exports/Toggle.svg";
-// import Logo2 from "../../Exports/inso 4.svg";
-import Logo2 from "../../Exports/newLogo.svg"
-
+import Logo2 from "../../Exports/newLogo.svg";
 import Logo from "../../Exports/inso 4.png";
-import toggleBtnClosed from "../../Exports/Hamburger.svg";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import ResponsiveSideBar from "./ResponsiveSideBar";
 import Sidebar from "./Sidebar";
+import toggleBtnOpen from "../../Exports/Toggle.svg";
+import toggleBtnClosed from "../../Exports/Hamburger.svg";
 function SideHeading({
   navSize,
-  setNavSize,
+  // setNavSize,
   handleClick,
   icon,
-ResponsiveHandleClick
+  ResponsiveHandleClick,
 }) {
   return (
     <>
       <div
-        className={`sideHeading  py-4 pr-12 ${
+        className={` sideHeading  py-4 pr-12 ${
           navSize == "small" ? "pl-7" : "pl-12"
         }
           ${navSize == "small" ? "pr-6" : ""}
@@ -27,7 +25,12 @@ ResponsiveHandleClick
       >
         <div className=" sideHeading-logoCont">
           <button onClick={handleClick}>
-            <img className="toggleBtn" src={icon} alt="" />
+            <img
+              className="toggleBtn"
+              // src={icon}
+              src={`${navSize == "small" ? toggleBtnClosed : toggleBtnOpen}`}
+              alt=""
+            />
           </button>
           <img className="heading-logo " src={Logo2} alt="" />
         </div>

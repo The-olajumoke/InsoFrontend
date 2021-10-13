@@ -1,0 +1,111 @@
+.profileHeading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: #07a098;
+}
+.pictureCont {
+  display: flex;
+  align-items: center;
+}
+.pictureCont img {
+  width: 94px;
+  height: 94px;
+  border-radius: 500px;
+}
+.pictureCont h3 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #011b25;
+}
+.pictureCont h5 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #07a098;
+}
+.profileBox {
+  display: flex;
+  /* border:lime 1px solid; */
+  padding: 2px 0;
+  height: auto;
+  align-items: center;
+  margin-bottom: 10px;
+  width: auto;
+}
+.mb-14 {
+  margin-bottom: 56px;
+}
+.profileBox label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+  width: 250px;
+  /* border: rebeccapurple 2px solid; */
+}
+.profileBox input {
+  padding: 2px 2px 2px 15px;
+  width: 414px;
+  height: 40px;
+  border: 2px solid rgba(31, 196, 255, 0.12);
+  box-sizing: border-box;
+  border-radius: 6px;
+  outline: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 137.15%;
+  display: flex;
+  align-items: center;
+  color: #6d7d8b;
+}
+.profileBtnCont {
+  display: flex;
+  justify-content: center;
+}
+.profileBtn {
+  padding: 7px 25px;
+  width: 146px;
+  height: 34px;
+  background: #0eb4f6;
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.logoutBtn {
+  width: 122px;
+  height: 30px;
+  background: #f9f9f9;
+  border: 1px solid #0eb4f6;
+  box-sizing: border-box;
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e84949;
+}

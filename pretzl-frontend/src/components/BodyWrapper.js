@@ -1,28 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar/Sidebar";
 import SideHeading from "./Sidebar/sideHeading";
 import "../Styling/BodyWrapper.css";
 import toggleBtnOpen from "../Exports/Toggle.svg";
-
+import store from "../redux/store";
 import toggleBtnClosed from "../Exports/Hamburger.svg";
 import ResponsiveSideBar from "./Sidebar/ResponsiveSideBar";
+import { useDispatch } from "react-redux";
+import { setCurrentNavSize } from "../redux/User/userSlice";
 
 function BodyWrapper({ children }) {
-  const [navSize, setNavSize] = useState("large");
-  const [bodySize, setBodySize] = useState("mid");
-  const [newIcon, setNewIcon] = useState(toggleBtnOpen);
+  const dispatch = useDispatch();
+  let current = store.getState();
+  // useEffect(() => {
+  //   console.log("useEffect");
+
+  // }, []);
+
+  const [navSize, setNavSize] = useState(current.user.navSize);
   const [navOpen, setNavOpen] = useState(false);
 
+  console.log("in Body wrapper it is" + navSize);
   const handleClick = () => {
+    console.log(navSize);
     if (navSize == "small") {
-      setNewIcon(toggleBtnOpen);
+      // setNewIcon(toggleBtnOpen);
+      dispatch(setCurrentNavSize("large"));
       setNavSize("large");
-      setBodySize("mid");
     } else {
-      setNewIcon(toggleBtnClosed);
+      // setNewIcon(toggleBtnClosed);
       setNavSize("small");
-      setBodySize("full");
-      //
+      dispatch(setCurrentNavSize("small"));
     }
   };
 
@@ -33,11 +41,10 @@ function BodyWrapper({ children }) {
     <div className="body-wrapper font-Poppins">
       <SideHeading
         navSize={navSize}
-        setNavSize={setNavSize}
+        // setNavSize={setNavSize}
         handleClick={handleClick}
-        icon={newIcon}
-        setNewIcon={setNewIcon}
-     ResponsiveHandleClick={ResponsiveHandleClick}
+        // setNewIcon={setNewIcon}
+        ResponsiveHandleClick={ResponsiveHandleClick}
       />
 
       {/* <ResponsiveSideBar/> */}
@@ -45,7 +52,10 @@ function BodyWrapper({ children }) {
         {navOpen ? (
           <ResponsiveSideBar />
         ) : (
-          <Sidebar navSize={navSize} setNavSize={setNavSize} />
+          <Sidebar
+            navSize={navSize}
+            // setNavSize={setNavSize}
+          />
         )}
 
         {/* {Children} */}

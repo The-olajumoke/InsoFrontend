@@ -1,11 +1,11 @@
 import React from 'react'
 
 function ActivityItem({height}) {
-    const newheight = `${height *0.6}px `;
+    const newheight = `${height *0.55}px `;
     return (
         <div 
         style={{height:`${newheight}`}}
-        className=" actItem mx-2 w-9" >
+        className=" actItem" >
        <h3>{height}</h3>
         </div>
     )

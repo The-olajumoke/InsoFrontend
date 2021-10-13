@@ -11,7 +11,7 @@ function ResponsiveSideBar({ navSize, avatar }) {
   return (
     <nav className="responNav">
       <div
-        className={`userDetailsCont  ring    ${
+        className={`userDetailsCont    ${
           navSize ==="small" ? "justify-end" : "justify-center"
         }    ${navSize === "small" ? "pr-3" : ""}  `}
       >
