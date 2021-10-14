@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import history from "../../utils/history";
 import axios from "axios";
-import PopIcon from "../../components/PopIcon";
-import CustomizedSnackbars from "../../components/NotiPopUp";
+
 
 const initialState = {
   user: {
@@ -72,6 +70,11 @@ export const signUpOne = (newUser, showResult) => (dispatch) => {
 export const signUpTwo = (newUser) => (dispatch) => {
   dispatch(setCurrentUsertwo(newUser));
 };
+
+
+
+
+
 export const signUpThree = createAsyncThunk(
   "user/signUpUser", async (newUser, { dispatch,getState }) => {
     dispatch(setCurrentUserthree(newUser));
@@ -108,7 +111,6 @@ export const signUpThree = createAsyncThunk(
       console.log(res.status);
       if(res.status){
       dispatch(setSignedTrue());
-
       }
       console.log(res.data);
       console.log(res.data.message);

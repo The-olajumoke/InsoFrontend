@@ -10,8 +10,6 @@ import Analytics from "./pages/Analytics.jsx";
 import Notification from "./pages/Notification";
 import Discussion from "./pages/Discussion.jsx";
 import Contact from "./pages/Contact";
-import NotiPopUp from "./components/NotiPopUp";
-import CustomizedSnackbars from "./components/NotiPopUp";
 import Settings from "./pages/Settings";
 import Grades from "./pages/Grades";
 
@@ -20,8 +18,8 @@ const App = () => {
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          {/* <Landing /> */}
-          <Discussion />
+          <Landing />
+          {/* <Discussion /> */}
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />

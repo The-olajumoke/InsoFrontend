@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../Exports/inso 4@2x.png";
-import "../Styling/header.css"
+import "../Styling/header.css";
 import history from "../utils/history";
 function Header() {
   return (
@@ -28,9 +28,7 @@ function Header() {
           >
             Log in
           </button>
-         
         </div>
-
       </div>
     </>
   );

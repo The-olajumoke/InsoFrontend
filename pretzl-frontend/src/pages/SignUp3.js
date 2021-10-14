@@ -11,7 +11,7 @@ import history from "../utils/history";
 import store from "../redux/store";
 import { signUpThree } from "../redux/User/userSlice";
 import CustomizedSnackbars from "../components/NotiPopUp";
-var apiBaseUrl = "http://localhost:8080/api/auth/signup";
+
 function SignUp3({ activeModal, setactiveModal }) {
   // DISPLAY SUCCESS MESSAGE
   console.log(store);
@@ -29,6 +29,7 @@ function SignUp3({ activeModal, setactiveModal }) {
   const [allSelected, setallSelected] = useState(false);
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false)
 
   const handleBack = () => {
     setactiveModal("signUp2");
@@ -45,7 +46,7 @@ function SignUp3({ activeModal, setactiveModal }) {
     console.log(`terms is ${terms}`);
   };
 
-  const handleSubmit = () => {
+  const  handleSubmit =async () => {
     const newUser = {
       primaryUse: selected,
       profession: selected2,
@@ -54,19 +55,17 @@ function SignUp3({ activeModal, setactiveModal }) {
     };
     console.log(newUser);
     // THIS IS THE DISPATCH ACTION
-    dispatch(signUpThree(newUser));
+    await dispatch(signUpThree(newUser));
 
     // THIS IS ACTION THAT SHOULD HAPPEN AFTER GETTING THE API RESPONSE
     const currentStore = store.getState();
     console.log(currentStore);
     const currentSignedState = currentStore.user.signedState;
     console.log(currentSignedState);
-    if (currentSignedState) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
 
+    {
+      currentSignedState ? setShowAlert(true) : setErrorAlert(true);
+    }
     setSelected("");
     setSelected2("");
     setSelected3("");
@@ -180,14 +179,20 @@ function SignUp3({ activeModal, setactiveModal }) {
             </div>
           </div>
         </div>
-        {/* {showAlert ? ( */}
+        {showAlert && (
           <CustomizedSnackbars
             title="Account created Successfully"
             text="Log in to start a discussion."
+            severity="success"
           />
-        {/* ) : (
-          ""
-        )} */}
+        )}
+        {errorAlert && (
+          <CustomizedSnackbars
+            title="Error Creating Account"
+            text="Please try again"
+            severity="error"
+          />
+        )}
       </div>
     </SignInCont>
   );

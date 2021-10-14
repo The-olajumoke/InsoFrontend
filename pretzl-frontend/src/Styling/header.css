@@ -6,7 +6,7 @@
   margin: 24px 0;
   height: 70px;
   width: 100%;
-  padding-left: 18px;
+  padding-left: 35px;
 }
 .imgCont {
   display: flex;
@@ -45,13 +45,17 @@
   line-height: 24px;
   color: #07a098;
 }
-
+.headerBtn:hover{
+  color: white;
+  background-color: #0eb4f6;
+}
 @media (max-width: 820px) {
   .logo {
     height: 100%;
   }
   .headerCont {
     height: 60px;
+    padding-left:20px;
   }
   .headerBtn {
     padding: 5px 15px;
@@ -79,6 +83,10 @@
   }
 }
 @media (max-width: 350px) {
+  .headerCont{
+    padding-left: 10px;
+
+  }
   .imgCont {
     width: 35%;
   }
@@ -99,6 +107,7 @@
     margin-right:15px;
   }
 }
+
 /* 
 git remote add second https://github.com/The-olajumoke/ibnsoFrontend.git
 git branch -M main

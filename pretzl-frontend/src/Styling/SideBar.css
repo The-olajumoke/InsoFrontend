@@ -21,6 +21,15 @@
   height: 40px;
   border-radius: 500px;
   margin-right: 15px;
+  background: #daf2ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #0eb4f6;
 }
 .details {
   flex-direction: column;
@@ -119,7 +128,7 @@
 /* RESPONSIVE SIDEBAR */
 .responNav {
   position: fixed;
-  top:50px;
+  top: 50px;
   bottom: 0;
   display: none;
   flex-direction: column;

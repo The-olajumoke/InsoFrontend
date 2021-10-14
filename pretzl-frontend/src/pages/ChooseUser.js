@@ -1,18 +1,14 @@
-import React, { useState } from "react";
-import * as Yup from "yup";
+import React from "react";
 import "../Styling/ChooseUser.css";
 import firstIcon from "../Exports/firstIcon.svg";
 import secondIcon from "../Exports/secondIcon.svg";
-import whiteicon from "../Exports/whiteicon.svg";
 import { MdClose } from "react-icons/md";
 import { FiArrowRight } from "react-icons/fi";
 import SignInCont from "../components/SignInCont";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
 
-function ChooseUser({ activeModal, setactiveModal }) {
-  const [guest, setGuest] = useState(false);
-  const [user, setUser] = useState(false);
+function ChooseUser({ setactiveModal }) {
 
   const handleBack = () => {
     history.push("./");
@@ -47,38 +43,20 @@ function ChooseUser({ activeModal, setactiveModal }) {
                 history.push("/sign-as-user");
               }}
               id="user"
-              className={`chooseBtn  ${user ? "bg-primary" : "bg-inputField"}`}
+              className="chooseBtn bg-inputField"
             >
               <div className="  flex justify-center">
-                <img
-                  src={user ? whiteicon : firstIcon}
-                  alt="currentIcon"
-                  className="img"
-                />
+                <img src={firstIcon} alt="currentIcon" className="img" />
               </div>
               <div className=" btn-textCont">
-                <h3
-                  className={`btn-mainText  ${
-                    user ? "text-white" : "text-textBody"
-                  }`}
-                >
-                  As User
-                </h3>
-                <h5
-                  className={`btn-subText  ${
-                    user ? "text-white" : "text-desc"
-                  }`}
-                >
+                <h3 className="btn-mainText text-textBody">As User</h3>
+                <h5 className=" btn-subText text-desc">
                   Create an account to begin. Log in if you have one already.
                 </h5>
               </div>
 
               <div className=" flex justify-center">
-                <FiArrowRight
-                  className={`icon ${
-                    user ? "text-white" : " text-primary"
-                  } items-center`}
-                />
+                <FiArrowRight className="icon text-primary items-center" />
               </div>
             </button>
             {/* GUESt */}
@@ -88,38 +66,20 @@ function ChooseUser({ activeModal, setactiveModal }) {
                 history.push("/sign-as-guest");
               }}
               id="guest"
-              className={`chooseBtn  ${guest ? "bg-primary" : "bg-inputField"}`}
+              className="chooseBtn bg-inputField"
             >
               <div className="flex justify-center">
-                <img
-                  src={guest ? whiteicon : secondIcon}
-                  alt="currentIcon"
-                  className="img"
-                />
+                <img src={secondIcon} alt="currentIcon" className="img" />
               </div>
               <div className=" btn-textCont ">
-                <h3
-                  className={`btn-mainText ${
-                    guest ? "text-white" : "text-textBody"
-                  }`}
-                >
-                  As Guest
-                </h3>
-                <h5
-                  className={`btn-subText  ${
-                    guest ? "text-white" : "text-desc"
-                  }`}
-                >
+                <h3 className="btn-mainText text-textBody">As Guest</h3>
+                <h5 className=" btn-subText text-desc">
                   Join Discussion and create account later.
                 </h5>
               </div>
 
               <div className=" flex justify-center">
-                <FiArrowRight
-                  className={`icon ${
-                    guest ? "text-white" : " text-border"
-                  } items-center`}
-                />
+                <FiArrowRight className="icon text-border items-center" />
               </div>
             </button>
           </div>

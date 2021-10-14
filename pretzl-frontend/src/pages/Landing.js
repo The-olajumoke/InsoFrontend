@@ -18,8 +18,8 @@ const Landing = () => {
     <div className=" h-auto sm:h-auto font-Poppins w-full p-0 flex flex-col items-center justify-between ">
       <Header />
 
-      <div className=" bodyCont">
-        <div className="landingLeft   ">
+      <div className="bodyCont">
+        <div className="landingLeft">
           <div className=" textCont">
             <div className=" maintext">
               <h1>Share ideas,</h1>
@@ -58,7 +58,7 @@ const Landing = () => {
           </div>
         </div>
 
-        <div className=" mockupCont  overflow-hidden sm:overscroll-none">
+        <div className="mockupCont  overflow-hidden sm:overscroll-none">
           <div className="contRel">
             <img className="landingCircle" src={landingCircle} alt="" />
             <img className="mockup" src={landingimg} draggable="false" alt="" />

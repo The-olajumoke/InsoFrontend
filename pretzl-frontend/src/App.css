@@ -15,18 +15,9 @@
 }
 
 .notipopup {
- 
-  /* height: 62.08px; */
   height:72px;
   width: 680px;
-  /* width: 100%; */
   background: #ffffff;
-  /* border: blueviolet 2px solid;*/
-  /* padding:4px 4px ; */
-  /* background-color: red; */
-  /* position: absolute; */
-  /* top: 0; */
-  /* left: 0; */
   box-shadow: 1px 2px 10px rgba(130, 223, 128, 0.18);
   border-radius: 7px;
   margin:10px  auto;

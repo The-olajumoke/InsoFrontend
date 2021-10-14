@@ -10,9 +10,15 @@ import { MdHeadsetMic } from "react-icons/md";
 import { FaRegCalendar } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdChatBubbleOutline } from "react-icons/md";
-import NavIcon from "./NavIcon";
 import downloadImg from "../../Exports/downloadimg.svg";
 function Sidebar({ navSize, setNavSize }) {
+  const user = {
+    firstName: "Patrick",
+    lastName: "Dempsey",
+  };
+  const firstInit = user.firstName.split("")[0];
+  const lastInit = user.lastName.split("")[0];
+
   return (
     <>
       <nav
@@ -25,11 +31,16 @@ function Sidebar({ navSize, setNavSize }) {
               navSize == "small" ? "justify-end" : "justify-center"
             }    ${navSize == "small" ? "pr-3" : ""}  `}
           >
-            <img className={`user-img ${navSize =="small"? "mb-5": ""}`} src={avatar} alt="" />
+            {/* WHEN IMAGE IS UPDATED */}
+            {/* <img className={`user-img ${navSize =="small"? "mb-5": ""}`} src={avatar} alt="" />
+          > */}
+            <h2 className={`user-img ${navSize == "small" ? "mb-5" : ""}`}>{firstInit} {lastInit}</h2>
             <div
               className={`details ${navSize == "small" ? "hidden" : "flex"} `}
             >
-              <h3>Patrick Dempsey</h3>
+              <h3>
+                {user.firstName} {user.lastName}
+              </h3>
               <span>@patrick</span>
             </div>
           </div>
@@ -94,7 +105,7 @@ function Sidebar({ navSize, setNavSize }) {
         <div
           className={` downBtnCont 
          ${navSize == "small" ? "px-0" : "px-12"}
-         ${navSize == "small" ?"mt-16" : "mt-10"}
+         ${navSize == "small" ? "mt-16" : "mt-10"}
             ${navSize == "small" ? " pl-10" : ""}
     ${navSize == "small" ? "justify-end" : "justify-items-start"}
     ${navSize == "small" ? "" : "mr-4"}
@@ -102,7 +113,11 @@ function Sidebar({ navSize, setNavSize }) {
         >
           <button
             className={`upgradeBtn  ${navSize == "small" ? "" : "p-3"} flex 
-                ${navSize =="small" ? "justify-items-end": "justify-items-start"}
+                ${
+                  navSize == "small"
+                    ? "justify-items-end"
+                    : "justify-items-start"
+                }
             `}
             style={{
               width: `${navSize == "small" ? "auto" : "230px"}

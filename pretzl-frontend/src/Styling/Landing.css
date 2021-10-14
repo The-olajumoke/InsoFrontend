@@ -3,7 +3,7 @@
   display: flex;
   width: 100%;
   align-items: center;
-  padding-left: 24px;
+  padding-left: 45px;
   margin-bottom: 80px;
   margin-top: 20px;
   height: 650px;
@@ -25,6 +25,7 @@
   align-items: center;
   color: #011b25;
   margin-bottom: 20px;
+  
 }
 .subText {
   font-style: normal;
@@ -102,24 +103,24 @@
 
 .contRel {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   height: 100%;
-  width: 90%;
-  width: auto;
+  width: 100%;
   position: relative;
   right: -10%;
 
 }
 .landingCircle {
-  width: 92%;
-  height: 90%;
+  /* width: 92%; */
+  height: 100%;
+  width: 90%;
   position:relative;
   margin: auto;
 
 }
 .mockup {
   position: absolute;
-  right: -10%;
+  right: -15%;
   /* height: 100%; */
   top: 0;
   bottom: 0;
@@ -127,6 +128,12 @@
 
 }
 @media (max-width: 1380px) {
+  .contRel{
+    width: 90%;
+  }
+  .mockup{
+    right:-10%;
+  }
   .maintext {
     font-size: 45px;
     line-height: 60px;
@@ -194,7 +201,8 @@
     flex-direction: column;
     height: auto;
     margin-top: 50px;
-    padding-left: 16px;
+    padding-left: 20px;
+    
   }
 
   .landingLeft {
@@ -213,7 +221,7 @@
   .contRel {
     height: 90%;
     width: 600px;
-    right: -30%;
+    right: -25%;
   }
 
   .landingCircle {
@@ -255,7 +263,7 @@
   }
   .mockup {
     width: 100%;
-    right: -5%;
+    right: -8%;
   }
   .maintext {
     font-style: normal;
@@ -279,6 +287,9 @@
 }
 
 @media (max-width: 350px) {
+  .bodyCont{
+    padding-left: 16px;
+  }
   .maintext {
     font-weight: 500;
     font-size: 28px;
@@ -297,8 +308,7 @@
     line-height: 24px;
   }
   .createBtn2 {
-    width: 270px;
-    width: 220px;
+    width: 220px; 
     height: 45px;
     font-size: 13px;
     line-height: 20px;
@@ -309,6 +319,8 @@
   }
   .mockupCont {
     height: auto;
+    margin-bottom: 25px;
+    margin-top: 25px;
   }
   .contRel {
     height: auto;
@@ -316,11 +328,11 @@
     right: -30%;
   }
   .landingCircle {
-    height: 100%;
-    width: 100%;
+    height: 90%;
+    width: 90%;
   }
   .mockup {
-    right: -5%;
+    right: -10%;
     height: 100%;
   }
 }

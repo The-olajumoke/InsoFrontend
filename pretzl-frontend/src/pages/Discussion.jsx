@@ -11,9 +11,10 @@ import NoMessageYet from "../components/Discussion/NoMessageYet";
 import CreateNewDis from "../components/Discussion/CreateNewDis";
 
 function Discussion() {
-  const [showcreateMenu, setshowcreateMenu] = useState(false);
-  const handleClick =()=>{
-    // setshowcreateMenu(false)
+const [showMenu, setShowMenu] = useState(false) 
+  const handleClick =(e)=>{
+    console.log(e.target);
+    setShowMenu(!showMenu)
     alert('clkiue')
   }
   const DiscussionCont = [];
@@ -67,13 +68,13 @@ function Discussion() {
       <div className="disMain ">
         <div className="disCont">
           <div className="discBtnCont">
-            <button className="discBtn" onMouseOver={handleClick}>
+            <button className="discBtn">
               <FiPlus className="icn" />
               Create new discussion
-              <IoMdArrowDropdown className="icn" />
-              {showcreateMenu ? <CreateNewDis /> : null}
-             {/* <CreateNewDis /> */}
+              <IoMdArrowDropdown className="icn" onClick={handleClick} />
+            {showMenu && <CreateNewDis />}
             </button>
+            
             <div className="flex">
               <div className="filterAndsort">
                 <RiInboxArchiveLine className="topIcon" />
