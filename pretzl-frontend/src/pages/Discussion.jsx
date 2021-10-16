@@ -72,9 +72,9 @@ const [showMenu, setShowMenu] = useState(false)
               <FiPlus className="icn" />
               Create new discussion
               <IoMdArrowDropdown className="icn" onClick={handleClick} />
-            {showMenu && <CreateNewDis />}
+              {showMenu && <CreateNewDis />}
             </button>
-            
+
             <div className="flex">
               <div className="filterAndsort">
                 <RiInboxArchiveLine className="topIcon" />
@@ -88,7 +88,7 @@ const [showMenu, setShowMenu] = useState(false)
           </div>
           <div className="allDisCont">
             {DiscussionCont.length < 1 ? (
-              <NoMessageYet />
+              <NoMessageYet message="It’s lonely in here. Create a new discussion" />
             ) : (
               DiscussionCont.map((dis, index) => (
                 <DiscussionBox

@@ -42,6 +42,7 @@ module.exports = {
       btnText: "#C1C1C1",
       red: "#FF0000",
       placeholder: "#001E2F",
+      dashBtn: "#f9f9f9",
     },
     fontFamily: {
       Poppins: "Poppins",

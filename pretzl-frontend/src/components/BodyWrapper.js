@@ -20,9 +20,7 @@ function BodyWrapper({ children }) {
   const [navSize, setNavSize] = useState(current.user.navSize);
   const [navOpen, setNavOpen] = useState(false);
 
-  console.log("in Body wrapper it is" + navSize);
   const handleClick = () => {
-    console.log(navSize);
     if (navSize == "small") {
       // setNewIcon(toggleBtnOpen);
       dispatch(setCurrentNavSize("large"));

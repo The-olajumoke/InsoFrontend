@@ -1,11 +1,11 @@
 import React from 'react'
 import img from "../../Exports/noMessageIcon.svg"
-function NoMessageYet() {
+function NoMessageYet({message}) {
     return (
       <div className=" noMessage">
         <img src={img} alt=""/>
         
-        <h4>It’s lonely in here. Create a new discussion</h4>
+        <h4>{message}</h4>
       </div>
     );
 }

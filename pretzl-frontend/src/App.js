@@ -12,14 +12,15 @@ import Discussion from "./pages/Discussion.jsx";
 import Contact from "./pages/Contact";
 import Settings from "./pages/Settings";
 import Grades from "./pages/Grades";
+import Archives from "./pages/Archives";
 
 const App = () => {
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          <Landing />
-          {/* <Discussion /> */}
+          {/* <Landing /> */}
+          <Discussion/>
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />
@@ -59,6 +60,9 @@ const App = () => {
         </Route>
         <Route exact path="/settings">
           <Settings/>
+        </Route>
+        <Route exact path="/archives">
+          <Archives/>
         </Route>
       </Switch>
     </Router>

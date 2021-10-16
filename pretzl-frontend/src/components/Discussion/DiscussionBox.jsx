@@ -1,9 +1,19 @@
-import React from "react";
-import { MdChatBubbleOutline, MdContentCopy, MdLock, MdLockOpen } from "react-icons/md";
+import React, { useState } from "react";
+import {
+  MdChatBubbleOutline,
+  MdContentCopy,
+  MdLock,
+  MdLockOpen,
+} from "react-icons/md";
 import "../../Styling/Discussion.css";
 import img from "../../Exports/DisIcon.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
-function DiscussionBox({ title, code,name, numberOfPeople, date }) {
+import { FiEdit } from "react-icons/fi";
+function DiscussionBox({ title, code, name, numberOfPeople, date }) {
+  const [showEdit, setshowEdit] = useState(false);
+  const handleEdit = () => {
+    setshowEdit(!showEdit);
+  };
   return (
     <div className="discBox">
       <div className="boxHead">
@@ -12,13 +22,13 @@ function DiscussionBox({ title, code,name, numberOfPeople, date }) {
           <h4>{name}</h4>
         </div>
         <div className="box-2">
-          <div className="flex items-center">
+          <div className="flex items-center ml-6">
             <img src={img} alt="" />
             <h5>{numberOfPeople}</h5>
           </div>
           <div className="flex">
-              <MdLock/>
-              <BsThreeDotsVertical/>
+            <MdLock />
+            <BsThreeDotsVertical onClick={handleEdit} />
           </div>
         </div>
       </div>
@@ -30,9 +40,25 @@ function DiscussionBox({ title, code,name, numberOfPeople, date }) {
 
       <div className="boxfooter">
         <h4>{code}</h4>
-        <MdContentCopy/>
+        <MdContentCopy />
         <button>Open</button>
       </div>
+      {showEdit && (
+        <div className="editBox">
+          <span>
+            <FiEdit />
+            Edit
+          </span>
+          <span>
+            <FiEdit />
+            Archive
+          </span>
+          <span>
+            <FiEdit />
+            Duplicate
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,23 +4,23 @@ function Security({handleClick}) {
     return (
       <>
       <div className="settingHeader">
-      <button onClick={handleClick} name="profile">
+      <button className="bg-dashBtn text-textBody" onClick={handleClick} name="profile">
         Profile
       </button>
-      <button onClick={handleClick} name="security">
+      <button className="bg-primary text-white" onClick={handleClick} name="security">
         Security
       </button>
-      <button onClick={handleClick} name="notification">
+      <button className="bg-dashBtn text-textBody" onClick={handleClick} name="notification">
         Notifications
       </button>
-      <button onClick={handleClick} name="plan">
+      <button className="bg-dashBtn text-textBody" onClick={handleClick} name="plan">
         Plans
       </button>
     </div>
-      <div className="securityCont ring">
+      <div className="securityCont">
         <h2 className="profileHeading">Security</h2>
 
-        <div className="ring ring-red">
+        <div className="profileBoxCont">
           <div className="profileBox mb-14">
             <label htmlFor="">Current Password :</label>
             <input type="text" name="" id="" placeholder={`@Patrick`} />
@@ -34,6 +34,9 @@ function Security({handleClick}) {
             <label htmlFor="">Confirm New Password :</label>
             <input type="email" name="" id="" />
           </div>
+        </div>
+        <div className="saveBtn">
+          <button>Save Changes</button>
         </div>
       </div>
       </>

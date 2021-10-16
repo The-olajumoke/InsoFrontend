@@ -1,3 +1,9 @@
+.profileCont {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .profileHeading {
   font-style: normal;
   font-weight: 500;
@@ -6,15 +12,18 @@
   display: flex;
   align-items: center;
   color: #07a098;
+  margin-bottom: 20px;
 }
 .pictureCont {
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 .pictureCont img {
   width: 94px;
   height: 94px;
   border-radius: 500px;
+  margin-right: 24px;
 }
 .pictureCont h3 {
   font-style: normal;
@@ -33,6 +42,10 @@
   display: flex;
   align-items: center;
   color: #07a098;
+}
+.profileBoxCont {
+  /* margin-bottom: 40px; */
+  flex: 1;
 }
 .profileBox {
   display: flex;
@@ -75,7 +88,8 @@
 }
 .profileBtnCont {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  /* margin-bottom: 100px; */
 }
 .profileBtn {
   padding: 7px 25px;
@@ -91,6 +105,7 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
+  margin-right: 20px;
 }
 
 .logoutBtn {
@@ -108,4 +123,30 @@
   align-items: center;
   justify-content: center;
   color: #e84949;
+}
+.logIcon {
+  margin-right: 10px;
+}
+
+/* SECURITY */
+.saveBtn {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+.saveBtn button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 25px;
+  width: 146px;
+  height: 34px;
+  background: #0eb4f6;
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  color: #ffffff;
 }

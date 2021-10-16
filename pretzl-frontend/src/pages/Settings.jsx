@@ -5,8 +5,8 @@ import Notific from "../components/Settings/Notific";
 import Plan from "../components/Settings/Plan";
 import Profile from "../components/Settings/Profile";
 import Security from "../components/Settings/Security";
-import SettingHeader from "../components/Settings/SettingHeader";
-import "../Styling/settings.css";
+
+import "../Styling/settings/settings.css"
 
 function Settings() {
   const [active, setActive] = useState("profile");

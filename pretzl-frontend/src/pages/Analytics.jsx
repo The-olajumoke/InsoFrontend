@@ -12,7 +12,6 @@ function Overview() {
   const [active, setActive] = useState("courses");
 
   const handleClick = (e) => {
-    console.log(e.target.name);
     setActive(e.target.name);
   };
   return (

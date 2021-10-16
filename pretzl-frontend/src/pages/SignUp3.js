@@ -10,6 +10,8 @@ import Button from "../components/SignUp/Button";
 import history from "../utils/history";
 import store from "../redux/store";
 import { signUpThree } from "../redux/User/userSlice";
+import { BiCheckCircle,BiErrorCircle } from "react-icons/bi";
+
 import CustomizedSnackbars from "../components/NotiPopUp";
 
 function SignUp3({ activeModal, setactiveModal }) {
@@ -184,6 +186,7 @@ function SignUp3({ activeModal, setactiveModal }) {
             title="Account created Successfully"
             text="Log in to start a discussion."
             severity="success"
+            icon={<BiCheckCircle/>}
           />
         )}
         {errorAlert && (
@@ -191,6 +194,7 @@ function SignUp3({ activeModal, setactiveModal }) {
             title="Error Creating Account"
             text="Please try again"
             severity="error"
+            icon={<BiErrorCircle />}
           />
         )}
       </div>
