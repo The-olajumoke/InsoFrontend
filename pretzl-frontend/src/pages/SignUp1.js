@@ -72,7 +72,7 @@ const showResult = () => {
     <SignInCont
       title="Sign Up"
       largeText="Say something different."
-      extraText="Sign up to all Inso features."
+      extraText=""
       setactiveModal={setactiveModal}
       previousModal="chooseUser"
       backBtnFunction={handleBack}

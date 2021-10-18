@@ -4,6 +4,7 @@
 }
 .overlay::after {
   background-color: white;
+  /* background-color: rebeccapurple; */
   opacity: 0.8;
   content: "";
   position: absolute;
@@ -11,6 +12,7 @@
   bottom: 0;
   right: 0;
   top: 0;
+  height:1035px;
 }
 .main-container {
   margin: auto;
@@ -28,12 +30,13 @@
 .sub-container {
   height: 648px;
     width: 900px;
-   box-shadow: 1px 2px 10px rgba(10, 10, 10, 0.3);
-  padding: 2px;
+   box-shadow: 1px 2px 5px rgba(10, 10, 10, 0.05);
   border-radius: 20px;
-  background-color: none;
   position: relative;
+  background: transparent;
   display: flex;
+  z-index: 900;
+
 }
 .left-container {
   width: 42%;
