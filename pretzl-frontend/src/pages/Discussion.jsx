@@ -9,13 +9,12 @@ import ResponsiveTop from "../components/ResponsiveTop";
 import "../Styling/Discussion.css";
 import NoMessageYet from "../components/Discussion/NoMessageYet";
 import CreateNewDis from "../components/Discussion/CreateNewDis";
+import history from "../utils/history"
 
 function Discussion() {
 const [showMenu, setShowMenu] = useState(false) 
   const handleClick =(e)=>{
-    console.log(e.target);
     setShowMenu(!showMenu)
-    alert('clkiue')
   }
   const DiscussionCont = [];
   // const DiscussionCont = [
@@ -64,19 +63,20 @@ const [showMenu, setShowMenu] = useState(false)
   // ];
   return (
     <BodyWrapper>
+     
       <ResponsiveTop title="Discussion Title" />
       <div className="disMain ">
-        <div className="disCont">
+        <div className="disCont ">
           <div className="discBtnCont">
-            <button className="discBtn">
+            <button className="discBtn" onClick={handleClick}>
               <FiPlus className="icn" />
               Create new discussion
-              <IoMdArrowDropdown className="icn" onClick={handleClick} />
+              <IoMdArrowDropdown className="icn" />
               {showMenu && <CreateNewDis />}
             </button>
 
             <div className="flex">
-              <div className="filterAndsort">
+              <div onClick={()=>history.push("./archives")} className="filterAndsort">
                 <RiInboxArchiveLine className="topIcon" />
                 Archives
               </div>
@@ -86,6 +86,7 @@ const [showMenu, setShowMenu] = useState(false)
               </div>
             </div>
           </div>
+         
           <div className="allDisCont">
             {DiscussionCont.length < 1 ? (
               <NoMessageYet message="It’s lonely in here. Create a new discussion" />

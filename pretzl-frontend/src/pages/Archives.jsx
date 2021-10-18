@@ -4,6 +4,7 @@ import DiscussionBox from "../components/Discussion/DiscussionBox";
 import NoMessageYet from "../components/Discussion/NoMessageYet";
 import ResponsiveTop from "../components/ResponsiveTop";
 import "../Styling/archives.css";
+import { FiArrowLeft, FiFilter } from "react-icons/fi";
 
 function Archives() {
   const handleDots = () => {
@@ -59,6 +60,17 @@ function Archives() {
       <ResponsiveTop title="Archives" dotHandle={handleDots} />
       <div className="arcMain">
         {/* ARCHIVES HEADING*/}
+        <div>
+          <div>
+            <FiArrowLeft />
+            <h2>Archives</h2>
+          </div>
+
+          <div>
+            <FiFilter/>
+            <h2>Sort Archives List</h2>
+          </div>
+        </div>
         <div className="allDisCont ring">
           {archivesList.length < 1 ? (
             <NoMessageYet message="No archived discussion Yet" />

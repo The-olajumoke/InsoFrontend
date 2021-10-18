@@ -25,7 +25,7 @@ function Sidebar({ navSize, setNavSize }) {
         style={{ width: `${navSize == "small" ? "109px" : "25%"}` }}
         className="side-Cont font-Poppins"
       >
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <div
             className={`userDetailsCont ${
               navSize == "small" ? "justify-end" : "justify-center"
@@ -34,7 +34,9 @@ function Sidebar({ navSize, setNavSize }) {
             {/* WHEN IMAGE IS UPDATED */}
             {/* <img className={`user-img ${navSize =="small"? "mb-5": ""}`} src={avatar} alt="" />
           > */}
-            <h2 className={`user-img ${navSize == "small" ? "mb-5" : ""}`}>{firstInit} {lastInit}</h2>
+            <h2 className={`user-img ${navSize == "small" ? "mb-5" : ""}`}>
+              {firstInit} {lastInit}
+            </h2>
             <div
               className={`details ${navSize == "small" ? "hidden" : "flex"} `}
             >
@@ -104,30 +106,18 @@ function Sidebar({ navSize, setNavSize }) {
         </div>
         <div
           className={` downBtnCont 
-         ${navSize == "small" ? "px-0" : "px-12"}
-         ${navSize == "small" ? "mt-16" : "mt-10"}
-            ${navSize == "small" ? " pl-10" : ""}
-    ${navSize == "small" ? "justify-end" : "justify-items-start"}
+     ${navSize == "small" ? "px-0" : "px-12"}
+     ${navSize == "small" ? "mt-7" : "mt-8"}
+     ${navSize == "small" ? " pl-10" : ""}
+     ${navSize == "small" ? "justify-end" : "justify-items-start"}
     ${navSize == "small" ? "" : "mr-4"}
     `}
         >
-          <button
-            className={`upgradeBtn  ${navSize == "small" ? "" : "p-3"} flex 
-                ${
-                  navSize == "small"
-                    ? "justify-items-end"
-                    : "justify-items-start"
-                }
-            `}
-            style={{
-              width: `${navSize == "small" ? "auto" : "230px"}
-            `,
-            }}
-          >
+  <button className={`upgradeBtn  ${navSize == "small" ? "p-2" : "p-3"} flex 
+  ${navSize == "small" ? "justify-items-end": "justify-items-start"}`}
+   style={{width: `${navSize == "small" ? "auto" : "200px"}`,}}>
             <img src={downloadImg} alt="" />
-            <h3
-              className={` ${navSize == "small" ? "hidden" : "flex"}
-          `}
+      <h3 className={` ${navSize == "small" ? "hidden" : "flex"}   `}
             >
               Upgrade
             </h3>

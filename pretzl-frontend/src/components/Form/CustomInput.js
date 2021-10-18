@@ -9,15 +9,20 @@ export const CustomField = (props) => {
   
   return (
     <div className=" input-container">
-      <label  className="label" htmlFor="name">
+      <label className="label" htmlFor="name">
         {label}
         {req ? (
-          <span className=" text-btnText">{req}</span>
+          <span className=" text-btnText ml-2">{req}</span>
         ) : (
-          <span style={{ color: "red" }}>*</span>
+          <span
+            className={` ${name == "alternativeEmail"?"hidden":"flex"} `}
+            style={{ color: "red" }}
+          >
+            *
+          </span>
         )}
       </label>
-      <Input  {...props} />
+      <Input {...props} />
       <FormErrorMessage name={name} />
     </div>
   );

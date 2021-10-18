@@ -1,12 +1,14 @@
 import React from "react";
 import { MdHeadsetMic } from "react-icons/md";
 import avatar from "../../Exports/Avatar.svg";
+import img from "../../Exports/Avatar.svg"
 function UpvotedNotif() {
   return (
     <div className="postCont">
       <div className="postsubcont ">
         <div className="postIcon ">
           <MdHeadsetMic className="icon" />
+          <img src={img} className="icon" alt="" />
         </div>
         <div className="postInfo">
           <div className="avatars">

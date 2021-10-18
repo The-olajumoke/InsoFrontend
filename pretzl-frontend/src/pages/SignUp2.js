@@ -31,8 +31,7 @@ function SignUp2({ activeModal, setactiveModal }) {
   const validationSchema = Yup.object({
     email: Yup.string().email("invalid email address").required("Required"),
     alternativeEmail: Yup.string()
-      .email("invalid email address")
-      .required("Required"),
+      .email("invalid email address"),
     password: Yup.string()
       .min(8, "Must be at least 8 characters")
       .required("Required"),
@@ -98,6 +97,7 @@ few more details"
                   name="alternativeEmail"
                   type="email"
                   placeholder="Enter email adress"
+                  req=""
                 />
                 <CustomField
                   label="Password"

@@ -3,6 +3,7 @@ import NavItem from "./NavItem";
 import { FiBarChart } from "react-icons/fi";
 import { MdShowChart } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
+import downloadImg from "../../Exports/downloadimg.svg";
 import { MdHeadsetMic } from "react-icons/md";
 import { FaRegCalendar } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -12,7 +13,7 @@ function ResponsiveSideBar({ navSize, avatar }) {
     <nav className="responNav">
       <div
         className={`userDetailsCont    ${
-          navSize ==="small" ? "justify-end" : "justify-center"
+          navSize === "small" ? "justify-end" : "justify-center"
         }    ${navSize === "small" ? "pr-3" : ""}  `}
       >
         {/* <img className={`user-img`} src={avatar} alt="" /> */}
@@ -91,6 +92,7 @@ function ResponsiveSideBar({ navSize, avatar }) {
             `}
                 icon={<FaRegCalendar />}
               /> */}
+          <img src={downloadImg} alt="" />
           <h3
             className={` ${navSize == "small" ? "hidden" : "flex"}
           `}

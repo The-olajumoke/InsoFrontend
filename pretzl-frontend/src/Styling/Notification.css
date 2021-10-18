@@ -1,14 +1,13 @@
-
 .notificationCont {
   display: flex;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   flex-direction: column;
   width: 100%;
   height: 100%;
   padding: 40px 50px 10px 41px;
   /* overflow-y: scroll; */
 }
-.notiHeader{
+.notiHeader {
   display: flex;
   align-items: center;
   position: relative;
@@ -56,27 +55,22 @@ hr {
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-
-} 
+}
 .allNotifications::-webkit-scrollbar {
   display: none;
 }
 .postCont {
   width: 100%;
-  height: 146.22px;
+  height: 147px;
   margin: 20px 0;
-  
-  /* padding: 20px 0; */
   justify-content: flex-start;
   border-bottom: 1px solid rgba(0, 30, 47, 0.35);
   display: flex;
-
 }
 .postsubcont {
   display: flex;
   justify-content: flex-start;
   width: 65%;
-
 }
 .postIcon {
   height: 100%;
@@ -94,7 +88,6 @@ hr {
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-
 }
 .avatars {
   display: flex;
@@ -110,7 +103,6 @@ hr {
   color: #001e2f;
 }
 .avatars .time {
-
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -127,10 +119,8 @@ hr {
 }
 .moreInfo {
   display: flex;
-
 }
 .moreInfo h4 {
-
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -160,33 +150,78 @@ hr {
   font-size: 16px;
   line-height: 24px;
   color: #686868;
-
   flex-wrap: wrap;
 }
-
 @media (max-width: 1000px) {
-  .notiHeader{
+  .notiHeader {
     display: none;
   }
-.notificationCont{
-  padding-top: 0;
-
-
-}}
+  .notificationCont {
+    padding-top: 0;
+  }
+}
 @media (max-width: 815px) {
   .postCont {
     padding: 10px 0;
     height: auto;
   }
-
+  .avatars {
+    margin-bottom: 10px;
+  }
   .postsubcont {
     width: 100%;
   }
 
+  .postTopic {
+    margin-top: 10px;
+    font-size: 13px;
+  }
   .notificationCont {
     padding: 20px 20px 10px;
   }
-  .moreInfo h4{
+  .moreInfo h4,
+  .moreInfo h5 {
+    font-size: 14px;
+  }
+}
+@media (max-width: 425px) {
+  .postTopic {
+    font-size: 11px;
+    line-height: 20px;
+  }
+  .moreInfo h4,
+  .moreInfo h5 {
     font-size: 12px;
+  }
+}
+@media (max-width: 350px) {
+  .postIcon {
+    margin-right: 10px;
+  }
+  .postInfo img {
+    width: 30px;
+    height: 30px;
+  }
+  .postTopic {
+    font-size: 12px;
+  }
+  .moreInfo h4 {
+    font-size: 12px;
+    line-height: 21px;
+  }
+  .avatars .time {
+    font-size: 10px;
+  }
+  .moreInfo h5,
+  .avatars h4 {
+    margin-left: 2px;
+    font-size: 11px;
+    line-height: 15px;
+    display: flex;
+    align-items: center;
+    color: #07a098;
+  }
+  .avatars h5{
+    font-size: 14px;
   }
 }

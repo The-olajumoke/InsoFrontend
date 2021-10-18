@@ -63,20 +63,21 @@
   padding-left: 105px;
   color: #04be00;
 }
-
+.downBtnCont {
+}
 .upgradeBtn {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
+  /* padding: auto; */
   height: 40px;
   border: 2px solid #0eb4f6;
   box-sizing: border-box;
   border-radius: 50px;
 }
 .upgradeBtn h3 {
-  font-family: Poppins;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -91,7 +92,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 16px;
 }
 .navItem {
   /* padding: 26px 0; */
@@ -140,7 +141,6 @@
   width: 32%;
   box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.08);
 }
-
 @media (max-width: 1064px) {
   .nav-text {
     font-size: 18px;
@@ -169,7 +169,6 @@
     height: 40px;
   }
 }
-
 @media (max-width: 1000px) {
   .side-Cont {
     display: none;
