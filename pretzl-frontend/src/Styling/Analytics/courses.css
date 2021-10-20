@@ -47,6 +47,9 @@
   overflow-x: scroll;
   overscroll-behavior: smooth;
 }
+.actCont::-webkit-scrollbar{
+  display: none;
+}
 .allActCont {
   height: 100%;
   width: 95%;   
