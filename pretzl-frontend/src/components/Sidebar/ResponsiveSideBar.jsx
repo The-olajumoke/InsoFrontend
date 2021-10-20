@@ -8,7 +8,8 @@ import { MdHeadsetMic } from "react-icons/md";
 import { FaRegCalendar } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdChatBubbleOutline } from "react-icons/md";
-function ResponsiveSideBar({ navSize, avatar }) {
+// import avatar from "../"
+function ResponsiveSideBar({ navSize }) {
   return (
     <nav className="responNav">
       <div
