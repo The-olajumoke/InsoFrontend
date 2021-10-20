@@ -13,14 +13,16 @@ import Contact from "./pages/Contact";
 import Settings from "./pages/Settings";
 import Grades from "./pages/Grades";
 import Archives from "./pages/Archives";
+import ViewDiscussion from "./pages/ViewDiscussion";
+import ViewDiscussionSet from "./pages/ViewDiscussionSet";
 
 const App = () => {
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          <Landing />
-          {/* <Discussion/> */}
+          {/* <Landing /> */}
+          <Discussion/>
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />
@@ -37,8 +39,14 @@ const App = () => {
         <Route exact path="/log-in">
           <LogInUser />
         </Route>
-        <Route exact path="/discussion">
+        <Route exact path="/discussions">
           <Discussion />
+        </Route>
+        <Route exact path="/discussion/:id">
+     <ViewDiscussion/>
+        </Route>
+        <Route exact path="/discussion-set">
+     <ViewDiscussionSet/>
         </Route>
         <Route exact path="/notifications">
           <Notification />
@@ -62,6 +70,9 @@ const App = () => {
           <Settings/>
         </Route>
         <Route exact path="/archives">
+          <Archives/>
+        </Route>
+        <Route exact path="/">
           <Archives/>
         </Route>
       </Switch>

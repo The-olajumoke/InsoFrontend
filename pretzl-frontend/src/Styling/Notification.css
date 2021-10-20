@@ -77,11 +77,11 @@ hr {
   padding: 0;
   margin-right: 16px;
 }
-.postIcon .icon {
-  width: 100%;
-  width: 26px;
+.postIcon img {
+  width: 20px;
   height: 35px;
   color: #07a098;
+  /* margin-top: 5px; */
 }
 .postInfo {
   display: flex;
@@ -93,6 +93,7 @@ hr {
   display: flex;
   align-items: center;
 }
+
 .avatars h5 {
   font-style: normal;
   font-weight: 500;
@@ -102,6 +103,7 @@ hr {
   align-items: center;
   color: #001e2f;
 }
+
 .avatars .time {
   font-style: normal;
   font-weight: normal;

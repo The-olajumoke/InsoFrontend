@@ -1,12 +1,13 @@
 import React from "react";
 import { MdHeadsetMic } from "react-icons/md";
 import avatar from "../../Exports/Avatar.svg";
+import mentionImg from "../../Exports/notifications/mention.svg"
 function MentionNotification() {
   return (
     <div className="postCont">
       <div className=" postsubcont ">
         <div className="postIcon ">
-          <MdHeadsetMic className="icon" />
+          <img  src={mentionImg} alt="" />
         </div>
         <div className="postInfo">
           <div className="avatars">

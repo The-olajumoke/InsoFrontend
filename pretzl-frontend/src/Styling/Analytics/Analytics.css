@@ -16,7 +16,7 @@
 .overviewCont::-webkit-scrollbar {
   display: none;
 }
-.courses-overview {
+.courses-overview { 
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -353,7 +353,6 @@
 @media (max-width: 400px) {
   .contForWidth {
     width: 100%;
-    border: 2px solid;
     align-items: center;
   }
   .postTypes {

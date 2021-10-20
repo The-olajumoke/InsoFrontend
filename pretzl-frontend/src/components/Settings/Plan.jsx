@@ -11,7 +11,11 @@ function Plan({ handleClick }) {
         >
           Profile
         </button>
-        <button className="bg-dashBtn text-textBody" onClick={handleClick} name="security">
+        <button
+          className="bg-dashBtn text-textBody"
+          onClick={handleClick}
+          name="security"
+        >
           Security
         </button>
         <button
@@ -21,13 +25,17 @@ function Plan({ handleClick }) {
         >
           Notifications
         </button>
-        <button className=" bg-primary text-white" onClick={handleClick} name="plan">
+        <button
+          className=" bg-primary text-white"
+          onClick={handleClick}
+          name="plan"
+        >
           Plans
         </button>
       </div>
       <div className="profileCont">
         <h2 className="profileHeading">Plans</h2>
-        <div className="cardHolder">
+        <div className="cardHolder  ">
           <div className="card">
             <h2>Free</h2>
             <h3>$0 per month</h3>
@@ -49,8 +57,10 @@ function Plan({ handleClick }) {
         </div>
 
         <div className="underInfo">
-          <bold>Time-limited offer: </bold>  Any discussion that you create now
-          will stay free for you forever.
+          <bold>Time-limited offer: </bold>
+          <h3>
+            Any discussion that you create now will stay free for you forever.
+          </h3>
         </div>
       </div>
     </>

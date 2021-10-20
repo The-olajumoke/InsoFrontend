@@ -5,7 +5,7 @@ import ActivityChart from "../ActivityChart";
 
 function Courses({ handleClick }) {
   return (
-    <div className="w-full">
+    <div className="theMainCont" >
       <div className="courseCont ">
         <div className="courseHeader">
           <h2>Active Courses</h2>
@@ -15,7 +15,7 @@ function Courses({ handleClick }) {
           <span> 18</span> courses
         </div>
       </div>
-      <div className="actCont">
+      <div className="actCont ">
         <ActivityChart />
       </div>
 

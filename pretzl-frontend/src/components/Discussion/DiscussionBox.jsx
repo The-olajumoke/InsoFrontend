@@ -9,7 +9,9 @@ import "../../Styling/Discussion.css";
 import img from "../../Exports/DisIcon.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
-function DiscussionBox({ title, code, name, numberOfPeople, date }) {
+import { Link } from "react-router-dom";
+
+function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
   const [showEdit, setshowEdit] = useState(false);
   const handleEdit = () => {
     setshowEdit(!showEdit);
@@ -18,7 +20,7 @@ function DiscussionBox({ title, code, name, numberOfPeople, date }) {
     <div className="discBox">
       <div className="boxHead">
         <div className=" box-1">
-          <MdChatBubbleOutline />
+          <MdChatBubbleOutline className=" mr-1" />
           <h4>{name}</h4>
         </div>
         <div className="box-2">
@@ -28,20 +30,27 @@ function DiscussionBox({ title, code, name, numberOfPeople, date }) {
           </div>
           <div className="flex">
             <MdLock />
-            <BsThreeDotsVertical onClick={handleEdit} />
+            <BsThreeDotsVertical
+              className="text-primary"
+              onClick={handleEdit}
+            />
           </div>
         </div>
       </div>
 
-      <div className="boxDetail">
-        <h2>{title}</h2>
+      <div className="boxDetail ">
+        <h2 className="boxDetailTitle">{title}</h2>
         <h4>{date}</h4>
       </div>
 
       <div className="boxfooter">
-        <h4>{code}</h4>
-        <MdContentCopy />
-        <button>Open</button>
+        <div className="flex  items-center">
+          <h4>{code}</h4>
+          <MdContentCopy className="ml-2" />
+        </div>
+        <Link to={{ pathname: `/discussion/${id}` }}>
+          <button>Open</button>
+        </Link>
       </div>
       {showEdit && (
         <div className="editBox">

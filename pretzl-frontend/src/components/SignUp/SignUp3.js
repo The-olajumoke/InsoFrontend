@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import "../Styling/SignUp.css";
+import "../../Styling/SignUp.css";
 import { FiArrowLeft } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
-import SignInCont from "../components/SignInCont";
-import InputCheckbox from "../components/Form/InputCheckbox";
+import SignInCont from "../SignInCont";
+import InputCheckbox from "../Form/InputCheckbox";
 import { useDispatch } from "react-redux";
-import Dropdown from "../components/Form/Dropdown";
-import Button from "../components/SignUp/Button";
-import history from "../utils/history";
-import store from "../redux/store";
-import { signUpThree } from "../redux/User/userSlice";
+import Dropdown from "../Form/Dropdown";
+import Button from "./Button";
+import history from "../../utils/history";
+import store from "../../redux/store";
+import { signUpThree } from "../../redux/User/userSlice";
 import { BiCheckCircle,BiErrorCircle } from "react-icons/bi";
 
-import CustomizedSnackbars from "../components/NotiPopUp";
+import CustomizedSnackbars from "../NotiPopUp";
 
 function SignUp3({ activeModal, setactiveModal }) {
   // DISPLAY SUCCESS MESSAGE

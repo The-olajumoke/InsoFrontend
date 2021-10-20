@@ -1,12 +1,13 @@
 import React from "react";
 import { MdHeadsetMic } from "react-icons/md";
 import avatar from "../../Exports/Avatar.svg";
+import replyImg from "../../Exports/notifications/reply.svg";
 function ReplyOthers() {
   return (
     <div className="postCont">
       <div className=" postsubcont ">
         <div className="postIcon">
-          <MdHeadsetMic className="icon" />
+        <img  src={replyImg} alt=""/>
         </div>
         <div className="postInfo">
           <div className="avatars">

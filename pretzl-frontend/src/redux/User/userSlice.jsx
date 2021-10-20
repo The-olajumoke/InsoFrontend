@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 const initialState = {
   user: {
     firstName: null,
@@ -18,7 +17,7 @@ const initialState = {
     terms: false,
   },
   signedState: false,
-  navSize:"large",
+  navSize: "large",
   // icon:"large",
 };
 
@@ -57,11 +56,11 @@ const userSlice = createSlice({
 
     //   console.log(state.signedState);
     // },
-    setCurrentNavSize:(state,{payload})=>{
-      console.log("previous state is" + state.navSize)
-      state.navSize=payload
+    setCurrentNavSize: (state, { payload }) => {
+      console.log("previous state is" + state.navSize);
+      state.navSize = payload;
       console.log("new state is" + state.navSize);
-    }
+    },
   },
 });
 export const signUpOne = (newUser, showResult) => (dispatch) => {
@@ -71,12 +70,9 @@ export const signUpTwo = (newUser) => (dispatch) => {
   dispatch(setCurrentUsertwo(newUser));
 };
 
-
-
-
-
 export const signUpThree = createAsyncThunk(
-  "user/signUpUser", async (newUser, { dispatch,getState }) => {
+  "user/signUpUser",
+  async (newUser, { dispatch, getState }) => {
     dispatch(setCurrentUserthree(newUser));
     const currentState = getState();
     const userDetails = currentState.user.user;
@@ -109,81 +105,44 @@ export const signUpThree = createAsyncThunk(
       const res = await axios.post(apiBaseUrl, payload);
       console.log(res);
       console.log(res.status);
-      if(res.status){
-      dispatch(setSignedTrue());
+      if (res.status) {
+        dispatch(setSignedTrue());
       }
       console.log(res.data);
       console.log(res.data.message);
-      alert("successful")
+      alert("successful");
     } catch (error) {
       console.log({ ...error });
-      alert("failure"); 
+      alert("failure");
     }
   }
 );
-// export const signUpThree = (newUser) => (dispatch, getState) => {
-//   dispatch(setCurrentUserthree(newUser));
-//   const currentState = getState();
-//   const userDetails = currentState.user.user;
-//   console.log(userDetails);
-//   {
-//     alert(JSON.stringify(userDetails, null, 2));
-//   }
-//   var payload = {
-//     firstName: userDetails.firstName,
-//     lastName: userDetails.lastName,
-//     userName: userDetails.userName,
-//     phoneNumber: userDetails.phoneNumber,
-//     email: userDetails.email,
-//     password: userDetails.password,
-//     alternativeEmail: userDetails.alternativeEmail,
-//     primarilyUse: userDetails.primaryUse,
-//     role: ["user"],
-//     occupation: userDetails.profession,
-//     receiveInsoUpdates: userDetails.terms,
-//   };
-//   console.log(payload);
-//   dispatch(SignUpUser(payload));
-// };
-// export const SignUpUser = (payload) => (dispatch) => {
-//   console.log(payload);
-//   // var apiBaseUrl = "http://localhost:8080/api/auth/signup";
 
-//   axios.defaults.headers.post["Content-Type"] =
-//     "application/json;charset=utf-8";
-//   axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-//   axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
-
-//   axios.post(apiBaseUrl, payload).then(function (response) {
-//     console.log(response);
-//     if (response.status == 200) {
-//       console.log("SignUp Successful");
-//       alert("SignUp Successful" + `\n`);
-//       dispatch(setSignedTrue());
-//       history.push("./log-in");
-//     } else if (response.status == 401) {
-//       console.log("error from payload");
-//       alert("error from payload");
-//       dispatch(setSignedFalse());
-//     } else {
-//       console.log("Unsuccessful SignUp");
-//       alert("Unsuccessful SignUp");
-//       dispatch(setSignedFalse());
-//     }
-//   });
-
-//   // try {
-//   //   const res = await axios.post(apiBaseUrl,payload)
-//   //   console.log(res);
-//   //   console.log(res.status);
-//   // } catch (error) {
-//   //   console.log(error.res);
-//   // }
-// };
-
-export const setNavSize=(size)=>(dispatch)=>{
+export const setNavSize = (size) => (dispatch) => {
   dispatch(setCurrentNavSize(size));
-}
+};
+export const editDetails = createAsyncThunk(
+  "user/editUserDetails",
+  async (data) => {
+    var apiBaseUrl = "http://localhost:8080/api/auth/signup";
+    axios.defaults.headers.post["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.post["Access-Control-Allow-Methods"] = "PUT";
+
+    try {
+      const res = await axios.put(apiBaseUrl, data);
+      console.log(res);
+      console.log(res.status);
+      console.log(res.data);
+      console.log(res.data.message);
+      alert("successful");
+    } catch (error) {
+      console.log({ ...error });
+      alert("failure");
+    }
+  }
+);
 export const {
   setCurrentUser,
   setCurrentUsertwo,

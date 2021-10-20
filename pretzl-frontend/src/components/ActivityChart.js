@@ -4,7 +4,7 @@ import ActivityItem from "./ActivityItem";
 function ActivityChart() {
   return (
     <div className="allActCont">
-      <ActivityItem height="32" />      <ActivityItem height="80" />
+      <ActivityItem height="32" /> <ActivityItem height="80" />
       <ActivityItem height="43" />
       <ActivityItem height="84" />
       <ActivityItem height="144" />

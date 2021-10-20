@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 import { FiAward, FiLogOut } from "react-icons/fi";
-import "../../Styling/settings/profile.css";
 import img from "../../Exports/Avatar.svg";
+import "../../Styling/settings/profile.css";
+import "../../Styling/Contact.css";
+import { useDispatch } from "react-redux";
+import { editDetails } from "../../redux/User/userSlice";
 function Profile({ handleClick }) {
-  const [inputField, setInputField] = useState({
-    username: "",
-    firstname: "",
-    // lastname: "",
-    email: "",
-    // alternativeemail: "",
-  });
-  const handleChange = (e) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+  const dispatch = useDispatch();
+  const [username, setusername] = useState("");
+  const [firstname, setfirstname] = useState("");
+  const [lastname, setlastname] = useState("");
+  const [email, setemail] = useState("");
+  const [alternativeemail, setalternativeemail] = useState("");
 
-    setInputField({ [e.target.name]: e.target.value });
-  };
-  const handlesubmit = () => {
-    const newUser = {
-      userName: inputField.username,
-      // firstName: inputField.firstname,
-      // lastname: inputField.lastname,
-      email: inputField.email,
-      // alternativeemail: inputField.alternativeemail,
+  const handlesubmit = (e) => {
+    e.preventDefault();
+    const editDetails = {
+      username,
+      firstname,
+      lastname,
+      email,
+      alternativeemail,
     };
     {
-      alert(JSON.stringify(newUser, null, 2));
+      alert(JSON.stringify(editDetails, null, 2));
     }
+
+    // dispatch(editDetails(editDetails))
   };
   return (
     <>
@@ -71,34 +71,64 @@ function Profile({ handleClick }) {
         </div>
 
         <div className=" profileBoxCont">
-          <div className="profileBox ">
+          <div className="contactBox ">
             <label htmlFor="">Username :</label>
             <input
               type="text"
-              onChange={handleChange}
+              onChange={(e) => {
+                setusername(e.target.value);
+              }}
               name="username"
               id=""
+              value={username}
               placeholder={`@Patrick`}
             />
           </div>
-          <div className="profileBox">
+          <div className="contactBox">
             <label htmlFor="">First Name :</label>
-            <input type="text" onChange={handleChange} name="firstname" id="" />
+            <input
+              type="text"
+              onChange={(e) => {
+                setfirstname(e.target.value);
+              }}
+              value={firstname}
+              name="firstname"
+              id=""
+            />
           </div>
-          <div className="profileBox">
+          <div className="contactBox">
             <label htmlFor="">Last Name :</label>
-            <input type="text" onChange={handleChange} name="lastname" id="" />
+            <input
+              type="text"
+              onChange={(e) => {
+                setlastname(e.target.value);
+              }}
+              value={lastname}
+              name="lastname"
+              id=""
+            />
           </div>
-          <div className="profileBox">
+          <div className="contactBox">
             <label htmlFor="">Email :</label>
-            <input type="email" onChange={handleChange} name="email" id="" />
+            <input
+              type="email"
+              onChange={(e) => {
+                setemail(e.target.value);
+              }}
+              value={email}
+              name="email"
+              id=""
+            />
           </div>
-          <div className="profileBox">
+          <div className="contactBox">
             <label htmlFor="">Alternative Mail :</label>
             <input
               type="email"
               name="alternativeemail"
-              onChange={handleChange}
+              onChange={(e) => {
+                setalternativeemail(e.target.value);
+              }}
+              value={alternativeemail}
               id=""
             />
           </div>

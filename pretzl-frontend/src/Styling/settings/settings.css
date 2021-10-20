@@ -5,9 +5,10 @@
   position: relative;
 }
 .setCont {
-  height: 100%;
+  /* height: 100%; */
+  height: auto;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -41,4 +42,35 @@
   line-height: 20px;
   text-align: center;
   /* color: #686868; */
+}
+@media (max-width: 815px) {
+  .setMain {
+    padding: 30px;
+  }
+  .setCont {
+  }
+  .settingHeader {
+    width: 100%;
+    height: auto;
+    /* display: none; */
+  }
+  .settingHeader button {
+    /* width: 23%; */
+    width: auto;
+    flex: 1;
+    gap: 30px;
+    margin-right: 3px;
+  }
+}
+@media (max-width: 450px) {
+.setMain{
+  width: 100%;
+  padding: 20px;
+}
+.settingHeader  button{
+  flex: 1;
+  font-size: 12px;
+  padding:5px;
+
+}
 }

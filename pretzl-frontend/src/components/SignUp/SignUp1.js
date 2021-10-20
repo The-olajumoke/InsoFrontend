@@ -4,22 +4,22 @@ import * as Yup from "yup";
 import { MdClose } from "react-icons/md";
 import { FiArrowLeft } from "react-icons/fi";
 
-import SignInCont from "../components/SignInCont";
-import "../Styling/SignUp.css";
-import "../Styling/Login.css";
+import SignInCont from "../../components/SignInCont";
+import "../../Styling/SignUp.css";
+import "../../Styling/Login.css";
 import { Form, Formik } from "formik";
-import CustomField from "../components/Form/CustomInput";
-import Button from "../components/SignUp/Button";
-import Page from "../components/SignUp/Page";
-import history from "../utils/history";
+import CustomField from "../../components/Form/CustomInput";
+import Button from "../../components/SignUp/Button";
+
+import history from "../../utils/history";
 import axios from "axios";
-import { signUpOne } from "../redux/User/userSlice";
+import { signUpOne } from "../../redux/User/userSlice";
 import { useDispatch } from "react-redux";
 function SignUp1({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
-const showResult = () => {
-  alert("hello world");
-};
+  const showResult = () => {
+    alert("hello world");
+  };
   const handleSubmit = (values, { resetForm }) => {
     // STORE VALUES SOMEWHERE
     const newUser = {
@@ -28,11 +28,11 @@ const showResult = () => {
       userName: values.userName,
       phoneNumber: values.phoneNumber,
     };
-    dispatch(signUpOne(newUser,showResult));
+    dispatch(signUpOne(newUser, showResult));
     resetForm();
     setactiveModal("signUp2");
   };
-  
+
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -67,7 +67,7 @@ const showResult = () => {
   const handleBack = () => {
     history.push("./sign-up");
   };
-  
+
   return (
     <SignInCont
       title="Sign Up"

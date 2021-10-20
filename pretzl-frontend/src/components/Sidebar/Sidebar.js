@@ -56,7 +56,7 @@ function Sidebar({ navSize, setNavSize }) {
             navSize={navSize}
             title="Discussions"
             icon={<MdChatBubbleOutline />}
-            path="/discussion"
+            path="/discussions"
             active
           />
           <NavItem

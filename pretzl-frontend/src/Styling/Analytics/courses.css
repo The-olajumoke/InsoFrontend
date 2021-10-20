@@ -1,3 +1,7 @@
+.trial {
+}
+.theMainCont {
+}
 .courseCont {
   display: flex;
   justify-content: space-between;
@@ -38,21 +42,24 @@
 }
 .actCont {
   height: 200px;
-  width: 100%;
   /* border: blue 2px solid; */
+  width: 100%;
+  overflow-x: scroll;
+  overscroll-behavior: smooth;
 }
 .allActCont {
   height: 100%;
-  width: 95%;
+  width: 95%;   
   display: flex;
   align-items: flex-end;
 }
 .actItem {
-  width: 35px;
+  width: 40px;
   background: #07a098;
   position: relative;
-  margin-left: 8px;
-  margin-right: 8px;
+  display: inline-block;
+  margin-right: 10px;
+  flex-basis: 40px;
 }
 .actItem h3 {
   font-style: normal;
@@ -97,22 +104,28 @@
   line-height: 20px;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   color: #686868;
   text-align: center;
-  justify-content: flex-start;
   padding-left: 27px;
   padding: 9px 0 9px 27px;
-  /* border-bottom: #07a098 2px solid; */
+  /* border: #07a098 2px solid; */
   /* margin-right: 20px; */
   width: 30%;
 }
-@media (max-width: 1024) {
-  .allActCont {
-    height: 100%;
+@media (max-width: 1440px) {
+  .allActCont{
     width: 100%;
   }
+}
+@media (max-width:1024px) {
+  .allActCont {
+    height: 100%;
+  width: 700px;
+
+  }
   .actItem {
-    width: 30px;
+    /* width: 35px; */
   }
 }
 @media (max-width: 620px) {
@@ -121,5 +134,20 @@
   }
   .courseHeader h4 {
     font-size: 12px;
+  }
+}
+@media (max-width: 350px) {
+  .actItem{
+    width: 25px;
+    margin-right: 5px;
+  }
+  .allTypesCont{
+    width: 100%;
+  }
+  .typeBtn{
+    font-size:12px;
+    width: 32%;
+    justify-content: center;
+    padding: 9px 0;
   }
 }

@@ -17,9 +17,11 @@ function Settings() {
   };
   return (
     <BodyWrapper>
-      <div className="setMain">
+      <ResponsiveTop title="Settings" />
+
+      <div className="setMain font-Poppins">
         {/* <SettingHeader /> */}
-        <div className="setCont  font-Poppins">
+        <div className="setCont">
           {active == "profile" && <Profile handleClick={handleClick} />}
           {active == "security" && <Security handleClick={handleClick} />}
           {active == "plan" && <Plan handleClick={handleClick} />}

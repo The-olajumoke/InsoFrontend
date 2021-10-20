@@ -39,9 +39,7 @@ function BodyWrapper({ children }) {
     <div className="body-wrapper font-Poppins">
       <SideHeading
         navSize={navSize}
-        // setNavSize={setNavSize}
         handleClick={handleClick}
-        // setNewIcon={setNewIcon}
         ResponsiveHandleClick={ResponsiveHandleClick}
       />
 

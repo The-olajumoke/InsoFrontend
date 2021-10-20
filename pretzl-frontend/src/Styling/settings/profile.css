@@ -1,5 +1,6 @@
 .profileCont {
-  flex: 1;
+  /* flex: 1; */
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,8 +45,10 @@
   color: #07a098;
 }
 .profileBoxCont {
-  /* margin-bottom: 40px; */
+  margin-bottom: 40px;
   flex: 1;
+  position: relative;
+
 }
 .profileBox {
   display: flex;
@@ -88,7 +91,7 @@
 }
 .profileBtnCont {
   display: flex;
-  justify-content: flex-end;
+  justify-content:center;
   /* margin-bottom: 100px; */
 }
 .profileBtn {
@@ -129,6 +132,7 @@
 }
 
 /* SECURITY */
+
 .saveBtn {
   margin-top: 40px;
   display: flex;
@@ -149,4 +153,30 @@
   font-size: 13.19px;
   line-height: 20px;
   color: #ffffff;
+}
+@media (max-width: 815px) {
+  .profileCont {
+    width: 100%;
+  }
+  .pictureCont img {
+    width: 70px;
+    height: 70px;
+  }
+}
+@media (max-width: 450px) {
+  .profileCont {
+    width: 100%;
+  }
+  .profileHeading{
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .pictureCont img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+  }
+  .pictureCont h3{
+    font-size: 16px;
+  }
 }

@@ -1,9 +1,10 @@
 import React from "react";
 import BodyWrapper from "../components/BodyWrapper";
 import "../Styling/Contact.css";
-function Contact() {
+import ResponsiveTop from "../components/ResponsiveTop";function Contact() {
   return (
     <BodyWrapper>
+      <ResponsiveTop title="Contact Us" />
       <div className="contactMain">
         <div className="contactForWidth">
           <div className="contactCont">

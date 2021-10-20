@@ -9,61 +9,19 @@ import ResponsiveTop from "../components/ResponsiveTop";
 import "../Styling/Discussion.css";
 import NoMessageYet from "../components/Discussion/NoMessageYet";
 import CreateNewDis from "../components/Discussion/CreateNewDis";
-import history from "../utils/history"
-
+import history from "../utils/history";
+import { allDiscData } from "../DummyData/discData";
+import DiscSet from "../components/Discussion/DiscSetTemp";
 function Discussion() {
-const [showMenu, setShowMenu] = useState(false) 
-  const handleClick =(e)=>{
-    setShowMenu(!showMenu)
-  }
-  const DiscussionCont = [];
-  // const DiscussionCont = [
-  //   {
-  //     title: "Price Action in Foreign Exchange",
-  //     date: "Mar 21",
-  //     numberOfPeople: "4",
-  //     name: "Patrick Dempsey",
-  //     code: "51RP70F",
-  //   },
-  //   {
-  //     title: "Types of Mineral Resources",
-  //     date: "Mar 21",
-  //     numberOfPeople: "2",
-  //     name: "Fakomi Idowu",
-  //     code: "89RWT2",
-  //   },
-  //   {
-  //     title: "Benefits of Foreign Exchange",
-  //     date: "Mar 21",
-  //     numberOfPeople: "3",
-  //     name: "Patrick Dempsey",
-  //     code: "51RP70F",
-  //   },
-  //   {
-  //     title: "Types of Mineral Resources",
-  //     date: "Mar 21",
-  //     numberOfPeople: "2",
-  //     name: "Patrick Dempsey",
-  //     code: "51RP70F",
-  //   },
-  //   {
-  //     title: "Price Action in Foreign Exchange",
-  //     date: "Mar 21",
-  //     numberOfPeople: "4",
-  //     name: "Patrick Dempsey",
-  //     code: "51RP70F",
-  //   },
-  //   {
-  //     title: "Price Action in Foreign Exchange",
-  //     date: "Mar 21",
-  //     numberOfPeople: "4",
-  //     name: "Patrick Dempsey",
-  //     code: "51RP70F",
-  //   },
-  // ];
+  const [showMenu, setShowMenu] = useState(false);
+  const handleClick = (e) => {
+    setShowMenu(!showMenu);
+  };
+  // const DiscussionCont = [];
+  // FROM DUMMY DATA
+  const DiscussionCont = allDiscData;
   return (
     <BodyWrapper>
-     
       <ResponsiveTop title="Discussion Title" />
       <div className="disMain ">
         <div className="disCont ">
@@ -76,7 +34,10 @@ const [showMenu, setShowMenu] = useState(false)
             </button>
 
             <div className="flex">
-              <div onClick={()=>history.push("./archives")} className="filterAndsort">
+              <div
+                onClick={() => history.push("./archives")}
+                className="filterAndsort"
+              >
                 <RiInboxArchiveLine className="topIcon" />
                 Archives
               </div>
@@ -86,13 +47,25 @@ const [showMenu, setShowMenu] = useState(false)
               </div>
             </div>
           </div>
-         
+
           <div className="allDisCont">
+            {/* DISCUSSION SET */}
+            <DiscSet
+              key="1"
+              id="1"
+              title="Discussion Set 1"
+              date="mar 21"
+              numberofDisc="3"
+              name="Patrick Dempsey"
+            />
+            {/* DISCUSSION */}
             {DiscussionCont.length < 1 ? (
               <NoMessageYet message="It’s lonely in here. Create a new discussion" />
             ) : (
               DiscussionCont.map((dis, index) => (
                 <DiscussionBox
+                  key={index}
+                  id={index}
                   title={dis.title}
                   date={dis.date}
                   numberOfPeople={dis.numberOfPeople}

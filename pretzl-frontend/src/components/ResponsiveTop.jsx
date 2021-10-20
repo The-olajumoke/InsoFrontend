@@ -7,7 +7,7 @@ import "../Styling/BodyWrapper.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 function responsiveTop({ title, dotHandle }) {
   return (
-    <div className="responCont ring px-20">
+    <div className="responCont px-20">
       <div className="cont1 ">
         <FiArrowLeft className="icon" />
         <h3>{title}</h3>

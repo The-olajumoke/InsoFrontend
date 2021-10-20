@@ -4,13 +4,13 @@ import * as Yup from "yup";
 import { MdClose } from "react-icons/md";
 import { FiArrowLeft } from "react-icons/fi";
 
-import SignInCont from "../components/SignInCont";
+import SignInCont from "../../components/SignInCont";
 import { Form, Formik } from "formik";
-import CustomField from "../components/Form/CustomInput";
+import CustomField from "../../components/Form/CustomInput";
 import { useDispatch } from "react-redux";
-import Button from "../components/SignUp/Button";
-import { signUpTwo } from "../redux/User/userSlice";
-import history from "../utils/history";
+import Button from "../../components/SignUp/Button";
+import { signUpTwo } from "../../redux/User/userSlice";
+import history from "../../utils/history";
 function SignUp2({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
 

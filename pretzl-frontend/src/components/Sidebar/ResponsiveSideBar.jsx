@@ -28,7 +28,7 @@ function ResponsiveSideBar({ navSize, avatar }) {
           navSize={navSize}
           title="Discussions"
           icon={<MdChatBubbleOutline />}
-          path="/discussion"
+          path="/discussions"
           active
         />
         <NavItem

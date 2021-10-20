@@ -52,11 +52,13 @@ function Overview() {
                 </button>
               </div>
 
-              {active == "courses" && <Courses handleClick={handleClick} />}
-              {active == "discussions" && (
-                <Discussion handleClick={handleClick} />
-              )}
-              {active == "threads" && <Threads handleClick={handleClick} />}
+              <div className="trial">
+                {active == "courses" && <Courses handleClick={handleClick} />}
+                {active == "discussions" && (
+                  <Discussion handleClick={handleClick} />
+                )}
+                {active == "threads" && <Threads handleClick={handleClick} />}
+              </div>
             </div>
             <div className="sect2">
               <div className="postTypes">
