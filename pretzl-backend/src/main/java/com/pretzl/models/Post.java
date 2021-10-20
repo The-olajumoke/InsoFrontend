@@ -1,3 +1,4 @@
+/*
 package com.pretzl.models;
 
 import javax.persistence.*;
@@ -52,3 +53,4 @@ public class Post {
         this.post_desc = post_desc;
     }
 }
+*/
