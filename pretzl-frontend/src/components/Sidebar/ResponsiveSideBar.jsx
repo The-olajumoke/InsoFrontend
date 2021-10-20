@@ -77,13 +77,13 @@ function ResponsiveSideBar({ navSize, avatar }) {
         />
       </div>
       <div
-        className={`my-14  w-full flex  
+        className={`  mt-12 mb-2  w-full flex  
          ${navSize == "small" ? "" : "px-12"}
             ${navSize == "small" ? "pr-3" : ""}
     ${navSize == "small" ? "justify-end" : "justify-items-start"}`}
       >
         <button
-          className={`upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
+          className={` upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
           style={{ width: `${navSize == "small" ? "auto" : "230px"}` }}
         >
           {/* <NavIcon
