@@ -117,7 +117,7 @@ function SignUp3({ activeModal, setactiveModal }) {
               setIsActive1={setIsActive1}
               setIsActive2={setIsActive2}
               setIsActive3={setIsActive3}
-              initial="select one"
+              initial="Select one"
             />
             <Dropdown
               name="user"
