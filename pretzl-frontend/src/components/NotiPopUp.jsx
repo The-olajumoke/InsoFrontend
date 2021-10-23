@@ -13,7 +13,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function CustomizedSnackbars({text,title,severity,icon}) {
   const [open, setOpen] = React.useState(true);
-console.log(severity);
   // const handleClick = () => {
   //   setOpen(true);
   // };
@@ -44,15 +43,6 @@ console.log(severity);
           <Alert
             sx={{ width: "100%" }}
             onClose={handleClose}
-            icon={`${severity !=="success"?<BiCheckCircle/>:<BiErrorCircle/>}`}
-            // icon={
-            //   <BiCheckCircle
-            //     fontSize="30px"
-            //     color="#04BE00"
-            //     severity={severity}
-                
-            //   />
-          // }
             icon={icon}
             variant="outline"
             // color="#fff"
