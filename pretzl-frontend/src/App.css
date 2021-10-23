@@ -87,6 +87,7 @@
 }
 .drop-container label {
   margin-bottom: 15px;
+  color: #07A098;
 }
 .dropdown {
   user-select: none;
