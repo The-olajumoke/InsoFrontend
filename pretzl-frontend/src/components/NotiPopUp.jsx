@@ -3,7 +3,7 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { BiCheckCircle } from "react-icons/bi";
+import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 import { AlertTitle } from "@mui/material";
 import Slide from "@mui/material/Slide";
 
@@ -13,7 +13,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function CustomizedSnackbars({text,title,severity,icon}) {
   const [open, setOpen] = React.useState(true);
-
+console.log(severity);
   // const handleClick = () => {
   //   setOpen(true);
   // };
@@ -44,14 +44,16 @@ export default function CustomizedSnackbars({text,title,severity,icon}) {
           <Alert
             sx={{ width: "100%" }}
             onClose={handleClose}
-            icon={
-              <BiCheckCircle
-                fontSize="30px"
-                color="#04BE00"
-                severity={severity}
+            icon={`${severity !=="success"?<BiCheckCircle/>:<BiErrorCircle/>}`}
+            // icon={
+            //   <BiCheckCircle
+            //     fontSize="30px"
+            //     color="#04BE00"
+            //     severity={severity}
                 
-              />
-            }
+            //   />
+          // }
+            icon={icon}
             variant="outline"
             // color="#fff"
           >
