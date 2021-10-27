@@ -8,12 +8,22 @@ import ResponsiveTop from "../components/ResponsiveTop";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Discussion from "../components/Analytics/Discussion";
 import Threads from "../components/Analytics/Threads";
+import { getAllDisc } from "../redux/Analytics/analyticsSlice";
+import { useDispatch } from "react-redux";
+import "../Styling/CustomInput.css";
 function Overview() {
+  const dispatch = useDispatch();
   const [active, setActive] = useState("courses");
 
   const handleClick = (e) => {
     setActive(e.target.name);
   };
+
+  const getData = async () => {
+    // dispatch(getAllDisc("Jumoke"));
+    dispatch(getAllDisc());
+  };
+  getData();
   return (
     <BodyWrapper>
       <ResponsiveTop title="Analytics" />
@@ -72,10 +82,6 @@ function Overview() {
               <div className="postTypes">
                 <input type="radio" name="type" id="" />
                 <label>Reactions</label>
-              </div>
-              <div className="postTypes">
-                <input type="radio" name="type" id="" />
-                <label>Likes</label>
               </div>
               <div className="postTypes">
                 <input type="radio" name="type" id="" />

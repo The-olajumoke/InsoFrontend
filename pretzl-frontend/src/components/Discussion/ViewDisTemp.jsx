@@ -2,6 +2,7 @@ import React from 'react'
 import Avatar from "../../Exports/Avatar.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 function ViewDisTemp({name,question,username}) {
+
     return (
       <div className="DiscProp">
         {/* Heading */}

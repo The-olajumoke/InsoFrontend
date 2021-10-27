@@ -9,14 +9,14 @@
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
-  line-height: 27px;
+  line-height:27px;
   display: flex;
   align-items: center;
   color: rgba(7, 160, 152, 0.9);
   margin: 0;
   margin-bottom:2px;
 }
-.input-box {
+.input-box{
   width: 100%;
   border: 1px solid #0eb4f6;
   box-sizing: border-box;

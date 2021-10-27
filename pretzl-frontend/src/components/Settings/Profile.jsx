@@ -69,7 +69,7 @@ function Profile({ handleClick }) {
             <h5>@patrick</h5>
           </div>
         </div>
- {/* http://localhost:8080/api/auth/analytics?username=Bhaskar */}
+ 
         <div className=" profileBoxCont">
           <div className="contactBox ">
             <label htmlFor="">Username :</label>

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
-import "../../Styling/Analytics/courses.css"
+import "../../Styling/Analytics/courses.css";
 import ActivityChart from "../ActivityChart";
+import AnalDropdown from "./AnalDropdown";
 
 function Courses({ handleClick }) {
+  const [dropdown, setdropdown] = useState(false);
+  const options = ["good", "bad", "ugly"];
+
   return (
     <div className="theMainCont">
       <div className="courseCont ">
@@ -24,10 +28,13 @@ function Courses({ handleClick }) {
         <button
           name="courses"
           className="typeBtn border-b-2 border-primary"
-          onClick={handleClick}
+          onClick={() => {
+            setdropdown(!dropdown);
+          }}
         >
           Discussion set
           <IoMdArrowDropdown />
+          {dropdown && <AnalDropdown options={options} />}
         </button>
         <button name="discussions" className="typeBtn" onClick={handleClick}>
           Discussions

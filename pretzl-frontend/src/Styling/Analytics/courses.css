@@ -47,12 +47,12 @@
   overflow-x: scroll;
   overscroll-behavior: smooth;
 }
-.actCont::-webkit-scrollbar{
+.actCont::-webkit-scrollbar {
   display: none;
 }
 .allActCont {
   height: 100%;
-  width: 95%;   
+  width: 95%;
   display: flex;
   align-items: flex-end;
 }
@@ -96,7 +96,6 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 2px solid rgba(31, 196, 255, 0.12);
-
 }
 
 .typeBtn {
@@ -112,17 +111,35 @@
   text-align: center;
   padding: 9px 0 9px 27px;
   width: 30%;
+  position: relative;
 }
+/* DROPDOWN */
+.analDropdown {
+  position: absolute;
+  top: 110%;
+  left: -2px;
+  padding: 10px;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  font-weight: 500;
+}
+.analItem {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 2px solid rgb(0, 30, 47,0.05);
+}
+.analItem:last-child{
+  border-bottom: none;
+}
+
 @media (max-width: 1440px) {
-  .allActCont{
+  .allActCont {
     width: 100%;
   }
 }
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .allActCont {
     height: 100%;
-  width: 700px;
-
+    width: 700px;
   }
   .actItem {
     /* width: 35px; */
@@ -135,25 +152,24 @@
   .courseHeader h4 {
     font-size: 12px;
   }
-  .allTypesCont{
+  .allTypesCont {
     width: 100%;
     justify-content: center;
   }
-  .typeBtn{
-  padding: 5px 0;
-  width: 33%;
-      justify-content: center;
-
+  .typeBtn {
+    padding: 5px 0;
+    width: 33%;
+    justify-content: center;
   }
 }
 @media (max-width: 350px) {
-  .actItem{
+  .actItem {
     width: 25px;
     margin-right: 5px;
   }
-  
-  .typeBtn{
-    font-size:12px;
+
+  .typeBtn {
+    font-size: 12px;
     width: 32%;
     justify-content: center;
     /* padding: 9px 0; */

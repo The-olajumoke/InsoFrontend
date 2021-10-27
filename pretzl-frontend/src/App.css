@@ -2,18 +2,15 @@
   padding: 0;
   margin: 0;
 }
-
 .activeLink {
   color: black;
 }
-
 .icon {
   height: 100%;
   bottom: 0;
   font-size: 25px;
   margin-right: 5px;
 }
-
 .notipopup {
   height: 72px;
   width: 680px;
@@ -42,17 +39,17 @@
   color: #686868;
 }
 
-/* dropdown */
 
-.drop-container {
+/* DROPDOWN */
+.drop-container{
   width: 100%;
   margin-bottom: 10px;
 }
-.drop-container label {
+.drop-container label{
   margin-bottom: 15px;
   color: #07a098;
 }
-.dropdown {
+.dropdown{
   user-select: none;
   position: relative;
   width: 100%;
@@ -71,7 +68,7 @@
   color: rgba(0, 30, 47, 0.4);
   padding: 20px 34px;
 }
-.dropdown .dropdown-btn {
+.dropdown .dropdown-btn{
   background: none;
   width: 100%;
   height: 64px;
@@ -81,7 +78,6 @@
   cursor: pointer;
   justify-content: space-between;
 }
-
 .dropdown .dropdown-content {
   position: absolute;
   top: 110%;

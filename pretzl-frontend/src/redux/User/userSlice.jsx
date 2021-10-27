@@ -63,6 +63,7 @@ const userSlice = createSlice({
     },
   },
 });
+
 export const signUpOne = (newUser, showResult) => (dispatch) => {
   dispatch(setCurrentUser(newUser));
 };
@@ -143,6 +144,7 @@ export const editDetails = createAsyncThunk(
     }
   }
 );
+
 export const {
   setCurrentUser,
   setCurrentUsertwo,
