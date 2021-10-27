@@ -5,7 +5,7 @@ import ActivityChart from "../ActivityChart";
 
 function Courses({ handleClick }) {
   return (
-    <div className="theMainCont" >
+    <div className="theMainCont">
       <div className="courseCont ">
         <div className="courseHeader">
           <h2>Active Courses</h2>
@@ -21,8 +21,13 @@ function Courses({ handleClick }) {
 
       {/* Buttons */}
       <div className="allTypesCont">
-        <button name="courses" className="typeBtn border-b-2 border-primary" onClick={handleClick}>
-          Courses
+        <button
+          name="courses"
+          className="typeBtn border-b-2 border-primary"
+          onClick={handleClick}
+        >
+          Discussion set
+          <IoMdArrowDropdown />
         </button>
         <button name="discussions" className="typeBtn" onClick={handleClick}>
           Discussions

@@ -21,7 +21,8 @@ function Discussion({handleClick}) {
         {/* Buttons */}
         <div className="allTypesCont">
           <button name="courses" className="typeBtn " onClick={handleClick}>
-            Courses
+            Discussion set
+            <IoMdArrowDropdown />
           </button>
           <button
             name="discussions"

@@ -2,9 +2,12 @@
   /* padding: 45px 50px 10px 50px; */
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* border: orangered 2px solid; */
 }
 .viewHeading {
-  height: 70px;
+  height: 50px;
   padding: 0 45px;
   background: #fafafa;
   width: 100%;
@@ -67,7 +70,8 @@
 .DiscProp .top {
   display: flex;
 }
-.DiscProp img, .commentProp img {
+.DiscProp img,
+.commentProp img {
   width: 40px;
   height: 40px;
   border-radius: 500px;
@@ -112,6 +116,13 @@
   color: #686868;
 }
 /* COMMENTs */
+.allCommentCont {
+  flex: 1;
+  overflow-y: scroll;
+}
+.allCommentCont::-webkit-scrollbar {
+  display: none;
+}
 .commentProp {
   height: 117.86px;
   background: #ffffff;
@@ -143,4 +154,112 @@
   display: flex;
   align-items: center;
   color: #001e2f;
+}
+/* COMMENT BOX */
+.commentBoxCont {
+  padding: 0 45px;
+  justify-self: flex-end;
+  margin: 15px 0 ;
+}
+.commentBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 5px 0px 12px 20px;
+  width: 100%;
+  height: 122.3px;
+  background: #ffffff;
+  border: 1px solid #07a098;
+  box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  color: #bdbdbd;
+  border-radius: 8px;
+}
+.commentBox textarea {
+  width: 100%;
+  outline: none;
+}
+.commentBox textarea:empty{
+  color:#011b25;
+}
+.widgetCont {
+  width: 100%;
+  height: 34px;
+  /* height: auto; */
+  display: flex;
+  justify-content: space-between;
+}
+.widget {
+  display: flex;
+  column-gap: 20px;
+}
+.widget img {
+  /* border: red 2px solid; */
+}
+.commentBtnCont {
+  display: flex;
+  column-gap: 20px;
+
+}
+.commentBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+  width: 112px;
+  /* height: 34px; */
+  background: #07a098;
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  color: #ffffff;
+}
+.commentBtn:last-child{
+  background: #F9F9F9;
+  color: #9D9D9D;     
+}
+@media (max-width:900px) {
+  .viewHeading{
+    display: none;
+  }
+  .DiscProp,.commentProp{
+    height: auto;
+    padding: 0 15px;
+  }
+  .commentBoxCont {
+  padding: 0 25px;}
+}
+@media (max-width:620px) {
+  .commentBoxCont {
+  padding: 0;
+  }
+  .commentBox{
+    height:150px;
+  }
+  .commentBox textarea{
+    flex: 1;
+  }
+  .widgetCont{
+    flex-direction: column;
+    height: auto;
+  }
+  .widget{
+    /* column-gap: 2px; */
+    flex: 1;
+  }
+  .commentBtnCont{
+    justify-content: space-between;
+    margin-top: 8px;
+
+  }
+  .topRight{
+    display: none;
+  }
 }

@@ -17,7 +17,7 @@ const initialState = {
     terms: false,
   },
   signedState: false,
-  navSize: "large",
+  navSize: "small",
   // icon:"large",
 };
 

@@ -23,7 +23,7 @@ function Overview() {
           <div className="courses-overview">
             <div className="contForWidth">
               <div className="course-item">
-                <h4>Courses</h4>
+                <h4>Discussion set</h4>
                 <h2>14</h2>
               </div>
               <div className="course-item">
