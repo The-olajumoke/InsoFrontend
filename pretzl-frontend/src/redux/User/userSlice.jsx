@@ -17,7 +17,7 @@ const initialState = {
     terms: false,
   },
   signedState: false,
-  navSize: "large",
+  navSize: "small",
   // icon:"large",
 };
 
@@ -63,6 +63,7 @@ const userSlice = createSlice({
     },
   },
 });
+
 export const signUpOne = (newUser, showResult) => (dispatch) => {
   dispatch(setCurrentUser(newUser));
 };
@@ -91,9 +92,9 @@ export const signUpThree = createAsyncThunk(
       occupation: userDetails.profession,
       receiveInsoUpdates: userDetails.terms,
     };
-    {
-      alert(JSON.stringify(payload, null, 2));
-    }
+    // {
+    //   alert(JSON.stringify(payload, null, 2));
+    // }
 
     var apiBaseUrl = "http://localhost:8080/api/auth/signup";
     axios.defaults.headers.post["Content-Type"] =
@@ -110,10 +111,10 @@ export const signUpThree = createAsyncThunk(
       }
       console.log(res.data);
       console.log(res.data.message);
-      alert("successful");
+      // alert("successful");
     } catch (error) {
       console.log({ ...error });
-      alert("failure");
+      // alert("failure");
     }
   }
 );
@@ -143,6 +144,7 @@ export const editDetails = createAsyncThunk(
     }
   }
 );
+
 export const {
   setCurrentUser,
   setCurrentUsertwo,

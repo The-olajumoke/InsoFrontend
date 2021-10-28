@@ -69,7 +69,7 @@ function Profile({ handleClick }) {
             <h5>@patrick</h5>
           </div>
         </div>
-
+ 
         <div className=" profileBoxCont">
           <div className="contactBox ">
             <label htmlFor="">Username :</label>

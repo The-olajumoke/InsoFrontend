@@ -38,8 +38,8 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  width: 76.72px;
   height: 74px;
+
 }
 .course-item h4 {
   font-style: normal;
@@ -48,7 +48,6 @@
   line-height: 27px;
   display: flex;
   align-items: center;
-  width: 78.94px;
   height: 27px;
 }
 .course-item h2 {

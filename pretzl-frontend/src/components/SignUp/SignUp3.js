@@ -10,7 +10,7 @@ import Button from "./Button";
 import history from "../../utils/history";
 import store from "../../redux/store";
 import { signUpThree } from "../../redux/User/userSlice";
-import { BiCheckCircle,BiErrorCircle } from "react-icons/bi";
+import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 
 import CustomizedSnackbars from "../NotiPopUp";
 
@@ -31,7 +31,7 @@ function SignUp3({ activeModal, setactiveModal }) {
   const [allSelected, setallSelected] = useState(false);
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
-  const [errorAlert, setErrorAlert] = useState(false)
+  const [errorAlert, setErrorAlert] = useState(false);
 
   const handleBack = () => {
     setactiveModal("signUp2");
@@ -48,14 +48,13 @@ function SignUp3({ activeModal, setactiveModal }) {
     console.log(`terms is ${terms}`);
   };
 
-  const  handleSubmit =async () => {
+  const handleSubmit = async () => {
     const newUser = {
       primaryUse: selected,
       profession: selected2,
       work: selected3,
       terms: "true",
     };
-    console.log(newUser);
     // THIS IS THE DISPATCH ACTION
     await dispatch(signUpThree(newUser));
 
@@ -117,7 +116,7 @@ function SignUp3({ activeModal, setactiveModal }) {
               setIsActive1={setIsActive1}
               setIsActive2={setIsActive2}
               setIsActive3={setIsActive3}
-              initial="select one"
+              initial="Select one"
             />
             <Dropdown
               name="user"
@@ -186,7 +185,13 @@ function SignUp3({ activeModal, setactiveModal }) {
             title="Account created Successfully"
             text="Log in to start a discussion."
             severity="success"
-            icon={<BiCheckCircle/>}
+            icon={
+              <BiCheckCircle
+                fontSize="30px"
+                color="#04BE00"
+                severity="success"
+              />
+            }
           />
         )}
         {errorAlert && (
@@ -194,7 +199,13 @@ function SignUp3({ activeModal, setactiveModal }) {
             title="Error Creating Account"
             text="Please try again"
             severity="error"
-            icon={<BiErrorCircle />}
+            icon={
+              <BiErrorCircle
+                fontSize="30px"
+                color=" #E84949"
+                severity="error"
+              />
+            }
           />
         )}
       </div>

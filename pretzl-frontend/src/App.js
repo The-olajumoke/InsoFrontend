@@ -22,7 +22,7 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           {/* <Landing /> */}
-          <Discussion/>
+          <Discussion />
         </Route>
         <Route exact path="/sign-up">
           <ChooseUser />
@@ -43,10 +43,10 @@ const App = () => {
           <Discussion />
         </Route>
         <Route exact path="/discussion/:id">
-     <ViewDiscussion/>
+          <ViewDiscussion />
         </Route>
         <Route exact path="/discussion-set">
-     <ViewDiscussionSet/>
+          <ViewDiscussionSet />
         </Route>
         <Route exact path="/notifications">
           <Notification />
@@ -61,19 +61,19 @@ const App = () => {
           <Analytics />
         </Route>
         <Route exact path="/grades">
-         <Grades/>
+          <Grades />
         </Route>
         <Route exact path="/contact">
           <Contact />
         </Route>
         <Route exact path="/settings">
-          <Settings/>
+          <Settings />
         </Route>
         <Route exact path="/archives">
-          <Archives/>
+          <Archives />
         </Route>
         <Route exact path="/">
-          <Archives/>
+          <Archives />
         </Route>
       </Switch>
     </Router>

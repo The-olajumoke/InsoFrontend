@@ -4,11 +4,12 @@ import { FiBarChart } from "react-icons/fi";
 import { MdShowChart } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import downloadImg from "../../Exports/downloadimg.svg";
-import { MdHeadsetMic } from "react-icons/md";
+import { MdHeadsetMic} from "react-icons/md";
 import { FaRegCalendar } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdChatBubbleOutline } from "react-icons/md";
-function ResponsiveSideBar({ navSize, avatar }) {
+// import avatar from "../"
+function ResponsiveSideBar({ navSize }) {
   return (
     <nav className="responNav">
       <div
@@ -77,13 +78,13 @@ function ResponsiveSideBar({ navSize, avatar }) {
         />
       </div>
       <div
-        className={`my-14  w-full flex  
+        className={`  mt-10 mb-2  w-full flex  
          ${navSize == "small" ? "" : "px-12"}
             ${navSize == "small" ? "pr-3" : ""}
     ${navSize == "small" ? "justify-end" : "justify-items-start"}`}
       >
         <button
-          className={`upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
+          className={` upgradeBtn  ${navSize == "small" ? "p-3" : "p-3"}`}
           style={{ width: `${navSize == "small" ? "auto" : "230px"}` }}
         >
           {/* <NavIcon

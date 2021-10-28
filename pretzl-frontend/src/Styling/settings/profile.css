@@ -14,6 +14,7 @@
   align-items: center;
   color: #07a098;
   margin-bottom: 20px;
+  /* border: rebeccapurple 2px solid; */
 }
 .pictureCont {
   display: flex;
