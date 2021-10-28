@@ -1,30 +1,26 @@
 package com.pretzl.models;
 
-import org.springframework.lang.Nullable;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name = "discussions",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "discussion_id")
+                @UniqueConstraint(columnNames = "id")
         })
 
 public class Discussion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int discussion_id;
+    private int number;
 
     @NotBlank
     @Size(max = 50)
     private String username;
 
-    private String discussion_desc;
+    private String description;
 
     @NotBlank
     private String action_type;
@@ -32,7 +28,7 @@ public class Discussion {
     @NotBlank
     private String date;
 
-    private String parent_discussion_id;
+    private String parent_id;
 
     private int word_count;
 
@@ -42,17 +38,77 @@ public class Discussion {
 
     private String tags;
 
-    public Discussion(int discussion_id, String username, String discussion_desc, String action_type, String date, String parent_discussion_id, int word_count, String post_as, String time_of_day, String tags) {
-        this.discussion_id = discussion_id;
+    private String id;
+
+    private String set_id;
+
+
+    public Discussion(int number, String username, String description, String action_type, String date, String parent_id,
+                      int word_count, String post_as, String time_of_day, String tags, String id, String set_id) {
+        this.number = number;
         this.username = username;
-        this.discussion_desc = discussion_desc;
+        this.description = description;
         this.action_type = action_type;
         this.date = date;
-        this.parent_discussion_id = parent_discussion_id;
+        this.parent_id = parent_id;
         this.word_count = word_count;
         this.post_as = post_as;
         this.time_of_day = time_of_day;
         this.tags = tags;
+        this.id = id;
+        this.set_id = set_id;
+    }
+
+    public Discussion() {
+
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAction_type() {
+        return action_type;
+    }
+
+    public void setAction_type(String action_type) {
+        this.action_type = action_type;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(String parent_id) {
+        this.parent_id = parent_id;
     }
 
     public int getWord_count() {
@@ -87,55 +143,19 @@ public class Discussion {
         this.tags = tags;
     }
 
-    public int getDiscussion_id() {
-        return discussion_id;
+    public String getId() {
+        return id;
     }
 
-    public void setDiscussion_id(int discussion_id) {
-        this.discussion_id = discussion_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getSet_id() {
+        return set_id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getDiscussion_desc() {
-        return discussion_desc;
-    }
-
-    public void setDiscussion_desc(String discussion_desc) {
-        this.discussion_desc = discussion_desc;
-    }
-
-    public String getAction_type() {
-        return action_type;
-    }
-
-    public void setAction_type(String action_type) {
-        this.action_type = action_type;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getParent_discussion_id() {
-        return parent_discussion_id;
-    }
-
-    public void setParent_discussion_id(String parent_discussion_id) {
-        this.parent_discussion_id = parent_discussion_id;
-    }
-
-    public Discussion(){
-
+    public void setSet_id(String set_id) {
+        this.set_id = set_id;
     }
 }

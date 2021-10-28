@@ -42,7 +42,7 @@ public class AuthController {
     RoleRepository roleRepository;
 
     @Autowired
-    DiscussionRepository postRepository;
+    DiscussionRepository discussionRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -135,7 +135,21 @@ public class AuthController {
 
     @GetMapping("/analytics")
     public ResponseEntity<?> registerUser(@RequestParam String username) {
-        return ResponseEntity.ok(postRepository.getAllPosts(username));
+        return ResponseEntity.ok(discussionRepository.getAllPosts(username));
     }
 
+    @GetMapping("/discussion/users")
+    public ResponseEntity<?> getUserDiscussionUser(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getDiscussionUsers(username));
+    }
+
+    @GetMapping("/discussion/set")
+    public ResponseEntity<?> getUserDiscussionSet(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getUserDiscussionSets(username));
+    }
+
+    @GetMapping("/discussion/discussions")
+    public ResponseEntity<?> getUserDiscussions(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
+    }
 }
