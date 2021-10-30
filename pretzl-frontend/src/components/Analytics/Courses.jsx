@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
+import store from "../../redux/store";
 import "../../Styling/Analytics/courses.css";
 import ActivityChart from "../ActivityChart";
 import AnalDropdown from "./AnalDropdown";
 
-function Courses({ handleClick }) {
+function Courses({ count, options, handleClick })
+ {
   const [dropdown, setdropdown] = useState(false);
-  const options = ["good", "bad", "ugly"];
-
+// console.log(count);
   return (
     <div className="theMainCont">
-      <div className="courseCont ">
+      <div className="courseCont">
         <div className="courseHeader">
           <h2>Active Courses</h2>
           <h4>States are based on engagement per course</h4>
@@ -19,7 +20,7 @@ function Courses({ handleClick }) {
           <span> 18</span> courses
         </div>
       </div>
-      <div className="actCont ">
+      <div className="actCont">
         <ActivityChart />
       </div>
 

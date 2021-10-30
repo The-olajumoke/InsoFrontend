@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { RiInboxArchiveLine } from "react-icons/ri";
@@ -12,7 +12,10 @@ import CreateNewDis from "../components/Discussion/CreateNewDis";
 import history from "../utils/history";
 import { allDiscData } from "../DummyData/discData";
 import DiscSet from "../components/Discussion/DiscSetTemp";
+import { getAllCount } from "../redux/Analytics/analyticsSlice";
+import { useDispatch } from "react-redux";
 function Discussion() {
+  const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const handleClick = (e) => {
     setShowMenu(!showMenu);
@@ -20,6 +23,9 @@ function Discussion() {
   // const DiscussionCont = [];
   // FROM DUMMY DATA
   const DiscussionCont = allDiscData;
+
+
+ 
   return (
     <BodyWrapper>
       <ResponsiveTop title="Discussion Title" />

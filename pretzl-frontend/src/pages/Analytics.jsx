@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BodyWrapper from "../components/BodyWrapper";
 import TopDiscusionText from "../components/Analytics/TopDiscusionText";
 import "../Styling/Analytics/Analytics.css";
@@ -8,22 +8,73 @@ import ResponsiveTop from "../components/ResponsiveTop";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Discussion from "../components/Analytics/Discussion";
 import Threads from "../components/Analytics/Threads";
-import { getAllDisc } from "../redux/Analytics/analyticsSlice";
+// import {
+//   getAllDisc,
+//   getDiscSet,
+//   getUsers,
+//   getAllCount,
+// } from "../redux/Analytics/analyticsSlice";
+import store from "../redux/store";
 import { useDispatch } from "react-redux";
 import "../Styling/CustomInput.css";
-function Overview() {
+import axios from "axios";
+import { setUserCount } from "../redux/Analytics/analyticsSlice";
+const Overview = () => {
   const dispatch = useDispatch();
   const [active, setActive] = useState("courses");
-
+  const [options, setOptions] = useState([""]);
+  const [discSet, setDiscSet] = useState([""]);
+  const [radioButton, setRadioButton] = useState("Posts");
   const handleClick = (e) => {
     setActive(e.target.name);
   };
 
-  const getData = async () => {
-    // dispatch(getAllDisc("Jumoke"));
-    dispatch(getAllDisc());
+  const getAllDisc = async () => {
+    var apiBaseUrl =
+      "http://localhost:8080/api/auth/discussion/discussions?username=Bhaskar";
+    axios.defaults.headers.get["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.get["Access-Control-Allow-Methods"] = "GET";
+
+    try {
+      const res = await axios.get(apiBaseUrl);
+      const data = res.data;
+      return data;
+    } catch (error) {
+      console.log({ ...error });
+    }
   };
-  getData();
+
+  const getDisSet = async () => {
+    var apiBaseUrl =
+      "http://localhost:8080/api/auth/discussion/set?username=Bhaskar";
+
+    axios.defaults.headers.get["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.get["Access-Control-Allow-Methods"] = "GET";
+
+    try {
+      const res = await axios.get(apiBaseUrl);
+      const data = res.data;
+      return data;
+    } catch (error) {
+      console.log({ ...error });
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const set = await getDisSet();
+      const disc = await getAllDisc();
+      console.log(set);
+      console.log(disc);
+      setDiscSet(set);
+      setOptions(disc);
+    };
+    fetchData();
+  }, []);
   return (
     <BodyWrapper>
       <ResponsiveTop title="Analytics" />
@@ -63,28 +114,65 @@ function Overview() {
               </div>
 
               <div className="trial">
-                {active == "courses" && <Courses handleClick={handleClick} />}
+                {active == "courses" && (
+                  <Courses options={discSet} handleClick={handleClick} />
+                )}
                 {active == "discussions" && (
-                  <Discussion handleClick={handleClick} />
+                  <Discussion options={options} handleClick={handleClick} />
                 )}
                 {active == "threads" && <Threads handleClick={handleClick} />}
               </div>
             </div>
-            <div className="sect2">
+
+            {/* RADIO BUTTONS */}
+            <div
+              onChange={(e) => {
+                // alert(`${e.target.value}`);
+                console.log(radioButton);
+                setRadioButton(e.target.value);
+                console.log(radioButton);
+              }}
+              className="sect2"
+            >
               <div className="postTypes">
-                <input type="radio" name="type" id="" />
+                <input
+                  type="radio"
+                  value="Users"
+                  name="type"
+                  id=""
+                  // checked={`${radioButton == "Users" ?true:false}`}
+                />
                 <label>Users</label>
               </div>
               <div className="postTypes">
-                <input type="radio" name="type" id="" />
+                <input
+                  type="radio"
+                  value="Posts"
+                  name="type"
+                  id=""
+                  checked
+                  // checked={`${radioButton == "Posts" && true}`}
+                />
                 <label>Posts</label>
               </div>
               <div className="postTypes">
-                <input type="radio" name="type" id="" />
+                <input
+                  type="radio"
+                  name="type"
+                  value="Reactions"
+                  id=""
+                  // checked={`${radioButton == "Reactions" && true}`}
+                />
                 <label>Reactions</label>
               </div>
               <div className="postTypes">
-                <input type="radio" name="type" id="" />
+                <input
+                  type="radio"
+                  value="Upvotes"
+                  name="type"
+                  id=""
+                  // checked={`${radioButton == "Upvotes" ? true : false}`}
+                />
                 <label>Upvotes</label>
               </div>
             </div>
@@ -117,6 +205,6 @@ function Overview() {
       </div>
     </BodyWrapper>
   );
-}
+};
 
 export default Overview;

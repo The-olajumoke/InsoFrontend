@@ -24,7 +24,7 @@ function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
           <h4>{name}</h4>
         </div>
         <div className="box-2">
-          <div className="flex items-center ml-6">
+          <div className="flex  ml-6">
             <img src={img} alt="" />
             <h5>{numberOfPeople}</h5>
           </div>

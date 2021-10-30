@@ -3,9 +3,9 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 import ActivityChart from "../ActivityChart";
 import AnalDropdown from "./AnalDropdown";
-function Discussion({ handleClick }) {
+function Discussion({ count, options, handleClick }) {
   const [dropdown, setdropdown] = useState(false);
-  const options = ["crunchy", "spicy", "tasty"];
+ 
 
   return (
     <div className="">

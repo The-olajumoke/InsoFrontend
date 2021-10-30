@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 function AnalDropdown({ options }) {
-  const [dropDown, setdropDown] = useState();
+  //options is an array of objects
 
   return (
-    <div className=" analDropdown  bg-white  z-10 w-3/4 p-0">
+    <div className=" analDropdown  bg-white  z-10  w-full p-0">
       {options.map((option, index) => (
         <div key={index} className="analItem text-textBody">
-          {option}
+          {option.description == "" ? null : option.description}
         </div>
       ))}
     </div>

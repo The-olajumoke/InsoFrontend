@@ -60,7 +60,6 @@ function SignUp3({ activeModal, setactiveModal }) {
 
     // THIS IS ACTION THAT SHOULD HAPPEN AFTER GETTING THE API RESPONSE
     const currentStore = store.getState();
-    console.log(currentStore);
     const currentSignedState = currentStore.user.signedState;
     console.log(currentSignedState);
 
