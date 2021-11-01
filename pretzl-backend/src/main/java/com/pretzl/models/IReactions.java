@@ -1,6 +1,6 @@
 package com.pretzl.models;
 
-public interface IAnalytics {
+public interface IReactions {
 
     public String getAction_type();
 
