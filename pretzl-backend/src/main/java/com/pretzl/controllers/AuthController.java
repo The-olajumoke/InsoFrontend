@@ -1,8 +1,6 @@
 package com.pretzl.controllers;
 
-import com.pretzl.models.ERole;
-import com.pretzl.models.Role;
-import com.pretzl.models.User;
+import com.pretzl.models.*;
 import com.pretzl.payload.request.LoginRequest;
 import com.pretzl.payload.request.SignupRequest;
 import com.pretzl.payload.response.JwtResponse;
@@ -28,7 +26,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+//@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -135,21 +133,56 @@ public class AuthController {
 
     @GetMapping("/analytics")
     public ResponseEntity<?> registerUser(@RequestParam String username) {
-        return ResponseEntity.ok(discussionRepository.getAllPosts(username));
+        return ResponseEntity.ok(discussionRepository.getUserPostCount(username));
     }
 
-    @GetMapping("/discussion/users")
-    public ResponseEntity<?> getUserDiscussionUser(@RequestParam String username) {
-        return ResponseEntity.ok(discussionRepository.getDiscussionUsers(username));
+    @GetMapping("/discussion/posts/count")
+    public ResponseEntity<ICounts> userPostCount(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getUserPostCount(username));
+    }
+    @GetMapping("/discussion/users/count")
+    public ResponseEntity<ICounts> getUserDiscussionCount(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getDiscussionUserCount(username));
     }
 
-    @GetMapping("/discussion/set")
-    public ResponseEntity<?> getUserDiscussionSet(@RequestParam String username) {
+    @GetMapping("/discussion/sets/count")
+    public ResponseEntity<ICounts> getUserDiscussionSetCount(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getUserDiscussionSetsCount(username));
+    }
+
+    @GetMapping("/discussion/discussions/count")
+    public ResponseEntity<ICounts> getUserDiscussionsCount(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getUserDiscussionCount(username));
+    }
+
+    @GetMapping("/discussion/postreactions/count")
+    public ResponseEntity< List<IReactions>> userPosts(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getReactions(username));
+    }
+
+    @GetMapping("/discussion/postreactions")
+    public ResponseEntity< List<IReactions>> postreactions(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getReactions(username));
+    }
+    @GetMapping("/discussion/sets")
+    public ResponseEntity<List<IDiscussionSet>> getUserDiscussionSet(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getUserDiscussionSets(username));
     }
 
     @GetMapping("/discussion/discussions")
-    public ResponseEntity<?> getUserDiscussions(@RequestParam String username) {
+    public ResponseEntity<List<IDiscussions>> getUserDiscussions(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
+    }
+
+    @GetMapping("/discussion/post/details")
+    public ResponseEntity<List<IDiscussions>> getDiscussionPostDetails(@RequestParam String username) {
+        return ResponseEntity.ok(discussionRepository.getDiscussionPostDetails(username));
+    }
+
+    @GetMapping("/discussion/all")
+    public ResponseEntity<List<Discussion>> getAllDiscussion(@RequestParam String username) {
+        List<Discussion> discussionList = discussionRepository.getAllDiscussions(username);
+        discussionList.stream().collect(Collectors.groupingBy(Discussion::getSet_id ));
+        return ResponseEntity.ok(discussionList);
     }
 }
