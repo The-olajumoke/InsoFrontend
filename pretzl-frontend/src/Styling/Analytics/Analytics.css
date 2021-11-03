@@ -16,7 +16,7 @@
 .overviewCont::-webkit-scrollbar {
   display: none;
 }
-.courses-overview { 
+.courses-overview {
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,6 @@
   align-items: flex-start;
   padding: 0px;
   height: 74px;
-
 }
 .course-item h4 {
   font-style: normal;
@@ -166,72 +165,161 @@
 }
 .TopDis {
   width: 68.5%;
-  padding: 16px 101px 16px 35px;
+  /* padding: 16px 101px 16px 35px; */
+  padding: 16px;
   background: #ffffff;
   border-radius: 15px;
 }
-.TopDis h3 {
+.TopDisHeader {
+  margin-bottom: 20px;
+}
+.TopDisFlex {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid rgba(7, 160, 152, 0.05);
+  align-items: flex-start;
+  padding: 5px 0;
+}
+.TopDisFlex:last-child,
+.TopDisFlex:first-child {
+  border: none;
+}
+
+.tempItem {
+  /* border: blueviolet 1px solid; */
+}
+.subTopic {
+  width: 40%;
+  justify-self: flex-start;
+}
+.subTopic h4 {
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: flex-end;
+  color: #07a098;
+}
+.first {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  color: #07a098;
+}
+.engcount {
+  width: 15%;
+}
+.engHeader {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: #07a098;
 }
-.TopDiscusionText {
-  border-bottom: 1px solid rgba(7, 160, 152, 0.05);
-  padding: 10px 0;
-}
-.TopDiscusionText h2 {
+.engText {
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 13.19px;
+  line-height: 20px;
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   color: #686868;
 }
-.TopDiscusionText h5 {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 21px;
-  display: flex;
-  align-items: flex-end;
-  color: #07a098;
-}
+
 .EngRate {
   width: 30%;
   background-color: rgb(87, 51, 51);
   background: #ffffff;
   border-radius: 15px;
-  padding: 13px 0 0 16px;
+  padding: 13px 20px 0 16px;
   display: flex;
   flex-direction: column;
   /* justify-content:space-evenly; */
+  position: relative;
 }
-.EngRate h2 {
+.EngRate .header {
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 16px;
+  line-height: 24px;
   display: flex;
   align-items: center;
   color: #07a098;
 }
-.EngRate h4 {
+
+.EngRate .subHeader {
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 21px;
   display: flex;
   align-items: center;
-  color: #9d9d9d;
-  margin-bottom: 15px;
+  color: #686868;
+}
+.allEngItems{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.engItem {
+  display: flex;
+  margin: 5px 0;
+
+}
+.engItem h2 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+  width: 60%;
+
+}
+.engItem h4 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 123%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #686868;
+
 }
 .EngRate img {
   width: 50%;
+}
+.engBtn {
+  position: absolute;
+  left: 5px;
+  top: 30px;
+  bottom: 0;
+  margin: auto;
+}
+.right {
+  right: 10px;
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  margin: auto;
+}
+.engIcon {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  padding: 5px;
+  color: #07a098;
+  background: #ffffff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 815px) {

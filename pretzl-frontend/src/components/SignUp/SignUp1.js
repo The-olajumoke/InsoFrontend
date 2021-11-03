@@ -62,7 +62,10 @@ function SignUp1({ activeModal, setactiveModal }) {
     //                 })
     //             }
     //         )
-    phoneNumber: Yup.string().matches(phoneRegExp, "Invalid phone number"),
+    phoneNumber: Yup.string()
+      .required("Required")
+
+      .matches(phoneRegExp, "Invalid phone number"),
   });
   const handleBack = () => {
     history.push("./sign-up");
@@ -133,7 +136,7 @@ function SignUp1({ activeModal, setactiveModal }) {
                   name="phoneNumber"
                   type="tel"
                   placeholder="Enter phone number"
-                  req="(optional)"
+                  // req="(optional)"
                 />
               </div>
 

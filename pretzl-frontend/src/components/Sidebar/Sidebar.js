@@ -7,7 +7,7 @@ import { FiBarChart } from "react-icons/fi";
 import { MdShowChart } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdHeadsetMic } from "react-icons/md";
-import { FaRegCalendar } from "react-icons/fa";
+import { FaChartLine, FaRegCalendar } from "react-icons/fa";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdChatBubbleOutline } from "react-icons/md";
 import downloadImg from "../../Exports/downloadimg.svg";
@@ -68,7 +68,7 @@ function Sidebar({ navSize, setNavSize }) {
           <NavItem
             navSize={navSize}
             title="Analytics"
-            icon={<MdChatBubbleOutline />}
+            icon={<FaChartLine />}
             path="/analytics"
             active
           />

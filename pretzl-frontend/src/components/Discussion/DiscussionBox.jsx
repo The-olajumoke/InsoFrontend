@@ -13,11 +13,16 @@ import { Link } from "react-router-dom";
 
 function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
   const [showEdit, setshowEdit] = useState(false);
+  const [trial, setTrial] = useState(false);
   const handleEdit = () => {
     setshowEdit(!showEdit);
   };
   return (
-    <div className="discBox">
+    <div
+      className="discBox ring"
+     
+    >
+  
       <div className="boxHead">
         <div className=" box-1">
           <MdChatBubbleOutline className=" mr-1" />

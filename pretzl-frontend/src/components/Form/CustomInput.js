@@ -15,7 +15,7 @@ export const CustomField = (props) => {
           <span className=" text-btnText ml-2">{req}</span>
         ) : (
           <span
-            className={` ${name == "alternativeEmail"?"hidden":"flex"} `}
+            className={` ${name == "alternativeEmail"?"hidden":"flex"} ml-1 `}
             style={{ color: "red" }}
           >
             *

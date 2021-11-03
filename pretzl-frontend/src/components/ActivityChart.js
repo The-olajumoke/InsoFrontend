@@ -22,10 +22,7 @@ function ActivityChart({}) {
       console.log({ ...error });
     }
   };
-  // const counts = [
-  //   { date: "10/27/2021", count: 1, action_type: "P" },
-  //   { date: "10/27/2021", count: 1, action_type: "P" },
-  // ];
+ 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +31,7 @@ function ActivityChart({}) {
 
       setCounts(userCounts);
     };
-    fetchData();
+    // fetchData();
   }, []);
 
   console.log(counts);
@@ -42,12 +39,11 @@ function ActivityChart({}) {
     <div className="allActCont">
       {/* {count.map((cnt, index) => ( */}
       {/* <ActivityItem height="90" /> */}
-      {/* ))} */}
 
-      {counts.map((cnt, index) => {
+      {/* {counts.map((cnt, index) => {
       return  <ActivityItem key={index} height={`${cnt.count}`}  />;
         // alert(`${cnt.action_type}`);
-      })}
+      })} */}
       {/* <ActivityItem height="80" />
       <ActivityItem height="84" />
       <ActivityItem height="144" />
