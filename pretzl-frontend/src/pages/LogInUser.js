@@ -12,17 +12,21 @@ import history from "../utils/history";
 import axios from "axios";
 import NotiPopUp from "../components/NotiPopUp";
 import CustomizedSnackbars from "../components/NotiPopUp";
+import { useDispatch } from "react-redux";
+import { logInUser } from "../redux/User/userSlice";
 
-var apiBaseUrl = "http://localhost:8080/api/auth/login";
+
 
 function LogInUser({ activeModal, setactiveModal }) {
+  const dispatch = useDispatch();
+
   const [guest, setGuest] = useState(false);
   const [user, setUser] = useState(false);
 
   const handleBack = () => {
     history.push("./");
   };
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     console.log(e.password);
     console.log(e.email);
 
@@ -30,48 +34,9 @@ function LogInUser({ activeModal, setactiveModal }) {
       username: e.email,
       password: e.password,
     };
+   await dispatch(logInUser(payload));
 
-    axios.defaults.headers.post["Content-Type"] =
-      "application/json;charset=utf-8";
-    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-    axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
-    axios
-      .post(apiBaseUrl, payload)
-      .then(function (response) {
-        console.log(response);
-        if (response.status == 200) {
-          console.log("Login successfull");
-          //  window.Response("Login successfull - Welcome to Pretzl"+`\n`+"AccessToken : "+response.data.accessToken +'\n'+"Roles : "+response.data.roles)
-          alert(
-            "Login successfull - Welcome to Pretzl" +
-              `\n` +
-              "AccessToken : " +
-              response.data.accessToken +
-              "\n" +
-              "Roles : " +
-              response.data.roles
-          );
-          const token = response.data.accessToken;
-          history.push("./discussion");
-        } else if (response.status == 401) {
-          console.log("Username password do not match");
-          alert("Username password do not match");
-        } else {
-          console.log("Username does not exists");
-          alert("Username does not exist");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        if (error.response.status == 401) {
-          console.log("Username password do not match");
-          alert(
-            error.response.data.message +
-              `\n` +
-              "Username password do not match"
-          );
-        }
-      });
+    
   };
 
   return (

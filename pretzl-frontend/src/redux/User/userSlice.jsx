@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
+import history from "../../utils/history";
+import setAuthToken from "../../utils/setAuthToken";
 const initialState = {
   user: {
     firstName: null,
@@ -16,6 +17,7 @@ const initialState = {
     work: null,
     terms: false,
   },
+  isAuthenticated: false,
   signedState: false,
   navSize: "small",
   // icon:"large",
@@ -49,17 +51,13 @@ const userSlice = createSlice({
       state.signedState = true;
       console.log(state.signedState);
     },
-    // setSignedFalse: (state, { payload }) => {
-    //   console.log(state);
-    //   console.log(payload);
-    //   state.signedState = false;
-
-    //   console.log(state.signedState);
-    // },
     setCurrentNavSize: (state, { payload }) => {
       console.log("previous state is" + state.navSize);
       state.navSize = payload;
       console.log("new state is" + state.navSize);
+    },
+    setLoggedInUser: (state, { payload }) => {
+      state.isAuthenticated = true;
     },
   },
 });
@@ -122,6 +120,35 @@ export const signUpThree = createAsyncThunk(
 export const setNavSize = (size) => (dispatch) => {
   dispatch(setCurrentNavSize(size));
 };
+
+// LOGIN USER
+export const logInUser = createAsyncThunk(
+  "user/logInUser",
+  async (data, { dispatch }) => {
+    var apiBaseUrl = "http://localhost:8080/api/auth/login";
+
+    axios.defaults.headers.post["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
+
+    try {
+      const res = await axios.post(apiBaseUrl, data);
+      console.log(res);
+
+      console.log(res.data);
+      const token = res.data.accessToken;
+      localStorage.setItem("jwtToken", token);
+      setAuthToken(token);
+      dispatch(setLoggedInUser());
+      history.push("./discussion");
+    } catch (error) {
+      console.log({ ...error });
+      alert("failure");
+    }
+  }
+);
+// SETTINGS PAGE
 export const editDetails = createAsyncThunk(
   "user/editUserDetails",
   async (data) => {
@@ -151,6 +178,7 @@ export const {
   setCurrentUserthree,
   setSignedTrue,
   setCurrentNavSize,
+  setLoggedInUser,
 
   // setSignedFalse,
 } = userSlice.actions;

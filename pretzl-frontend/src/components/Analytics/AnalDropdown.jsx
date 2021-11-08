@@ -8,11 +8,11 @@ function AnalDropdown({ options }) {
       <div className="analItem bg-textBody text-white">
         Please Select
       </div>
-      {options.map((option, index) => (
+      {/* {options.map((option, index) => (
         <div key={index} className="analItem text-textBody">
           {option.description == "" ? null : option.description}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

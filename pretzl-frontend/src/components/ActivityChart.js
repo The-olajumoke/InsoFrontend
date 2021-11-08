@@ -38,7 +38,11 @@ function ActivityChart({}) {
   return (
     <div className="allActCont">
       {/* {count.map((cnt, index) => ( */}
-      {/* <ActivityItem height="90" /> */}
+      <ActivityItem height="40" />
+      <ActivityItem height="90" />
+      <ActivityItem height="50" />
+      <ActivityItem height="90" />
+      <ActivityItem height="90" />
 
       {/* {counts.map((cnt, index) => {
       return  <ActivityItem key={index} height={`${cnt.count}`}  />;

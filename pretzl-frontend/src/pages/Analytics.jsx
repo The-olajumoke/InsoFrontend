@@ -25,14 +25,14 @@ const Overview = () => {
   const [totalUserCount, setTotalUserCount] = useState([0]);
   const [totalPostCount, setTotalPostCount] = useState([0]);
   const [radioButton, setRadioButton] = useState("Posts");
-  const [engMenu, setengMenu] = useState(true)
+  const [engMenu, setengMenu] = useState(true);
 
   const handleClick = (e) => {
     setActive(e.target.name);
   };
 
   const getAllDisc = async () => {
-    var apiBaseUrl =
+    let apiBaseUrl =
       "http://localhost:8080/api/auth/discussion/discussions?username=Bhaskar";
 
     axios.defaults.headers.get["Content-Type"] =
@@ -100,7 +100,7 @@ const Overview = () => {
   };
   const getTotalpostCount = async () => {
     var apiBaseUrl =
-      "https://cors-anywhere.herokuapp.com/http://localhost:8080/api/auth/discussion/posts/count?username=Bhaskar";
+      "http://localhost:8080/api/auth/discussion/posts/count?username=Bhaskar";
     // "localhost:8080/api/auth/discussion/posts/count?username=Bhaskar";
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
@@ -134,15 +134,15 @@ const Overview = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const set = await getDisSet();
+      // const set = await getDisSet();
       const disc = await getAllDisc();
       // const TotaldisCount = await getTotalDisCount();
       // const TotalDisSetCount = await getTotalDisSetCount();
       // const TotalPostCount = await getTotalpostCount();
       // const TotalUser = await getTotalUserCount();
-      console.log(set);
+      // console.log(set);
       console.log(disc);
-      setDiscSet(set);
+      // setDiscSet(set);
       setOptions(disc);
       // console.log(TotaldisCount);
       // console.log(TotalDisSetCount);
@@ -277,7 +277,9 @@ const Overview = () => {
                 <div className="tempItem engcount engHeader">Users</div>
                 <div className="tempItem engcount engHeader">Posts</div>
                 <div className="tempItem engcount engHeader">Word count</div>
-                <div className="tempItem engcount engHeader">Instructor’s</div>
+                <div className="tempItem engcount engHeader">
+                  Instructor’s post
+                </div>
               </div>
               <EngTemplate
                 set="The Economics of Democracy."
@@ -295,7 +297,6 @@ const Overview = () => {
                 word="100"
                 instructor="67"
               />
-              
             </div>
             <div className="EngRate ">
               <h2 className="header">Engagement Rate</h2>

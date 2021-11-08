@@ -16,6 +16,7 @@ import CustomizedSnackbars from "../NotiPopUp";
 
 function SignUp3({ activeModal, setactiveModal }) {
   // DISPLAY SUCCESS MESSAGE
+  const dispatch = useDispatch();
   console.log(store);
 
   const [guest, setGuest] = useState(false);
@@ -29,7 +30,6 @@ function SignUp3({ activeModal, setactiveModal }) {
   const [selected3, setSelected3] = useState("");
   const [terms, setTerms] = useState(true);
   const [allSelected, setallSelected] = useState(false);
-  const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 
