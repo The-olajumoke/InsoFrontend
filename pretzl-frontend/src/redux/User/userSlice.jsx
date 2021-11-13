@@ -17,10 +17,9 @@ const initialState = {
     work: null,
     terms: false,
   },
-  isAuthenticated: false,
+  isLoggedIn: false,
   signedState: false,
   navSize: "small",
-  // icon:"large",
 };
 
 const userSlice = createSlice({
@@ -57,8 +56,9 @@ const userSlice = createSlice({
       console.log("new state is" + state.navSize);
     },
     setLoggedInUser: (state, { payload }) => {
-      state.isAuthenticated = true;
+      state.isLoggedIn = true;
     },
+    
   },
 });
 
@@ -127,21 +127,24 @@ export const logInUser = createAsyncThunk(
   async (data, { dispatch }) => {
     var apiBaseUrl = "http://localhost:8080/api/auth/login";
 
-    axios.defaults.headers.post["Content-Type"] =
-      "application/json;charset=utf-8";
-    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-    axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
-
+      let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=Utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST",
+     
+      },
+    };
     try {
-      const res = await axios.post(apiBaseUrl, data);
+      const res = await axios.post(apiBaseUrl, data, axiosConfig);
       console.log(res);
 
       console.log(res.data);
       const token = res.data.accessToken;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
-      dispatch(setLoggedInUser());
-      history.push("./discussion");
+    dispatch(setLoggedInUser());
+      history.push("./discussions");
     } catch (error) {
       console.log({ ...error });
       alert("failure");

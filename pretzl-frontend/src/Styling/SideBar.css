@@ -104,11 +104,13 @@
   /* border: lime 3px solid; */
 }
 .navItem:hover {
-  background-color: #07a098;
+  background: rgb(7, 160, 152,0.08);
+  /* opacity: 0.08; */
 }
 .navItem:hover .nav-icon,
 .navItem:hover .nav-text {
-  color: #fff;
+  /* color:red; */
+  /* z-index: 50; */
 }
 
 .nav-icon {

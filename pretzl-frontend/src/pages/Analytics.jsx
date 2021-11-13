@@ -12,7 +12,7 @@ import store from "../redux/store";
 import { useDispatch } from "react-redux";
 import "../Styling/CustomInput.css";
 import axios from "axios";
-import { setUserCount } from "../redux/Analytics/analyticsSlice";
+
 import EngTemplate from "../components/Analytics/EngTemplate";
 import { IoIosArrowBack } from "react-icons/io";
 const Overview = () => {
@@ -26,11 +26,19 @@ const Overview = () => {
   const [totalPostCount, setTotalPostCount] = useState([0]);
   const [radioButton, setRadioButton] = useState("Posts");
   const [engMenu, setengMenu] = useState(true);
+  const [width, setWidth] = useState(React.useState(window.innerWidth));
+
+  const breakpoint = 620; 
+  React.useEffect(() => {
+    const handleResizeWindow = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResizeWindow);
+    return () => window.removeEventListener("resize", handleResizeWindow);
+ 
+},[]);
 
   const handleClick = (e) => {
     setActive(e.target.name);
   };
-
   const getAllDisc = async () => {
     let apiBaseUrl =
       "http://localhost:8080/api/auth/discussion/discussions?username=Bhaskar";
@@ -51,7 +59,6 @@ const Overview = () => {
   const getDisSet = async () => {
     var apiBaseUrl =
       "http://localhost:8080/api/auth/discussion/set?username=Bhaskar";
-
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
     axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
@@ -60,6 +67,7 @@ const Overview = () => {
     try {
       const res = await axios.get(apiBaseUrl);
       const data = res.data;
+      console.log(data);
       return data;
     } catch (error) {
       console.log({ ...error });
@@ -82,8 +90,8 @@ const Overview = () => {
     }
   };
   const getTotalDisSetCount = async () => {
-    var apiBaseUrl =
-      "localhost:8080/api/auth/discussion/sets/count?username=Bhaskar";
+    let apiBaseUrl =
+      "http://localhost:8080/api/auth/discussion/sets/count?username=Bhaskar";
 
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
@@ -134,49 +142,46 @@ const Overview = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const set = await getDisSet();
+      const set = await getDisSet();
       const disc = await getAllDisc();
-      // const TotaldisCount = await getTotalDisCount();
-      // const TotalDisSetCount = await getTotalDisSetCount();
-      // const TotalPostCount = await getTotalpostCount();
-      // const TotalUser = await getTotalUserCount();
+      let TotaldisCount = await getTotalDisCount();
+      TotaldisCount = TotaldisCount.count;
+      let TotalDisSetCount = await getTotalDisSetCount();
+      TotalDisSetCount = TotalDisSetCount.count;
+      let TotalPostCount = await getTotalpostCount();
+      TotalPostCount = TotalPostCount.count;
+      let TotalUser = await getTotalUserCount();
+      TotalUser = TotalUser.count;
       // console.log(set);
       console.log(disc);
-      // setDiscSet(set);
+      setDiscSet(set);
       setOptions(disc);
-      // console.log(TotaldisCount);
-      // console.log(TotalDisSetCount);
-      // console.log(TotalPostCount);
-      // console.log(TotalUser);
-
-      // setTotalDisCount(TotaldisCount);
-      // setTotalSetCount(TotalDisSetCount);
-      // setTotalPostCount(TotalPostCount);
-      // setTotalUserCount(TotalUser);
+      setTotalDisCount(TotaldisCount);
+      setTotalSetCount(TotalDisSetCount);
+      setTotalPostCount(TotalPostCount);
+      setTotalUserCount(TotalUser);
     };
     fetchData();
   }, []);
+
   return (
     <BodyWrapper>
       <ResponsiveTop title="Analytics" />
-      <div className=" overMain ">
+      <div className=" overMain  ">
         <div className=" overviewCont">
           {/* first section */}
           <div className="courses-overview">
-            <div className="contForWidth">
+            <div className="contForWidth ">
               <div className="course-item">
                 <h4>Discussion set</h4>
-                {/* <h2>14</h2> */}
                 <h2>{totalSetCount}</h2>
               </div>
               <div className="course-item">
                 <h4>Discussions</h4>
-                {/* <h2>38</h2> */}
                 <h2>{totaldisCount}</h2>
               </div>
               <div className="course-item">
                 <h4>Users</h4>
-                {/* <h2>100</h2> */}
                 <h2>{totalUserCount}</h2>
               </div>
               <div className="course-item">
@@ -188,7 +193,7 @@ const Overview = () => {
 
           {/* SECOND SECTION */}
           {/*Discussions*/}
-          <div className="secondSect">
+          <div className="secondSect ">
             <div className=" sect1">
               <div className="sectDetails">
                 <h3>
@@ -269,16 +274,22 @@ const Overview = () => {
           </div>
           {/* THIRD SECTION */}
           {/*Thread*/}
-          <div className="TopDisCont">
-            <div className="TopDis ">
+          <div className="TopDisCont ">
+            <div className="TopDis">
               <div className="TopDisFlex TopDisHeader">
                 {/* discusSet */}
                 <div className="tempItem subTopic first ">Discussion set</div>
-                <div className="tempItem engcount engHeader">Users</div>
-                <div className="tempItem engcount engHeader">Posts</div>
-                <div className="tempItem engcount engHeader">Word count</div>
                 <div className="tempItem engcount engHeader">
-                  Instructor’s post
+                  {width > breakpoint ? "Users" : "U"}
+                </div>
+                <div className="tempItem engcount engHeader">
+                  {width > breakpoint ? "Posts" : "P"}
+                </div>
+                <div className="tempItem engcount engHeader">
+                  {width > breakpoint ? "Word count" : "C"}
+                </div>
+                <div className="tempItem  engHeader last">
+                  {width > breakpoint ? "Instructor’s post" : "I"}
                 </div>
               </div>
               <EngTemplate
@@ -298,14 +309,14 @@ const Overview = () => {
                 instructor="67"
               />
             </div>
-            <div className="EngRate ">
+            <div className="EngRate">
               <h2 className="header">Engagement Rate</h2>
               <h4 className="subHeader">State on how well a post is doing.</h4>
               {engMenu ? (
                 <div className="allEngItems">
-                  <div className="engItem ">
-                    <h2>No. of users:</h2>
-                    <h4>12</h4>
+                  <div className="engItem">
+                    <h2 className="">No. of users:</h2>
+                    <h4 className="">12</h4>
                   </div>
                   <div className="engItem ">
                     <h2>Total posts:</h2>

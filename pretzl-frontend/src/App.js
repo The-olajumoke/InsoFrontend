@@ -24,58 +24,58 @@ const App = () => {
           <Landing />
           {/* <Discussion /> */}
         </Route>
-        <Route exact path="/sign-up">
+        <Route  path="/sign-up">
           <ChooseUser />
         </Route>
 
-        <Route exact path="/sign-as-user">
+        <Route  path="/sign-as-user">
           <SignUpModal />
         </Route>
 
-        <Route exact path="/sign-as-guest">
+        <Route  path="/sign-as-guest">
           <LogInGuest />
         </Route>
 
-        <Route exact path="/log-in">
+        <Route  path="/log-in">
           <LogInUser />
         </Route>
-        <Route exact path="/discussions">
+        <Route  path="/discussions">
           <Discussion />
         </Route>
-        <Route exact path="/discussion/:id">
+        <Route  path="/discussion/:id">
           <ViewDiscussion />
         </Route>
-        <Route exact path="/discussion-set">
+        <Route  path="/discussion-set">
           <ViewDiscussionSet />
         </Route>
-        <Route exact path="/notifications">
+        <Route  path="/notifications">
           <Notification />
         </Route>
-        <Route exact path="/analytics">
+        <Route  path="/analytics">
           <Analytics />
         </Route>
-        <Route exact path="/charts">
+        <Route  path="/charts">
           <Analytics />
         </Route>
-        <Route exact path="/calendar">
+        <Route  path="/calendar">
           <Analytics />
         </Route>
-        <Route exact path="/grades">
+        <Route  path="/grades">
           <Grades />
         </Route>
-        <Route exact path="/contact">
+        <Route  path="/contact">
           <Contact />
         </Route>
-        <Route exact path="/settings">
+        <Route  path="/settings">
           <Settings />
         </Route>
-        <Route exact path="/archives">
+        <Route  path="/archives">
           <Archives />
         </Route>
-        <Route exact path="/">
+        <Route  path="/">
           <Archives />
         </Route>
-      </Switch>
+      </Switch> 
     </Router>
   );
 };

@@ -7,14 +7,14 @@
 .overviewCont {
   height: 100%;
   width: 100%;
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: space-between; */
-  overflow-y: scroll;
-  /* border: 2px solid blue; */
+  justify-content: center;
+  overflow-y:scroll;
 }
 .overviewCont::-webkit-scrollbar {
   display: none;
+}
+.tempItem{
+  /* border: solid 1px rebeccapurple; */
 }
 .courses-overview {
   color: #ffffff;
@@ -29,7 +29,7 @@
   margin-bottom: 27px;
 }
 .contForWidth {
-  width: 55%;
+  width: 60%;
   justify-content: space-between;
   display: flex;
 }
@@ -71,7 +71,6 @@
   border-radius: 15px;
   margin-bottom: 28px;
   display: flex;
-  /* display: none; */
   justify-content: space-between;
   padding: 29px 35px 49px;
 }
@@ -159,8 +158,8 @@
   height: 278px;
   width: 100%;
   display: flex;
-  /* display: none; */
   flex-direction: row;
+  /* display: none; */
   justify-content: space-between;
 }
 .TopDis {
@@ -185,9 +184,6 @@
   border: none;
 }
 
-.tempItem {
-  /* border: blueviolet 1px solid; */
-}
 .subTopic {
   width: 40%;
   justify-self: flex-start;
@@ -201,6 +197,7 @@
   align-items: flex-end;
   color: #07a098;
 }
+
 .first {
   font-style: normal;
   font-weight: normal;
@@ -208,9 +205,14 @@
   line-height: 24px;
   display: flex;
   color: #07a098;
+  width: 40%;
 }
 .engcount {
   width: 15%;
+  /* flex: 1; */
+}
+.last {
+  width: 20%;
 }
 .engHeader {
   font-style: normal;
@@ -263,15 +265,15 @@
   align-items: center;
   color: #686868;
 }
-.allEngItems{
+.allEngItems {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin: 20px 0 10px;
 }
 .engItem {
   display: flex;
+  justify-content: space-between;
   margin: 5px 0;
-
 }
 .engItem h2 {
   font-style: normal;
@@ -281,8 +283,7 @@
   display: flex;
   align-items: center;
   color: #686868;
-  width: 70%;
-
+  width: 85%;
 }
 .engItem h4 {
   font-style: normal;
@@ -291,9 +292,9 @@
   line-height: 123%;
   display: flex;
   align-items: center;
-  text-align: center;
+  text-align: left;
+  width: 10%;
   color: #686868;
-
 }
 .EngRate img {
   width: 50%;
@@ -307,35 +308,63 @@
   outline: none;
 }
 .right {
-  right: 10px;
+  right: 5px;
   position: absolute;
   top: 30px;
   bottom: 0;
   margin: auto;
   outline: none;
-
 }
 .engIcon {
   border-radius: 50%;
-  height: 45px;
-  width: 45px;
+  height: 40px;
+  width: 40px;
   padding: 10px;
   color: #07a098;
   background: #ffffff;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
 }
 
+@media (max-width: 1300px) {
+  .engHeader,
+  .first,
+  .last,
+  .subTopic {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1024px) {
+  .contForWidth {
+    width: 80%;
+  }
+  .engHeader,
+  .first,
+  .last,
+  .subTopic {
+    font-size: 13px;
+  }
+  .TopDisCont {
+    height: 280px;
+  }
+}
 @media (max-width: 815px) {
   .courses-overview {
     padding: 20px 16px;
   }
+  .course-item h4 {
+    font-size: 16px;
+  }
+  .course-item h2 {
+    font-size: 25px;
+  }
   .overMain {
-    /* padding: 40px 50px 10px 41px; */
     padding: 20px;
-    /* border: 2px solid red; */
   }
   .contForWidth {
     width: 80%;
+  }
+  .allEngItems {
+    width: 60%;
   }
   .secondSect {
     height: auto;
@@ -354,13 +383,24 @@
     padding-left: 0;
     margin-top: 30px;
   }
+  .engHeader,
+  .first,
+  .last,
+  .subTopic,
+  .engItem h2,
+  .engItem h4 {
+    font-size: 14px;
+  }
   .TopDisCont {
     /* border: 2px solid; */
+    flex-direction: column;
+    height: auto;
+    row-gap: 30px;
   }
   .TopDis {
     padding: 20px 16px;
 
-    width: 60%;
+    width: 100%;
   }
   .TopDis h3 {
     font-size: 16px;
@@ -372,28 +412,20 @@
     font-size: 15px;
   }
 
-  .TopDis {
-  }
+ 
   .EngRate {
-    width: 33%;
+    width: 100%;
   }
-  .EngRate h2 {
-    font-size: 16px;
-  }
-  .EngRate h4 {
-    font-size: 12px;
+
+  .subHeader {
+    font-size: 14px;
   }
 }
 @media (max-width: 620px) {
   .contForWidth {
-    width: 90%;
+    /* width: 90%; */
   }
-  .course-item h4 {
-    font-size: 16px;
-  }
-  .course-item h2 {
-    font-size: 25px;
-  }
+
   .sectDetails h3 {
     font-size: 16px;
   }
@@ -401,9 +433,8 @@
     width: auto;
     font-size: 12px;
   }
-  .TopDis {
-    /* flex-direction: column; */
-    width: 60%;
+ .TopDis {
+   padding: 10px 5px 10px 10px ;
   }
   .TopDis h3 {
     font-size: 16px;
@@ -414,15 +445,23 @@
   .TopDiscusionText h5 {
     font-size: 12px;
   }
-  .EngRate {
-    width: 35%;
-  }
+
   .EngRate h4 {
     font-size: 12px;
   }
   .EngRate img {
     width: 70%;
   }
+  .first, .subTopic{
+    width: 50%;
+  }
+  .engcount,.last {
+  width: 12%;
+  /* flex: 1; */
+}
+.subTopic h2, .subTopic h4 {
+ font-size: 12px;
+}
 }
 @media (max-width: 560px) {
   .TopDisCont {
@@ -430,7 +469,20 @@
     gap: 30px;
   }
 
+  .contForWidth {
+    width: 100%;
+    align-items: center;
+  }
+  .course-item h4 {
+    font-size: 14px;
+  }
+  .course-item h2 {
+    font-size: 20px;
+  }
   .TopDis {
+    width: 100%;
+  }
+   .allEngItems {
     width: 100%;
   }
   .EngRate {
@@ -441,10 +493,6 @@
   }
 }
 @media (max-width: 400px) {
-  .contForWidth {
-    width: 100%;
-    align-items: center;
-  }
   .postTypes {
     /* border: 2px solid; */
     justify-content: space-between;
@@ -457,4 +505,11 @@
     height: 10px;
     margin-right: 5px;
   }
+ .right {
+  right: 2px;
 }
+.engIcon {
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+}}

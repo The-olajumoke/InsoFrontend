@@ -26,7 +26,7 @@ function LogInUser({ activeModal, setactiveModal }) {
   const handleBack = () => {
     history.push("./");
   };
-  const handleSubmit =async (e) => {
+  const handleSubmit = (e) => {
     console.log(e.password);
     console.log(e.email);
 
@@ -34,7 +34,8 @@ function LogInUser({ activeModal, setactiveModal }) {
       username: e.email,
       password: e.password,
     };
-   await dispatch(logInUser(payload));
+   dispatch(logInUser(payload));
+   
 
     
   };

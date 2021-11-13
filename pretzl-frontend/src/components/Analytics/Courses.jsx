@@ -43,6 +43,7 @@ function Courses({ count, options, handleClick })
         </button>
         <button name="threads" className="typeBtn" onClick={handleClick}>
           Threads
+          <IoMdArrowDropdown />
         </button>
       </div>
     </div>

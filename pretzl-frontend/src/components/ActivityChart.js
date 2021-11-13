@@ -22,7 +22,6 @@ function ActivityChart({}) {
       console.log({ ...error });
     }
   };
- 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,27 +37,13 @@ function ActivityChart({}) {
   return (
     <div className="allActCont">
       {/* {count.map((cnt, index) => ( */}
-      <ActivityItem height="40" />
-      <ActivityItem height="90" />
-      <ActivityItem height="50" />
-      <ActivityItem height="90" />
-      <ActivityItem height="90" />
+      {/* <ActivityItem height="40" />
+      <ActivityItem height="90" /> */}
 
-      {/* {counts.map((cnt, index) => {
-      return  <ActivityItem key={index} height={`${cnt.count}`}  />;
+      {counts.map((cnt, index) => {
+        return <ActivityItem key={index} height={`${cnt.count}`} />;
         // alert(`${cnt.action_type}`);
-      })} */}
-      {/* <ActivityItem height="80" />
-      <ActivityItem height="84" />
-      <ActivityItem height="144" />
-      <ActivityItem height="96" />
-      <ActivityItem height="248" />
-      <ActivityItem height="96" />
-      <ActivityItem height="144" />
-      <ActivityItem height="248" />
-      <ActivityItem height="300" />
-      <ActivityItem height="168" />
-      <ActivityItem height="96" /> */}
+      })}
     </div>
   );
 }
