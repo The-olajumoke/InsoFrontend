@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import { endDisc } from "../redux/Discussion/disSlice";
 function Discussion() {
   const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const handleClick = (e) => {
     setShowMenu(!showMenu);
     dispatch(endDisc());
