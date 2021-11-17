@@ -18,11 +18,7 @@ function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
     setshowEdit(!showEdit);
   };
   return (
-    <div
-      className="discBox ring"
-     
-    >
-  
+    <div className="discBox ring ring-red">
       <div className="boxHead">
         <div className=" box-1">
           <MdChatBubbleOutline className=" mr-1" />

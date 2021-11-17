@@ -8,12 +8,12 @@
   height: 100%;
   width: 100%;
   justify-content: center;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 .overviewCont::-webkit-scrollbar {
   display: none;
 }
-.tempItem{
+.tempItem {
   /* border: solid 1px rebeccapurple; */
 }
 .courses-overview {
@@ -100,16 +100,29 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 5px 20px;
-  width: 164px;
+  padding: 5px 15px 5px 20px;
+  width: 117px;
   height: 34px;
   background: rgba(144, 215, 255, 0.1);
   border-radius: 30px;
+  color: #07a098;
   font-style: normal;
   font-weight: normal;
   font-size: 13.19px;
   line-height: 20px;
+}
+.zoomBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 12px;
+  width: 83px;
+  height: 34px;
+  background: rgba(144, 215, 255, 0.1);
+  border-radius: 44px;
   color: #07a098;
+  font-size: 20px;
 }
 .sect2 {
   width: 20%;
@@ -412,7 +425,6 @@
     font-size: 15px;
   }
 
- 
   .EngRate {
     width: 100%;
   }
@@ -433,8 +445,8 @@
     width: auto;
     font-size: 12px;
   }
- .TopDis {
-   padding: 10px 5px 10px 10px ;
+  .TopDis {
+    padding: 10px 5px 10px 10px;
   }
   .TopDis h3 {
     font-size: 16px;
@@ -452,16 +464,19 @@
   .EngRate img {
     width: 70%;
   }
-  .first, .subTopic{
+  .first,
+  .subTopic {
     width: 50%;
   }
-  .engcount,.last {
-  width: 12%;
-  /* flex: 1; */
-}
-.subTopic h2, .subTopic h4 {
- font-size: 12px;
-}
+  .engcount,
+  .last {
+    width: 12%;
+    /* flex: 1; */
+  }
+  .subTopic h2,
+  .subTopic h4 {
+    font-size: 12px;
+  }
 }
 @media (max-width: 560px) {
   .TopDisCont {
@@ -482,7 +497,7 @@
   .TopDis {
     width: 100%;
   }
-   .allEngItems {
+  .allEngItems {
     width: 100%;
   }
   .EngRate {
@@ -505,11 +520,12 @@
     height: 10px;
     margin-right: 5px;
   }
- .right {
-  right: 2px;
+  .right {
+    right: 2px;
+  }
+  .engIcon {
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+  }
 }
-.engIcon {
-  height: 30px;
-  width: 30px;
-  padding: 5px;
-}}

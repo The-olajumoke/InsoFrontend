@@ -5,19 +5,18 @@ import "../../Styling/Analytics/courses.css";
 import ActivityChart from "../ActivityChart";
 import AnalDropdown from "./AnalDropdown";
 
-function Courses({ count, options, handleClick })
- {
+function Courses({ count, options, handleClick }) {
   const [dropdown, setdropdown] = useState(false);
-// console.log(count);
+  // console.log(count);
   return (
     <div className="theMainCont">
       <div className="courseCont">
         <div className="courseHeader">
-          <h2>Active Courses</h2>
+          <h2>Active Discussion set</h2>
           <h4>States are based on engagement per course</h4>
         </div>
         <div className="noOfCourses">
-          <span> 18</span> courses
+          <span> 18</span> discussion set
         </div>
       </div>
       <div className="actCont">

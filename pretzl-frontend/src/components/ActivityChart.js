@@ -17,6 +17,7 @@ function ActivityChart({}) {
     try {
       const res = await axios.get(apiBaseUrl);
       const data = res.data;
+      console.log(data);
       return data;
     } catch (error) {
       console.log({ ...error });
@@ -33,17 +34,16 @@ function ActivityChart({}) {
     // fetchData();
   }, []);
 
-  console.log(counts);
+  // console.log(counts);
   return (
     <div className="allActCont">
       {/* {count.map((cnt, index) => ( */}
-      {/* <ActivityItem height="40" />
-      <ActivityItem height="90" /> */}
+      <ActivityItem height="1" />
 
-      {counts.map((cnt, index) => {
+      {/* {counts.map((cnt, index) => {
         return <ActivityItem key={index} height={`${cnt.count}`} />;
         // alert(`${cnt.action_type}`);
-      })}
+      })} */}
     </div>
   );
 }

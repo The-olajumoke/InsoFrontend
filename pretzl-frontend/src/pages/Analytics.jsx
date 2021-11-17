@@ -15,6 +15,7 @@ import axios from "axios";
 
 import EngTemplate from "../components/Analytics/EngTemplate";
 import { IoIosArrowBack } from "react-icons/io";
+import { FiMinus, FiPlus } from "react-icons/fi";
 const Overview = () => {
   const dispatch = useDispatch();
   const [active, setActive] = useState("courses");
@@ -28,13 +29,12 @@ const Overview = () => {
   const [engMenu, setengMenu] = useState(true);
   const [width, setWidth] = useState(React.useState(window.innerWidth));
 
-  const breakpoint = 620; 
+  const breakpoint = 620;
   React.useEffect(() => {
     const handleResizeWindow = () => setWidth(window.innerWidth);
     window.addEventListener("resize", handleResizeWindow);
     return () => window.removeEventListener("resize", handleResizeWindow);
- 
-},[]);
+  }, []);
 
   const handleClick = (e) => {
     setActive(e.target.name);
@@ -161,7 +161,7 @@ const Overview = () => {
       setTotalPostCount(TotalPostCount);
       setTotalUserCount(TotalUser);
     };
-    fetchData();
+    // fetchData();
   }, []);
 
   return (
@@ -200,10 +200,21 @@ const Overview = () => {
                   Activity Chart
                   <IoMdArrowDropdown />
                 </h3>
-                <button>
-                  This month
-                  <IoMdArrowDropdown />
-                </button>
+                <div className="flex  gap-4">
+                  <button>Show all</button>
+                  <button>
+                    Month
+                    <IoMdArrowDropdown />
+                  </button>
+                  <div className="zoomBtn">
+                    <div>
+                      <FiMinus />
+                    </div>
+                    <div>
+                      <FiPlus />
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="trial">
@@ -220,22 +231,19 @@ const Overview = () => {
             </div>
 
             {/* RADIO BUTTONS */}
-            <div
-              onChange={(e) => {
-                // alert(`${e.target.value}`);
-                console.log(radioButton);
-                setRadioButton(e.target.value);
-                console.log(radioButton);
-              }}
-              className="sect2"
-            >
+            <div className="sect2">
               <div className="postTypes">
                 <input
                   type="radio"
                   value="Users"
                   name="type"
                   id=""
-                  // checked={`${radioButton == "Users" ?true:false}`}
+                  // checked={() => (radioButton = "Users")}
+                  onChange={(e) => {
+                    setRadioButton(e.target.value);
+                    console.log(e.target.checked);
+                  }}
+                  checked={radioButton === "Users"}
                 />
                 <label>Users</label>
               </div>
@@ -245,8 +253,12 @@ const Overview = () => {
                   value="Posts"
                   name="type"
                   id=""
-                  defaultChecked
-                  // checked={`${radioButton == "Posts" && true}`}
+                  checked={radioButton === "Posts"}
+                  onChange={(e) => {
+                    setRadioButton(e.target.value);
+                  }}
+
+                  // defaultChecked
                 />
                 <label>Posts</label>
               </div>
@@ -256,7 +268,10 @@ const Overview = () => {
                   name="type"
                   value="Reactions"
                   id=""
-                  // checked={`${radioButton == "Reactions" && true}`}
+                  checked={radioButton === "Reactions"}
+                  onChange={(e) => {
+                    setRadioButton(e.target.value);
+                  }}
                 />
                 <label>Reactions</label>
               </div>
@@ -266,7 +281,10 @@ const Overview = () => {
                   value="Upvotes"
                   name="type"
                   id=""
-                  // checked={`${radioButton == "Upvotes" ? true : false}`}
+                  checked={radioButton === "Upvotes"}
+                  onChange={(e) => {
+                    setRadioButton(e.target.value);
+                  }}
                 />
                 <label>Upvotes</label>
               </div>

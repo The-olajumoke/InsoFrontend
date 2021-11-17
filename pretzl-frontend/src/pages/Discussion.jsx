@@ -14,20 +14,23 @@ import { allDiscData } from "../DummyData/discData";
 import DiscSet from "../components/Discussion/DiscSetTemp";
 import { getAllCount } from "../redux/Analytics/analyticsSlice";
 import { useDispatch } from "react-redux";
+import { endDisc } from "../redux/Discussion/disSlice";
 function Discussion() {
   const dispatch = useDispatch();
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const handleClick = (e) => {
     setShowMenu(!showMenu);
+    dispatch(endDisc());
   };
   // const DiscussionCont = [];
   // FROM DUMMY DATA
   const DiscussionCont = allDiscData;
 
-
- 
   return (
     <BodyWrapper>
+      {showMenu && (
+        <CreateNewDis showMenu={showMenu} handleClick={handleClick} />
+      )}
       <ResponsiveTop title="Discussion Title" />
       <div className="disMain ">
         <div className="disCont ">
@@ -36,7 +39,6 @@ function Discussion() {
               <FiPlus className="icn" />
               Create new discussion
               <IoMdArrowDropdown className="icn" />
-              {showMenu && <CreateNewDis />}
             </button>
 
             <div className="flex">
