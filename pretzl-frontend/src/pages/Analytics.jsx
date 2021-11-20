@@ -51,6 +51,7 @@ const Overview = () => {
     try {
       const res = await axios.get(apiBaseUrl);
       const data = res.data;
+      console.log(data);
       return data;
     } catch (error) {
       console.log({ ...error });
@@ -58,7 +59,8 @@ const Overview = () => {
   };
   const getDisSet = async () => {
     var apiBaseUrl =
-      "http://localhost:8080/api/auth/discussion/set?username=Bhaskar";
+      "http://localhost:8080/api/auth/discussion/sets?username=Bhaskar";
+
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
     axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
@@ -161,7 +163,7 @@ const Overview = () => {
       setTotalPostCount(TotalPostCount);
       setTotalUserCount(TotalUser);
     };
-    // fetchData();
+    fetchData();
   }, []);
 
   return (

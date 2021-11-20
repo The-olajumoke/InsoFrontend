@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ActivityItem from "./ActivityItem";
-import store from "../redux/store";
+// import store from "../redux/store";
 import axios from "axios";
 
 function ActivityChart({}) {
-  const [counts, setCounts] = useState([]);
+  // const [counts, setCounts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const getCounts = async () => {
     var apiBaseUrl =
       "http://localhost:8080/api/auth/analytics?username=Bhaskar";
@@ -18,6 +19,8 @@ function ActivityChart({}) {
       const res = await axios.get(apiBaseUrl);
       const data = res.data;
       console.log(data);
+      // setCounts(...data);
+      // console.log(counts);
       return data;
     } catch (error) {
       console.log({ ...error });
@@ -27,25 +30,30 @@ function ActivityChart({}) {
   useEffect(() => {
     const fetchData = async () => {
       const userCounts = await getCounts();
-      console.log(userCounts);
+      // console.log(userCounts);
 
-      setCounts(userCounts);
+      // setCounts(userCounts);
+      setLoading(true);
     };
     // fetchData();
   }, []);
-
+  // const newCount = counts.count;
   // console.log(counts);
+
+  // let counts = ["aya", "aya","aya",];
   return (
     <div className="allActCont">
-      {/* {count.map((cnt, index) => ( */}
-      <ActivityItem height="1" />
-
       {/* {counts.map((cnt, index) => {
-        return <ActivityItem key={index} height={`${cnt.count}`} />;
-        // alert(`${cnt.action_type}`);
       })} */}
+      <ActivityItem />
+      <ActivityItem />
+      <ActivityItem />
     </div>
   );
 }
-
 export default ActivityChart;
+
+// ({counts.map((cnt, index) => {<ActivityItem key={index} height={`${cnt.count}`}/> })}
+
+//     </div>
+//   ):"HELLO"
