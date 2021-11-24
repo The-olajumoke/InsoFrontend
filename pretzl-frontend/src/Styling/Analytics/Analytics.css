@@ -256,8 +256,8 @@
   padding: 13px 20px 0 16px;
   display: flex;
   flex-direction: column;
-  /* justify-content:space-evenly; */
   position: relative;
+  /* height: 300px; */
 }
 .EngRate .header {
   font-style: normal;
@@ -312,6 +312,15 @@
 .EngRate img {
   width: 50%;
 }
+.engChart{
+  display: flex;
+  justify-content: center;
+  height: 80%;
+ }
+.chart{
+  width:50%;
+  height:50%;
+}
 .engBtn {
   position: absolute;
   left: 5px;
@@ -320,6 +329,7 @@
   margin: auto;
   outline: none;
 }
+
 .right {
   right: 5px;
   position: absolute;

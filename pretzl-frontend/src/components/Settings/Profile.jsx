@@ -7,11 +7,11 @@ import { useDispatch } from "react-redux";
 import { editDetails } from "../../redux/User/userSlice";
 function Profile({ handleClick }) {
   const dispatch = useDispatch();
-  const [username, setusername] = useState("");
-  const [firstname, setfirstname] = useState("");
-  const [lastname, setlastname] = useState("");
-  const [email, setemail] = useState("");
-  const [alternativeemail, setalternativeemail] = useState("");
+  const [username, setusername] = useState("patrick");
+  const [firstname, setfirstname] = useState("collins");
+  const [lastname, setlastname] = useState("Beth");
+  const [email, setemail] = useState("olajumokegoodluck@gmail.com");
+  const [alternativeemail, setalternativeemail] = useState("patrickDempsey@gmail.com");
 
   const handlesubmit = (e) => {
     e.preventDefault();
@@ -80,7 +80,7 @@ function Profile({ handleClick }) {
               }}
               name="username"
               id=""
-              value={username}
+              // value={username}
               placeholder={`@Patrick`}
             />
           </div>
@@ -91,7 +91,7 @@ function Profile({ handleClick }) {
               onChange={(e) => {
                 setfirstname(e.target.value);
               }}
-              value={firstname}
+              // value={firstname}
               name="firstname"
               id=""
             />
@@ -103,7 +103,7 @@ function Profile({ handleClick }) {
               onChange={(e) => {
                 setlastname(e.target.value);
               }}
-              value={lastname}
+              // value={lastname}
               name="lastname"
               id=""
             />
@@ -115,7 +115,7 @@ function Profile({ handleClick }) {
               onChange={(e) => {
                 setemail(e.target.value);
               }}
-              value={email}
+              // value={email}
               name="email"
               id=""
             />
@@ -128,7 +128,7 @@ function Profile({ handleClick }) {
               onChange={(e) => {
                 setalternativeemail(e.target.value);
               }}
-              value={alternativeemail}
+              // value={alternativeemail}
               id=""
             />
           </div>

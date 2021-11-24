@@ -1,14 +1,15 @@
 import React from 'react'
 
-function ActivityItem({height}) {
+function ActivityItem({height, count}) {
     // const newheight = `${height *0.55}px `;
     // const newheight = `${height *5}px `;
-const newheight='30px'
+// const newheight='30px'
+const newheight=`${count * 20}px`
     return (
         <div 
         style={{height:`${newheight}`}}
         className=" actItem" >
-       <h3>{height}</h3>
+       <h3>{count}</h3>
         </div>
     )
 }
