@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiArrowRight, FiEdit } from "react-icons/fi";
 import { MdChatBubbleOutline, MdContentCopy, MdLock } from "react-icons/md";
 import { Link } from "react-router-dom";
-import "../../Styling/Discussion.css";
+import "../../Styling/Discussion/Discussion.css";
 import imgIcon from "../../Exports/discSet.svg";
 import history from "../../utils/history";
 import img from "../../Exports/DisIcon.svg";

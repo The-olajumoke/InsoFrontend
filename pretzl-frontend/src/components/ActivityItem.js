@@ -1,9 +1,7 @@
 import React from 'react'
 
-function ActivityItem({height, count}) {
-    // const newheight = `${height *0.55}px `;
-    // const newheight = `${height *5}px `;
-// const newheight='30px'
+function ActivityItem({ count}) {
+  
 const newheight=`${count * 20}px`
     return (
         <div 

@@ -4,7 +4,7 @@ import ActivityItem from "./ActivityItem";
 import axios from "axios";
 
 function ActivityChart({}) {
-  // const [counts, setCounts] = useState([]);
+  const [counts, setCounts] = useState([]);
   const [loading, setLoading] = useState(false);
   const getCounts = async () => {
     var apiBaseUrl =
@@ -19,7 +19,7 @@ function ActivityChart({}) {
       const res = await axios.get(apiBaseUrl);
       const data = res.data;
       console.log(data);
-      // setCounts(...data);
+      setCounts(data);
       // console.log(counts);
       return data;
     } catch (error) {
@@ -31,38 +31,20 @@ function ActivityChart({}) {
     const fetchData = async () => {
       const userCounts = await getCounts();
       // console.log(userCounts);
-
       // setCounts(userCounts);
       setLoading(true);
     };
-    // fetchData();
+    fetchData();
   }, []);
-  // const newCount = counts.count;
-  // console.log(counts);
 
-  // let counts = ["aya", "aya","aya",];
   return (
     <div className="allActCont">
-      {/* {counts.map((cnt, index) => {
-      })} */}
-      <ActivityItem count="1" />
-      <ActivityItem count="1" />
-      <ActivityItem count="1" />
-      <ActivityItem count="3" />
-      <ActivityItem count="1" />
-      <ActivityItem count="3" />
-      <ActivityItem count="2" />
-      <ActivityItem count="1" />
-      <ActivityItem count="1" />
-      <ActivityItem count="3" />
-      <ActivityItem count="1" />
- 
+      
+      {counts.map((cnt, index) => (
+        <ActivityItem key={index} count={`${cnt.count}`} />
+      ))}
+      
     </div>
   );
 }
 export default ActivityChart;
-
-// ({counts.map((cnt, index) => {<ActivityItem key={index} height={`${cnt.count}`}/> })}
-
-//     </div>
-//   ):"HELLO"

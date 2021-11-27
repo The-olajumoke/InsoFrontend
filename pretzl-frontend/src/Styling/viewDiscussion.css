@@ -182,6 +182,7 @@
 .commentBox textarea {
   width: 100%;
   outline: none;
+  resize: none;
 }
 .commentBox textarea:empty{
   color:#011b25;
@@ -197,9 +198,7 @@
   display: flex;
   column-gap: 20px;
 }
-.widget img {
-  /* border: red 2px solid; */
-}
+
 .commentBtnCont {
   display: flex;
   column-gap: 20px;

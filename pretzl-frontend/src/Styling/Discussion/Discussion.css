@@ -12,7 +12,7 @@
 }
 .discBtnCont {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -45,7 +45,7 @@
   line-height: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   color: #686868;
   margin-right: 43px;
 }
@@ -56,7 +56,7 @@
   width: 24px;
   height: 24px;
   color: #07a098;
-  margin-right: 14px;
+  margin-right: 10px;
 }
 .allDisCont {
   display: flex;
@@ -249,8 +249,8 @@
   }
   to{left:0;}
 } */
-.createCont{
-  padding: 20px 110px 20px 50px ;
+.createCont {
+  padding: 20px 110px 20px 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -331,7 +331,7 @@
   height: 100%;
   width: 20px;
   margin-left: 5px;
-  color: #C1C1C1;
+  color: #c1c1c1;
 }
 .newBox-textarea {
   width: 100%;
@@ -428,18 +428,18 @@
     column-gap: 5px;
     justify-content: space-between;
   }
-  .closeCont{
+  .closeCont {
     right: 20px;
     top: 30px;
     font-size: 12px;
   }
-  .closeCont img{
+  .closeCont img {
     width: 20px;
   }
-  .createNewDis{
-   justify-content:flex-start ;
-   top: 100px;
-   padding-top: 100px;
+  .createNewDis {
+    justify-content: flex-start;
+    top: 100px;
+    padding-top: 100px;
   }
 }
 @media (max-width: 620px) {

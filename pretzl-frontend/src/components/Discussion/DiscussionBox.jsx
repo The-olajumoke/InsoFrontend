@@ -5,7 +5,7 @@ import {
   MdLock,
   MdLockOpen,
 } from "react-icons/md";
-import "../../Styling/Discussion.css";
+import "../../Styling/Discussion/Discussion.css";
 import img from "../../Exports/DisIcon.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";

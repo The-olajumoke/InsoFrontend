@@ -21,6 +21,7 @@ const Overview = () => {
   const dispatch = useDispatch();
   const [active, setActive] = useState("courses");
   const [options, setOptions] = useState([""]);
+  const [thread, setThread] = useState([""]);
   const [discSet, setDiscSet] = useState([""]);
   const [totalSetCount, setTotalSetCount] = useState([0]);
   const [totaldisCount, setTotalDisCount] = useState([0]);
@@ -78,7 +79,7 @@ const Overview = () => {
   };
   const getThread = async () => {
     var apiBaseUrl =
-      "http://localhost:8080/api/auth/discussion/post/details?username=Bhaskar";
+      "http://localhost:8080/api/auth/threads/all?username=Bhaskar";
 
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
@@ -166,8 +167,8 @@ const Overview = () => {
     const fetchData = async () => {
       const set = await getDisSet();
       const disc = await getAllDisc();
-      const thread = await getThread();
-      console.log(thread);
+      const threads = await getThread();
+      console.log(threads);
       let TotaldisCount = await getTotalDisCount();
       TotaldisCount = TotaldisCount.count;
       let TotalDisSetCount = await getTotalDisSetCount();
@@ -178,6 +179,7 @@ const Overview = () => {
       TotalUser = TotalUser.count;
       // console.log(set);
       console.log(disc);
+      setThread(threads)
       setDiscSet(set);
       setOptions(disc);
       setTotalDisCount(TotaldisCount);
@@ -249,7 +251,7 @@ const Overview = () => {
                   <Discussion options={options} handleClick={handleClick} />
                 )}
                 {active == "threads" && (
-                  <Threads handleClick={handleClick} options={options} />
+                  <Threads handleClick={handleClick} options={thread} />
                 )}
               </div>
             </div>

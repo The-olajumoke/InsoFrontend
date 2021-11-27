@@ -6,7 +6,7 @@ import { BsFilterLeft } from "react-icons/bs";
 import BodyWrapper from "../components/BodyWrapper";
 import DiscussionBox from "../components/Discussion/DiscussionBox";
 import ResponsiveTop from "../components/ResponsiveTop";
-import "../Styling/Discussion.css";
+import "../Styling/Discussion/Discussion.css";
 import NoMessageYet from "../components/Discussion/NoMessageYet";
 import CreateNewDis from "../components/Discussion/CreateNewDis";
 import history from "../utils/history";
