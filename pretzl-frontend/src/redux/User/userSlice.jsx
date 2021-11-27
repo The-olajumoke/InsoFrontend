@@ -58,7 +58,6 @@ const userSlice = createSlice({
     setLoggedInUser: (state, { payload }) => {
       state.isLoggedIn = true;
     },
-    
   },
 });
 
@@ -127,12 +126,11 @@ export const logInUser = createAsyncThunk(
   async (data, { dispatch }) => {
     var apiBaseUrl = "http://localhost:8080/api/auth/login";
 
-      let axiosConfig = {
+    let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=Utf-8",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST",
-     
       },
     };
     try {
@@ -143,7 +141,7 @@ export const logInUser = createAsyncThunk(
       const token = res.data.accessToken;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
-    dispatch(setLoggedInUser());
+      dispatch(setLoggedInUser());
       history.push("./discussions");
     } catch (error) {
       console.log({ ...error });
@@ -156,10 +154,11 @@ export const editDetails = createAsyncThunk(
   "user/editUserDetails",
   async (data) => {
     var apiBaseUrl = "http://localhost:8080/api/auth/signup";
-    axios.defaults.headers.post["Content-Type"] =
+
+    axios.defaults.headers.put["Content-Type"] =
       "application/json;charset=utf-8";
-    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-    axios.defaults.headers.post["Access-Control-Allow-Methods"] = "PUT";
+    axios.defaults.headers.put["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.put["Access-Control-Allow-Methods"] = "PUT";
 
     try {
       const res = await axios.put(apiBaseUrl, data);

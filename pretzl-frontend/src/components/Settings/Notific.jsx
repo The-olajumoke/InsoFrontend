@@ -1,6 +1,6 @@
 import React from "react";
 import "../../Styling/settings/Notific.css";
-function Notific({handleClick}) {
+function Notific({ handleClick }) {
   return (
     <>
       <div className="settingHeader">
@@ -43,7 +43,12 @@ function Notific({handleClick}) {
               <option value="daily"> daily</option>
             </select>
             <label className="switch">
-              <input type="checkbox" name="reports" id="" />
+              <input
+                type="checkbox"
+                onChange={(e) => alert(`changed ${e.target.id}`)}
+                name="reports"
+                id="activity"
+              />
               <span className="slider round"></span>
             </label>
           </div>
@@ -54,7 +59,12 @@ function Notific({handleClick}) {
               <option value="daily"> daily</option>
             </select>
             <label className="switch">
-              <input type="checkbox" name="mentions" id="" />
+              <input
+                type="checkbox"
+                onChange={(e) => alert(`changed ${e.target.id}`)}
+                name="mentions"
+                id="mentions"
+              />
               <span className="slider round"></span>
             </label>
           </div>
@@ -65,7 +75,12 @@ function Notific({handleClick}) {
               <option value="daily"> daily</option>
             </select>
             <label className="switch">
-              <input type="checkbox" name="grade" id="" />
+              <input
+                type="checkbox"
+                onChange={(e) => alert(`changed ${e.target.id}`)}
+                name="grade"
+                id="newGrade"
+              />
               <span className="slider round"></span>
             </label>
           </div>

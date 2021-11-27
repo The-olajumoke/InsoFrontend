@@ -8,7 +8,7 @@ function ActivityChart({}) {
   const [loading, setLoading] = useState(false);
   const getCounts = async () => {
     var apiBaseUrl =
-      "http://localhost:8080/api/auth/analytics?username=Bhaskar";
+      "http://localhost:8080/api/auth/discussion/postreactions?username=Bhaskar";
 
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
@@ -45,9 +45,18 @@ function ActivityChart({}) {
     <div className="allActCont">
       {/* {counts.map((cnt, index) => {
       })} */}
-      <ActivityItem />
-      <ActivityItem />
-      <ActivityItem />
+      <ActivityItem count="1" />
+      <ActivityItem count="1" />
+      <ActivityItem count="1" />
+      <ActivityItem count="3" />
+      <ActivityItem count="1" />
+      <ActivityItem count="3" />
+      <ActivityItem count="2" />
+      <ActivityItem count="1" />
+      <ActivityItem count="1" />
+      <ActivityItem count="3" />
+      <ActivityItem count="1" />
+ 
     </div>
   );
 }

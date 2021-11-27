@@ -16,6 +16,7 @@ import axios from "axios";
 import EngTemplate from "../components/Analytics/EngTemplate";
 import { IoIosArrowBack } from "react-icons/io";
 import { FiMinus, FiPlus } from "react-icons/fi";
+import Charts from "../components/Analytics/Charts";
 const Overview = () => {
   const dispatch = useDispatch();
   const [active, setActive] = useState("courses");
@@ -75,6 +76,25 @@ const Overview = () => {
       console.log({ ...error });
     }
   };
+  const getThread = async () => {
+    var apiBaseUrl =
+      "http://localhost:8080/api/auth/discussion/post/details?username=Bhaskar";
+
+    axios.defaults.headers.get["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.get["Access-Control-Allow-Methods"] = "GET";
+
+    try {
+      const res = await axios.get(apiBaseUrl);
+      const data = res.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log({ ...error });
+    }
+  };
+
   const getTotalDisCount = async () => {
     var apiBaseUrl =
       "http://localhost:8080/api/auth/discussion/discussions/count?username=Bhaskar";
@@ -146,6 +166,8 @@ const Overview = () => {
     const fetchData = async () => {
       const set = await getDisSet();
       const disc = await getAllDisc();
+      const thread = await getThread();
+      console.log(thread);
       let TotaldisCount = await getTotalDisCount();
       TotaldisCount = TotaldisCount.count;
       let TotalDisSetCount = await getTotalDisSetCount();
@@ -356,8 +378,8 @@ const Overview = () => {
                   </div>
                 </div>
               ) : (
-                <div className="flex justify-center mt-5 ">
-                  <img src={OverviewImg} alt="" />
+                <div className=" engChart">
+                  <Charts active="12.5" />
                 </div>
               )}
               {engMenu ? (
