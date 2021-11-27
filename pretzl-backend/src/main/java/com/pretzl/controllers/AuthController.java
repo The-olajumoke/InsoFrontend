@@ -185,4 +185,10 @@ public class AuthController {
         discussionList.stream().collect(Collectors.groupingBy(Discussion::getSet_id ));
         return ResponseEntity.ok(discussionList);
     }
+
+    @GetMapping("/threads/all")
+    public ResponseEntity<List<IThreads>> getAllThreads(@RequestParam String username) {
+        List<IThreads> allThreads = discussionRepository.getAllThreads(username);
+        return ResponseEntity.ok(allThreads);
+    }
 }
