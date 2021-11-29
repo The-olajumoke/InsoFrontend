@@ -44,28 +44,7 @@ export const allDiscData = [
     question:
       "What’s your opinion on the Fukushima Nuclear power plant incident in 2011 and how does it relate with current occurences now in 2021?",
   },
-  {
-    id: 3,
-    title: "Types of Mineral Resources",
-    date: "Mar 21",
-    numberOfPeople: "2",
-    name: "Bhaskar Backend",
-    username: "bhaskar",
-    code: "51RP70F",
-    question:
-      "What’s your opinion on the Fukushima Nuclear power plant incident in 2011 and how does it relate with current occurences now in 2021?",
-  },
-  {
-    id: 3,
-    title: "Types of Mineral Resources",
-    date: "Mar 21",
-    numberOfPeople: "2",
-    name: "Bhaskar Backend",
-    username: "bhaskar",
-    code: "51RP70F",
-    question:
-      "What’s your opinion on the Fukushima Nuclear power plant incident in 2011 and how does it relate with current occurences now in 2021?",
-  },
+  
   {
     id: 3,
     title: "Types of Mineral Resources",

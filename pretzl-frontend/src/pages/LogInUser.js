@@ -14,8 +14,7 @@ import NotiPopUp from "../components/NotiPopUp";
 import CustomizedSnackbars from "../components/NotiPopUp";
 import { useDispatch } from "react-redux";
 import { logInUser } from "../redux/User/userSlice";
-
-
+import GoogleBtn from "../components/Form/GoogleBtn";
 
 function LogInUser({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
@@ -34,10 +33,7 @@ function LogInUser({ activeModal, setactiveModal }) {
       username: e.email,
       password: e.password,
     };
-   dispatch(logInUser(payload));
-   
-
-    
+    dispatch(logInUser(payload));
   };
 
   return (
@@ -45,7 +41,7 @@ function LogInUser({ activeModal, setactiveModal }) {
       <SignInCont
         title="Log in"
         largeText="Say something different."
-        extraText="Enter login details."
+        extraText="Enter Log in details"
         setactiveModal={setactiveModal}
         backBtnFunction={handleBack}
       >
@@ -83,16 +79,14 @@ function LogInUser({ activeModal, setactiveModal }) {
             })}
           >
             {({ isSubmitting, isValid, dirty }) => (
-              <Form className="log-form">
-                <div className="form-cont ring-red">
+              <Form className="log-form my-12 ">
+                <div className="form-cont">
                   <CustomField
-                    label="Email address"
                     placeholder="Enter email..."
                     type="email"
                     name="email"
                   />
                   <CustomField
-                    label="Password"
                     placeholder="Enter password..."
                     type="password"
                     name="password"
@@ -100,6 +94,7 @@ function LogInUser({ activeModal, setactiveModal }) {
                 </div>
 
                 <div className="btn-holder">
+                  <GoogleBtn />
                   <Button mt="mt-16" disabled={!(isValid && dirty)}>
                     Log In
                   </Button>

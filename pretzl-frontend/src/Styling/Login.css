@@ -33,25 +33,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:space-around;
+  justify-content:space-evenly;
   flex: 1;
   padding: 20px 0;
 }
 
 .form-cont {
-  width:100%;
-  height: 232px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-
 }
 
 .form-button {
   width: 100%;
   height: 64px;
   border-radius: 118px;
-  padding: 17px 171px;
+  padding: 17px 50px;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -60,9 +57,11 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 15px;
+  /* margin-bottom: 10px; */
 }
-
+.googleImg {
+  margin-right: 20px;
+}
 .account-text {
   width: 100%;
   height: 27px;
@@ -78,12 +77,25 @@
   justify-content: center;
 }
 
-
-
 .account-text button {
   margin: 0 4px;
   color: #07a098;
   font-weight: 600;
+}
+
+.continuePolicy {
+  width: 100%;
+  /* padding: 0 79px; */
+  margin-top: 20px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #686868;
 }
 
 @media (min-width: 1500px) {
@@ -113,16 +125,15 @@
   }
 }
 .form-button {
-  padding: 17px 110px;
-  margin-top: 20px;
-  margin-bottom: 0;
+  padding: 17px 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 1060px) {
-  .logInUser-content{
+  .logInUser-content {
     width: 92%;
   }
-
 }
 @media (max-width: 815px) {
   .logInUser-content {
@@ -130,7 +141,7 @@
     padding: 0;
     width: 95%;
   }
-  .log-form{
+  .log-form {
     width: 100%;
   }
   .form-cont {
@@ -138,17 +149,24 @@
   }
   .form-button {
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 54px;
     font-size: 24px;
-    margin-top: 60px;
     margin-bottom: 20px;
     font-size: 16px;
     line-height: 24px;
+  padding: 17px 30px;
+
   }
   .desktopCancel,
   .desktopCancel2 {
     display: none;
   }
+  .googleImg {
+  margin-right: 5px;
+}
 }
 @media (max-width: 515px) {
   .log-form {

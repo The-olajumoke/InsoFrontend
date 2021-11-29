@@ -15,6 +15,7 @@ import history from "../../utils/history";
 import axios from "axios";
 import { signUpOne } from "../../redux/User/userSlice";
 import { useDispatch } from "react-redux";
+import GoogleBtn from "../Form/GoogleBtn";
 function SignUp1({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
   const showResult = () => {
@@ -28,13 +29,12 @@ function SignUp1({ activeModal, setactiveModal }) {
       userName: values.userName,
       phoneNumber: values.phoneNumber,
     };
-    dispatch(signUpOne(newUser, showResult));
-    resetForm();
-    setactiveModal("signUp2");
+    // dispatch(signUpOne(newUser, showResult));
+    // resetForm();
+    // setactiveModal("signUp2");
   };
 
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+ 
 
   const validationSchema = Yup.object({
     firstName: Yup.string()
@@ -43,29 +43,10 @@ function SignUp1({ activeModal, setactiveModal }) {
     lastName: Yup.string()
       .min(3, "Must be at least 3 characters")
       .required("Required"),
-    userName: Yup.string()
-      .min(3, "Must be at least 3 characters")
+    email: Yup.string().email("invalid email address").required("Required"),
+    password: Yup.string()
+      .min(8, "Must be at least 8 characters")
       .required("Required"),
-
-    //  .test('Unique Username', 'Username has already been taken',
-    //             function (value) {
-    //                 return new Promise((resolve, reject) => {
-    //                     axios.get(`http://localhost:8003/api/u/user/${value}/available`)
-    //                         .then((res) => {
-    //                             resolve(true)
-    //                         })
-    //                         .catch((error) => {
-    //                             if (error.response.data.content === "The username has already been taken.") {
-    //                                 resolve(false);
-    //                             }
-    //                         })
-    //                 })
-    //             }
-    //         )
-    phoneNumber: Yup.string()
-      .required("Required")
-
-      .matches(phoneRegExp, "Invalid phone number"),
   });
   const handleBack = () => {
     history.push("./sign-up");
@@ -75,7 +56,7 @@ function SignUp1({ activeModal, setactiveModal }) {
     <SignInCont
       title="Sign Up"
       largeText="Say something different."
-      extraText=""
+      extraText="Create an account to gain full access to our features."
       setactiveModal={setactiveModal}
       previousModal="chooseUser"
       backBtnFunction={handleBack}
@@ -103,8 +84,8 @@ function SignUp1({ activeModal, setactiveModal }) {
           initialValues={{
             firstName: "",
             lastName: "",
-            userName: "",
-            phoneNumber: "",
+            email: "",
+            password: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
@@ -114,33 +95,29 @@ function SignUp1({ activeModal, setactiveModal }) {
             <Form className="sign-form ">
               <div className="frame">
                 <CustomField
-                  label="First Name"
                   name="firstName"
                   type="text "
-                  placeholder="Enter first name"
+                  placeholder="First name"
                 />
                 <CustomField
-                  label="Last Name"
                   name="lastName"
                   type="text"
-                  placeholder="Enter last name"
+                  placeholder="Last name"
                 />
                 <CustomField
-                  label="Preferred Username"
-                  name="userName"
-                  type="text"
-                  placeholder="Enter username"
+                  name="email"
+                  type="email"
+                  placeholder="Enter email"
                 />
                 <CustomField
-                  label="Phone Number"
-                  name="phoneNumber"
-                  type="tel"
-                  placeholder="Enter phone number"
-                  // req="(optional)"
+                  name="password"
+                  type="password"
+                  placeholder="Enter password"
                 />
               </div>
 
               <div className="btn-holder">
+                <GoogleBtn />
                 <Button mt="mt-2" disabled={!(isValid && dirty)}>
                   Continue
                 </Button>

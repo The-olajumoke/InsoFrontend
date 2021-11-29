@@ -146,8 +146,15 @@
   
 }
 @media (max-width: 815px) {
-  .overlay::after {
+  /* .overlay::after {
     opacity: 1;
+  } */
+  .overlay{
+    padding-top: 10px;
+  }
+  .overlayImg{
+    display: none;
+    
   }
 
   .sub-container {

@@ -11,7 +11,8 @@ import CustomField from "../components/Form/CustomInput";
 import Button from "../components/SignUp/Button";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
-import axios from "axios"
+import axios from "axios";
+import GoogleBtn from "../components/Form/GoogleBtn";
 var apiBaseUrl = "http://localhost:8080/api/auth/login";
 
 function LogInGuest({ activeModal, setactiveModal }) {
@@ -69,8 +70,7 @@ function LogInGuest({ activeModal, setactiveModal }) {
               "Username password do not match"
           );
         }
-      }
-     );
+      });
   };
   return (
     <Page>
@@ -102,35 +102,44 @@ function LogInGuest({ activeModal, setactiveModal }) {
           <Formik
             initialValues={{
               email: "",
-              username: "",
+              password: "",
+              repeatPassword: "",
             }}
             onSubmit={handleSubmit}
             validationSchema={Yup.object({
               email: Yup.string()
                 .email("invalid email address")
                 .required("Required"),
-              username: Yup.string()
-                .min(3, "Must be at least 3 characters")
+              password: Yup.string()
+                .min(8, "Must be at least 8 characters")
+                .required("Required"),
+
+              repeatPassword: Yup.string()
+                .oneOf([Yup.ref("password"), null], "Passwords must match")
                 .required("Required"),
             })}
           >
             {({ isSubmitting, isValid, isValidating, dirty }) => (
-              <Form className="log-form ">
-                <div className="form-cont">
+              <Form className="log-form">
+                <div className="form-cont ">
                   <CustomField
-                    label="Email address"
                     placeholder="Enter email..."
                     type="email"
                     name="email"
                   />
                   <CustomField
-                    label="Preferred username"
-                    placeholder="Enter preferred username..."
-                    type="text"
-                    name="username"
+                    name="password"
+                    type="password"
+                    placeholder="Create password"
+                  />
+                  <CustomField
+                    name="repeatPassword"
+                    type="password"
+                    placeholder="Confirm password"
                   />
                 </div>
                 <div className="btn-holder">
+                  <GoogleBtn />
                   <Button mt="mt-1" disabled={!(isValid && dirty)}>
                     Log In
                   </Button>
@@ -145,6 +154,10 @@ function LogInGuest({ activeModal, setactiveModal }) {
                       Sign up
                     </button>
                   </div>
+                  <h5 className=" continuePolicy">
+                    <span> By continuing you agree to our</span>
+                    <span>Terms & Conditions and Privacy Policy.</span>{" "}
+                  </h5>
                 </div>
               </Form>
             )}

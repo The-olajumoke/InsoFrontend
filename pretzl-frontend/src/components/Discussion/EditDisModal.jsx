@@ -34,6 +34,8 @@ function EditDisModal({ discussions, showEditModal }) {
 
  };
 
+
+//  ARRAY FOR KNOWING WHO IS MARKED[]
   return (
     <div className="editModal">
       <div className="EditDiscont">
