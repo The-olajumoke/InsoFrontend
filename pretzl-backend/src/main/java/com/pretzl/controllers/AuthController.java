@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -70,29 +71,33 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUserName())) {
+        /*if (userRepository.existsByUsername(signUpRequest.getUserName())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
-
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+*/
+        String userName = signUpRequest.getUserName();
+        Optional<User> userRepositoryByEmail = userRepository.findByEmail(signUpRequest.getEmail());
+        if (userRepositoryByEmail.isPresent()) {
+            userName = signUpRequest.getFirstName().substring(0, 1).toLowerCase() + signUpRequest.getLastName().toLowerCase();
+            int i = 1;
+            while (userRepository.existsByUsername(userName)) {
+                userName = userName.replaceAll("\\d+$", "") + i++;
+            }
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUserName(),
+        User user = new User(userName,
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-        user.setFirstName(signUpRequest.getFirstName());
+       /* user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
         user.setAlternativeEmail(signUpRequest.getAlternativeEmail());
         user.setOccupation(signUpRequest.getOccupation());
         user.setPrimarilyUse(signUpRequest.getPrimarilyUse());
         user.setPhoneNumber(signUpRequest.getPhoneNumber());
-        user.setReceiveInsoUpdates(signUpRequest.isReceiveInsoUpdates());
+        user.setReceiveInsoUpdates(signUpRequest.isReceiveInsoUpdates());*/
 
 
         Set<String> strRoles = signUpRequest.getRole();
@@ -140,6 +145,7 @@ public class AuthController {
     public ResponseEntity<ICounts> userPostCount(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getUserPostCount(username));
     }
+
     @GetMapping("/discussion/users/count")
     public ResponseEntity<ICounts> getUserDiscussionCount(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getDiscussionUserCount(username));
@@ -156,14 +162,15 @@ public class AuthController {
     }
 
     @GetMapping("/discussion/postreactions/count")
-    public ResponseEntity< List<IReactions>> userPosts(@RequestParam String username) {
+    public ResponseEntity<List<IReactions>> userPosts(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getReactions(username));
     }
 
     @GetMapping("/discussion/postreactions")
-    public ResponseEntity< List<IReactions>> postreactions(@RequestParam String username) {
+    public ResponseEntity<List<IReactions>> postreactions(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getReactions(username));
     }
+
     @GetMapping("/discussion/sets")
     public ResponseEntity<List<IDiscussionSet>> getUserDiscussionSet(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getUserDiscussionSets(username));
@@ -182,7 +189,7 @@ public class AuthController {
     @GetMapping("/discussion/all")
     public ResponseEntity<List<Discussion>> getAllDiscussion(@RequestParam String username) {
         List<Discussion> discussionList = discussionRepository.getAllDiscussions(username);
-        discussionList.stream().collect(Collectors.groupingBy(Discussion::getSet_id ));
+        discussionList.stream().collect(Collectors.groupingBy(Discussion::getSet_id));
         return ResponseEntity.ok(discussionList);
     }
 
