@@ -1,6 +1,6 @@
 import React from "react";
 import img from "../../Exports/Google.svg";
-function GoogleBtn() {
+function GoogleBtn({handleClick}) {
   return (
     <button className="form-button text-primary shadow-md">
       <img src={img} alt="" className="googleImg" />

@@ -15,9 +15,9 @@ function Charts({ active }) {
     ],
   };
   return (
-    <div className=" h-full relative">
+    <div className=" h-full ">
       <Doughnut data={data} className="chart" />
-      <div className="absolute  top-0 left-0 right-0 bottom-0 my-auto">
+      <div className=" activeCount ">
         <h3 className="">{active}%</h3>
         <h5>Active</h5>
       </div>

@@ -6,16 +6,6 @@ const initialState = {
   user: {
     firstName: null,
     lastName: null,
-    userName: null,
-    phoneNumber: null,
-    email: null,
-    alternativeEmail: null,
-    password: null,
-    repeatPassword: null,
-    primaryUse: null,
-    profession: null,
-    work: null,
-    terms: false,
   },
   isLoggedIn: false,
   signedState: false,
@@ -27,23 +17,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setCurrentUser: (state, { payload }) => {
-      state.user.firstName = payload.firstName;
-      state.user.lastName = payload.lastName;
-      state.user.userName = payload.userName;
-      state.user.phoneNumber = payload.phoneNumber;
-    },
-    setCurrentUsertwo: (state, { payload }) => {
-      state.user.email = payload.email;
-      state.user.alternativeEmail = payload.alternativeEmail;
-      state.user.password = payload.password;
-      state.user.repeatPassword = payload.repeatPassword;
-    },
-    setCurrentUserthree: (state, { payload }) => {
       console.log(payload);
-      state.user.primaryUse = payload.primaryUse;
-      state.user.profession = payload.profession;
-      state.user.work = payload.work;
-      state.user.terms = payload.terms;
     },
     setSignedTrue: (state) => {
       console.log(state);
@@ -61,37 +35,10 @@ const userSlice = createSlice({
   },
 });
 
-export const signUpOne = (newUser, showResult) => (dispatch) => {
-  dispatch(setCurrentUser(newUser));
-};
-export const signUpTwo = (newUser) => (dispatch) => {
-  dispatch(setCurrentUsertwo(newUser));
-};
-
-export const signUpThree = createAsyncThunk(
+export const signUpUser = createAsyncThunk(
   "user/signUpUser",
-  async (newUser, { dispatch, getState }) => {
-    dispatch(setCurrentUserthree(newUser));
-    const currentState = getState();
-    const userDetails = currentState.user.user;
-    console.log(userDetails);
-
-    var payload = {
-      firstName: userDetails.firstName,
-      lastName: userDetails.lastName,
-      userName: userDetails.userName,
-      phoneNumber: userDetails.phoneNumber,
-      email: userDetails.email,
-      password: userDetails.password,
-      alternativeEmail: userDetails.alternativeEmail,
-      primarilyUse: userDetails.primaryUse,
-      role: ["user"],
-      occupation: userDetails.profession,
-      receiveInsoUpdates: userDetails.terms,
-    };
-    // {
-    //   alert(JSON.stringify(payload, null, 2));
-    // }
+  async (newUser, { dispatch }) => {
+    console.log(newUser);
 
     var apiBaseUrl = "http://localhost:8080/api/auth/signup";
     axios.defaults.headers.post["Content-Type"] =
@@ -100,7 +47,7 @@ export const signUpThree = createAsyncThunk(
     axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
 
     try {
-      const res = await axios.post(apiBaseUrl, payload);
+      const res = await axios.post(apiBaseUrl, newUser);
       console.log(res);
       console.log(res.status);
       if (res.status) {
@@ -109,6 +56,7 @@ export const signUpThree = createAsyncThunk(
       console.log(res.data);
       console.log(res.data.message);
       // alert("successful");
+      history.push("./discussions")
     } catch (error) {
       console.log({ ...error });
       // alert("failure");
@@ -125,7 +73,6 @@ export const logInUser = createAsyncThunk(
   "user/logInUser",
   async (data, { dispatch }) => {
     var apiBaseUrl = "http://localhost:8080/api/auth/login";
-
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=Utf-8",
@@ -135,6 +82,7 @@ export const logInUser = createAsyncThunk(
     };
     try {
       const res = await axios.post(apiBaseUrl, data, axiosConfig);
+
       console.log(res);
 
       console.log(res.data);
@@ -142,10 +90,11 @@ export const logInUser = createAsyncThunk(
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
       dispatch(setLoggedInUser());
+      // dispatch(setCurrentUser(data))
       history.push("./discussions");
     } catch (error) {
       console.log({ ...error });
-      alert("failure");
+      // alert("failure");
     }
   }
 );
@@ -176,8 +125,6 @@ export const editDetails = createAsyncThunk(
 
 export const {
   setCurrentUser,
-  setCurrentUsertwo,
-  setCurrentUserthree,
   setSignedTrue,
   setCurrentNavSize,
   setLoggedInUser,

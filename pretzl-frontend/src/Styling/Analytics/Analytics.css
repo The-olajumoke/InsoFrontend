@@ -312,14 +312,28 @@
 .EngRate img {
   width: 50%;
 }
-.engChart{
+.engChart {
   display: flex;
   justify-content: center;
   height: 80%;
- }
-.chart{
-  width:50%;
-  height:50%;
+}
+.chart {
+  width: 50%;
+  height: 50%;
+  position: relative;
+}
+.activeCount {
+  color: #07a098;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 75px;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 .engBtn {
   position: absolute;
