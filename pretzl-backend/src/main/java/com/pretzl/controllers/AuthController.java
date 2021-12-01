@@ -71,13 +71,12 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        /*if (userRepository.existsByUsername(signUpRequest.getUserName())) {
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse("Error: Email is already taken!"));
         }
-*/
-        String userName = signUpRequest.getUserName();
+        String userName = "";
         Optional<User> userRepositoryByEmail = userRepository.findByEmail(signUpRequest.getEmail());
         if (userRepositoryByEmail.isPresent()) {
             userName = signUpRequest.getFirstName().substring(0, 1).toLowerCase() + signUpRequest.getLastName().toLowerCase();
@@ -100,7 +99,7 @@ public class AuthController {
         user.setReceiveInsoUpdates(signUpRequest.isReceiveInsoUpdates());*/
 
 
-        Set<String> strRoles = signUpRequest.getRole();
+        Set<String> strRoles = null;
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
@@ -131,7 +130,14 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            String usernameNew = user.getUsername();
+            usernameNew = usernameNew.replaceAll("\\d+$", "") + Math.random();
+            user.setUsername(usernameNew);
+            userRepository.save(user);
+        }
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
