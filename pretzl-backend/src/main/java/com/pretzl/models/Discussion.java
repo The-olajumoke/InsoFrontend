@@ -28,7 +28,7 @@ public class Discussion {
     @NotBlank
     private String date;
 
-    private String parent_id;
+    private int parent_id;
 
     private int word_count;
 
@@ -43,7 +43,7 @@ public class Discussion {
     private String set_id;
 
 
-    public Discussion(int number, String username, String description, String action_type, String date, String parent_id,
+    public Discussion(int number, String username, String description, String action_type, String date, int parent_id,
                       int word_count, String post_as, String time_of_day, String tags, String id, String set_id) {
         this.number = number;
         this.username = username;
@@ -103,11 +103,11 @@ public class Discussion {
         this.date = date;
     }
 
-    public String getParent_id() {
+    public int getParent_id() {
         return parent_id;
     }
 
-    public void setParent_id(String parent_id) {
+    public void setParent_id(int parent_id) {
         this.parent_id = parent_id;
     }
 

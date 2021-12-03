@@ -1,6 +1,7 @@
 package com.pretzl.controllers;
 
 import com.pretzl.models.*;
+import com.pretzl.payload.request.DiscussionsRequest;
 import com.pretzl.payload.request.LoginRequest;
 import com.pretzl.payload.request.SignupRequest;
 import com.pretzl.payload.response.JwtResponse;
@@ -21,10 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -71,33 +70,24 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already taken!"));
         }
-        String userName = "";
-        Optional<User> userRepositoryByEmail = userRepository.findByEmail(signUpRequest.getEmail());
-        if (userRepositoryByEmail.isPresent()) {
-            userName = signUpRequest.getFirstName().substring(0, 1).toLowerCase() + signUpRequest.getLastName().toLowerCase();
-            int i = 1;
-            while (userRepository.existsByUsername(userName)) {
-                userName = userName.replaceAll("\\d+$", "") + i++;
-            }
+        String userName = String.format("%s.%s", signUpRequest.getFirstName(), signUpRequest.getLastName());
+        int i = 1;
+        while (userRepository.existsByUsername(userName)) {
+            userName = userName.replaceAll("\\d+$", "") + i++;
         }
 
         // Create new user's account
         User user = new User(userName,
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
-       /* user.setFirstName(signUpRequest.getFirstName());
+        user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
-        user.setAlternativeEmail(signUpRequest.getAlternativeEmail());
-        user.setOccupation(signUpRequest.getOccupation());
-        user.setPrimarilyUse(signUpRequest.getPrimarilyUse());
-        user.setPhoneNumber(signUpRequest.getPhoneNumber());
-        user.setReceiveInsoUpdates(signUpRequest.isReceiveInsoUpdates());*/
-
 
         Set<String> strRoles = null;
         Set<Role> roles = new HashSet<>();
@@ -130,16 +120,9 @@ public class AuthController {
         }
 
         user.setRoles(roles);
-        try {
-            userRepository.save(user);
-        } catch (Exception e) {
-            String usernameNew = user.getUsername();
-            usernameNew = usernameNew.replaceAll("\\d+$", "") + Math.random();
-            user.setUsername(usernameNew);
-            userRepository.save(user);
-        }
+        User userDetails = userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(userDetails);
     }
 
     @GetMapping("/analytics")
@@ -203,5 +186,40 @@ public class AuthController {
     public ResponseEntity<List<IThreads>> getAllThreads(@RequestParam String username) {
         List<IThreads> allThreads = discussionRepository.getAllThreads(username);
         return ResponseEntity.ok(allThreads);
+    }
+
+    @PostMapping("/create/discussions")
+    public ResponseEntity<?>createDiscussions(@Valid @RequestBody DiscussionsRequest discussionsRequest){
+        Map<String, List<com.pretzl.payload.request.Discussion>> discMap = discussionsRequest.getDiscussions().stream().collect(Collectors.groupingBy(com.pretzl.payload.request.Discussion::getSet_id));
+        discMap.forEach((set_id, discussions) ->{
+            if(null == set_id || set_id.isEmpty()){
+                set_id = Math.random()+"";
+            }
+            String finalSet_id = set_id;
+            Discussion discSetModel = new Discussion();
+            discSetModel.setDate(LocalDate.now().toString());
+            discSetModel.setDescription(set_id);
+            discSetModel.setUsername(discussionsRequest.getUsername());
+            discSetModel.setSet_id(finalSet_id);
+            discSetModel.setAction_type("S");
+
+            discSetModel.setNumber((int)(Math.random()*(1L-10+1)+10));
+            discussionRepository.save(discSetModel);
+
+            discussions.forEach(discussion -> {
+                Discussion discModel = new Discussion();
+                discModel.setDate(LocalDate.now().toString());
+                discModel.setDescription(discussion.getDescription());
+                discModel.setUsername(discussionsRequest.getUsername());
+                discModel.setSet_id(finalSet_id);
+                discModel.setAction_type("D");
+                discModel.setNumber((int)(Math.random()*(1L-11+1)+11));
+                discussionRepository.save(discModel);
+            });
+        } );
+
+        return ResponseEntity
+                .ok()
+                .body(new MessageResponse("Discussions are created successfully"));
     }
 }
