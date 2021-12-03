@@ -251,7 +251,7 @@ const Overview = () => {
                   <Discussion options={options} handleClick={handleClick} />
                 )}
                 {active == "threads" && (
-                  <Threads handleClick={handleClick} options={thread} />
+                  <Threads handleClick={handleClick} options={options} />
                 )}
               </div>
             </div>

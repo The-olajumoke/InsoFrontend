@@ -13,28 +13,35 @@ import Button from "../../components/SignUp/Button";
 
 import history from "../../utils/history";
 import axios from "axios";
-import { signUpOne } from "../../redux/User/userSlice";
+import { signUpUser } from "../../redux/User/userSlice";
 import { useDispatch } from "react-redux";
 import GoogleBtn from "../Form/GoogleBtn";
+import CustomizedSnackbars from "../NotiPopUp";
+import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
+
+import store from "../../redux/store";
+
 function SignUp1({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
-  const showResult = () => {
-    alert("hello world");
-  };
-  const handleSubmit = (values, { resetForm }) => {
-    // STORE VALUES SOMEWHERE
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
+  const handleSubmit = async (values, { resetForm }) => {
     const newUser = {
       firstName: values.firstName,
       lastName: values.lastName,
-      userName: values.userName,
-      phoneNumber: values.phoneNumber,
+      email: values.email,
+      password: values.password,
     };
-    // dispatch(signUpOne(newUser, showResult));
-    // resetForm();
-    // setactiveModal("signUp2");
-  };
+    await dispatch(signUpUser(newUser));
+    const currentStore = store.getState();
+    const currentSignedState = currentStore.user.signedState;
+    console.log(currentSignedState);
 
- 
+    {
+      currentSignedState ? setShowAlert(true) : setErrorAlert(true);
+    }
+  };
+  const handleGoogleSignUp = () => {};
 
   const validationSchema = Yup.object({
     firstName: Yup.string()
@@ -117,7 +124,7 @@ function SignUp1({ activeModal, setactiveModal }) {
               </div>
 
               <div className="btn-holder">
-                <GoogleBtn />
+                <GoogleBtn handleClick={handleGoogleSignUp} />
                 <Button mt="mt-2" disabled={!(isValid && dirty)}>
                   Continue
                 </Button>
@@ -133,37 +140,37 @@ function SignUp1({ activeModal, setactiveModal }) {
           )}
         </Formik>
         {/* button */}
+        {showAlert && (
+          <CustomizedSnackbars
+            title="Account created Successfully"
+            text="Log in to start a discussion."
+            severity="success"
+            icon={
+              <BiCheckCircle
+                fontSize="30px"
+                color="#04BE00"
+                severity="success"
+              />
+            }
+          />
+        )}
+
+        {errorAlert && (
+          <CustomizedSnackbars
+            title="Error Creating Account"
+            text="Please try again"
+            severity="error"
+            icon={
+              <BiErrorCircle
+                fontSize="30px"
+                color=" #E84949"
+                severity="error"
+              />
+            }
+          />
+        )}
       </div>
     </SignInCont>
   );
 }
 export default SignUp1;
-
-// const validationSchema = Yup.object().shape({
-//   username: Yup.string().test('checkDuplUsername', 'same name exists', function (value) {
-//     if (!value) {
-//       const isDuplicateExists = await checkDuplicate(value);
-//       console.log("isDuplicateExists = ", isDuplicateExists);
-//       return !isDuplicateExists;
-//     }
-//     // WHEN THE VALUE IS EMPTY RETURN `true` by default
-//     return true;
-//   }),
-// });
-
-// function checkDuplicate(valueToCheck) {
-//   return new Promise(async (resolve, reject) => {
-//     let isDuplicateExists;
-
-//     // EXECUTE THE API CALL TO CHECK FOR DUPLICATE VALUE
-//     api.post('url', valueToCheck)
-//     .then((valueFromAPIResponse) => {
-//       isDuplicateExists = valueFromAPIResponse; // boolean: true or false
-//       resolve(isDuplicateExists);
-//     })
-//     .catch(() => {
-//       isDuplicateExists = false;
-//       resolve(isDuplicateExists);
-//     })
-//   });
-// }
