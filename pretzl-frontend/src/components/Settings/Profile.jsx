@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FiAward, FiLogOut } from "react-icons/fi";
+import {FiLogOut } from "react-icons/fi";
 import img from "../../Exports/Avatar.svg";
 import "../../Styling/settings/profile.css";
 import "../../Styling/Contact.css";
 import { useDispatch } from "react-redux";
-import { editDetails } from "../../redux/User/userSlice";
+import { editDetails,logOutUser } from "../../redux/User/userSlice";
 function Profile({ handleClick }) {
   const dispatch = useDispatch();
   const [username, setusername] = useState("patrick");
@@ -139,7 +139,7 @@ function Profile({ handleClick }) {
           </div>
         </div>
 
-        <button className="logoutBtn">
+        <button className="logoutBtn" onClick={()=>dispatch(logOutUser())}>
           <FiLogOut className="logIcon" />
           Sign Out
         </button>

@@ -6,29 +6,33 @@ import close from "../../Exports/cancelImg.svg";
 import CreateBox from "./CreateBox";
 import { createDisc } from "../../redux/Discussion/disSlice";
 import store from "../../redux/store";
+import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
+import CustomizedSnackbars from "../NotiPopUp";
 function CreateNewDis({ handleClick, showMenu }) {
   const dispatch = useDispatch();
 
-  const [allDisc, setAllDisc] = useState([]);
-  const [type, setType] = useState("dis");
+  const [allDisc, setAllDisc] = useState([
+    {
+      description: "",
+      set_id: "",
+    },
+  ]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
+
   const [setTitle, setsetTitle] = useState(false);
-  // CREATE DISCUSSION MODAL
-  // FIX ANIMATION
-  // A++RRAY TO HOLD DISCUSSION
-  //data to pass
-  //if length is greater than 1 ,change type to set
 
   const handleplusClick = async () => {
     const data = {
-      title: "",
+      description: "",
+      set_id: "",
     };
-    await dispatch(createDisc(data));
-    let top = store.getState().disc.newDiscusssion;
-    console.log(top);
-    setAllDisc(top);
+    setAllDisc([...allDisc, data]);
   };
-  const handleDelete = (id) => {
-    console.log(id);
+
+  const handleDelete = (description) => {
+    const items = allDisc.filter((item) => item.description !== description);
+    setAllDisc(items);
   };
 
   useEffect(() => {
@@ -40,6 +44,46 @@ function CreateNewDis({ handleClick, showMenu }) {
     fetchData();
   }, []);
 
+  const handleEdit = (id) => (e) => {
+    let newArray = [...allDisc];
+    newArray[id].description = e.target.value;
+    // newArray[id].set_id = id;
+
+    setAllDisc(newArray);
+  };
+  const handleCreate = async () => {
+    // {
+    //   alert(JSON.stringify(allDisc, null, 2));
+    // }
+
+    const currentUsername = localStorage.getItem("username");
+
+    const payload = {
+      username: `${currentUsername}`,
+      discussions: allDisc,
+    };
+
+    console.log(payload);
+    await dispatch(createDisc(payload));
+    const currentStore = store.getState();
+
+    const createdState = currentStore.disc.createState;
+    console.log(createdState);
+    let reset = [
+      {
+        description: "",
+        set_id: "",
+      },
+    ];
+
+    if (createdState) {
+      setShowAlert(true);
+      setAllDisc(reset);
+    } else {
+      setErrorAlert(true);
+    }
+  };
+
   return (
     <div className="createNewDis">
       <div className="closeCont" onClick={handleClick}>
@@ -47,7 +91,7 @@ function CreateNewDis({ handleClick, showMenu }) {
         <h2>Close</h2>
       </div>
       <div className=" createCont ">
-        {allDisc.length > 0 && (
+        {allDisc.length > 1 && (
           <input
             type="text"
             className="setTitleBox"
@@ -55,46 +99,69 @@ function CreateNewDis({ handleClick, showMenu }) {
           />
         )}
         <div className="allBoxes" id="allBoxes">
-          <div className="lastBox">
-            <CreateBox id={0} handleDelete={handleDelete} />
-            <div
-              className={`actionsCont ${
-                allDisc.length > 0 ? "hidden" : "flex"
-              }`}
-            >
-              <FiPlus className="addBtn" onClick={handleplusClick} />
-              <button className="creBtn">Create</button>
-            </div>
-          </div>
-
           {allDisc.map((di, index, { length }) => {
             if (index + 1 === length) {
               return (
                 <div className="lastBox">
-                  <CreateBox id={index} handleDelete={handleDelete} />
+                  <CreateBox
+                    id={index}
+                    key={index}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                    val={di.description}
+                  />
                   <div className="actionsCont flex ">
-                    <FiPlus className="addBtn " onClick={handleplusClick} />
-                    <button className="creBtn">Create</button>
+                    <FiPlus className="addBtn" onClick={handleplusClick} />
+                    <button className="creBtn" onClick={handleCreate}>
+                      Create
+                    </button>
                   </div>
                 </div>
               );
             } else {
-              return <CreateBox id={index} handleDelete={handleDelete} />;
+              return (
+                <CreateBox
+                  id={index}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                  val={di.description}
+                />
+              );
             }
           })}
         </div>
+        {showAlert && (
+          <CustomizedSnackbars
+            title="Discussion created Successfully"
+            text=""
+            severity="success"
+            icon={
+              <BiCheckCircle
+                fontSize="30px"
+                color="#04BE00"
+                severity="success"
+              />
+            }
+          />
+        )}
+
+        {errorAlert && (
+          <CustomizedSnackbars
+            title="Error Creating Discussion"
+            text="Please try again"
+            severity="error"
+            icon={
+              <BiErrorCircle
+                fontSize="30px"
+                color=" #E84949"
+                severity="error"
+              />
+            }
+          />
+        )}
       </div>
     </div>
   );
 }
 
 export default CreateNewDis;
-
-{
-  /* <CreateBox id={2} handleDelete={handleDelete} />
-<CreateBox id={3} handleDelete={handleDelete} />
-<CreateBox id={4} handleDelete={handleDelete} /> 
- <CreateBox id={5} handleDelete={handleDelete} />
-
-*/
-}

@@ -6,6 +6,7 @@ const initialState = {
   user: {
     firstName: null,
     lastName: null,
+    userName: "",
   },
   isLoggedIn: false,
   signedState: false,
@@ -30,7 +31,12 @@ const userSlice = createSlice({
       console.log("new state is" + state.navSize);
     },
     setLoggedInUser: (state, { payload }) => {
+      console.log(payload);
       state.isLoggedIn = true;
+      state.user.userName = payload;
+    },
+    setLoggedOutUser: (state, { payload }) => {
+     return initialState
     },
   },
 });
@@ -56,7 +62,9 @@ export const signUpUser = createAsyncThunk(
       console.log(res.data);
       console.log(res.data.message);
       // alert("successful");
-      history.push("./discussions")
+      setTimeout(() => {
+        history.push("./log-in");
+      }, 2000);
     } catch (error) {
       console.log({ ...error });
       // alert("failure");
@@ -89,7 +97,10 @@ export const logInUser = createAsyncThunk(
       const token = res.data.accessToken;
       localStorage.setItem("jwtToken", token);
       setAuthToken(token);
-      dispatch(setLoggedInUser());
+      const username = res.data.username;
+      localStorage.setItem("username", username);
+      dispatch(setLoggedInUser(username));
+
       // dispatch(setCurrentUser(data))
       history.push("./discussions");
     } catch (error) {
@@ -122,12 +133,19 @@ export const editDetails = createAsyncThunk(
     }
   }
 );
-
+export const logOutUser = () => (dispatch) => {
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("username");
+  setAuthToken("");
+  dispatch(setLoggedOutUser());
+  history.push('/')
+};
 export const {
   setCurrentUser,
   setSignedTrue,
   setCurrentNavSize,
   setLoggedInUser,
+  setLoggedOutUser,
 
   // setSignedFalse,
 } = userSlice.actions;

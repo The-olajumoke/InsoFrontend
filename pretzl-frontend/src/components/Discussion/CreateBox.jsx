@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { MdOutlineModeEdit, MdDelete } from "react-icons/md";
-
-function CreateBox({ id, handleDelete }) {
-  const [value, setvalue] = useState();
+import img from "../../Exports/createDiscDel.svg";
+import img2 from "../../Exports/createDiscEdit.svg";
+function CreateBox({ id, val, handleDelete, handleEdit }) {
+  // const [value, setvalue] = useState();
   return (
     <div className="newBox " id={id}>
       <div className="newBox-header">
@@ -10,20 +11,45 @@ function CreateBox({ id, handleDelete }) {
           Open discussion
         </button>
         <div className="newBox-icons">
-          <MdDelete id={id} className="new-icon " onClick={handleDelete(id)} />
-          <MdOutlineModeEdit className="new-icon" />
+          {/* <MdDelete id={id} className="new-icon" /> */}
+          <img
+            src={img}
+            id={id}
+            alt=""
+            className="new-icon"
+            onClick={(e) => handleDelete(val)}
+          />
+          <img src={img2} id={id} alt="" className="new-icon" />
         </div>
       </div>
       <textarea
         className=" newBox-textarea "
         name=""
         id=""
-        onChange={(e) => setvalue(e.target.value)}
+        value={val}
+        onChange={handleEdit(id)}
         maxLength={50}
         placeholder="Input discussion title"
-      ></textarea>
+      >
+        {val}
+      </textarea>
     </div>
   );
 }
 
 export default CreateBox;
+
+// Payload:
+// {
+//     "username":"Bhaskar.Sadineni",
+//     "discussions":[
+//         {
+//           "description":"discussion1",
+//           "set_id":"efweh3232"
+//         },
+//         {
+//           "description":"discussion2",
+//           "set_id":"efweh3232"
+//         }
+//     ]
+// }

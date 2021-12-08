@@ -22,8 +22,6 @@ function Discussion() {
     setShowMenu(!showMenu);
     dispatch(endDisc());
   };
-  // const DiscussionCont = [];
-  // FROM DUMMY DATA
   const DiscussionCont = allDiscData;
 
   return (

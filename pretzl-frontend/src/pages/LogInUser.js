@@ -94,10 +94,10 @@ function LogInUser({ activeModal, setactiveModal }) {
                 </div>
 
                 <div className="btn-holder">
-                  <GoogleBtn />
                   <Button mt="mt-16" disabled={!(isValid && dirty)}>
                     Log In
                   </Button>
+                  <GoogleBtn />
 
                   <div className="account-text ">
                     <h3 className="">If you don't have an account, </h3>

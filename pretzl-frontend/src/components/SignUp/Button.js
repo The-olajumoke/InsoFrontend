@@ -15,7 +15,7 @@ const Button = ({ children, ...props }) => {
     >
       {children}
 
-      <FiArrowRight className="mx-3 h-6 w-6 justify-center items-center" />
+      {/* <FiArrowRight className="mx-3 h-6 w-6 justify-center items-center" /> */}
     </button>
   );
 };

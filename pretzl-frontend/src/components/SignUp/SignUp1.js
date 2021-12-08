@@ -25,6 +25,7 @@ function SignUp1({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  
   const handleSubmit = async (values, { resetForm }) => {
     const newUser = {
       firstName: values.firstName,
@@ -124,10 +125,10 @@ function SignUp1({ activeModal, setactiveModal }) {
               </div>
 
               <div className="btn-holder">
-                <GoogleBtn handleClick={handleGoogleSignUp} />
                 <Button mt="mt-2" disabled={!(isValid && dirty)}>
-                  Continue
+                  Sign up
                 </Button>
+                <GoogleBtn handleClick={handleGoogleSignUp} />
 
                 <div className=" account-text">
                   <h3 className="">Already have an account?</h3>
