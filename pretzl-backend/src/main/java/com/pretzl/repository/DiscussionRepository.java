@@ -35,6 +35,8 @@ public interface DiscussionRepository extends JpaRepository<Discussion, Long> {
     @Query(value = "select username as username,description as description,date as date FROM discussions where set_id in (SELECT id FROM discussions where username = :username and action_type='S') and action_type='D' ", nativeQuery = true)
     List<IDiscussions> getUserDiscussions(@Param("username") String username);
 
+    @Query(value = "select username as username,description as description,date as date FROM discussions where  username = :username  and action_type='D' ", nativeQuery = true)
+    List<IDiscussions> getUserDiscussionsByUserName(@Param("username") String username);
 
     @Query(value="select username as username,description as description,date as date FROM discussions where id in (SELECT id FROM discussions where username = :username and action_type='D') and username != :username and action_type='P'", nativeQuery = true)
     List<IDiscussions> getDiscussionPostDetails(@Param("username") String username);

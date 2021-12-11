@@ -167,7 +167,8 @@ public class AuthController {
 
     @GetMapping("/discussion/discussions")
     public ResponseEntity<List<IDiscussions>> getUserDiscussions(@RequestParam String username) {
-        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
+//        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
+        return ResponseEntity.ok(discussionRepository.getUserDiscussionsByUserName(username));
     }
 
     @GetMapping("/discussion/post/details")

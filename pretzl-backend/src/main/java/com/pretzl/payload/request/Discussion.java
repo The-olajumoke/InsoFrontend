@@ -19,7 +19,7 @@ public class Discussion {
     public void setSet_id(String set_id) {
         this.set_id = set_id;
     }
-
+    
     private String set_id;
 
 }
