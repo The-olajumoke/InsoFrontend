@@ -15,15 +15,44 @@ import DiscSet from "../components/Discussion/DiscSetTemp";
 import { getAllCount } from "../redux/Analytics/analyticsSlice";
 import { useDispatch } from "react-redux";
 import { endDisc } from "../redux/Discussion/disSlice";
+import axios from "axios";
 function Discussion() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const [DiscussionCont, setDiscussionCont] = useState([]);
   const handleClick = (e) => {
     setShowMenu(!showMenu);
     dispatch(endDisc());
   };
-  const DiscussionCont = allDiscData;
+  // const DiscussionCont = allDiscData;
 
+  const getTotalDiscussions = async () => {
+    const currentUsername = localStorage.getItem("username");
+
+    var apiBaseUrl = `http://localhost:8080/api/auth/discussion/discussions?username=${currentUsername}`;
+
+    axios.defaults.headers.get["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.get["Access-Control-Allow-Methods"] = "GET";
+    try {
+      const res = await axios.get(apiBaseUrl);
+      const data = res.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log({ ...error });
+      return DiscussionCont;
+    }
+  };
+
+  useEffect(() => {
+    const fetchDiscussions = async () => {
+      const discussions = await getTotalDiscussions();
+      setDiscussionCont(discussions);
+    };
+    fetchDiscussions();
+  }, []);
   return (
     <BodyWrapper>
       {showMenu && (
@@ -31,7 +60,7 @@ function Discussion() {
       )}
       <ResponsiveTop title="Discussion Title" />
       <div className="disMain ">
-        <div className="disCont ">
+        <div className="disCont">
           <div className="discBtnCont">
             <button className="discBtn" onClick={handleClick}>
               <FiPlus className="icn" />
@@ -65,21 +94,23 @@ function Discussion() {
               name="Patrick Dempsey"
             />
             {/* DISCUSSION */}
-            {DiscussionCont.length < 1 ? (
-              <NoMessageYet message="It’s lonely in here. Create a new discussion" />
-            ) : (
+            {
+              // DiscussionCont.length < 1 ? (
+              //   <NoMessageYet message="It’s lonely in here. Create a new discussion" />
+              // ) : (
               DiscussionCont.map((dis, index) => (
                 <DiscussionBox
                   key={index}
                   id={index}
-                  title={dis.title}
+                  title={dis.description}
                   date={dis.date}
                   numberOfPeople={dis.numberOfPeople}
-                  name={dis.name}
+                  name={dis.username}
                   code={dis.code}
                 />
               ))
-            )}
+              // )
+            }
           </div>
         </div>
       </div>

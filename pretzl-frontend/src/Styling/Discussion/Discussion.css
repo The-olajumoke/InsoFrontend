@@ -9,6 +9,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 .discBtnCont {
   width: 100%;
@@ -62,10 +64,11 @@
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
-  align-items: center;
-  position: relative;
+  /* align-items: center; */
+  /* position: relative; */
   column-gap: 20px;
   row-gap: 20px;
+  height: 100%;
 }
 .allDisCont::-webkit-scrollbar {
   display: none;
@@ -82,7 +85,7 @@
   justify-content: center;
   text-align: center;
   color: #939393;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   bottom: 0;
   left: 0;

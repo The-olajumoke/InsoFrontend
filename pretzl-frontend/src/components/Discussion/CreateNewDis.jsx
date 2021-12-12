@@ -20,7 +20,7 @@ function CreateNewDis({ handleClick, showMenu }) {
   const [showAlert, setShowAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 
-  const [setTitle, setsetTitle] = useState(false);
+  const [setTitle, setSetTitle] = useState(false);
 
   const handleplusClick = async () => {
     const data = {
@@ -95,9 +95,11 @@ function CreateNewDis({ handleClick, showMenu }) {
           <input
             type="text"
             className="setTitleBox"
+            onChange={(e)=>setSetTitle(e.target.value)}
             placeholder="Input discussion set title"
           />
-        )}
+          )}
+          {setTitle}
         <div className="allBoxes" id="allBoxes">
           {allDisc.map((di, index, { length }) => {
             if (index + 1 === length) {

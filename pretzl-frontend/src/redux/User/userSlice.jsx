@@ -71,11 +71,9 @@ export const signUpUser = createAsyncThunk(
     }
   }
 );
-
 export const setNavSize = (size) => (dispatch) => {
   dispatch(setCurrentNavSize(size));
 };
-
 // LOGIN USER
 export const logInUser = createAsyncThunk(
   "user/logInUser",

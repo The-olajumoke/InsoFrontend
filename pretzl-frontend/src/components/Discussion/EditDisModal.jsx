@@ -7,7 +7,7 @@ import {
   MdArrowUpward,
   MdBarChart,
 } from "react-icons/md";
-import {BiSmile} from "react-icons/bi"
+import { BiSmile } from "react-icons/bi";
 import "../../Styling/Discussion/EditDis.css";
 import textFormat from "../../Exports/comment/text_format.svg";
 import attFile from "../../Exports/comment/attach_file.svg";
@@ -18,7 +18,7 @@ import smile from "../../Exports/comment/sentiment_satisfied_alt.svg";
 import cameraAlt from "../../Exports/comment/camera_alt.svg";
 import addCircle from "../../Exports/add_circle.svg";
 import clear from "../../Exports/clear.svg";
-import { BsClock,BsChatLeft } from "react-icons/bs";
+import { BsClock, BsChatLeft } from "react-icons/bs";
 function EditDisModal({ discussions, showEditModal }) {
   const [starterPrompt, setstarterPrompt] = useState(false);
   const [postInsp, setPostInsp] = useState(false);
@@ -26,16 +26,17 @@ function EditDisModal({ discussions, showEditModal }) {
   const [scores, setscores] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [automatic, setautomatic] = useState(true);
+  const [applyAll,setApplyAll] = useState('');
+
   console.log(discussions);
 
   //   HANDLE CHECKED
   const handleChecked = (e) => {
     //   alert(e.target.checked)
+    setApplyAll(true)
+  };
 
- };
-
-
-//  ARRAY FOR KNOWING WHO IS MARKED[]
+  //  ARRAY FOR KNOWING WHO IS MARKED[]
   return (
     <div className="editModal">
       <div className="EditDiscont">
@@ -137,9 +138,9 @@ function EditDisModal({ discussions, showEditModal }) {
               {postInsp && (
                 <div className="postInspMore">
                   <div className="allPostBtn">
-                    <button className="postInspBtn">Posting</button>
-                    <button className="postInspBtn">Responding</button>
-                    <button className="postInspBtn">Synthesizing</button>
+                    <button className="postInspBtn">Questions</button>
+                    <button className="postInspBtn">Resources</button>
+                    <button className="postInspBtn">Synthesis</button>
                   </div>
                   <input
                     type="text"
@@ -370,3 +371,14 @@ function EditDisModal({ discussions, showEditModal }) {
 }
 
 export default EditDisModal;
+
+
+
+
+
+
+
+
+
+
+
