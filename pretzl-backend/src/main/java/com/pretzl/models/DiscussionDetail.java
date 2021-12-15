@@ -40,16 +40,13 @@ public class DiscussionDetail {
 
     private String type;
 
-    private int starter_prompt;
+    private String starter_prompt;
 
     @Column(columnDefinition = "character varying[]")
     @Type(type = "com.pretzl.models.PostgreSqlStringArrayType")
     private String[] post_inspiration;
 
-
-    @Column(columnDefinition = "character varying[]")
-    @Type(type = "com.pretzl.models.PostgreSqlStringArrayType")
-    private String[] post_as;
+    private String post_as;
 
     private int score;
 

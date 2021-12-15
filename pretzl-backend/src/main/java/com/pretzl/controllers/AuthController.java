@@ -225,30 +225,23 @@ public class AuthController {
     }
 
     @PostMapping("/edit/discussions")
-    public ResponseEntity<?> editDiscussions(@Valid @RequestBody EditDiscussionRequest editDiscussionRequest) {
-        Score score = editDiscussionRequest.getScores();
+    public ResponseEntity<List<DiscussionDetail>> editDiscussions(@Valid @RequestBody UpdateDiscussionsRequest updateDiscussionsRequest) {
+        String set_id = updateDiscussionsRequest.getSet_id();
+        List<DiscussionDetail> discussionDetails = new ArrayList<>();
+        updateDiscussionsRequest.getUpdateDiscussions().forEach(updateDiscussion -> {
+                    discussionDetails.addAll(updateDiscussion.getScores().getActions().stream()
+                            .map(actions -> updateDiscussion.getDiscussionDetail(set_id, actions))
+                            .collect(Collectors.toList()));
+                    updateDiscussion.getPostAs().forEach(postAs -> discussionDetails.add(updateDiscussion.getDiscussionDetailPostAs(set_id,postAs)));
+                }
 
+        );
 
-        List<DiscussionDetail> discussionDetails = score.getActions().stream()
-                .map(actions -> {
-                    DiscussionDetail discussionDetail = new DiscussionDetail();
-                    discussionDetail.setDiscussion_id(editDiscussionRequest.getDiscussion_id());
-                    discussionDetail.setSet_id(editDiscussionRequest.getSet_id());
-                    discussionDetail.setStart_date(editDiscussionRequest.getStartDate());
-                    discussionDetail.setClose_date(editDiscussionRequest.getCloseDate());
-                    discussionDetail.setPost_as(editDiscussionRequest.getPostAs().toArray(new String[0]));
-                    discussionDetail.setPost_inspiration(editDiscussionRequest.getPostInspirations().stream().map(PostInspiration::getType).toArray(String[]::new));
-                    discussionDetail.setTotal_score(editDiscussionRequest.getScores().getTotalScore());
-
-                    discussionDetail.setScore(actions.getScore());
-                    discussionDetail.setCriteria(actions.getCriteria().toArray(new String[0]));
-                    discussionDetail.setType(actions.getType());
-                    return discussionDetail;
-                }).collect(Collectors.toList());
         List<DiscussionDetail> discussionDetails1 = discussionDetailsRepository.saveAll(discussionDetails);
         discussionDetails1.forEach(discussionDetail1 -> System.out.println("Successfully updated for :" + discussionDetail1.getType() + " " + discussionDetail1.getScore()));
         return ResponseEntity
                 .ok()
-                .body(new MessageResponse("Discussions are updated successfully"));
+                .body(discussionDetails1);
     }
+
 }
