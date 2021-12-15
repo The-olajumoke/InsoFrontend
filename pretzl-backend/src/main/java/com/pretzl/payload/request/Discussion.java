@@ -12,14 +12,14 @@ public class Discussion {
         this.description = description;
     }
 
-    public String getSet_id() {
-        return set_id;
+    public String getSetDescription() {
+        return setDescription;
     }
 
-    public void setSet_id(String set_id) {
-        this.set_id = set_id;
+    public void setSetDescription(String set_id) {
+        this.setDescription = set_id;
     }
     
-    private String set_id;
+    private String setDescription;
 
 }

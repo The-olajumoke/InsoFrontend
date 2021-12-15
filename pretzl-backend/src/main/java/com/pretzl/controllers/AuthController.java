@@ -1,11 +1,11 @@
 package com.pretzl.controllers;
 
+import com.pretzl.models.Discussion;
 import com.pretzl.models.*;
-import com.pretzl.payload.request.DiscussionsRequest;
-import com.pretzl.payload.request.LoginRequest;
-import com.pretzl.payload.request.SignupRequest;
+import com.pretzl.payload.request.*;
 import com.pretzl.payload.response.JwtResponse;
 import com.pretzl.payload.response.MessageResponse;
+import com.pretzl.repository.DiscussionDetailsRepository;
 import com.pretzl.repository.DiscussionRepository;
 import com.pretzl.repository.RoleRepository;
 import com.pretzl.repository.UserRepository;
@@ -41,6 +41,9 @@ public class AuthController {
 
     @Autowired
     DiscussionRepository discussionRepository;
+
+    @Autowired
+    DiscussionDetailsRepository discussionDetailsRepository;
 
     @Autowired
     PasswordEncoder encoder;
@@ -190,21 +193,18 @@ public class AuthController {
     }
 
     @PostMapping("/create/discussions")
-    public ResponseEntity<?>createDiscussions(@Valid @RequestBody DiscussionsRequest discussionsRequest){
-        Map<String, List<com.pretzl.payload.request.Discussion>> discMap = discussionsRequest.getDiscussions().stream().collect(Collectors.groupingBy(com.pretzl.payload.request.Discussion::getSet_id));
-        discMap.forEach((set_id, discussions) ->{
-            if(null == set_id || set_id.isEmpty()){
-                set_id = Math.random()+"";
-            }
-            String finalSet_id = set_id;
+    public ResponseEntity<?> createDiscussions(@Valid @RequestBody DiscussionsRequest discussionsRequest) {
+        Map<String, List<com.pretzl.payload.request.Discussion>> discMap = discussionsRequest.getDiscussions().stream().collect(Collectors.groupingBy(com.pretzl.payload.request.Discussion::getSetDescription));
+        discMap.forEach((setDescription, discussions) -> {
+            String finalSet_id = UUID.randomUUID().toString();
             Discussion discSetModel = new Discussion();
             discSetModel.setDate(LocalDate.now().toString());
-            discSetModel.setDescription(set_id);
+            discSetModel.setDescription(setDescription);
             discSetModel.setUsername(discussionsRequest.getUsername());
             discSetModel.setSet_id(finalSet_id);
             discSetModel.setAction_type("S");
 
-            discSetModel.setNumber((int)(Math.random()*(1L-10+1)+10));
+            discSetModel.setNumber((int) (Math.random() * (1L - 10 + 1) + 10));
             discussionRepository.save(discSetModel);
 
             discussions.forEach(discussion -> {
@@ -214,13 +214,41 @@ public class AuthController {
                 discModel.setUsername(discussionsRequest.getUsername());
                 discModel.setSet_id(finalSet_id);
                 discModel.setAction_type("D");
-                discModel.setNumber((int)(Math.random()*(1L-11+1)+11));
+                discModel.setNumber((int) (Math.random() * (1L - 11 + 1) + 11));
                 discussionRepository.save(discModel);
             });
-        } );
+        });
 
         return ResponseEntity
                 .ok()
                 .body(new MessageResponse("Discussions are created successfully"));
+    }
+
+    @PostMapping("/edit/discussions")
+    public ResponseEntity<?> editDiscussions(@Valid @RequestBody EditDiscussionRequest editDiscussionRequest) {
+        Score score = editDiscussionRequest.getScores();
+
+
+        List<DiscussionDetail> discussionDetails = score.getActions().stream()
+                .map(actions -> {
+                    DiscussionDetail discussionDetail = new DiscussionDetail();
+                    discussionDetail.setDiscussion_id(editDiscussionRequest.getDiscussion_id());
+                    discussionDetail.setSet_id(editDiscussionRequest.getSet_id());
+                    discussionDetail.setStart_date(editDiscussionRequest.getStartDate());
+                    discussionDetail.setClose_date(editDiscussionRequest.getCloseDate());
+                    discussionDetail.setPost_as(editDiscussionRequest.getPostAs().toArray(new String[0]));
+                    discussionDetail.setPost_inspiration(editDiscussionRequest.getPostInspirations().stream().map(PostInspiration::getType).toArray(String[]::new));
+                    discussionDetail.setTotal_score(editDiscussionRequest.getScores().getTotalScore());
+
+                    discussionDetail.setScore(actions.getScore());
+                    discussionDetail.setCriteria(actions.getCriteria().toArray(new String[0]));
+                    discussionDetail.setType(actions.getType());
+                    return discussionDetail;
+                }).collect(Collectors.toList());
+        List<DiscussionDetail> discussionDetails1 = discussionDetailsRepository.saveAll(discussionDetails);
+        discussionDetails1.forEach(discussionDetail1 -> System.out.println("Successfully updated for :" + discussionDetail1.getType() + " " + discussionDetail1.getScore()));
+        return ResponseEntity
+                .ok()
+                .body(new MessageResponse("Discussions are updated successfully"));
     }
 }
