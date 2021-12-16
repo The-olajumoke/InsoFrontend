@@ -1,3 +1,7 @@
+.unactive {
+  opacity: 0.4 !important;
+}
+
 .editModal {
   background: rgb(240, 240, 240, 0.7);
   /* background-color: rebeccapurple; */
@@ -124,7 +128,6 @@ hr {
   justify-content: space-between;
   margin-bottom: 5px;
   padding: 0 40px;
-
 }
 .settingsName {
   font-style: normal;
@@ -147,9 +150,8 @@ hr {
   font-size: 20px;
   margin-left: 45px;
 }
-.settingsMore{
+.settingsMore {
   padding: 0 40px;
-
 }
 .settingsBox {
   border: 1px solid #bdbdbd;
@@ -158,8 +160,8 @@ hr {
   font-size: 18px;
   line-height: 27px;
 }
-.settingsWidget{
-    column-gap: 15px;
+.settingsWidget {
+  column-gap: 15px;
 }
 
 /*/ /////////// POST INSPIRATIONS */

@@ -22,24 +22,30 @@ import { BsClock, BsChatLeft } from "react-icons/bs";
 function EditDisModal({ discussions, showEditModal }) {
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   // STARTER PROMPT
+
   const [starterPrompt, setstarterPrompt] = useState(false);
+  const [starterPromptMode, setstarterPromptMode] = useState(false);
   const [starterPromptValue, setstarterPromptValue] = useState("");
   // POST INSPIRATION
   const [postInsp, setPostInsp] = useState(false);
+  const [postInspMode, setPostInspMode] = useState(false);
   const [posting, setPosting] = useState(true);
   const [responding, setResponding] = useState(false);
   const [synthesizing, setSynthesizing] = useState(false);
 
   // POST AS
   const [postAs, setpostAs] = useState(false);
+  const [postAsMode, setpostAsMode] = useState(false);
   // SCORES
   const [scores, setscores] = useState(false);
+  const [scoresMode, setScoresMode] = useState(false);
   const [scoresValue, setScoresValue] = useState(20);
   const [reactionsValue, setReactionsValue] = useState(20);
   const [upvoteValue, setUpvoteValue] = useState(20);
   const [totalValue, setTotalValue] = useState(60);
-
-  const [calendar, setCalendar] = useState(false);
+  // CALENDAR
+  const [calendar, setCalendar] = useState(true);
+  const [calendarMode, setCalendarMode] = useState(false);
   const [automatic, setautomatic] = useState(true);
   const [applyAll, setApplyAll] = useState("");
 
@@ -52,7 +58,44 @@ function EditDisModal({ discussions, showEditModal }) {
   };
 
   const saveEdit = () => {
-    // const payload
+    const payload = {
+      set_id: "m876",
+      updateDiscussions: [
+        {
+          discussion_id: "discussion1",
+          starterPrompt: `${starterPromptValue}`,
+          postInspirations: [
+            {
+              type: "posting",
+            },
+          ],
+          postAs: ["lorem", "1234"],
+          scores: {
+            type: "score",
+            actions: [
+              {
+                type: "Scores",
+                score: { scoresValue },
+                criteria: ["comments1"],
+              },
+              {
+                type: "Reactions",
+                score: { reactionsValue },
+                criteria: ["comments2"],
+              },
+              {
+                type: "Upvotes",
+                score: { upvoteValue },
+                criteria: ["comments3"],
+              },
+            ],
+            totalScore: { totalValue },
+          },
+          startDate: "2021-12-15",
+          closeDate: "2021-12-16",
+        },
+      ],
+    };
   };
 
   //  ARRAY FOR KNOWING WHO IS MARKED[]
@@ -96,7 +139,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="starterPrompt"
                       id="starterPrompt"
-                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                      onChange={(e) => setstarterPromptMode(!starterPromptMode)}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -115,10 +158,15 @@ function EditDisModal({ discussions, showEditModal }) {
               </div>
               {starterPrompt && (
                 <div className="settingsMore">
-                  <div className="commentBox settingsBox">
+                  <div
+                    className={`commentBox settingsBox ${
+                      starterPromptMode ? "" : "unactive"
+                    }`}
+                  >
                     <textarea
                       className="textA"
                       name=""
+                      readOnly={!starterPromptMode}
                       placeholder="Get this discussion started"
                       onChange={(e) => setstarterPromptValue(e.target.value)}
                     ></textarea>
@@ -148,7 +196,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="reports"
                       id="postInspiration"
-                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                      onChange={(e) => setPostInspMode(!postInspMode)}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -166,7 +214,9 @@ function EditDisModal({ discussions, showEditModal }) {
                 </div>
               </div>
               {postInsp && (
-                <div className="postInspMore">
+                <div
+                  className={`postInspMore ${postInspMode ? "" : "unactive"}`}
+                >
                   <div className="allPostBtn">
                     <button
                       className={`postInspBtn ${posting && "bg-primary"} 
@@ -227,7 +277,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="reports"
                       id="postAs"
-                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                      onChange={(e) => setpostAsMode(!postAsMode)}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -245,7 +295,7 @@ function EditDisModal({ discussions, showEditModal }) {
                 </div>
               </div>
               {postAs && (
-                <div className="postInspMore">
+                <div className={`postInspMore ${postAsMode ? "" : "unactive"}`}>
                   <div className="allPostBtn allPostAsBtn">
                     <button className="postAsBtn">lorem</button>
                     <button className="postAsBtn">lorem</button>
@@ -268,7 +318,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="reports"
                       id="scores"
-                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                      onChange={(e) => setScoresMode(!scoresMode)}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -286,7 +336,7 @@ function EditDisModal({ discussions, showEditModal }) {
                 </div>
               </div>
               {scores && (
-                <div className="postInspMore">
+                <div className={`postInspMore ${scoresMode ? "" : "unactive"}`}>
                   <div className="allPostBtn">
                     <button
                       // style={{`${automatic?}`}}
@@ -430,7 +480,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="reports"
                       id="calendar"
-                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                      onChange={(e) => setCalendarMode(!calendarMode)}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -448,7 +498,9 @@ function EditDisModal({ discussions, showEditModal }) {
                 </div>
               </div>
               {calendar && (
-                <div className="postInspMore">
+                <div
+                  className={`postInspMore ${calendarMode ? "" : "unactive"}`}
+                >
                   <div className="calItem">
                     <h4 className="limit">open</h4>
                     <div className="calendarOption">
