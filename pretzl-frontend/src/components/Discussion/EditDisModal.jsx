@@ -20,20 +20,39 @@ import addCircle from "../../Exports/add_circle.svg";
 import clear from "../../Exports/clear.svg";
 import { BsClock, BsChatLeft } from "react-icons/bs";
 function EditDisModal({ discussions, showEditModal }) {
+  const [allCheckedIDs, setallCheckedIDs] = useState([]);
+  // STARTER PROMPT
   const [starterPrompt, setstarterPrompt] = useState(false);
+  const [starterPromptValue, setstarterPromptValue] = useState("");
+  // POST INSPIRATION
   const [postInsp, setPostInsp] = useState(false);
+  const [posting, setPosting] = useState(true);
+  const [responding, setResponding] = useState(false);
+  const [synthesizing, setSynthesizing] = useState(false);
+
+  // POST AS
   const [postAs, setpostAs] = useState(false);
+  // SCORES
   const [scores, setscores] = useState(false);
+  const [scoresValue, setScoresValue] = useState(20);
+  const [reactionsValue, setReactionsValue] = useState(20);
+  const [upvoteValue, setUpvoteValue] = useState(20);
+  const [totalValue, setTotalValue] = useState(60);
+
   const [calendar, setCalendar] = useState(false);
   const [automatic, setautomatic] = useState(true);
-  const [applyAll,setApplyAll] = useState('');
+  const [applyAll, setApplyAll] = useState("");
 
   console.log(discussions);
 
   //   HANDLE CHECKED
   const handleChecked = (e) => {
     //   alert(e.target.checked)
-    setApplyAll(true)
+    setApplyAll(true);
+  };
+
+  const saveEdit = () => {
+    // const payload
   };
 
   //  ARRAY FOR KNOWING WHO IS MARKED[]
@@ -73,7 +92,12 @@ function EditDisModal({ discussions, showEditModal }) {
                 <h3 className="settingsName ">Starter prompt</h3>
                 <div className="settingsControl">
                   <label className="switch">
-                    <input type="checkbox" name="reports" id="" />
+                    <input
+                      type="checkbox"
+                      name="starterPrompt"
+                      id="starterPrompt"
+                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                    />
                     <span className="slider round"></span>
                   </label>
                   {starterPrompt ? (
@@ -96,6 +120,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       className="textA"
                       name=""
                       placeholder="Get this discussion started"
+                      onChange={(e) => setstarterPromptValue(e.target.value)}
                     ></textarea>
                     <div className="widgetCont">
                       <div className="widget settingsWidget">
@@ -119,7 +144,12 @@ function EditDisModal({ discussions, showEditModal }) {
                 <h3 className="settingsName ">Post Inspiration</h3>
                 <div className="settingsControl">
                   <label className="switch">
-                    <input type="checkbox" name="reports" id="" />
+                    <input
+                      type="checkbox"
+                      name="reports"
+                      id="postInspiration"
+                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                    />
                     <span className="slider round"></span>
                   </label>
                   {postInsp ? (
@@ -138,9 +168,39 @@ function EditDisModal({ discussions, showEditModal }) {
               {postInsp && (
                 <div className="postInspMore">
                   <div className="allPostBtn">
-                    <button className="postInspBtn">Questions</button>
-                    <button className="postInspBtn">Resources</button>
-                    <button className="postInspBtn">Synthesis</button>
+                    <button
+                      className={`postInspBtn ${posting && "bg-primary"} 
+                      ${posting ? "text-white" : "text-textBody"}`}
+                      onClick={() => {
+                        setPosting(true);
+                        setResponding(false);
+                        setSynthesizing(false);
+                      }}
+                    >
+                      Posting
+                    </button>
+                    <button
+                      className={`postInspBtn ${responding && "bg-primary"} 
+                      ${responding ? "text-white" : "text-textBody"}`}
+                      onClick={() => {
+                        setPosting(false);
+                        setResponding(true);
+                        setSynthesizing(false);
+                      }}
+                    >
+                      Responding
+                    </button>
+                    <button
+                      className={`postInspBtn ${synthesizing && "bg-primary"} 
+                      ${synthesizing ? "text-white" : "text-textBody"}`}
+                      onClick={() => {
+                        setPosting(false);
+                        setResponding(false);
+                        setSynthesizing(true);
+                      }}
+                    >
+                      Synthesizing
+                    </button>
                   </div>
                   <input
                     type="text"
@@ -163,7 +223,12 @@ function EditDisModal({ discussions, showEditModal }) {
                 <h3 className="settingsName ">Post as</h3>
                 <div className="settingsControl">
                   <label className="switch">
-                    <input type="checkbox" name="reports" id="" />
+                    <input
+                      type="checkbox"
+                      name="reports"
+                      id="postAs"
+                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                    />
                     <span className="slider round"></span>
                   </label>
                   {postAs ? (
@@ -199,7 +264,12 @@ function EditDisModal({ discussions, showEditModal }) {
                 <h3 className="settingsName ">Scores</h3>
                 <div className="settingsControl">
                   <label className="switch">
-                    <input type="checkbox" name="reports" id="" />
+                    <input
+                      type="checkbox"
+                      name="reports"
+                      id="scores"
+                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                    />
                     <span className="slider round"></span>
                   </label>
                   {scores ? (
@@ -221,13 +291,21 @@ function EditDisModal({ discussions, showEditModal }) {
                     <button
                       // style={{`${automatic?}`}}
 
-                      className="scoresBtn"
+                      className={`scoresBtn ${
+                        automatic ? "bg-primary" : "bg-scoresBtn"
+                      } 
+                      ${automatic ? "text-white" : "   text-textBody"}
+                      `}
                       onClick={() => setautomatic(true)}
                     >
                       Automatic
                     </button>
                     <button
-                      className="scoresBtn"
+                      className={`scoresBtn ${
+                        automatic ? "bg-scoresBtn" : "   bg-primary"
+                      } 
+                      ${automatic ? "text-textBody" : "text-white"}
+                      `}
                       onClick={() => setautomatic(false)}
                     >
                       Rubric
@@ -236,13 +314,20 @@ function EditDisModal({ discussions, showEditModal }) {
                   {/* Automatic & Rubric */}
                   {automatic ? (
                     <div className="autoOptions">
-                      <div className="options">
+                      <div className="options ">
                         <h3 className="optionsName">
                           <BsChatLeft className="optionsIcon" />
                           Scores
                         </h3>
                         <div className="settingsControl">
-                          <h4 className="optionScore">20</h4>
+                          <input
+                            className="optionScore"
+                            type="number"
+                            name=""
+                            id=""
+                            placeholder={scoresValue}
+                            onChange={(e) => setScoresValue(e.target.value)}
+                          />
 
                           <MdKeyboardArrowDown className="settingsIcon" />
                         </div>
@@ -253,7 +338,14 @@ function EditDisModal({ discussions, showEditModal }) {
                           Reactions
                         </h3>
                         <div className="settingsControl">
-                          <h4 className="optionScore">20</h4>
+                          <input
+                            className="optionScore"
+                            type="number"
+                            name=""
+                            id=""
+                            placeholder={reactionsValue}
+                            onChange={(e) => setReactionsValue(e.target.value)}
+                          />
 
                           <MdKeyboardArrowDown className="settingsIcon" />
                         </div>
@@ -264,7 +356,14 @@ function EditDisModal({ discussions, showEditModal }) {
                           Upvotes
                         </h3>
                         <div className="settingsControl">
-                          <h4 className="optionScore">20</h4>
+                          <input
+                            className="optionScore"
+                            type="number"
+                            name=""
+                            id=""
+                            placeholder={upvoteValue}
+                            onChange={(e) => setUpvoteValue(e.target.value)}
+                          />
 
                           <MdKeyboardArrowDown className="settingsIcon" />
                         </div>
@@ -275,7 +374,14 @@ function EditDisModal({ discussions, showEditModal }) {
                           Total Score
                         </h3>
                         <div className="settingsControl">
-                          <h4 className="optionScore">60</h4>
+                          <input
+                            className="optionScore"
+                            type="number"
+                            name=""
+                            id=""
+                            placeholder={totalValue}
+                            onChange={(e) => setTotalValue(e.target.value)}
+                          />
 
                           <MdKeyboardArrowDown className="settingsIcon opacity-0" />
                         </div>
@@ -320,7 +426,12 @@ function EditDisModal({ discussions, showEditModal }) {
                 <h3 className="settingsName ">Calendar</h3>
                 <div className="settingsControl">
                   <label className="switch">
-                    <input type="checkbox" name="reports" id="" />
+                    <input
+                      type="checkbox"
+                      name="reports"
+                      id="calendar"
+                      onChange={(e) => alert(`changed ${e.target.id}`)}
+                    />
                     <span className="slider round"></span>
                   </label>
                   {calendar ? (
@@ -371,14 +482,3 @@ function EditDisModal({ discussions, showEditModal }) {
 }
 
 export default EditDisModal;
-
-
-
-
-
-
-
-
-
-
-
