@@ -8,12 +8,12 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "discussions",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "id")
+                @UniqueConstraint(columnNames = "number")
         })
 
 public class Discussion {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "hibernate_sequence")
     private int number;
 
     @NotBlank

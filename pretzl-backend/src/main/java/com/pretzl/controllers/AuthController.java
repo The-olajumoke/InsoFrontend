@@ -182,7 +182,7 @@ public class AuthController {
     @GetMapping("/discussion/all")
     public ResponseEntity<List<Discussion>> getAllDiscussion(@RequestParam String username) {
         List<Discussion> discussionList = discussionRepository.getAllDiscussions(username);
-        discussionList.stream().collect(Collectors.groupingBy(Discussion::getSet_id));
+//        discussionList.stream().collect(Collectors.groupingBy(Discussion::getSet_id));
         return ResponseEntity.ok(discussionList);
     }
 
@@ -195,6 +195,7 @@ public class AuthController {
     @PostMapping("/create/discussions")
     public ResponseEntity<?> createDiscussions(@Valid @RequestBody DiscussionsRequest discussionsRequest) {
         Map<String, List<com.pretzl.payload.request.Discussion>> discMap = discussionsRequest.getDiscussions().stream().collect(Collectors.groupingBy(com.pretzl.payload.request.Discussion::getSetDescription));
+        List<Discussion> discussionList = new ArrayList<>();
         discMap.forEach((setDescription, discussions) -> {
             String finalSet_id = UUID.randomUUID().toString();
             Discussion discSetModel = new Discussion();
@@ -204,7 +205,7 @@ public class AuthController {
             discSetModel.setSet_id(finalSet_id);
             discSetModel.setAction_type("S");
 
-            discSetModel.setNumber((int) (Math.random() * (1L - 10 + 1) + 10));
+//            discSetModel.setNumber((int) (Math.random() * (1L - 10 + 1) + 10));
             discussionRepository.save(discSetModel);
 
             discussions.forEach(discussion -> {
@@ -214,14 +215,14 @@ public class AuthController {
                 discModel.setUsername(discussionsRequest.getUsername());
                 discModel.setSet_id(finalSet_id);
                 discModel.setAction_type("D");
-                discModel.setNumber((int) (Math.random() * (1L - 11 + 1) + 11));
-                discussionRepository.save(discModel);
+                discModel.setId(UUID.randomUUID().toString());
+                discussionList.add(discussionRepository.save(discModel));
             });
         });
 
         return ResponseEntity
                 .ok()
-                .body(new MessageResponse("Discussions are created successfully"));
+                .body(discussionList);
     }
 
     @PostMapping("/edit/discussions")
