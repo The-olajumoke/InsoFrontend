@@ -1,3 +1,7 @@
+.unactive {
+  opacity: 0.4 !important;
+}
+
 .editModal {
   background: rgb(240, 240, 240, 0.7);
   /* background-color: rebeccapurple; */
@@ -124,7 +128,6 @@ hr {
   justify-content: space-between;
   margin-bottom: 5px;
   padding: 0 40px;
-
 }
 .settingsName {
   font-style: normal;
@@ -147,9 +150,8 @@ hr {
   font-size: 20px;
   margin-left: 45px;
 }
-.settingsMore{
+.settingsMore {
   padding: 0 40px;
-
 }
 .settingsBox {
   border: 1px solid #bdbdbd;
@@ -158,8 +160,8 @@ hr {
   font-size: 18px;
   line-height: 27px;
 }
-.settingsWidget{
-    column-gap: 15px;
+.settingsWidget {
+  column-gap: 15px;
 }
 
 /*/ /////////// POST INSPIRATIONS */
@@ -185,8 +187,6 @@ hr {
   border-radius: 30px;
   font-size: 13.19px;
   line-height: 20px;
-  color: #686868;
-  background: #f9f9f9;
   border: 1px solid #bdbdbd;
   box-sizing: border-box;
   border-radius: 30px;
@@ -256,11 +256,9 @@ hr {
   padding: 5px 20px;
   width: 130px;
   height: 30px;
-  background: #ecf4f4;
   border-radius: 30px;
   font-size: 13.19px;
   line-height: 20px;
-  color: #686868;
 }
 .autoOptions {
 }
@@ -287,7 +285,16 @@ hr {
   line-height: 30px;
   display: flex;
   align-items: flex-end;
+  background: #f9f9f9;
+  /* outline: none; */
+  outline-color: #07a098;
+  width: 35px;
   text-align: center;
+}
+.optionScore::-webkit-outer-spin-button,
+.optionScore::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .TotalOptions {
   color: #07a098;

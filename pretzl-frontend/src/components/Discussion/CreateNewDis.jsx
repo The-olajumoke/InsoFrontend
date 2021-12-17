@@ -14,7 +14,7 @@ function CreateNewDis({ handleClick, showMenu }) {
   const [allDisc, setAllDisc] = useState([
     {
       description: "",
-      set_id: "",
+      setDescription: "",
     },
   ]);
   const [showAlert, setShowAlert] = useState(false);

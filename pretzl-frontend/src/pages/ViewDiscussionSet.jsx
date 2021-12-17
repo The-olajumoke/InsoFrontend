@@ -11,7 +11,7 @@ import history from "../utils/history";
 import EditDisModal from "../components/Discussion/EditDisModal";
 function ViewDiscussionSet() {
   const DiscussionCont = allsetData;
-  const [showModal, setshowModal] = useState(false);
+  const [showModal, setshowModal] = useState(true);
 
   const showEditModal = () => {
     setshowModal(!showModal);
