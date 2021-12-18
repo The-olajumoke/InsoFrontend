@@ -10,22 +10,23 @@ import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 import CustomizedSnackbars from "../NotiPopUp";
 function CreateNewDis({ handleClick, showMenu }) {
   const dispatch = useDispatch();
-
-  const [allDisc, setAllDisc] = useState([
-    {
-      description: "",
-      setDescription: "",
-    },
-  ]);
   const [showAlert, setShowAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
 
-  const [setTitle, setSetTitle] = useState(false);
+  const [setTitle, setSetTitle] = useState('');
+  const [allDisc, setAllDisc] = useState([
+    {
+      description: "",
+      setDescription: `${setTitle}`,
+
+    },
+  ]);
+
 
   const handleplusClick = async () => {
     const data = {
       description: "",
-      set_id: "",
+      setDescription: `${setTitle}`,
     };
     setAllDisc([...allDisc, data]);
   };
@@ -72,7 +73,7 @@ function CreateNewDis({ handleClick, showMenu }) {
     let reset = [
       {
         description: "",
-        set_id: "",
+      setDescription: `${setTitle}`,
       },
     ];
 
@@ -91,6 +92,7 @@ function CreateNewDis({ handleClick, showMenu }) {
         <h2>Close</h2>
       </div>
       <div className=" createCont ">
+        {setTitle}
         {allDisc.length > 1 && (
           <input
             type="text"

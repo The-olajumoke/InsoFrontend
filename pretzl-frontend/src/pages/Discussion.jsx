@@ -14,7 +14,7 @@ import { allDiscData } from "../DummyData/discData";
 import DiscSet from "../components/Discussion/DiscSetTemp";
 import { getAllCount } from "../redux/Analytics/analyticsSlice";
 import { useDispatch } from "react-redux";
-import { endDisc } from "../redux/Discussion/disSlice";
+import { endDisc, saveDisc } from "../redux/Discussion/disSlice";
 import axios from "axios";
 function Discussion() {
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ function Discussion() {
 
     var apiBaseUrl = `http://localhost:8080/api/auth/discussion/discussions?username=${currentUsername}`;
 
+  
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
     axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
@@ -38,7 +39,6 @@ function Discussion() {
     try {
       const res = await axios.get(apiBaseUrl);
       const data = res.data;
-      console.log(data);
       return data;
     } catch (error) {
       console.log({ ...error });
@@ -49,10 +49,29 @@ function Discussion() {
   useEffect(() => {
     const fetchDiscussions = async () => {
       const discussions = await getTotalDiscussions();
+      dispatch(saveDisc(discussions))
       setDiscussionCont(discussions);
     };
     fetchDiscussions();
   }, []);
+
+let newArray
+  const groupByIds =arr=>{
+    console.log(arr);
+    const hash= Object.create(null),
+    result=[];
+    arr.forEach(el=>{
+      if(!hash[el.setId]){
+        hash[el.setId]=[];
+        result.push(hash[el.setId]);
+      };
+      hash[el.setId].push(el);
+    });
+    newArray=result
+    return result;
+  }
+  groupByIds(DiscussionCont);
+  
   return (
     <BodyWrapper>
       {showMenu && (
@@ -85,32 +104,56 @@ function Discussion() {
 
           <div className="allDisCont">
             {/* DISCUSSION SET */}
-            <DiscSet
-              key="1"
-              id="1"
-              title="Discussion Set 1"
-              date="mar 21"
-              numberofDisc="3"
-              name="Patrick Dempsey"
-            />
-            {/* DISCUSSION */}
-            {
-              // DiscussionCont.length < 1 ? (
-              //   <NoMessageYet message="It’s lonely in here. Create a new discussion" />
-              // ) : (
-              DiscussionCont.map((dis, index) => (
-                <DiscussionBox
+           {
+               DiscussionCont.length < 1 ? (
+                 <NoMessageYet message="It’s lonely in here. Create a new discussion" />
+               ) : (  newArray.map(arr=>{
+                 console.log(arr);
+                 console.log(arr.length);
+                 if(arr.length == 1){
+                   return arr.map((dis,index)=>
+                   <DiscussionBox
                   key={index}
                   id={index}
                   title={dis.description}
                   date={dis.date}
                   numberOfPeople={dis.numberOfPeople}
                   name={dis.username}
-                  code={dis.code}
-                />
-              ))
-              // )
-            }
+                  code={dis.discussionId}
+                  setID={dis.setId} />
+                  )
+                 }
+                 else{
+          return   <DiscSet
+              key="1"
+              id="1"
+              title="Discussion Set"
+              date="mar 21"
+              numberofDisc="3"
+              name={arr[0].username}
+              discussions={arr}
+            />
+                 }
+               }
+               
+               ))
+}
+               
+              {/* //    console.log(arr);
+              // console.log(arr.length);
+              // if (arr.length == 1) {
+                // <h2>dis</h2>
+              
+            
+              // }
+            //    else {
+            //     console.log(arr);
+            //       
+                
+            //   }
+            // }) */}
+            
+            
           </div>
         </div>
       </div>

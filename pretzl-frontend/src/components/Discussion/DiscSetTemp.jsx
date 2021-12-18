@@ -7,7 +7,8 @@ import "../../Styling/Discussion/Discussion.css";
 import imgIcon from "../../Exports/discSet.svg";
 import history from "../../utils/history";
 import img from "../../Exports/DisIcon.svg";
-function DiscSetTemp({ title, id, code, name, numberOfPeople, date }) {
+function DiscSetTemp({ title, id, code, name, numberOfPeople, date,discussions }) {
+  const discId = discussions[0].setId;
   return (
     <div className="discBox">
       <div className="boxHead">
@@ -36,10 +37,11 @@ function DiscSetTemp({ title, id, code, name, numberOfPeople, date }) {
         <div className="boxfooter">
           <h3 className="disSetNumber">
             Discussions
-            <span className="text-primary mx-2">(3)</span>
+            <span className="text-primary mx-2">{`(${discussions.length})`}</span>
           </h3>
 
-          <Link to="discussion-set">
+          {/* <Link to={`discussion-set/${discId}`}> */}
+          <Link to={{pathname:`discussion-set/${discId}`,state:{disc:discussions}}}>
             <FiArrowRight className="text-primary w-6 h-6" />
           </Link>
         </div>

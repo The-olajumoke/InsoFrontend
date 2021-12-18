@@ -43,9 +43,9 @@ const App = () => {
           <Discussion />
         </Route>
         <Route  path="/discussion/:id">
-          <ViewDiscussion />
+          <ViewDiscussion />  
         </Route>
-        <Route  path="/discussion-set">
+        <Route  path="/discussion-set/:setId">
           <ViewDiscussionSet />
         </Route>
         <Route  path="/notifications">

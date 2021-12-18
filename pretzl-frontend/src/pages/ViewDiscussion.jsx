@@ -23,6 +23,7 @@ function ViewDiscussion() {
   let discussion = allDiscData.find((disc) => id == disc.id);
 
   console.log(discussion);
+
   return (
     <BodyWrapper>
       <ResponsiveTop title="Discussion"/>

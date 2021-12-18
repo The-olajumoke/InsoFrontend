@@ -44,7 +44,7 @@ function EditDisModal({ discussions, showEditModal }) {
   const [upvoteValue, setUpvoteValue] = useState(20);
   const [totalValue, setTotalValue] = useState(60);
   // CALENDAR
-  const [calendar, setCalendar] = useState(true);
+  const [calendar, setCalendar] = useState(false);
   const [calendarMode, setCalendarMode] = useState(false);
   const [automatic, setautomatic] = useState(true);
   const [applyAll, setApplyAll] = useState("");
@@ -62,7 +62,7 @@ function EditDisModal({ discussions, showEditModal }) {
       set_id: "m876",
       updateDiscussions: [
         {
-          discussion_id: "discussion1",
+          // discussion_id: "discussion1",
           starterPrompt: `${starterPromptValue}`,
           postInspirations: [
             {
@@ -111,7 +111,7 @@ function EditDisModal({ discussions, showEditModal }) {
           {discussions.map((dis, index) => (
             <div className="formControl " key={index}>
               <input type="checkbox" name="disc" id={index} />
-              <label htmlFor="">{dis.title}</label>
+              <label htmlFor="">{dis.description}</label>
             </div>
           ))}
         </div>
