@@ -17,7 +17,7 @@ const disc=localStorage.getItem('disc')
 console.log(disc);
   const [DiscussionCont,setDiscussionCont] = useState(JSON.parse(localStorage.getItem('disc')));
 
-  const [showModal, setshowModal] = useState(true);
+  const [showModal, setshowModal] = useState(false);
 
   const showEditModal = () => {
     setshowModal(!showModal);

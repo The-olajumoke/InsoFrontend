@@ -15,7 +15,7 @@ import Grades from "./pages/Grades";
 import Archives from "./pages/Archives";
 import ViewDiscussion from "./pages/ViewDiscussion";
 import ViewDiscussionSet from "./pages/ViewDiscussionSet";
-import Charts from "./components/Analytics/Charts";
+// import Charts from "./components/Analytics/Charts";
 
 const App = () => {
   return (

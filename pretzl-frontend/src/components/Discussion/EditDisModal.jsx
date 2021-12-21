@@ -19,7 +19,10 @@ import cameraAlt from "../../Exports/comment/camera_alt.svg";
 import addCircle from "../../Exports/add_circle.svg";
 import clear from "../../Exports/clear.svg";
 import { BsClock, BsChatLeft } from "react-icons/bs";
+import { editDisc } from "../../redux/Discussion/disSlice";
+import { useDispatch } from "react-redux";
 function EditDisModal({ discussions, showEditModal }) {
+ const dispatch= useDispatch()
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   // STARTER PROMPT
 
@@ -58,59 +61,56 @@ function EditDisModal({ discussions, showEditModal }) {
   };
 
   const saveEdit = () => {
-    const payload = {
-      set_id: "m876",
-      updateDiscussions: [
-        {
-          // discussion_id: "discussion1",
-          starterPrompt: `${starterPromptValue}`,
-          postInspirations: [
-            {
-              type: "posting",
-            },
-          ],
-          postAs: ["lorem", "1234"],
-          scores: {
-            type: "score",
-            actions: [
-              {
-                type: "Scores",
-                score: { scoresValue },
-                criteria: ["comments1"],
-              },
-              {
-                type: "Reactions",
-                score: { reactionsValue },
-                criteria: ["comments2"],
-              },
-              {
-                type: "Upvotes",
-                score: { upvoteValue },
-                criteria: ["comments3"],
-              },
-            ],
-            totalScore: { totalValue },
-          },
-          startDate: "2021-12-15",
-          closeDate: "2021-12-16",
-        },
-      ],
-    };
-  };
+        const payload={
+    "set_id":`${discussions[0].setId}`,
+    "updateDiscussions":[
 
+{
+     "discussion_id":`${discussions[0].discussionId}`,
+     "starterPrompt":`${starterPromptValue}`,
+     "postInspirations":[{"type":"posting"}],
+     "postAs":["lorem","1234"],
+     "scores":{
+            "type":"score",
+            "actions":[
+                    {"type":"Scores","score":{scoresValue},"criteria":["comments1"]},
+                    {"type":"Reactions","score":{reactionsValue},"criteria":["comments2"]},
+                    {"type":"Upvotes","score":{upvoteValue},"criteria":["comments3"]}
+                     ],
+     "totalScore":{totalValue}},
+     "startDate":"2021-12-18",
+     "closeDate":"2021-12-19"
+    }
+    ]
+}
+
+
+    console.log(JSON.stringify(payload ,undefined,2))
+
+
+dispatch(editDisc(payload))
+
+  };
+console.log(allCheckedIDs); 
+
+const checkBox =(e)=>{
+console.log(e.target);
+setallCheckedIDs(...allCheckedIDs,e.target.id)
+console.log(allCheckedIDs);
+}
   //  ARRAY FOR KNOWING WHO IS MARKED[]
   return (
     <div className="editModal">
       <div className="EditDiscont">
         <div className="EditDisTop">
-          <button>Save</button>
+          <button className="bg-primary" onClick={saveEdit}>Save</button>
           <img src={clear} onClick={showEditModal} alt="" />
         </div>
         <h2 className="EditHeading">Discussions</h2>
-        <div className="allCheckDisc ">
+        <div className="allCheckDisc " id={discussions[0].setId}>
           {discussions.map((dis, index) => (
             <div className="formControl " key={index}>
-              <input type="checkbox" name="disc" id={index} />
+              <input type="checkbox" name="disc" id={dis.discussionId} onChange={checkBox} />
               <label htmlFor="">{dis.description}</label>
             </div>
           ))}
