@@ -14,8 +14,8 @@ function ViewDiscussionSet() {
   dis=dis.disc
   localStorage.setItem('disc',JSON.stringify(dis))
 const disc=localStorage.getItem('disc')
-console.log(disc);
-  const [DiscussionCont,setDiscussionCont] = useState(JSON.parse(localStorage.getItem('disc')));
+// console.log(disc);
+  const [DiscussionCont, setDiscussionCont] = useState(JSON.parse(localStorage.getItem('disc')));
 
   const [showModal, setshowModal] = useState(false);
 

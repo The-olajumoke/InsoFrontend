@@ -2,6 +2,90 @@
   padding: 0;
   margin: 0;
 }
+/* CALENDAR */
+.closeCalendar {
+  position: absolute;
+  top: 10px;
+  right: 98px;
+  color: red;
+  font-size: 20px;
+  z-index: 5;
+}
+.calTemp {
+  position: absolute;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 0 auto;
+
+  translate: transform(-50%);
+  background-color: rgb(255, 255, 255, 0.5);
+  background-color: rgb(249, 249, 249, 0.8);
+}
+.react-calendar {
+  width: 350px;
+  width: 455px;
+  height: 400px;
+  background: #ffffff;
+  border-radius: 17px;
+  padding: 20px;
+  border: none !important;
+  z-index: 3;
+  box-shadow: 10px 5px 5px rgb(0, 0, 0, 0.1);
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  /* background-color: rebeccapurple; */
+  margin-bottom: 30px !important;
+  background-color: #ffffff;
+}
+
+.react-calendar__navigation__prev-button {
+  order: 1;
+}
+.react-calendar__navigation__prev-button:hover,
+.react-calendar__navigation__next-button:hover {
+  background-color: none !important;
+}
+.react-calendar__navigation__next-button {
+  order: 1;
+}
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+.react-calendar__navigation__label {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  color: #686868;
+}
+.react-calendar__month-view__days__day--weekend {
+  color: black !important;
+}
+
+.react-calendar__tile--active {
+  background: #07a098 !important;
+  color: white !important;
+}
+.react-calendar__tile--hasActive {
+  background: #06928b !important;
+  color: white !important;
+}
+abbr[title] {
+  text-decoration: none !important;
+}
+.react-calendar__month-view__weekdays {
+  color: #686868;
+}
 .activeLink {
   color: black;
 }
@@ -39,17 +123,16 @@
   color: #686868;
 }
 
-
 /* DROPDOWN */
-.drop-container{
+.drop-container {
   width: 100%;
   margin-bottom: 10px;
 }
-.drop-container label{
+.drop-container label {
   margin-bottom: 15px;
   color: #07a098;
 }
-.dropdown{
+.dropdown {
   user-select: none;
   position: relative;
   width: 100%;
@@ -68,7 +151,7 @@
   color: rgba(0, 30, 47, 0.4);
   padding: 20px 34px;
 }
-.dropdown .dropdown-btn{
+.dropdown .dropdown-btn {
   background: none;
   width: 100%;
   height: 64px;

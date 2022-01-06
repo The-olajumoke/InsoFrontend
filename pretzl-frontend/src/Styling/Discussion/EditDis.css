@@ -24,6 +24,7 @@
   padding: 25px 0;
   box-shadow: 0px 4px 21px rgba(182, 182, 182, 0.26);
   border-radius: 17px;
+  position: relative;
 }
 .EditDisTop {
   display: flex;
@@ -32,11 +33,10 @@
   height: auto;
   padding: 0 40px;
 }
-.EditDisTop button {
+.saveBtn {
   padding: 7px 25px;
   width: 95.05px;
   height: 34px;
-  background: #eaeaea;
   border-radius: 30px;
   font-style: normal;
   font-weight: normal;
@@ -45,7 +45,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9d9d9d;
+  outline: none;
 }
 
 .EditHeading,
@@ -157,8 +157,10 @@ hr {
   border: 1px solid #bdbdbd;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 27px;
+text-align: left;
+justify-content: left;
 }
 .settingsWidget {
   column-gap: 15px;
@@ -211,7 +213,8 @@ hr {
   line-height: 21px;
   display: flex;
   align-items: center;
-  color: #bdbdbd;
+  /* color: #bdbdbd; */
+  outline: none;
 }
 .inspAddCircle {
   margin: 15px 0;
@@ -244,7 +247,9 @@ hr {
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #bdbdbd;
+  /* color: #bdbdbd; */
+  outline: none;
+  /* padding: 5px; */
 }
 
 /* SCORES */
@@ -318,19 +323,21 @@ hr {
   justify-content: space-between;
   align-items: center;
 }
-.rubricMid textarea {
-  width: 75%;
-  resize: none;
+.rubricInput {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 0px 15px 20px;
-  height: 90px;
-  background: #ffffff;
-  border: 1px solid #07a098;
-  box-sizing: border-box;
+  padding: 5px 10px 5px 20px;
+  width: 80%;
+  height: 34px;
+  background: #ecf4f4;
   border-radius: 8px;
+  font-size: 16px;
+  line-height: 24px;
+  outline: none;
+  color: #686868;
 }
+
 .rubricScores {
   display: flex;
   padding-right: 5px;
@@ -348,19 +355,7 @@ hr {
   margin-top: 12px;
   width: 75%;
 }
-.rubricInput {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 5px 10px 5px 20px;
-  width: 100%;
-  height: 34px;
-  background: #ecf4f4;
-  border-radius: 8px;
-  font-size: 16px;
-  line-height: 24px;
-  color: #686868;
-}
+
 
 /* ////////////CALENDAR */
 .calItem {
@@ -400,4 +395,5 @@ hr {
   box-sizing: border-box;
   border-radius: 30px;
   padding: 2px 15px;
+  cursor: pointer;
 }

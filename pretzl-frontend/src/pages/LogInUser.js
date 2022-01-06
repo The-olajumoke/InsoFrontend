@@ -10,22 +10,27 @@ import Button from "../components/SignUp/Button";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
 import axios from "axios";
-import NotiPopUp from "../components/NotiPopUp";
+import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
+import { CgSpinner } from "react-icons/cg";
 import CustomizedSnackbars from "../components/NotiPopUp";
 import { useDispatch } from "react-redux";
 import { logInUser } from "../redux/User/userSlice";
 import GoogleBtn from "../components/Form/GoogleBtn";
+import store from "../redux/store";
 
 function LogInUser({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
 
   const [guest, setGuest] = useState(false);
   const [user, setUser] = useState(false);
-
+  const [loading, setLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
   const handleBack = () => {
     history.push("./");
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setLoading(true);
     console.log(e.password);
     console.log(e.email);
 
@@ -33,7 +38,14 @@ function LogInUser({ activeModal, setactiveModal }) {
       username: e.email,
       password: e.password,
     };
-    dispatch(logInUser(payload));
+    await dispatch(logInUser(payload));
+    setLoading(false);
+    const currentStore = store.getState();
+    const currentSignedState = currentStore.user.isLoggedIn;
+    console.log(currentSignedState);
+    {
+      currentSignedState ? setShowAlert(true) : setErrorAlert(true);
+    }
   };
 
   return (
@@ -74,7 +86,7 @@ function LogInUser({ activeModal, setactiveModal }) {
                 .email("invalid email address")
                 .required("Required"),
               password: Yup.string()
-                .min(6, "Must be at least 6 characters")
+                .min(8, "Must be at least 6 characters")
                 .required("Required"),
             })}
           >
@@ -95,7 +107,14 @@ function LogInUser({ activeModal, setactiveModal }) {
 
                 <div className="btn-holder">
                   <Button mt="mt-16" disabled={!(isValid && dirty)}>
-                    Log In
+                    {loading ? (
+                      <h2 className="flex items-center">
+                        <CgSpinner className="animate-spin    mr-1" />{" "}
+                        Loading...
+                      </h2>
+                    ) : (
+                      " Log In"
+                    )}
                   </Button>
                   <GoogleBtn />
 
@@ -112,13 +131,37 @@ function LogInUser({ activeModal, setactiveModal }) {
               </Form>
             )}
           </Formik>
-          {/* button */}
+          {showAlert && (
+            <CustomizedSnackbars
+              title="Welcome to inso"
+              text="Click Dashboard to create a discussion."
+              severity="success"
+              icon={
+                <BiCheckCircle
+                  fontSize="30px"
+                  color="#04BE00"
+                  severity="success"
+                />
+              }
+            />
+          )}
+
+          {errorAlert && (
+            <CustomizedSnackbars
+              title="Error Logging in"
+              text="Please try again"
+              severity="error"
+              icon={
+                <BiErrorCircle
+                  fontSize="30px"
+                  color=" #E84949"
+                  severity="error"
+                />
+              }
+            />
+          )}
         </div>
       </SignInCont>
-      {/* <CustomizedSnackbars
-        title="Account created Successfully"
-        text="Log in to start a discussion."
-      /> */}
     </Page>
   );
 }

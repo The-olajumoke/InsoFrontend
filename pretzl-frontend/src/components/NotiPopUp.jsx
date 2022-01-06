@@ -3,7 +3,6 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 import { AlertTitle } from "@mui/material";
 import Slide from "@mui/material/Slide";
 
@@ -26,14 +25,14 @@ export default function CustomizedSnackbars({text,title,severity,icon}) {
   };
 
   function SlideTransition(props) {
-    return <Slide {...props} direction="up" />;
+    return <Slide {...props} direction="down" />;
   }
   return (
     <Stack spacing={2} sx={{ width: "100%" }}>
      
       <Snackbar
      
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
         autoHideDuration={5000}
         onClose={handleClose}

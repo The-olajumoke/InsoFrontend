@@ -27,10 +27,7 @@ export const createDisc = createAsyncThunk(
   "disc/createDis",
   async (disc, { dispatch }) => {
     console.log(disc)
-     {
-     alert(JSON.stringify(disc, null, 2));
-     }
-
+  
     var apiBaseUrl = "http://localhost:8080/api/auth/create/discussions";
 
     axios.defaults.headers.post["Content-Type"] =
@@ -86,3 +83,8 @@ export const saveDisc = (disc) => (dispatch) => {
 
 export const { SetCreateState, StopDisc,SaveDiscussions } = disSlice.actions;
 export default disSlice.reducer;
+
+
+
+
+

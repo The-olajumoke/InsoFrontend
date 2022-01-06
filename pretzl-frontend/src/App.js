@@ -16,6 +16,8 @@ import Archives from "./pages/Archives";
 import ViewDiscussion from "./pages/ViewDiscussion";
 import ViewDiscussionSet from "./pages/ViewDiscussionSet";
 // import Charts from "./components/Analytics/Charts";
+import EditDisModal from "./components/Discussion/EditDisModal"
+import CalendarTemp from "./components/EditDisc/CalendarTemp";
 
 const App = () => {
   return (
@@ -23,6 +25,7 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Landing />
+          {/* <EditDisModal/> */}
         </Route>
         <Route  path="/sign-up">
           <ChooseUser />

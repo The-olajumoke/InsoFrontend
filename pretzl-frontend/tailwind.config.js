@@ -44,6 +44,7 @@ module.exports = {
       placeholder: "#001E2F",
       dashBtn: "#f9f9f9",
       scoresBtn: " #ecf4f4",
+      saveBtn: "#eaeaea",
     },
     fontFamily: {
       Poppins: "Poppins",
