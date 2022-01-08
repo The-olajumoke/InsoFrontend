@@ -23,7 +23,7 @@ import { editDisc } from "../../redux/Discussion/disSlice";
 import { useDispatch } from "react-redux";
 import CalendarTemp from "../EditDisc/CalendarTemp";
 
-function EditDisModal({ discussions, showEditModal }) {
+function EditDisModal({ discussio, showEditModal }) {
   const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   const [saveState, setSaveState] = useState(false);
@@ -49,7 +49,13 @@ function EditDisModal({ discussions, showEditModal }) {
   const [postAsMode, setpostAsMode] = useState(false);
   const [allPostAs, setAllPostAs] = useState([
     {
-      post_in: "#new",
+      post_in: "questions",
+    },
+    {
+      post_in: "resources",
+    },
+    {
+      post_in: "synthesis",
     },
   ]);
   // SCORES
@@ -149,7 +155,7 @@ function EditDisModal({ discussions, showEditModal }) {
     setSaveState(true);
   };
   console.log(allCheckedIDs);
-  // let discussions = ["heelo", "hi"];
+  let discussions = ["heelo", "hi"];
   return (
     <div className="editModal">
       <div className="EditDiscont">
@@ -386,7 +392,7 @@ function EditDisModal({ discussions, showEditModal }) {
               )}
             </div>
 
-            {/*POST AS */}
+            {/*POST IN */}
             <div className="settingsMainCont">
               <div className="settingsTop">
                 <h3 className="settingsName ">Post in</h3>
@@ -433,7 +439,9 @@ function EditDisModal({ discussions, showEditModal }) {
                         placeholder="#channel"
                         onChange={(e) => {
                           let newpostAs = [...allPostAs];
-                          newpostAs[e.target.id].post_in = e.target.value;
+                          newpostAs[
+                            e.target.id
+                          ].post_in = ` # ${e.target.value}`;
                           setAllPostAs(newpostAs);
                           // console.log(allPostInsp);
                         }}
