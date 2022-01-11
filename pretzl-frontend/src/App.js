@@ -16,7 +16,7 @@ import Archives from "./pages/Archives";
 import ViewDiscussion from "./pages/ViewDiscussion";
 import ViewDiscussionSet from "./pages/ViewDiscussionSet";
 // import Charts from "./components/Analytics/Charts";
-import EditDisModal from "./components/Discussion/EditDisModal"
+import EditDisModal from "./components/Discussion/EditDisModal";
 import CalendarTemp from "./components/EditDisc/CalendarTemp";
 
 const App = () => {
@@ -24,61 +24,61 @@ const App = () => {
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          {/* <Landing /> */}
-          <EditDisModal/>
+          <Landing />
+          {/* <EditDisModal/> */}
         </Route>
-        <Route  path="/sign-up">
+        <Route path="/sign-up">
           <ChooseUser />
         </Route>
 
-        <Route  path="/sign-as-user">
+        <Route path="/sign-as-user">
           <SignUpModal />
         </Route>
 
-        <Route  path="/sign-as-guest">
+        <Route path="/sign-as-guest">
           <LogInGuest />
         </Route>
 
-        <Route  path="/log-in">
+        <Route path="/log-in">
           <LogInUser />
         </Route>
-        <Route  path="/discussions">
+        <Route path="/discussions">
           <Discussion />
         </Route>
-        <Route  path="/discussion/:id">
-          <ViewDiscussion />  
+        <Route path="/discussion/:id">
+          <ViewDiscussion />
         </Route>
-        <Route  path="/discussion-set/:setId">
+        <Route path="/discussion-set/:setId">
           <ViewDiscussionSet />
         </Route>
-        <Route  path="/notifications">
+        <Route path="/notifications">
           <Notification />
         </Route>
-        <Route  path="/analytics">
+        <Route path="/analytics">
           <Analytics />
         </Route>
-        <Route  path="/charts">
+        <Route path="/charts">
           <Analytics />
         </Route>
-        <Route  path="/calendar">
+        <Route path="/calendar">
           <Analytics />
         </Route>
-        <Route  path="/grades">
+        <Route path="/grades">
           <Grades />
         </Route>
-        <Route  path="/contact">
+        <Route path="/contact">
           <Contact />
         </Route>
-        <Route  path="/settings">
+        <Route path="/settings">
           <Settings />
         </Route>
-        <Route  path="/archives">
+        <Route path="/archives">
           <Archives />
         </Route>
-        <Route  path="/">
+        <Route path="/">
           <Archives />
         </Route>
-      </Switch> 
+      </Switch>
     </Router>
   );
 };
