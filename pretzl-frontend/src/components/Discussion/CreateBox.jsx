@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdOutlineModeEdit, MdDelete } from "react-icons/md";
 import img from "../../Exports/createDiscDel.svg";
 import img2 from "../../Exports/createDiscEdit.svg";
-function CreateBox({ id, val, handleDelete, handleEdit }) {
+function CreateBox({ id, val, handleDelete, handleEdit, setAct }) {
   // const [value, setvalue] = useState();
   return (
     <div className="newBox " id={id}>
@@ -19,7 +19,6 @@ function CreateBox({ id, val, handleDelete, handleEdit }) {
             className="new-icon"
             onClick={(e) => handleDelete(val)}
           />
-          <img src={img2} id={id} alt="" className="new-icon" />
         </div>
       </div>
       <textarea

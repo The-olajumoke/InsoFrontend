@@ -6,12 +6,18 @@ import { FiArrowLeft } from "react-icons/fi";
 import BodyWrapper from "../components/BodyWrapper";
 import DiscussionBox from "../components/Discussion/DiscussionBox";
 import ResponsiveTop from "../components/ResponsiveTop";
-import { allsetData } from "../DummyData/discData";
 import history from "../utils/history";
 import EditDisModal from "../components/Discussion/EditDisModal";
 function ViewDiscussionSet() {
-  const DiscussionCont = allsetData;
-  const [showModal, setshowModal] = useState(true);
+  let dis=history.location.state;
+  console.log(dis);
+  dis=dis.disc
+  localStorage.setItem('disc',JSON.stringify(dis))
+const disc=localStorage.getItem('disc')
+// console.log(disc);
+  const [DiscussionCont, setDiscussionCont] = useState(JSON.parse(localStorage.getItem('disc')));
+
+  const [showModal, setshowModal] = useState(false);
 
   const showEditModal = () => {
     setshowModal(!showModal);
@@ -48,15 +54,15 @@ function ViewDiscussionSet() {
             {/* DISCUSSION SET */}
             {/* DISCUSSION */}
             {DiscussionCont.map((dis, index) => (
-              <DiscussionBox
-                key={index}
-                id={index}
-                title={dis.title}
-                date={dis.date}
-                numberOfPeople={dis.numberOfPeople}
-                name={dis.name}
-                code={dis.code}
-              />
+          <DiscussionBox
+                  key={index}
+                  id={index}
+                  title={dis.description}
+                  date={dis.date}
+                  numberOfPeople={dis.numberOfPeople}
+                  name={dis.username}
+                  code={dis.discussionId}
+                  setID={dis.setId} />
             ))}
           </div>
         </div>

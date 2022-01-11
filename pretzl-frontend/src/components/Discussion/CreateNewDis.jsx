@@ -10,22 +10,22 @@ import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 import CustomizedSnackbars from "../NotiPopUp";
 function CreateNewDis({ handleClick, showMenu }) {
   const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(false);
+  const [active, setActive] = useState(false);
 
+  const [setTitle, setSetTitle] = useState("");
   const [allDisc, setAllDisc] = useState([
     {
       description: "",
-      setDescription: "",
+      setDescription: `${setTitle}`,
     },
   ]);
-  const [showAlert, setShowAlert] = useState(false);
-  const [errorAlert, setErrorAlert] = useState(false);
 
-  const [setTitle, setSetTitle] = useState(false);
-
-  const handleplusClick = async () => {
+  const handleplusClick = () => {
     const data = {
       description: "",
-      set_id: "",
+      setDescription: `${setTitle}`,
     };
     setAllDisc([...allDisc, data]);
   };
@@ -48,14 +48,11 @@ function CreateNewDis({ handleClick, showMenu }) {
     let newArray = [...allDisc];
     newArray[id].description = e.target.value;
     // newArray[id].set_id = id;
+    setActive(true);
 
     setAllDisc(newArray);
   };
   const handleCreate = async () => {
-    // {
-    //   alert(JSON.stringify(allDisc, null, 2));
-    // }
-
     const currentUsername = localStorage.getItem("username");
 
     const payload = {
@@ -72,13 +69,16 @@ function CreateNewDis({ handleClick, showMenu }) {
     let reset = [
       {
         description: "",
-        set_id: "",
+        setDescription: `${setTitle}`,
       },
     ];
 
     if (createdState) {
       setShowAlert(true);
       setAllDisc(reset);
+      handleClick();
+      window.location.reload();
+
     } else {
       setErrorAlert(true);
     }
@@ -91,15 +91,16 @@ function CreateNewDis({ handleClick, showMenu }) {
         <h2>Close</h2>
       </div>
       <div className=" createCont ">
+        {setTitle}
         {allDisc.length > 1 && (
           <input
             type="text"
             className="setTitleBox"
-            onChange={(e)=>setSetTitle(e.target.value)}
+            onChange={(e) => setSetTitle(e.target.value)}
             placeholder="Input discussion set title"
           />
-          )}
-          {setTitle}
+        )}
+        {setTitle}
         <div className="allBoxes" id="allBoxes">
           {allDisc.map((di, index, { length }) => {
             if (index + 1 === length) {
@@ -113,8 +114,18 @@ function CreateNewDis({ handleClick, showMenu }) {
                     val={di.description}
                   />
                   <div className="actionsCont flex ">
-                    <FiPlus className="addBtn" onClick={handleplusClick} />
-                    <button className="creBtn" onClick={handleCreate}>
+                    <FiPlus
+                      className={`addBtn ${
+                        active ? "bg-primary" : "bg-dashBtn"
+                      }  ${active ? "text-white" : "text-desc"}`}
+                      onClick={handleplusClick}
+                    />
+                    <button
+                      className={`creBtn ${
+                        active ? "bg-primary" : "bg-dashBtn"
+                      }  ${active ? "text-white" : "text-desc"}`}
+                      onClick={handleCreate}
+                    >
                       Create
                     </button>
                   </div>

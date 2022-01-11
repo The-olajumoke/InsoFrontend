@@ -19,8 +19,14 @@ import cameraAlt from "../../Exports/comment/camera_alt.svg";
 import addCircle from "../../Exports/add_circle.svg";
 import clear from "../../Exports/clear.svg";
 import { BsClock, BsChatLeft } from "react-icons/bs";
-function EditDisModal({ discussions, showEditModal }) {
+import { editDisc } from "../../redux/Discussion/disSlice";
+import { useDispatch } from "react-redux";
+import CalendarTemp from "../EditDisc/CalendarTemp";
+
+function EditDisModal({ discussio, showEditModal }) {
+  const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
+  const [saveState, setSaveState] = useState(false);
   // STARTER PROMPT
 
   const [starterPrompt, setstarterPrompt] = useState(false);
@@ -32,10 +38,26 @@ function EditDisModal({ discussions, showEditModal }) {
   const [posting, setPosting] = useState(true);
   const [responding, setResponding] = useState(false);
   const [synthesizing, setSynthesizing] = useState(false);
+  const [allPostInsp, setAllPostInsp] = useState([
+    {
+      post_inspiration: "Type in a post inspiration",
+    },
+  ]);
 
-  // POST AS
+  // POST IN
   const [postAs, setpostAs] = useState(false);
   const [postAsMode, setpostAsMode] = useState(false);
+  const [allPostAs, setAllPostAs] = useState([
+    {
+      post_in: "questions",
+    },
+    {
+      post_in: "resources",
+    },
+    {
+      post_in: "synthesis",
+    },
+  ]);
   // SCORES
   const [scores, setscores] = useState(false);
   const [scoresMode, setScoresMode] = useState(false);
@@ -43,26 +65,49 @@ function EditDisModal({ discussions, showEditModal }) {
   const [reactionsValue, setReactionsValue] = useState(20);
   const [upvoteValue, setUpvoteValue] = useState(20);
   const [totalValue, setTotalValue] = useState(60);
+  const [allrubric, setAllRubric] = useState([
+    {
+      criteria: "must be white",
+    },
+  ]);
+  const [rubMaxScore, setRubMaxScore] = useState(100);
+  let midscore = rubMaxScore / allrubric.length;
+  midscore = midscore.toFixed(0);
+
   // CALENDAR
-  const [calendar, setCalendar] = useState(true);
+  const [calendar, setCalendar] = useState(false);
   const [calendarMode, setCalendarMode] = useState(false);
   const [automatic, setautomatic] = useState(true);
-  const [applyAll, setApplyAll] = useState("");
+  const [applyAll, setApplyAll] = useState(false);
+  const [showCalDate, setShowCalDate] = useState(false);
 
-  console.log(discussions);
+  const [date, setDate] = useState([
+    new Date(2021, 6, 1),
+    new Date(2021, 6, 10),
+  ]);
 
   //   HANDLE CHECKED
   const handleChecked = (e) => {
-    //   alert(e.target.checked)
-    setApplyAll(true);
-  };
+    alert(e.target.checked);
+    setApplyAll(!applyAll);
+    if (e.target.checked) {
+      let newar = discussions.filter((dis) => dis.discussionId);
+      newar = newar.discussionId;
+      console.log(newar);
+    } else {
+      setallCheckedIDs([""]);
+    }
 
+    // dis
+  };
+  //HANDLE SAVE EDITS
   const saveEdit = () => {
+    console.log(upvoteValue);
     const payload = {
-      set_id: "m876",
+      set_id: `${discussions[0].setId}`,
       updateDiscussions: [
-        {
-          discussion_id: "discussion1",
+        allCheckedIDs.map((ids) => ({
+          discussion_id: `${ids}`,
           starterPrompt: `${starterPromptValue}`,
           postInspirations: [
             {
@@ -75,43 +120,77 @@ function EditDisModal({ discussions, showEditModal }) {
             actions: [
               {
                 type: "Scores",
-                score: { scoresValue },
+                score: scoresValue,
                 criteria: ["comments1"],
               },
               {
                 type: "Reactions",
-                score: { reactionsValue },
+                score: reactionsValue,
                 criteria: ["comments2"],
               },
               {
                 type: "Upvotes",
-                score: { upvoteValue },
+                score: upvoteValue,
                 criteria: ["comments3"],
               },
             ],
-            totalScore: { totalValue },
+            totalScore: totalValue,
           },
           startDate: "2021-12-15",
           closeDate: "2021-12-16",
-        },
+        })),
       ],
     };
-  };
+    //hhhjxjjxn
+    console.log(JSON.stringify(payload, undefined, 2));
 
-  //  ARRAY FOR KNOWING WHO IS MARKED[]
+    // dispatch(editDisc(payload));
+    setApplyAll(false);
+    showEditModal();
+  };
+  //HANDLE ChECkBOX
+  const checkBox = (e) => {
+    console.log(e.target.id);
+    setallCheckedIDs([...allCheckedIDs, e.target.id]);
+    setSaveState(true);
+  };
+  console.log(allCheckedIDs);
+  let discussions = ["heelo", "hi"];
   return (
     <div className="editModal">
       <div className="EditDiscont">
         <div className="EditDisTop">
-          <button>Save</button>
+          <button
+            className={`saveBtn ${saveState ? "bg-primary" : "bg-saveBtn"} 
+                ${saveState ? "text-white" : "text-desc"}
+            `}
+            onClick={saveEdit}
+          >
+            Save
+          </button>
           <img src={clear} onClick={showEditModal} alt="" />
         </div>
         <h2 className="EditHeading">Discussions</h2>
-        <div className="allCheckDisc ">
+        <div className="allCheckDisc " id={discussions[0].setId}>
           {discussions.map((dis, index) => (
             <div className="formControl " key={index}>
-              <input type="checkbox" name="disc" id={index} />
-              <label htmlFor="">{dis.title}</label>
+              {applyAll ? (
+                <input
+                  type="checkbox"
+                  name="disc"
+                  checked
+                  id={dis.discussionId}
+                  onChange={checkBox}
+                />
+              ) : (
+                <input
+                  type="checkbox"
+                  name="disc"
+                  id={dis.discussionId}
+                  onChange={checkBox}
+                />
+              )}
+              <label htmlFor="">{dis.description}</label>
             </div>
           ))}
         </div>
@@ -139,19 +218,30 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="starterPrompt"
                       id="starterPrompt"
-                      onChange={(e) => setstarterPromptMode(!starterPromptMode)}
+                      onChange={(e) => {
+                        setstarterPromptMode(!starterPromptMode);
+                        setSaveState(true);
+                      }}
                     />
                     <span className="slider round"></span>
                   </label>
                   {starterPrompt ? (
                     <MdKeyboardArrowUp
                       className="settingsIcon"
-                      onClick={() => setstarterPrompt(!starterPrompt)}
+                      onClick={() => {
+                        setstarterPrompt(!starterPrompt);
+                      }}
                     />
                   ) : (
                     <MdKeyboardArrowDown
                       className="settingsIcon"
-                      onClick={() => setstarterPrompt(!starterPrompt)}
+                      onClick={() => {
+                        setstarterPrompt(true);
+                        setPostInsp(false);
+                        setpostAs(false);
+                        setscores(false);
+                        setCalendar(false);
+                      }}
                     />
                   )}
                 </div>
@@ -159,7 +249,7 @@ function EditDisModal({ discussions, showEditModal }) {
               {starterPrompt && (
                 <div className="settingsMore">
                   <div
-                    className={`commentBox settingsBox ${
+                    className={`commentBox  settingsBox ${
                       starterPromptMode ? "" : "unactive"
                     }`}
                   >
@@ -167,9 +257,16 @@ function EditDisModal({ discussions, showEditModal }) {
                       className="textA"
                       name=""
                       readOnly={!starterPromptMode}
-                      placeholder="Get this discussion started"
+                      // placeholder="Get this discussion started"
                       onChange={(e) => setstarterPromptValue(e.target.value)}
-                    ></textarea>
+                    >
+                      {`1. In this discussion we are going to be exploring.
+                     2.If you are responding directly to my initial post, you can select a specific channel to post in by selecting the appropriate tag from the "Post in" dropdown menu.
+                    3. For all posts and responses, be sure to #hashtag any keywords or themes.
+                    4. For some ideas on what sorts of things you should post, click Posting Inspiration and explore the prompts for posting, responding and synthesizing.
+
+`}
+                    </textarea>
                     <div className="widgetCont">
                       <div className="widget settingsWidget">
                         <img src={textFormat} alt="" />
@@ -196,7 +293,10 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="reports"
                       id="postInspiration"
-                      onChange={(e) => setPostInspMode(!postInspMode)}
+                      onChange={(e) => {
+                        setPostInspMode(!postInspMode);
+                        setSaveState(true);
+                      }}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -208,7 +308,13 @@ function EditDisModal({ discussions, showEditModal }) {
                   ) : (
                     <MdKeyboardArrowDown
                       className="settingsIcon"
-                      onClick={() => setPostInsp(!postInsp)}
+                      onClick={() => {
+                        setstarterPrompt(false);
+                        setPostInsp(true);
+                        setpostAs(false);
+                        setscores(false);
+                        setCalendar(false);
+                      }}
                     />
                   )}
                 </div>
@@ -252,13 +358,32 @@ function EditDisModal({ discussions, showEditModal }) {
                       Synthesizing
                     </button>
                   </div>
-                  <input
-                    type="text"
-                    className="postInspInput"
-                    placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                  />
+                  {allPostInsp.map((ins, index) => (
+                    <input
+                      key={index}
+                      id={index}
+                      type="text"
+                      onChange={(e) => {
+                        let newInsp = [...allPostInsp];
+                        newInsp[e.target.id].post_inspiration = e.target.value;
+                        setAllPostInsp(newInsp);
+                        // console.log(allPostInsp);
+                      }}
+                      className="postInspInput mb-2 "
+                      placeholder="Type in post inspirations..."
+                    />
+                  ))}
                   <div className="inspAddCircle">
-                    <img src={addCircle} alt="" />
+                    <img
+                      src={addCircle}
+                      alt=""
+                      onClick={() => {
+                        const data = {
+                          post_inspiration: "Type in a post inspiration",
+                        };
+                        setAllPostInsp([...allPostInsp, data]);
+                      }}
+                    />
                   </div>
                   <div className="addinsp">
                     <button>Add post inspiration</button>
@@ -267,17 +392,20 @@ function EditDisModal({ discussions, showEditModal }) {
               )}
             </div>
 
-            {/*POST AS */}
+            {/*POST IN */}
             <div className="settingsMainCont">
               <div className="settingsTop">
-                <h3 className="settingsName ">Post as</h3>
+                <h3 className="settingsName ">Post in</h3>
                 <div className="settingsControl">
                   <label className="switch">
                     <input
                       type="checkbox"
                       name="reports"
                       id="postAs"
-                      onChange={(e) => setpostAsMode(!postAsMode)}
+                      onChange={(e) => {
+                        setpostAsMode(!postAsMode);
+                        setSaveState(true);
+                      }}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -289,7 +417,13 @@ function EditDisModal({ discussions, showEditModal }) {
                   ) : (
                     <MdKeyboardArrowDown
                       className="settingsIcon"
-                      onClick={() => setpostAs(!postAs)}
+                      onClick={() => {
+                        setstarterPrompt(false);
+                        setPostInsp(false);
+                        setpostAs(true);
+                        setscores(false);
+                        setCalendar(false);
+                      }}
                     />
                   )}
                 </div>
@@ -297,17 +431,35 @@ function EditDisModal({ discussions, showEditModal }) {
               {postAs && (
                 <div className={`postInspMore ${postAsMode ? "" : "unactive"}`}>
                   <div className="allPostBtn allPostAsBtn">
-                    <button className="postAsBtn">lorem</button>
-                    <button className="postAsBtn">lorem</button>
-                    <button className="postAsBtn">lorem</button>
-                    {/* <div className="inspAddCircle"> */}
-                    <img src={addCircle} alt="" />
+                    {allPostAs.map((pos, index) => (
+                      <input
+                        id={index}
+                        type="text"
+                        className="postAsBtn"
+                        placeholder="#channel"
+                        onChange={(e) => {
+                          let newpostAs = [...allPostAs];
+                          newpostAs[
+                            e.target.id
+                          ].post_in = ` # ${e.target.value}`;
+                          setAllPostAs(newpostAs);
+                          // console.log(allPostInsp);
+                        }}
+                      />
+                    ))}
+                    <img
+                      src={addCircle}
+                      alt=""
+                      onClick={() => {
+                        const data = { post_in: "" };
+                        setAllPostAs([...allPostAs, data]);
+                      }}
+                    />
                     {/* </div> */}
                   </div>
                 </div>
               )}
             </div>
-
             {/*SCORES */}
             <div className="settingsMainCont">
               <div className="settingsTop">
@@ -318,7 +470,10 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="reports"
                       id="scores"
-                      onChange={(e) => setScoresMode(!scoresMode)}
+                      onChange={(e) => {
+                        setScoresMode(!scoresMode);
+                        setSaveState(true);
+                      }}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -330,7 +485,13 @@ function EditDisModal({ discussions, showEditModal }) {
                   ) : (
                     <MdKeyboardArrowDown
                       className="settingsIcon"
-                      onClick={() => setscores(!scores)}
+                      onClick={() => {
+                        setstarterPrompt(false);
+                        setPostInsp(false);
+                        setpostAs(false);
+                        setscores(true);
+                        setCalendar(false);
+                      }}
                     />
                   )}
                 </div>
@@ -367,7 +528,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       <div className="options ">
                         <h3 className="optionsName">
                           <BsChatLeft className="optionsIcon" />
-                          Scores
+                          Posts
                         </h3>
                         <div className="settingsControl">
                           <input
@@ -421,7 +582,7 @@ function EditDisModal({ discussions, showEditModal }) {
                       <div className="options TotalOptions">
                         <h3 className="optionsName">
                           <MdBarChart className="optionsIcon" />
-                          Total Score
+                          Maximum Score
                         </h3>
                         <div className="settingsControl">
                           <input
@@ -443,25 +604,41 @@ function EditDisModal({ discussions, showEditModal }) {
                         <h3 className="rubricTopText">Criteria</h3>
                         <h3 className="rubricTopText">Score</h3>
                       </div>
-                      <div className="rubricMid">
-                        <textarea
-                          name=""
-                          id=""
-                          placeholder="In 2000, the stock market"
-                        ></textarea>
+                      <div className="rubricMid mb-3">
+                        <h3 className="">Maximum Score</h3>
                         <div className="rubricScores">
-                          <h2>20</h2>
-                          <h2>20</h2>
+                          <h2 className="text-primary">{rubMaxScore}</h2>
                         </div>
                       </div>
+                      {allrubric.map((rub, index) => (
+                        <div className="rubricMid mb-3">
+                          <input
+                            type="text"
+                            className="rubricInput"
+                            placeholder="At least 5 comments"
+                            onChange={(e) => {
+                              let newrub = [...allrubric];
+                              newrub[e.target.id].criteria = e.target.value;
+                              setAllRubric(newrub);
+                              // console.log(allPostInsp);
+                            }}
+                          />
+                          <div className="rubricScores">
+                            <h2>{midscore}</h2>
+                          </div>
+                        </div>
+                      ))}
+
                       <div className="rubricBottom">
-                        <input
-                          type="text"
-                          className="rubricInput"
-                          placeholder="At least 5 comments"
-                        />
                         <div className="inspAddCircle">
-                          <img src={addCircle} alt="" />
+                          <img
+                            src={addCircle}
+                            alt=""
+                            onClick={() => {
+                              const data = { criteria: "" };
+                              setAllRubric([...allrubric, data]);
+                            }}
+                          />
                         </div>
                       </div>
                     </>
@@ -480,7 +657,10 @@ function EditDisModal({ discussions, showEditModal }) {
                       type="checkbox"
                       name="reports"
                       id="calendar"
-                      onChange={(e) => setCalendarMode(!calendarMode)}
+                      onChange={(e) => {
+                        setCalendarMode(!calendarMode);
+                        setSaveState(true);
+                      }}
                     />
                     <span className="slider round"></span>
                   </label>
@@ -492,11 +672,18 @@ function EditDisModal({ discussions, showEditModal }) {
                   ) : (
                     <MdKeyboardArrowDown
                       className="settingsIcon"
-                      onClick={() => setCalendar(!calendar)}
+                      onClick={() => {
+                        setstarterPrompt(false);
+                        setPostInsp(false);
+                        setpostAs(false);
+                        setscores(false);
+                        setCalendar(true);
+                      }}
                     />
                   )}
                 </div>
               </div>
+
               {calendar && (
                 <div
                   className={`postInspMore ${calendarMode ? "" : "unactive"}`}
@@ -508,19 +695,38 @@ function EditDisModal({ discussions, showEditModal }) {
                         <BsClock className="calIcon" />
                         8:00 <span>AM</span>
                       </div>
-
-                      <h4 className="calendarInput">Fri 1st, January 2021</h4>
+                      <button
+                        className="calendarInput"
+                        onClick={() => setShowCalDate(true)}
+                      >
+                        {date[0].toLocaleString("en-US", {
+                          weekday: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          month: "long",
+                        })}
+                      </button>
                     </div>
                   </div>
+
                   <div className="calItem">
                     <h4 className="limit">close</h4>
                     <div className="calendarOption">
                       <div className="calendarTime">
                         <BsClock className="calIcon" />
-                        8:00 <span>AM</span>
+                        11:59 <span>PM</span>
                       </div>
-
-                      <h4 className="calendarInput">Fri 1st, January 2021</h4>
+                      <button
+                        className="calendarInput"
+                        onClick={() => setShowCalDate(true)}
+                      >
+                        {date[1].toLocaleString("en-US", {
+                          weekday: "short",
+                          day: "numeric",
+                          year: "numeric",
+                          month: "long",
+                        })}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -528,9 +734,21 @@ function EditDisModal({ discussions, showEditModal }) {
             </div>
           </div>
         </div>
+        {showCalDate && (
+          <CalendarTemp
+            date={date}
+            setDate={setDate}
+            setShowCalDate={setShowCalDate}
+          />
+        )}
       </div>
     </div>
   );
 }
 
 export default EditDisModal;
+//  <CalendarTemp
+//           date={date}
+//           setDate={setDate}
+//           setShowCalDate={setShowCalDate}
+//         />

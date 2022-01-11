@@ -15,14 +15,17 @@ import Grades from "./pages/Grades";
 import Archives from "./pages/Archives";
 import ViewDiscussion from "./pages/ViewDiscussion";
 import ViewDiscussionSet from "./pages/ViewDiscussionSet";
-import Charts from "./components/Analytics/Charts";
+// import Charts from "./components/Analytics/Charts";
+import EditDisModal from "./components/Discussion/EditDisModal"
+import CalendarTemp from "./components/EditDisc/CalendarTemp";
 
 const App = () => {
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          <Landing />
+          {/* <Landing /> */}
+          <EditDisModal/>
         </Route>
         <Route  path="/sign-up">
           <ChooseUser />
@@ -43,9 +46,9 @@ const App = () => {
           <Discussion />
         </Route>
         <Route  path="/discussion/:id">
-          <ViewDiscussion />
+          <ViewDiscussion />  
         </Route>
-        <Route  path="/discussion-set">
+        <Route  path="/discussion-set/:setId">
           <ViewDiscussionSet />
         </Route>
         <Route  path="/notifications">
