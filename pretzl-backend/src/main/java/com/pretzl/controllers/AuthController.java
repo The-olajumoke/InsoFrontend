@@ -1,7 +1,7 @@
 package com.pretzl.controllers;
 
-import com.pretzl.models.Discussion;
 import com.pretzl.models.*;
+import com.pretzl.models.Discussion;
 import com.pretzl.payload.request.*;
 import com.pretzl.payload.response.JwtResponse;
 import com.pretzl.payload.response.MessageResponse;
@@ -11,6 +11,7 @@ import com.pretzl.repository.RoleRepository;
 import com.pretzl.repository.UserRepository;
 import com.pretzl.security.jwt.JwtUtils;
 import com.pretzl.security.services.UserDetailsImpl;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -92,35 +93,42 @@ public class AuthController {
         user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
 
-        Set<String> strRoles = null;
         Set<Role> roles = new HashSet<>();
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
+        Role userRole = roleRepository.findByName(ERole.USER)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        roles.add(userRole);
 
-                        break;
-                    case "guest":
-                        Role modRole = roleRepository.findByName(ERole.GUEST)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
+        user.setRoles(roles);
+        User userDetails = userRepository.save(user);
 
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(ERole.USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
+        return ResponseEntity.ok(userDetails);
+    }
+
+    @PostMapping("/guestLogin")
+    public ResponseEntity<?> guestLoginUser(@Valid @RequestBody GuestLoginRequest guestLoginRequest) {
+
+        if (userRepository.existsByEmail(guestLoginRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already taken!"));
         }
+        String userName = guestLoginRequest.getEmail();
+        int i = 1;
+        while (userRepository.existsByUsername(userName)) {
+            userName = userName.replaceAll("\\d+$", "") + i++;
+        }
+
+        // Create new user's account
+        User user = new User(userName,
+                guestLoginRequest.getEmail(),
+                encoder.encode(guestLoginRequest.getPassword()));
+
+        Set<Role> roles = new HashSet<>();
+
+        Role userRole = roleRepository.findByName(ERole.USER)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        roles.add(userRole);
 
         user.setRoles(roles);
         User userDetails = userRepository.save(user);
@@ -173,7 +181,11 @@ public class AuthController {
 //        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
         return ResponseEntity.ok(discussionRepository.getUserDiscussionsByUserName(username));
     }
-
+    @GetMapping("/discussion")
+    public ResponseEntity<List<Discussion>> getUserDiscussionById(@RequestParam String discussionId) {
+//        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
+        return ResponseEntity.ok(discussionRepository.getUserDiscussionsById(discussionId));
+    }
     @GetMapping("/discussion/post/details")
     public ResponseEntity<List<IDiscussions>> getDiscussionPostDetails(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getDiscussionPostDetails(username));
@@ -197,7 +209,7 @@ public class AuthController {
         Map<String, List<com.pretzl.payload.request.Discussion>> discMap = discussionsRequest.getDiscussions().stream().collect(Collectors.groupingBy(com.pretzl.payload.request.Discussion::getSetDescription));
         List<Discussion> discussionList = new ArrayList<>();
         discMap.forEach((setDescription, discussions) -> {
-            String finalSet_id = UUID.randomUUID().toString();
+            String finalSet_id = RandomStringUtils.randomAlphabetic(5);;
             Discussion discSetModel = new Discussion();
             discSetModel.setDate(LocalDate.now().toString());
             discSetModel.setDescription(setDescription);
@@ -205,7 +217,6 @@ public class AuthController {
             discSetModel.setSet_id(finalSet_id);
             discSetModel.setAction_type("S");
 
-//            discSetModel.setNumber((int) (Math.random() * (1L - 10 + 1) + 10));
             discussionRepository.save(discSetModel);
 
             discussions.forEach(discussion -> {
@@ -215,6 +226,7 @@ public class AuthController {
                 discModel.setUsername(discussionsRequest.getUsername());
                 discModel.setSet_id(finalSet_id);
                 discModel.setAction_type("D");
+                RandomStringUtils.randomAlphabetic(5);
                 discModel.setId(UUID.randomUUID().toString());
                 discussionList.add(discussionRepository.save(discModel));
             });
@@ -233,7 +245,7 @@ public class AuthController {
                     discussionDetails.addAll(updateDiscussion.getScores().getActions().stream()
                             .map(actions -> updateDiscussion.getDiscussionDetail(set_id, actions))
                             .collect(Collectors.toList()));
-                    updateDiscussion.getPostAs().forEach(postAs -> discussionDetails.add(updateDiscussion.getDiscussionDetailPostAs(set_id,postAs)));
+                    updateDiscussion.getPostAs().forEach(postAs -> discussionDetails.add(updateDiscussion.getDiscussionDetailPostAs(set_id, postAs)));
                 }
 
         );
