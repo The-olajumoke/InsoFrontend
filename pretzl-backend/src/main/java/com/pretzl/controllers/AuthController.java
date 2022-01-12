@@ -209,7 +209,7 @@ public class AuthController {
         Map<String, List<com.pretzl.payload.request.Discussion>> discMap = discussionsRequest.getDiscussions().stream().collect(Collectors.groupingBy(com.pretzl.payload.request.Discussion::getSetDescription));
         List<Discussion> discussionList = new ArrayList<>();
         discMap.forEach((setDescription, discussions) -> {
-            String finalSet_id = RandomStringUtils.randomAlphabetic(5);;
+            String finalSet_id = RandomStringUtils.randomAlphanumeric(7);;
             Discussion discSetModel = new Discussion();
             discSetModel.setDate(LocalDate.now().toString());
             discSetModel.setDescription(setDescription);
@@ -226,7 +226,7 @@ public class AuthController {
                 discModel.setUsername(discussionsRequest.getUsername());
                 discModel.setSet_id(finalSet_id);
                 discModel.setAction_type("D");
-                RandomStringUtils.randomAlphabetic(5);
+                RandomStringUtils.randomAlphanumeric(7);
                 discModel.setId(UUID.randomUUID().toString());
                 discussionList.add(discussionRepository.save(discModel));
             });
