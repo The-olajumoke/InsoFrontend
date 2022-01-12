@@ -1,7 +1,6 @@
 import React from "react";
 import BodyWrapper from "../components/BodyWrapper";
 import { useParams } from "react-router-dom";
-import { allDiscData } from "../DummyData/discData";
 import "../Styling/viewDiscussion.css";
 import vec1 from "../Exports/vec1.svg";
 import vec2 from "../Exports/vec2.svg";
@@ -13,20 +12,22 @@ import textFormat from "../Exports/comment/text_format.svg";
 import attFile from "../Exports/comment/attach_file.svg";
 import assessment from "../Exports/comment/assessment.svg";
 import insertPhoto from "../Exports/comment/insert_photo.svg";
-import code from "../Exports/comment/icomoon-free_embed2.svg"
 import smile from "../Exports/comment/sentiment_satisfied_alt.svg";
-import cameraAlt from "../Exports/comment/camera_alt.svg"
+import cameraAlt from "../Exports/comment/camera_alt.svg";
 import ResponsiveTop from "../components/ResponsiveTop";
+import store from "../redux/store";
 function ViewDiscussion() {
-  const { id } = useParams();
-  console.log(allDiscData);
-  let discussion = allDiscData.find((disc) => id == disc.id);
-
+  const { code } = useParams();
+  console.log(code);
+  const currentStore = store.getState();
+  const AllDisc = currentStore.disc.discussions;
+  console.log(AllDisc);
+  let discussion = AllDisc.find((disc) => code == disc.discussionId);
   console.log(discussion);
 
   return (
     <BodyWrapper>
-      <ResponsiveTop title="Discussion"/>
+      <ResponsiveTop title="Discussion" />
       <div className="viewDisCont pt-1">
         {/* HEADING AND TITLE */}
         <div className="viewHeading ">
@@ -35,7 +36,7 @@ function ViewDiscussion() {
               onClick={() => history.push("../discussions")}
               className="viewIcon"
             />
-            <h3>{discussion.title}</h3>
+            <h3>Type title here</h3>
           </div>
           <div className="viewButton">
             <button>Charts</button>
@@ -48,13 +49,12 @@ function ViewDiscussion() {
         </div>
         {/* MAIN DISCUSSION */}
         <ViewDisTemp
-          question={discussion.question}
-          name={discussion.name}
+          question={discussion.description}
+          name={discussion.username}
           username={discussion.username}
         />
         {/* Comment Section */}
         <div className="allCommentCont">
-      
           <ViewCommentTemp
             name="Elvis Collins"
             username="COLLINS"
@@ -69,6 +69,7 @@ function ViewDiscussion() {
         {/* COMMENT BOX */}
         <div className="commentBoxCont">
           <div className="commentBox">
+            <h4 className="replyTo">@ {discussion.username}</h4>
             <textarea
               className="textA"
               name=""
@@ -76,7 +77,7 @@ function ViewDiscussion() {
             ></textarea>
             <div className="widgetCont">
               <div className="widget">
-                <img src={textFormat} alt=""/>
+                <img src={textFormat} alt="" />
                 <img src={smile} alt="" />
                 <img src={attFile} alt="" />
                 <img src={insertPhoto} alt="" />

@@ -45,7 +45,7 @@ const App = () => {
         <Route path="/discussions">
           <Discussion />
         </Route>
-        <Route path="/discussion/:id">
+        <Route path="/discussion/:code">
           <ViewDiscussion />
         </Route>
         <Route path="/discussion-set/:setId">

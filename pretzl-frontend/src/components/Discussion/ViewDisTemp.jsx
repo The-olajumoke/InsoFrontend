@@ -1,35 +1,32 @@
-import React from 'react'
+import React from "react";
 import Avatar from "../../Exports/Avatar.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
-function ViewDisTemp({name,question,username}) {
-
-    return (
-      <div className="DiscProp">
-        {/* Heading */}
-        <div className="top">
-          <div className="avatars">
-            <img src={Avatar} alt="" />
-            <div>
-              <div className="flex items-center">
-                <h5>{name}</h5>
-                <h4 className='ml-2'>@{username}</h4>
-              </div>
-              <div className="time">posted 3 mins ago</div>
+function ViewDisTemp({ name, question, username }) {
+  return (
+    <div className="DiscProp">
+      {/* Heading */}
+      <div className="top">
+        <div className="avatars">
+          <img src={Avatar} alt="" />
+          <div>
+            <div className="userDet">
+              <h5 className="mainName">{name}</h5>
+              <h4 className=" userName">@{username}</h4>
             </div>
-          </div>
-          <div className="topRight">
-            <button>#Open discussion</button>
-            <BsThreeDotsVertical className="topRightIcon" />
+            <div className="time">posted 3 mins ago</div>
           </div>
         </div>
-        {/* Content */}
-        <div className="viewMainText">
-          <h3>
-          {question}
-          </h3>
+        <div className="topRight">
+          <button>#Open discussion</button>
+          <BsThreeDotsVertical className="topRightIcon" />
         </div>
       </div>
-    );
+      {/* Content */}
+      <div className="viewMainText">
+        <h3>{question}</h3>
+      </div>
+    </div>
+  );
 }
 
-export default ViewDisTemp
+export default ViewDisTemp;

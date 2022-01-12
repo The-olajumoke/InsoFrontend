@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import "../Styling/Login.css";
 import "../Styling/SignUp.css";
+import { CgSpinner } from "react-icons/cg";
 
 import { MdClose } from "react-icons/md";
 import { FiArrowLeft } from "react-icons/fi";
@@ -11,66 +12,32 @@ import CustomField from "../components/Form/CustomInput";
 import Button from "../components/SignUp/Button";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import GoogleBtn from "../components/Form/GoogleBtn";
-var apiBaseUrl = "http://localhost:8080/api/auth/login";
+import { logInGuest } from "../redux/User/userSlice";
 
 function LogInGuest({ activeModal, setactiveModal }) {
-  const [guest, setGuest] = useState(false);
-  const [user, setUser] = useState(false);
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
   const handleBack = () => {
     history.push("./sign-up");
   };
-  const handleSubmit = (e) => {
-    console.log(e.username);
+
+  const handleSubmit = async (e) => {
+    setLoading(true);
     console.log(e.email);
+    console.log(e.password);
 
     var payload = {
-      username: e.email,
-      password: e.username,
+      email: e.email,
+      password: e.password,
     };
     console.log(payload);
 
-    axios.defaults.headers.post["Content-Type"] =
-      "application/json;charset=utf-8";
-    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-    axios.defaults.headers.post["Access-Control-Allow-Methods"] = "POST";
-    axios
-      .post(apiBaseUrl, payload)
-      .then(function (response) {
-        console.log(response);
-        if (response.status == 200) {
-          console.log("Login successfull");
-          //  window.Response("Login successfull - Welcome to Pretzl"+`\n`+"AccessToken : "+response.data.accessToken +'\n'+"Roles : "+response.data.roles)
-          alert(
-            "Login successfull - Welcome to Pretzl" +
-              `\n` +
-              "AccessToken : " +
-              response.data.accessToken +
-              "\n" +
-              "Roles : " +
-              response.data.roles
-          );
-          history.push("./discussion");
-        } else if (response.status == 401) {
-          console.log("Username password do not match");
-          alert("Username password do not match");
-        } else {
-          console.log("Username does not exists");
-          alert("Username does not exist");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-        if (error.response.status == 401) {
-          console.log("Username password do not match");
-          alert(
-            error.response.data.message +
-              `\n` +
-              "Username password do not match"
-          );
-        }
-      });
+    await dispatch(logInGuest(payload));
+    setLoading(false);
   };
   return (
     <Page>
@@ -139,10 +106,17 @@ function LogInGuest({ activeModal, setactiveModal }) {
                   />
                 </div>
                 <div className="btn-holder">
-                  <GoogleBtn />
                   <Button mt="mt-1" disabled={!(isValid && dirty)}>
-                    Log In
+                    {loading ? (
+                      <h2 className="flex items-center">
+                        <CgSpinner className="animate-spin    mr-1" />{" "}
+                        Loading...
+                      </h2>
+                    ) : (
+                      " Log In"
+                    )}
                   </Button>
+                  <GoogleBtn />
 
                   <div className="account-text">
                     <h3 className="">If you don't have an account,</h3>

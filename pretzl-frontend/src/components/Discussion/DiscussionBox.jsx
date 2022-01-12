@@ -49,7 +49,7 @@ function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
           <h4>{code}</h4>
           <MdContentCopy className="ml-2" />
         </div>
-        <Link to={{ pathname: `/discussion/${id}` }}>
+        <Link to={{ pathname: `/discussion/${code}` }}>
           <button>Open</button>
         </Link>
       </div>
