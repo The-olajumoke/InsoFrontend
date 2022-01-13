@@ -31,8 +31,9 @@ function LogInGuest({ activeModal, setactiveModal }) {
     console.log(e.password);
 
     var payload = {
+      firstName: e.firstName,
+      lastName: e.lastName,
       email: e.email,
-      password: e.password,
     };
     console.log(payload);
 
@@ -68,9 +69,9 @@ function LogInGuest({ activeModal, setactiveModal }) {
           </div>
           <Formik
             initialValues={{
+              firstName: "",
+              lastName: "",
               email: "",
-              password: "",
-              repeatPassword: "",
             }}
             onSubmit={handleSubmit}
             validationSchema={Yup.object({
@@ -90,19 +91,19 @@ function LogInGuest({ activeModal, setactiveModal }) {
               <Form className="log-form">
                 <div className="form-cont ">
                   <CustomField
+                    name="firstName"
+                    type="text "
+                    placeholder="First name"
+                  />
+                  <CustomField
+                    name="lastName"
+                    type="text"
+                    placeholder="Last name"
+                  />
+                  <CustomField
                     placeholder="Enter email..."
                     type="email"
                     name="email"
-                  />
-                  <CustomField
-                    name="password"
-                    type="password"
-                    placeholder="Create password"
-                  />
-                  <CustomField
-                    name="repeatPassword"
-                    type="password"
-                    placeholder="Confirm password"
                   />
                 </div>
                 <div className="btn-holder">

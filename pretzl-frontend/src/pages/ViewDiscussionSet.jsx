@@ -27,7 +27,7 @@ const disc=localStorage.getItem('disc')
     <BodyWrapper>
       <ResponsiveTop title="Discussion Title" />
       <div className="disMain ">
-        {showModal && <EditDisModal showEditModal={showEditModal} discussions={DiscussionCont} />}
+        {showModal && <EditDisModal showEditModal={showEditModal} discussions ={DiscussionCont} />}
         <div className="disCont">
           <div className="discBtnCont">
             <div className="viewHeadText">

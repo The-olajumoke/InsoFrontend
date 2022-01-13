@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   /* border: orangered 2px solid; */
+  position: relative;
 }
 .viewHeading {
   height: 50px;
@@ -64,9 +65,10 @@
 }
 .DiscProp {
   background: #fafafa;
-  height: 90px;
+  /* height: 90px; */
   padding: 10px 45px;
   margin-bottom: 20px;
+  
 }
 .DiscProp .top {
   display: flex;
@@ -78,6 +80,7 @@
   border-radius: 500px;
   margin-right: 10px;
 }
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -134,6 +137,20 @@
   display: flex;
   align-items: center;
   color: #686868;
+  margin-bottom: 10px;
+}
+.DiscPostInspBtn {
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  padding: 5px 20px;
+  background: #07a098;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  gap: 10px;
 }
 /* COMMENTs */
 .allCommentCont {

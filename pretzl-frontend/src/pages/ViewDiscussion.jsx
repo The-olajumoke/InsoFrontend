@@ -16,6 +16,8 @@ import smile from "../Exports/comment/sentiment_satisfied_alt.svg";
 import cameraAlt from "../Exports/comment/camera_alt.svg";
 import ResponsiveTop from "../components/ResponsiveTop";
 import store from "../redux/store";
+import postInDrop from "../Exports/comment/postIn.svg";
+import ViewPostInsp from "../components/Discussion/ViewPostInsp";
 function ViewDiscussion() {
   const { code } = useParams();
   console.log(code);
@@ -24,11 +26,14 @@ function ViewDiscussion() {
   console.log(AllDisc);
   let discussion = AllDisc.find((disc) => code == disc.discussionId);
   console.log(discussion);
+  // Get Discussion details by discussionId:
+//  http://localhost:8080/api/auth/discussion?discussionId=a3bdc000-79a8-492c-8727-274d90c5b075
 
   return (
     <BodyWrapper>
       <ResponsiveTop title="Discussion" />
       <div className="viewDisCont pt-1">
+      <ViewPostInsp/>
         {/* HEADING AND TITLE */}
         <div className="viewHeading ">
           <div className="viewHeadText">
@@ -49,12 +54,26 @@ function ViewDiscussion() {
         </div>
         {/* MAIN DISCUSSION */}
         <ViewDisTemp
-          question={discussion.description}
-          name={discussion.username}
-          username={discussion.username}
+          question="In this discussion we are going to take sides on a topic. 
+You can start a new thread to argue for either of the sides and/pr respond to posts made by your classmates. "
+          name="hello world"
+          username="hello world"
+          // question={discussion.description}
+          // name={discussion.username}
+          // username={discussion.username}
         />
         {/* Comment Section */}
-        <div className="allCommentCont">
+        <div className="allCommentCont border">
+          <ViewCommentTemp
+            name="Elvis Collins"
+            username="COLLINS"
+            comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+          />
+          <ViewCommentTemp
+            name="Elvis Collins"
+            username="COLLINS"
+            comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+          />
           <ViewCommentTemp
             name="Elvis Collins"
             username="COLLINS"
@@ -69,7 +88,7 @@ function ViewDiscussion() {
         {/* COMMENT BOX */}
         <div className="commentBoxCont">
           <div className="commentBox">
-            <h4 className="replyTo">@ {discussion.username}</h4>
+            {/* <h4 className="replyTo">@ {discussion.username}</h4> */}
             <textarea
               className="textA"
               name=""
@@ -86,7 +105,10 @@ function ViewDiscussion() {
                 <img src={assessment} alt="" />
               </div>
               <div className="commentBtnCont ">
-                <button className="commentBtn">Post as</button>
+                <button className="commentBtn">
+                  Post as
+                  <img className="ml-1" src={postInDrop} alt="" />
+                </button>
                 <button className="commentBtn">Send</button>
               </div>
             </div>

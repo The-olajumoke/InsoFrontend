@@ -104,6 +104,7 @@ function PostInsp(props) {
                 key={index}
                 id={index}
                 type="text"
+                value={allPostInsp[index].post_inspiration}
                 onChange={(e) => {
                   let newInsp = [...allPostInsp];
                   newInsp[e.target.id].post_inspiration = e.target.value;
@@ -120,6 +121,7 @@ function PostInsp(props) {
                 key={index}
                 id={index}
                 type="text"
+                value={RespInsp[index].post_inspiration}
                 onChange={(e) => {
                   let newInsp = [...RespInsp];
                   newInsp[e.target.id].post_inspiration = e.target.value;
@@ -137,8 +139,9 @@ function PostInsp(props) {
                 key={index}
                 id={index}
                 type="text"
+                value={SynInsp[index].post_inspiration}
                 onChange={(e) => {
-                  let newInsp = [...allPostInsp];
+                  let newInsp = [...SynInsp];
                   newInsp[e.target.id].post_inspiration = e.target.value;
                   setAllPostInsp(newInsp);
                   // console.log(allPostInsp);
@@ -147,19 +150,50 @@ function PostInsp(props) {
                 placeholder="Type in post inspirations..."
               />
             ))}
+            {/* ADD BUTTON */}
+          {posting && (
+            <div className="inspAddCircle">
+              <img
+                src={addCircle}
+                alt=""
+                onClick={() => {
+                  const data = {
+                    post_inspiration: "Type in a post inspiration",
+                  };
+                  setAllPostInsp([...allPostInsp, data]);
+                }}
+              />
+            </div>
+          )}
+          {responding && (
+            <div className="inspAddCircle">
+              <img
+                src={addCircle}
+                alt=""
+                onClick={() => {
+                  const data = {
+                    post_inspiration: "Type in a post inspiration",
+                  };
+                  setRespInsp([...RespInsp, data]);
+                }}
+              />
+            </div>
+          )}
+          {synthesizing && (
+            <div className="inspAddCircle">
+              <img
+                src={addCircle}
+                alt=""
+                onClick={() => {
+                  const data = {
+                    post_inspiration: "Type in a post inspiration",
+                  };
+                  setSynInsp([...SynInsp, data]);
+                }}
+              />
+            </div>
+          )}
 
-          <div className="inspAddCircle">
-            <img
-              src={addCircle}
-              alt=""
-              onClick={() => {
-                const data = {
-                  post_inspiration: "Type in a post inspiration",
-                };
-                setAllPostInsp([...allPostInsp, data]);
-              }}
-            />
-          </div>
           <div className="addinsp">
             <button>Add post inspiration</button>
           </div>

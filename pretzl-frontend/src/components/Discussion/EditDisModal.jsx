@@ -28,7 +28,7 @@ function EditDisModal({ discussio, showEditModal }) {
   const [synthesizing, setSynthesizing] = useState(false);
   const [allPostInsp, setAllPostInsp] = useState([
     {
-      post_inspiration: "Type in a post inspiration",
+      post_inspiration: "Todya wjfdkmfdng",
     },
     {
       post_inspiration: "Type in a post inspiration",
@@ -42,7 +42,7 @@ function EditDisModal({ discussio, showEditModal }) {
   ]);
   const [SynInsp, setSynInsp] = useState([
     {
-      post_inspiration: "Type in a post inspiration",
+      post_inspiration: "Ty Syntejjnjnjcnvjniration",
     },
   ]);
 

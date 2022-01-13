@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "../../Exports/Avatar.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { MdChatBubbleOutline } from "react-icons/md";
 function ViewDisTemp({ name, question, username }) {
   return (
     <div className="DiscProp">
@@ -23,8 +24,12 @@ function ViewDisTemp({ name, question, username }) {
       </div>
       {/* Content */}
       <div className="viewMainText">
-        <h3>{question}</h3>
+        <h3 className="w-5/6">{question}</h3>
       </div>
+      <button className="DiscPostInspBtn">
+        <MdChatBubbleOutline />
+        Post Inspirations
+      </button>
     </div>
   );
 }

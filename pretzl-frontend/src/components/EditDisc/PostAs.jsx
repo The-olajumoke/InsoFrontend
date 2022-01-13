@@ -60,9 +60,10 @@ function PostAs(props) {
                 type="text"
                 className="postAsBtn"
                 placeholder="#channel"
+                value={allPostAs[index].post_in}
                 onChange={(e) => {
                   let newpostAs = [...allPostAs];
-                  newpostAs[e.target.id].post_in = ` # ${e.target.value}`;
+                  newpostAs[e.target.id].post_in = e.target.value;
                   setAllPostAs(newpostAs);
                   // console.log(allPostInsp);
                 }}
