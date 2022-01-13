@@ -75,7 +75,7 @@ function StarterPrompt(props) {
 `} */}
             </textarea>
             <div className="widgetCont">
-              <div className="widget settingsWidget border">
+              <div className="widget settingsWidget">
                 <img src={textFormat} alt="" />
                 <img src={smile} alt="" />
                 <img src={attFile} alt="" />
