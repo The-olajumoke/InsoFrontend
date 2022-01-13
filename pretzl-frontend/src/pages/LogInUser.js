@@ -9,7 +9,6 @@ import CustomField from "../components/Form/CustomInput";
 import Button from "../components/SignUp/Button";
 import Page from "../components/SignUp/Page";
 import history from "../utils/history";
-import axios from "axios";
 import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 import { CgSpinner } from "react-icons/cg";
 import CustomizedSnackbars from "../components/NotiPopUp";
@@ -21,14 +20,13 @@ import store from "../redux/store";
 function LogInUser({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
 
-  const [guest, setGuest] = useState(false);
-  const [user, setUser] = useState(false);
-  const [loading, setLoading] = useState(false);
+ const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const handleBack = () => {
     history.push("./");
   };
+  
   const handleSubmit = async (e) => {
     setLoading(true);
     console.log(e.password);

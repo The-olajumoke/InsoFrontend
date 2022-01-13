@@ -73,11 +73,15 @@
 }
 
 .react-calendar__tile--active {
-  background: #07a098 !important;
+  background: rgb(7, 160, 152, 0.45) !important;
+
   color: white !important;
+  border-radius: 50% !important;
 }
-.react-calendar__tile--hasActive {
-  background: #06928b !important;
+.react-calendar__tile--rangeEnd,
+.react-calendar__tile--rangeStart {
+  border-radius: 50% !important;
+  background: #07a098 !important;
   color: white !important;
 }
 abbr[title] {
@@ -189,5 +193,15 @@ abbr[title] {
   }
   .selected {
     font-size: 14px;
+  }
+  .closeCalendar {
+    top: 25px;
+    right: 35px;
+    color: red;
+    width: 30px;
+    z-index: 5;
+  }
+  .react-calendar {
+    padding: 30px 20px;
   }
 }

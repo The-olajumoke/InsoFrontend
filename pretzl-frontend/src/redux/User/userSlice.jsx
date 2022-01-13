@@ -36,7 +36,7 @@ const userSlice = createSlice({
       state.user.userName = payload;
     },
     setLoggedOutUser: (state, { payload }) => {
-     return initialState
+      return initialState;
     },
   },
 });
@@ -107,6 +107,38 @@ export const logInUser = createAsyncThunk(
     }
   }
 );
+export const logInGuest = createAsyncThunk(
+  "user/logInUser",
+  async (data, { dispatch }) => {
+    var apiBaseUrl = "http://localhost:8080/api/auth/guestLogin";
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=Utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST",
+      },
+    };
+    try {
+      const res = await axios.post(apiBaseUrl, data, axiosConfig);
+
+      console.log(res);
+
+      console.log(res.data);
+      // const token = res.data.accessToken;
+      // localStorage.setItem("jwtToken", token);
+      // setAuthToken(token);
+      // const username = res.data.username;
+      // localStorage.setItem("username", username);
+      // dispatch(setLoggedInUser(username));
+
+      // dispatch(setCurrentUser(data))
+      history.push("./discussions");
+    } catch (error) {
+      console.log({ ...error });
+      // alert("failure");
+    }
+  }
+);
 // SETTINGS PAGE
 export const editDetails = createAsyncThunk(
   "user/editUserDetails",
@@ -136,7 +168,7 @@ export const logOutUser = () => (dispatch) => {
   localStorage.removeItem("username");
   setAuthToken("");
   dispatch(setLoggedOutUser());
-  history.push('/')
+  history.push("/");
 };
 export const {
   setCurrentUser,

@@ -1,7 +1,6 @@
 import React from "react";
 import BodyWrapper from "../components/BodyWrapper";
 import { useParams } from "react-router-dom";
-import { allDiscData } from "../DummyData/discData";
 import "../Styling/viewDiscussion.css";
 import vec1 from "../Exports/vec1.svg";
 import vec2 from "../Exports/vec2.svg";
@@ -13,21 +12,28 @@ import textFormat from "../Exports/comment/text_format.svg";
 import attFile from "../Exports/comment/attach_file.svg";
 import assessment from "../Exports/comment/assessment.svg";
 import insertPhoto from "../Exports/comment/insert_photo.svg";
-import code from "../Exports/comment/icomoon-free_embed2.svg"
 import smile from "../Exports/comment/sentiment_satisfied_alt.svg";
-import cameraAlt from "../Exports/comment/camera_alt.svg"
+import cameraAlt from "../Exports/comment/camera_alt.svg";
 import ResponsiveTop from "../components/ResponsiveTop";
+import store from "../redux/store";
+import postInDrop from "../Exports/comment/postIn.svg";
+import ViewPostInsp from "../components/Discussion/ViewPostInsp";
 function ViewDiscussion() {
-  const { id } = useParams();
-  console.log(allDiscData);
-  let discussion = allDiscData.find((disc) => id == disc.id);
-
+  const { code } = useParams();
+  console.log(code);
+  const currentStore = store.getState();
+  const AllDisc = currentStore.disc.discussions;
+  console.log(AllDisc);
+  let discussion = AllDisc.find((disc) => code == disc.discussionId);
   console.log(discussion);
+  // Get Discussion details by discussionId:
+//  http://localhost:8080/api/auth/discussion?discussionId=a3bdc000-79a8-492c-8727-274d90c5b075
 
   return (
     <BodyWrapper>
-      <ResponsiveTop title="Discussion"/>
+      <ResponsiveTop title="Discussion" />
       <div className="viewDisCont pt-1">
+      <ViewPostInsp/>
         {/* HEADING AND TITLE */}
         <div className="viewHeading ">
           <div className="viewHeadText">
@@ -35,7 +41,7 @@ function ViewDiscussion() {
               onClick={() => history.push("../discussions")}
               className="viewIcon"
             />
-            <h3>{discussion.title}</h3>
+            <h3>Type title here</h3>
           </div>
           <div className="viewButton">
             <button>Charts</button>
@@ -48,13 +54,26 @@ function ViewDiscussion() {
         </div>
         {/* MAIN DISCUSSION */}
         <ViewDisTemp
-          question={discussion.question}
-          name={discussion.name}
-          username={discussion.username}
+          question="In this discussion we are going to take sides on a topic. 
+You can start a new thread to argue for either of the sides and/pr respond to posts made by your classmates. "
+          name="hello world"
+          username="hello world"
+          // question={discussion.description}
+          // name={discussion.username}
+          // username={discussion.username}
         />
         {/* Comment Section */}
-        <div className="allCommentCont">
-      
+        <div className="allCommentCont border">
+          <ViewCommentTemp
+            name="Elvis Collins"
+            username="COLLINS"
+            comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+          />
+          <ViewCommentTemp
+            name="Elvis Collins"
+            username="COLLINS"
+            comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+          />
           <ViewCommentTemp
             name="Elvis Collins"
             username="COLLINS"
@@ -69,6 +88,7 @@ function ViewDiscussion() {
         {/* COMMENT BOX */}
         <div className="commentBoxCont">
           <div className="commentBox">
+            {/* <h4 className="replyTo">@ {discussion.username}</h4> */}
             <textarea
               className="textA"
               name=""
@@ -76,7 +96,7 @@ function ViewDiscussion() {
             ></textarea>
             <div className="widgetCont">
               <div className="widget">
-                <img src={textFormat} alt=""/>
+                <img src={textFormat} alt="" />
                 <img src={smile} alt="" />
                 <img src={attFile} alt="" />
                 <img src={insertPhoto} alt="" />
@@ -85,7 +105,10 @@ function ViewDiscussion() {
                 <img src={assessment} alt="" />
               </div>
               <div className="commentBtnCont ">
-                <button className="commentBtn">Post as</button>
+                <button className="commentBtn">
+                  Post as
+                  <img className="ml-1" src={postInDrop} alt="" />
+                </button>
                 <button className="commentBtn">Send</button>
               </div>
             </div>

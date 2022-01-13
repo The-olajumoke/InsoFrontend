@@ -1,27 +1,15 @@
 import React, { useState } from "react";
-import { FiArrowUp } from "react-icons/fi";
-import {
-  MdCancel,
-  MdKeyboardArrowUp,
-  MdKeyboardArrowDown,
-  MdArrowUpward,
-  MdBarChart,
-} from "react-icons/md";
-import { BiSmile } from "react-icons/bi";
 import "../../Styling/Discussion/EditDis.css";
-import textFormat from "../../Exports/comment/text_format.svg";
-import attFile from "../../Exports/comment/attach_file.svg";
-import assessment from "../../Exports/comment/assessment.svg";
-import insertPhoto from "../../Exports/comment/insert_photo.svg";
-import code from "../../Exports/comment/icomoon-free_embed2.svg";
-import smile from "../../Exports/comment/sentiment_satisfied_alt.svg";
-import cameraAlt from "../../Exports/comment/camera_alt.svg";
 import addCircle from "../../Exports/add_circle.svg";
 import clear from "../../Exports/clear.svg";
-import { BsClock, BsChatLeft } from "react-icons/bs";
 import { editDisc } from "../../redux/Discussion/disSlice";
 import { useDispatch } from "react-redux";
 import CalendarTemp from "../EditDisc/CalendarTemp";
+import PostInsp from "../EditDisc/PostInsp";
+import StarterPrompt from "../EditDisc/StarterPrompt";
+import PostAs from "../EditDisc/PostAs";
+import Scores from "../EditDisc/Scores";
+import Calendar from "../EditDisc/Calendar";
 
 function EditDisModal({ discussio, showEditModal }) {
   const dispatch = useDispatch();
@@ -40,10 +28,78 @@ function EditDisModal({ discussio, showEditModal }) {
   const [synthesizing, setSynthesizing] = useState(false);
   const [allPostInsp, setAllPostInsp] = useState([
     {
-      post_inspiration: "Type in a post inspiration",
+      post_inspiration:
+        "Identify course concepts that relate to and/or support your ideas about this topic.",
+    },
+    {
+      post_inspiration:
+        "Ask questions and/or create a poll to generate more discussion and help you and your peers think more deeply about the topic.",
+    },
+    {
+      post_inspiration:
+        "Share ideas about this topic from the perspective of someone who would likely think differently about the topic than you..",
+    },
+    {
+      post_inspiration:
+        "Describe the types of strategies you use to remember important concepts about this topic (for example, attaching note or graphic organizers you have created; share an acrostic, a story, or a rhyme you created to to aid your memory, etc.",
+    },
+    {
+      post_inspiration:
+        "Share a link to a web-based resource that supports your ideas about the topic, explaining the value of that resource for supporting your perspective",
     },
   ]);
 
+  const [RespInsp, setRespInsp] = useState([
+    {
+      post_inspiration:
+        "Identify similarities and differences between the way you and your peer approached this topic.",
+    },
+    {
+      post_inspiration:
+        "Clarify any misunderstandings or inaccuracies you identified in your peer's post.",
+    },
+    {
+      post_inspiration:
+        "Ask follow-up questions and/or create a poll to generate more discussion and help you and your peers think more deeply about this topic.",
+    },
+    {
+      post_inspiration:
+        "Connect ideas shared by you and your peer with specific course concepts.",
+    },
+    {
+      post_inspiration:
+        "Share a link to a web-based resource that would help expand on the ideas shared by your classmate, explaining the value of the resources for understanding the concepts shared by your peer.",
+    },
+  ]);
+  const [SynInsp, setSynInsp] = useState([
+    {
+      post_inspiration:
+        "Explore the discussion charts to identify frequently used tags that are interesting to you. Identify the tags and explain why you believe those tags were important to the discussion of this topic.",
+    },
+    {
+      post_inspiration:
+        "Explore the discussion charts to identify connections between tags that are interesting to you. Describe the connections you found and explain how those connections might inform how we think about this topic.",
+    },
+    {
+      post_inspiration:
+        "Explore the discussion charts to identify the three most popular threads. Identify common themes and/or tags present in each. Explain how those themes and/or tags might inform how we think about this topic.",
+    },
+    {
+      post_inspiration:
+        "Filter the discussion by tags that interest you and review all the posts containing those tags. Describe common themes from the posts using those tags.",
+    },
+    {
+      post_inspiration:
+        "Filter the discussion by upvotes to identify the three most important posts. Summarize the main points made in each of those posts and explain how those ideas can help the class think better about this topic.",
+    },
+    {
+      post_inspiration:
+        "Explain how lessons learned from this discussion can apply to other related or unrelated topics or situations.",
+    },
+  ]);
+  // ALL/TOTAL INPISRATION
+  let total_Insp = [allPostInsp, RespInsp, SynInsp];
+  console.log(total_Insp);
   // POST IN
   const [postAs, setpostAs] = useState(false);
   const [postAsMode, setpostAsMode] = useState(false);
@@ -61,10 +117,10 @@ function EditDisModal({ discussio, showEditModal }) {
   // SCORES
   const [scores, setscores] = useState(false);
   const [scoresMode, setScoresMode] = useState(false);
-  const [scoresValue, setScoresValue] = useState(20);
-  const [reactionsValue, setReactionsValue] = useState(20);
-  const [upvoteValue, setUpvoteValue] = useState(20);
-  const [totalValue, setTotalValue] = useState(60);
+  const [scoresValue, setScoresValue] = useState(5);
+  const [reactionsValue, setReactionsValue] = useState(5);
+  const [upvoteValue, setUpvoteValue] = useState(5);
+  const [totalValue, setTotalValue] = useState(100);
   const [allrubric, setAllRubric] = useState([
     {
       criteria: "must be white",
@@ -155,10 +211,15 @@ function EditDisModal({ discussio, showEditModal }) {
     setSaveState(true);
   };
   console.log(allCheckedIDs);
-  let discussions = ["heelo", "hi"];
+  let discussions = [
+    "heelo",
+    "heelo how have you been",
+    " hope all is going well",
+    "itsd been a while",
+  ];
   return (
     <div className="editModal">
-      <div className="EditDiscont">
+      <div className="EditDiscont ">
         <div className="EditDisTop">
           <button
             className={`saveBtn ${saveState ? "bg-primary" : "bg-saveBtn"} 
@@ -168,7 +229,7 @@ function EditDisModal({ discussio, showEditModal }) {
           >
             Save
           </button>
-          <img src={clear} onClick={showEditModal} alt="" />
+          <img className="canbtn" src={clear} onClick={showEditModal} alt="" />
         </div>
         <h2 className="EditHeading">Discussions</h2>
         <div className="allCheckDisc " id={discussions[0].setId}>
@@ -190,12 +251,13 @@ function EditDisModal({ discussio, showEditModal }) {
                   onChange={checkBox}
                 />
               )}
-              <label htmlFor="">{dis.description}</label>
+              {/* <label htmlFor="">{dis.description}</label> */}
+              <label htmlFor="">{dis}</label>
             </div>
           ))}
         </div>
         {/*  BENEATH BOX */}
-        <div className="px-10">
+        <div className="px-5">
           <hr />
         </div>
         <div className="EditDisBottom">
@@ -209,529 +271,108 @@ function EditDisModal({ discussio, showEditModal }) {
 
           <div className="allSettings">
             {/* STARTER PROMPT */}
-            <div className="settingsMainCont ">
-              <div className="settingsTop">
-                <h3 className="settingsName ">Starter prompt</h3>
-                <div className="settingsControl">
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="starterPrompt"
-                      id="starterPrompt"
-                      onChange={(e) => {
-                        setstarterPromptMode(!starterPromptMode);
-                        setSaveState(true);
-                      }}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                  {starterPrompt ? (
-                    <MdKeyboardArrowUp
-                      className="settingsIcon"
-                      onClick={() => {
-                        setstarterPrompt(!starterPrompt);
-                      }}
-                    />
-                  ) : (
-                    <MdKeyboardArrowDown
-                      className="settingsIcon"
-                      onClick={() => {
-                        setstarterPrompt(true);
-                        setPostInsp(false);
-                        setpostAs(false);
-                        setscores(false);
-                        setCalendar(false);
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-              {starterPrompt && (
-                <div className="settingsMore">
-                  <div
-                    className={`commentBox  settingsBox ${
-                      starterPromptMode ? "" : "unactive"
-                    }`}
-                  >
-                    <textarea
-                      className="textA"
-                      name=""
-                      readOnly={!starterPromptMode}
-                      // placeholder="Get this discussion started"
-                      onChange={(e) => setstarterPromptValue(e.target.value)}
-                    >
-                      {`1. In this discussion we are going to be exploring.
-                     2.If you are responding directly to my initial post, you can select a specific channel to post in by selecting the appropriate tag from the "Post in" dropdown menu.
-                    3. For all posts and responses, be sure to #hashtag any keywords or themes.
-                    4. For some ideas on what sorts of things you should post, click Posting Inspiration and explore the prompts for posting, responding and synthesizing.
-
-`}
-                    </textarea>
-                    <div className="widgetCont">
-                      <div className="widget settingsWidget">
-                        <img src={textFormat} alt="" />
-                        <img src={smile} alt="" />
-                        <img src={attFile} alt="" />
-                        <img src={insertPhoto} alt="" />
-                        <img src={code} alt="" />
-                        <img src={cameraAlt} alt="" />
-                        <img src={assessment} alt="" />
-                      </div>
-                    </div>
-                  </div>{" "}
-                </div>
-              )}
-            </div>
+            <StarterPrompt
+              starterPrompt={starterPrompt}
+              starterPromptMode={starterPromptMode}
+              setstarterPromptMode={setstarterPromptMode}
+              setSaveState={setSaveState}
+              setstarterPromptValue={setstarterPromptValue}
+              //general
+              setstarterPrompt={setstarterPrompt}
+              setPostInsp={setPostInsp}
+              setpostAs={setpostAs}
+              setscores={setscores}
+              setCalendar={setCalendar}
+            />
 
             {/*POST INSPIRATION */}
-            <div className="settingsMainCont">
-              <div className="settingsTop">
-                <h3 className="settingsName ">Post Inspiration</h3>
-                <div className="settingsControl">
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="reports"
-                      id="postInspiration"
-                      onChange={(e) => {
-                        setPostInspMode(!postInspMode);
-                        setSaveState(true);
-                      }}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                  {postInsp ? (
-                    <MdKeyboardArrowUp
-                      className="settingsIcon"
-                      onClick={() => setPostInsp(!postInsp)}
-                    />
-                  ) : (
-                    <MdKeyboardArrowDown
-                      className="settingsIcon"
-                      onClick={() => {
-                        setstarterPrompt(false);
-                        setPostInsp(true);
-                        setpostAs(false);
-                        setscores(false);
-                        setCalendar(false);
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-              {postInsp && (
-                <div
-                  className={`postInspMore ${postInspMode ? "" : "unactive"}`}
-                >
-                  <div className="allPostBtn">
-                    <button
-                      className={`postInspBtn ${posting && "bg-primary"} 
-                      ${posting ? "text-white" : "text-textBody"}`}
-                      onClick={() => {
-                        setPosting(true);
-                        setResponding(false);
-                        setSynthesizing(false);
-                      }}
-                    >
-                      Posting
-                    </button>
-                    <button
-                      className={`postInspBtn ${responding && "bg-primary"} 
-                      ${responding ? "text-white" : "text-textBody"}`}
-                      onClick={() => {
-                        setPosting(false);
-                        setResponding(true);
-                        setSynthesizing(false);
-                      }}
-                    >
-                      Responding
-                    </button>
-                    <button
-                      className={`postInspBtn ${synthesizing && "bg-primary"} 
-                      ${synthesizing ? "text-white" : "text-textBody"}`}
-                      onClick={() => {
-                        setPosting(false);
-                        setResponding(false);
-                        setSynthesizing(true);
-                      }}
-                    >
-                      Synthesizing
-                    </button>
-                  </div>
-                  {allPostInsp.map((ins, index) => (
-                    <input
-                      key={index}
-                      id={index}
-                      type="text"
-                      onChange={(e) => {
-                        let newInsp = [...allPostInsp];
-                        newInsp[e.target.id].post_inspiration = e.target.value;
-                        setAllPostInsp(newInsp);
-                        // console.log(allPostInsp);
-                      }}
-                      className="postInspInput mb-2 "
-                      placeholder="Type in post inspirations..."
-                    />
-                  ))}
-                  <div className="inspAddCircle">
-                    <img
-                      src={addCircle}
-                      alt=""
-                      onClick={() => {
-                        const data = {
-                          post_inspiration: "Type in a post inspiration",
-                        };
-                        setAllPostInsp([...allPostInsp, data]);
-                      }}
-                    />
-                  </div>
-                  <div className="addinsp">
-                    <button>Add post inspiration</button>
-                  </div>
-                </div>
-              )}
-            </div>
+            <PostInsp
+              setPostInspMode={setPostInspMode}
+              postInspMode={postInspMode}
+              setSaveState={setSaveState}
+              postInsp={postInsp}
+              allPostInsp={allPostInsp}
+              setAllPostInsp={setAllPostInsp}
+              RespInsp={RespInsp}
+              setRespInsp={setRespInsp}
+              SynInsp={SynInsp}
+              setSynInsp={setSynInsp}
+              posting={posting}
+              setPosting={setPosting}
+              responding={responding}
+              setResponding={setResponding}
+              synthesizing={synthesizing}
+              setSynthesizing={setSynthesizing}
+              addCircle={addCircle}
+              // general
+              setstarterPrompt={setstarterPrompt}
+              setPostInsp={setPostInsp}
+              setpostAs={setpostAs}
+              setscores={setscores}
+              setCalendar={setCalendar}
+            />
 
             {/*POST IN */}
-            <div className="settingsMainCont">
-              <div className="settingsTop">
-                <h3 className="settingsName ">Post in</h3>
-                <div className="settingsControl">
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="reports"
-                      id="postAs"
-                      onChange={(e) => {
-                        setpostAsMode(!postAsMode);
-                        setSaveState(true);
-                      }}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                  {postAs ? (
-                    <MdKeyboardArrowUp
-                      className="settingsIcon"
-                      onClick={() => setpostAs(!postAs)}
-                    />
-                  ) : (
-                    <MdKeyboardArrowDown
-                      className="settingsIcon"
-                      onClick={() => {
-                        setstarterPrompt(false);
-                        setPostInsp(false);
-                        setpostAs(true);
-                        setscores(false);
-                        setCalendar(false);
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-              {postAs && (
-                <div className={`postInspMore ${postAsMode ? "" : "unactive"}`}>
-                  <div className="allPostBtn allPostAsBtn">
-                    {allPostAs.map((pos, index) => (
-                      <input
-                        id={index}
-                        type="text"
-                        className="postAsBtn"
-                        placeholder="#channel"
-                        onChange={(e) => {
-                          let newpostAs = [...allPostAs];
-                          newpostAs[
-                            e.target.id
-                          ].post_in = ` # ${e.target.value}`;
-                          setAllPostAs(newpostAs);
-                          // console.log(allPostInsp);
-                        }}
-                      />
-                    ))}
-                    <img
-                      src={addCircle}
-                      alt=""
-                      onClick={() => {
-                        const data = { post_in: "" };
-                        setAllPostAs([...allPostAs, data]);
-                      }}
-                    />
-                    {/* </div> */}
-                  </div>
-                </div>
-              )}
-            </div>
+            <PostAs
+              postAs={postAs}
+              setpostAsMode={setpostAsMode}
+              postAsMode={postAsMode}
+              allPostAs={allPostAs}
+              setAllPostAs={setAllPostAs}
+              addCircle={addCircle}
+              // general
+              setSaveState={setSaveState}
+              setstarterPrompt={setstarterPrompt}
+              setPostInsp={setPostInsp}
+              setpostAs={setpostAs}
+              setscores={setscores}
+              setCalendar={setCalendar}
+            />
+
             {/*SCORES */}
-            <div className="settingsMainCont">
-              <div className="settingsTop">
-                <h3 className="settingsName ">Scores</h3>
-                <div className="settingsControl">
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="reports"
-                      id="scores"
-                      onChange={(e) => {
-                        setScoresMode(!scoresMode);
-                        setSaveState(true);
-                      }}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                  {scores ? (
-                    <MdKeyboardArrowUp
-                      className="settingsIcon"
-                      onClick={() => setscores(!scores)}
-                    />
-                  ) : (
-                    <MdKeyboardArrowDown
-                      className="settingsIcon"
-                      onClick={() => {
-                        setstarterPrompt(false);
-                        setPostInsp(false);
-                        setpostAs(false);
-                        setscores(true);
-                        setCalendar(false);
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-              {scores && (
-                <div className={`postInspMore ${scoresMode ? "" : "unactive"}`}>
-                  <div className="allPostBtn">
-                    <button
-                      // style={{`${automatic?}`}}
-
-                      className={`scoresBtn ${
-                        automatic ? "bg-primary" : "bg-scoresBtn"
-                      } 
-                      ${automatic ? "text-white" : "   text-textBody"}
-                      `}
-                      onClick={() => setautomatic(true)}
-                    >
-                      Automatic
-                    </button>
-                    <button
-                      className={`scoresBtn ${
-                        automatic ? "bg-scoresBtn" : "   bg-primary"
-                      } 
-                      ${automatic ? "text-textBody" : "text-white"}
-                      `}
-                      onClick={() => setautomatic(false)}
-                    >
-                      Rubric
-                    </button>
-                  </div>
-                  {/* Automatic & Rubric */}
-                  {automatic ? (
-                    <div className="autoOptions">
-                      <div className="options ">
-                        <h3 className="optionsName">
-                          <BsChatLeft className="optionsIcon" />
-                          Posts
-                        </h3>
-                        <div className="settingsControl">
-                          <input
-                            className="optionScore"
-                            type="number"
-                            name=""
-                            id=""
-                            placeholder={scoresValue}
-                            onChange={(e) => setScoresValue(e.target.value)}
-                          />
-
-                          <MdKeyboardArrowDown className="settingsIcon" />
-                        </div>
-                      </div>
-                      <div className="options">
-                        <h3 className="optionsName">
-                          <BiSmile className="optionsIcon" />
-                          Reactions
-                        </h3>
-                        <div className="settingsControl">
-                          <input
-                            className="optionScore"
-                            type="number"
-                            name=""
-                            id=""
-                            placeholder={reactionsValue}
-                            onChange={(e) => setReactionsValue(e.target.value)}
-                          />
-
-                          <MdKeyboardArrowDown className="settingsIcon" />
-                        </div>
-                      </div>
-                      <div className="options">
-                        <h3 className="optionsName">
-                          <MdArrowUpward className="optionsIcon" />
-                          Upvotes
-                        </h3>
-                        <div className="settingsControl">
-                          <input
-                            className="optionScore"
-                            type="number"
-                            name=""
-                            id=""
-                            placeholder={upvoteValue}
-                            onChange={(e) => setUpvoteValue(e.target.value)}
-                          />
-
-                          <MdKeyboardArrowDown className="settingsIcon" />
-                        </div>
-                      </div>
-                      <div className="options TotalOptions">
-                        <h3 className="optionsName">
-                          <MdBarChart className="optionsIcon" />
-                          Maximum Score
-                        </h3>
-                        <div className="settingsControl">
-                          <input
-                            className="optionScore"
-                            type="number"
-                            name=""
-                            id=""
-                            placeholder={totalValue}
-                            onChange={(e) => setTotalValue(e.target.value)}
-                          />
-
-                          <MdKeyboardArrowDown className="settingsIcon opacity-0" />
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="rubricTop">
-                        <h3 className="rubricTopText">Criteria</h3>
-                        <h3 className="rubricTopText">Score</h3>
-                      </div>
-                      <div className="rubricMid mb-3">
-                        <h3 className="">Maximum Score</h3>
-                        <div className="rubricScores">
-                          <h2 className="text-primary">{rubMaxScore}</h2>
-                        </div>
-                      </div>
-                      {allrubric.map((rub, index) => (
-                        <div className="rubricMid mb-3">
-                          <input
-                            type="text"
-                            className="rubricInput"
-                            placeholder="At least 5 comments"
-                            onChange={(e) => {
-                              let newrub = [...allrubric];
-                              newrub[e.target.id].criteria = e.target.value;
-                              setAllRubric(newrub);
-                              // console.log(allPostInsp);
-                            }}
-                          />
-                          <div className="rubricScores">
-                            <h2>{midscore}</h2>
-                          </div>
-                        </div>
-                      ))}
-
-                      <div className="rubricBottom">
-                        <div className="inspAddCircle">
-                          <img
-                            src={addCircle}
-                            alt=""
-                            onClick={() => {
-                              const data = { criteria: "" };
-                              setAllRubric([...allrubric, data]);
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              )}
-            </div>
+            <Scores
+              setScoresMode={setScoresMode}
+              scoresMode={scoresMode}
+              scores={scores}
+              automatic={automatic}
+              setautomatic={setautomatic}
+              scoresValue={scoresValue}
+              reactionsValue={reactionsValue}
+              upvoteValue={upvoteValue}
+              setReactionsValue={setReactionsValue}
+              setUpvoteValue={setUpvoteValue}
+              totalValue={totalValue}
+              setTotalValue={setTotalValue}
+              rubMaxScore={rubMaxScore}
+              midscore={midscore}
+              allrubric={allrubric}
+              setAllRubric={setAllRubric}
+              setScoresValue={setScoresValue}
+              addCircle={addCircle}
+              // general
+              setSaveState={setSaveState}
+              setstarterPrompt={setstarterPrompt}
+              setPostInsp={setPostInsp}
+              setpostAs={setpostAs}
+              setscores={setscores}
+              setCalendar={setCalendar}
+            />
 
             {/*CALENDAR */}
-            <div className="settingsMainCont">
-              <div className="settingsTop">
-                <h3 className="settingsName ">Calendar</h3>
-                <div className="settingsControl">
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      name="reports"
-                      id="calendar"
-                      onChange={(e) => {
-                        setCalendarMode(!calendarMode);
-                        setSaveState(true);
-                      }}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                  {calendar ? (
-                    <MdKeyboardArrowUp
-                      className="settingsIcon"
-                      onClick={() => setCalendar(!calendar)}
-                    />
-                  ) : (
-                    <MdKeyboardArrowDown
-                      className="settingsIcon"
-                      onClick={() => {
-                        setstarterPrompt(false);
-                        setPostInsp(false);
-                        setpostAs(false);
-                        setscores(false);
-                        setCalendar(true);
-                      }}
-                    />
-                  )}
-                </div>
-              </div>
-
-              {calendar && (
-                <div
-                  className={`postInspMore ${calendarMode ? "" : "unactive"}`}
-                >
-                  <div className="calItem">
-                    <h4 className="limit">open</h4>
-                    <div className="calendarOption">
-                      <div className="calendarTime">
-                        <BsClock className="calIcon" />
-                        8:00 <span>AM</span>
-                      </div>
-                      <button
-                        className="calendarInput"
-                        onClick={() => setShowCalDate(true)}
-                      >
-                        {date[0].toLocaleString("en-US", {
-                          weekday: "short",
-                          day: "numeric",
-                          year: "numeric",
-                          month: "long",
-                        })}
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="calItem">
-                    <h4 className="limit">close</h4>
-                    <div className="calendarOption">
-                      <div className="calendarTime">
-                        <BsClock className="calIcon" />
-                        11:59 <span>PM</span>
-                      </div>
-                      <button
-                        className="calendarInput"
-                        onClick={() => setShowCalDate(true)}
-                      >
-                        {date[1].toLocaleString("en-US", {
-                          weekday: "short",
-                          day: "numeric",
-                          year: "numeric",
-                          month: "long",
-                        })}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
+            <Calendar
+              calendarMode={calendarMode}
+              setCalendarMode={setCalendarMode}
+              calendar={calendar}
+              setShowCalDate={setShowCalDate}
+              date={date}
+              // general
+              setSaveState={setSaveState}
+              setstarterPrompt={setstarterPrompt}
+              setPostInsp={setPostInsp}
+              setpostAs={setpostAs}
+              setscores={setscores}
+              setCalendar={setCalendar}
+            />
           </div>
         </div>
         {showCalDate && (
@@ -747,8 +388,3 @@ function EditDisModal({ discussio, showEditModal }) {
 }
 
 export default EditDisModal;
-//  <CalendarTemp
-//           date={date}
-//           setDate={setDate}
-//           setShowCalDate={setShowCalDate}
-//         />

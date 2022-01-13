@@ -45,6 +45,7 @@ module.exports = {
       dashBtn: "#f9f9f9",
       scoresBtn: " #ecf4f4",
       saveBtn: "#eaeaea",
+      favourite: "#DD2E44",
     },
     fontFamily: {
       Poppins: "Poppins",

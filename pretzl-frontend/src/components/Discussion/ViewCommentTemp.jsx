@@ -11,9 +11,9 @@ function ViewCommentTemp({ name, username, comment }) {
         <div className="avatars">
           <img src={Avatar} alt="" />
           <div>
-            <div className="flex items-center">
-              <h5>{name}</h5>
-              <h4>@{username}</h4>
+            <div className="userDet">
+              <h5 className="mainName">{name}</h5>
+              <h4 className="userName">@{username}</h4>
             </div>
             <div className="time">posted 3 mins ago</div>
           </div>
@@ -35,7 +35,7 @@ function ViewCommentTemp({ name, username, comment }) {
         </div>
         <div className="">
           {/* <FiHeart /> */}
-          <BsFillHeartFill className="commentIcons text-red" />
+          <BsFillHeartFill className="commentIcons  text-favourite" />
           <h2>2</h2>
         </div>
       </div>

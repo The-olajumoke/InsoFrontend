@@ -38,8 +38,7 @@ function SignUp1({ activeModal, setactiveModal }) {
     const currentSignedState = currentStore.user.signedState;
     console.log(currentSignedState);
 
-    {
-      currentSignedState ? setShowAlert(true) : setErrorAlert(true);
+    {currentSignedState ?setShowAlert(true): setErrorAlert(true);
     }
   };
   const handleGoogleSignUp = () => {};
