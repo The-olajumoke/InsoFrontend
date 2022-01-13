@@ -3,10 +3,14 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
+import clear from "../../Exports/clear.svg";
+
 function CalendarTemp({ date, setDate, setShowCalDate }) {
   return (
     <div className=" font-poppins  p-5 calTemp">
-      <MdClose
+      <img
+        src={clear}
+        alt=""
         className="closeCalendar"
         onClick={() => setShowCalDate(false)}
       />

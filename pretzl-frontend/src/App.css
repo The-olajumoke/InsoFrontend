@@ -194,4 +194,14 @@ abbr[title] {
   .selected {
     font-size: 14px;
   }
+  .closeCalendar {
+    top: 25px;
+    right: 35px;
+    color: red;
+    width: 30px;
+    z-index: 5;
+  }
+  .react-calendar {
+    padding: 30px 20px;
+  }
 }

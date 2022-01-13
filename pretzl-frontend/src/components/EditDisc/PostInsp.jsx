@@ -150,7 +150,7 @@ function PostInsp(props) {
                 placeholder="Type in post inspirations..."
               />
             ))}
-            {/* ADD BUTTON */}
+          {/* ADD BUTTON */}
           {posting && (
             <div className="inspAddCircle">
               <img
@@ -158,7 +158,7 @@ function PostInsp(props) {
                 alt=""
                 onClick={() => {
                   const data = {
-                    post_inspiration: "Type in a post inspiration",
+                    post_inspiration: "",
                   };
                   setAllPostInsp([...allPostInsp, data]);
                 }}
@@ -172,7 +172,7 @@ function PostInsp(props) {
                 alt=""
                 onClick={() => {
                   const data = {
-                    post_inspiration: "Type in a post inspiration",
+                    post_inspiration: "",
                   };
                   setRespInsp([...RespInsp, data]);
                 }}
@@ -186,7 +186,7 @@ function PostInsp(props) {
                 alt=""
                 onClick={() => {
                   const data = {
-                    post_inspiration: "Type in a post inspiration",
+                    post_inspiration: "",
                   };
                   setSynInsp([...SynInsp, data]);
                 }}

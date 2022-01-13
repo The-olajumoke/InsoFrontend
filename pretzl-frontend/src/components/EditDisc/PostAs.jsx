@@ -53,7 +53,7 @@ function PostAs(props) {
       </div>
       {postAs && (
         <div className={`postInspMore ${postAsMode ? "" : "unactive"}`}>
-          <div className="allPostBtn allPostAsBtn">
+          <div className=" allPostAsBtn ">
             {allPostAs.map((pos, index) => (
               <input
                 id={index}
@@ -69,6 +69,9 @@ function PostAs(props) {
                 }}
               />
             ))}
+          </div>
+          <div className="flex justify-end">
+            {" "}
             <img
               src={addCircle}
               alt=""
@@ -77,8 +80,8 @@ function PostAs(props) {
                 setAllPostAs([...allPostAs, data]);
               }}
             />
-            {/* </div> */}
           </div>
+          {/* </div> */}
         </div>
       )}
     </div>

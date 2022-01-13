@@ -28,6 +28,7 @@ function Scores(props) {
     totalValue,
     setTotalValue,
     rubMaxScore,
+    upvoteValue,
     midscore,
     allrubric,
     setAllRubric,
@@ -147,7 +148,7 @@ function Scores(props) {
                       type="number"
                       name=""
                       id=""
-                      placeholder={setReactionsValue}
+                      placeholder={upvoteValue}
                       onChange={(e) => setUpvoteValue(e.target.value)}
                     />
 
@@ -188,6 +189,7 @@ function Scores(props) {
                 {allrubric.map((rub, index) => (
                   <div className="rubricMid mb-3">
                     <input
+                      id={index}
                       type="text"
                       className="rubricInput"
                       placeholder="At least 5 comments"
