@@ -133,6 +133,8 @@ public class AuthController {
         user.setRoles(roles);
         User userDetails = userRepository.save(user);
 
+        userDetails.setFirstName(guestLoginRequest.getFirstName());
+        userDetails.setLastName(guestLoginRequest.getLastName());
         return ResponseEntity.ok(userDetails);
     }
 
