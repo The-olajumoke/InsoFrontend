@@ -29,14 +29,21 @@ public class UpdateDiscussion {
         discussionDetail.setClose_date(getCloseDate());
         discussionDetail.setPost_inspiration(getPostInspirations().stream().map(PostInspiration::getType).toArray(String[]::new));
         discussionDetail.setScore(actions.getScore());
-        if(actions.getType().equalsIgnoreCase("Scores")) {
+        String actionsType = actions.getType();
+        if(actionsType == null){
+            discussionDetail.setType("Rubric");
+        } else if(actionsType.equalsIgnoreCase("Scores")) {
             discussionDetail.setType("SS");
-        }else if(actions.getType().equalsIgnoreCase("Reactions")){
+        }else if(actionsType.equalsIgnoreCase("Reactions")){
             discussionDetail.setType("SR");
-        }else{
+        }else {
             discussionDetail.setType("SU");
         }
-        discussionDetail.setCriteria(actions.getCriteria().toArray(new String[0]));
+        if(actions.getCriteria() != null) {
+            discussionDetail.setCriteria(actions.getCriteria().toArray(new String[0]));
+        }else {
+            discussionDetail.setCriteria(new String[0]);
+        }
         return discussionDetail;
     }
 

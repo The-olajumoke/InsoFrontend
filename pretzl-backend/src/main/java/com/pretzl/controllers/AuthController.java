@@ -255,5 +255,24 @@ public class AuthController {
                 .ok()
                 .body(discussionDetails1);
     }
+    @PostMapping("/update/discussions")
+    public ResponseEntity<List<DiscussionDetail>> updateDiscussions(@Valid @RequestBody UpdateDiscussionsRequest updateDiscussionsRequest) {
+        String set_id = updateDiscussionsRequest.getSet_id();
+        List<DiscussionDetail> discussionDetails = new ArrayList<>();
+        updateDiscussionsRequest.getUpdateDiscussions().forEach(updateDiscussion -> {
+                    discussionDetails.addAll(updateDiscussion.getScores().getActions().stream()
+                            .map(actions -> updateDiscussion.getDiscussionDetail(set_id, actions))
+                            .collect(Collectors.toList()));
+                    updateDiscussion.getPostAs().forEach(postAs -> discussionDetails.add(updateDiscussion.getDiscussionDetailPostAs(set_id, postAs)));
+                }
+
+        );
+
+        List<DiscussionDetail> discussionDetails1 = discussionDetailsRepository.saveAll(discussionDetails);
+        discussionDetails1.forEach(discussionDetail1 -> System.out.println("Successfully updated for :" + discussionDetail1.getType() + " " + discussionDetail1.getScore()));
+        return ResponseEntity
+                .ok()
+                .body(discussionDetails1);
+    }
 
 }
