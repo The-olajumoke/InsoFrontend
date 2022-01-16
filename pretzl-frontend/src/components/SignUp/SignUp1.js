@@ -3,6 +3,7 @@ import * as Yup from "yup";
 
 import { MdClose } from "react-icons/md";
 import { FiArrowLeft } from "react-icons/fi";
+import { CgSpinner } from "react-icons/cg";
 
 import SignInCont from "../../components/SignInCont";
 import "../../Styling/SignUp.css";
@@ -25,8 +26,11 @@ function SignUp1({ activeModal, setactiveModal }) {
   const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (values, { resetForm }) => {
+    setLoading(true);
+
     const newUser = {
       firstName: values.firstName,
       lastName: values.lastName,
@@ -34,11 +38,12 @@ function SignUp1({ activeModal, setactiveModal }) {
       password: values.password,
     };
     await dispatch(signUpUser(newUser));
+    setLoading(false);
     const currentStore = store.getState();
     const currentSignedState = currentStore.user.signedState;
-    console.log(currentSignedState);
 
-    {currentSignedState ?setShowAlert(true): setErrorAlert(true);
+    {
+      currentSignedState ? setShowAlert(true) : setErrorAlert(true);
     }
   };
   const handleGoogleSignUp = () => {};
@@ -125,7 +130,13 @@ function SignUp1({ activeModal, setactiveModal }) {
 
               <div className="btn-holder">
                 <Button mt="mt-2" disabled={!(isValid && dirty)}>
-                  Sign up
+                  {loading ? (
+                    <h2 className="flex items-center">
+                      <CgSpinner className="animate-spin    mr-1" /> Loading...
+                    </h2>
+                  ) : (
+                    "Sign up"
+                  )}
                 </Button>
                 <GoogleBtn handleClick={handleGoogleSignUp} />
 

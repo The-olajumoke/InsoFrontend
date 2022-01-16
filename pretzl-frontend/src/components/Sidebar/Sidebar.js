@@ -12,12 +12,10 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdChatBubbleOutline } from "react-icons/md";
 import downloadImg from "../../Exports/downloadimg.svg";
 function Sidebar({ navSize, setNavSize }) {
-  const user = {
-    firstName: "Patrick",
-    lastName: "Dempsey",
-  };
-  const firstInit = user.firstName.split("")[0];
-  const lastInit = user.lastName.split("")[0];
+  const firstName = localStorage.getItem("username");
+  const lastName = localStorage.getItem("username");
+  const firstInit = firstName.split("")[0];
+  const lastInit = lastName.split("")[0];
 
   return (
     <>
@@ -34,14 +32,19 @@ function Sidebar({ navSize, setNavSize }) {
             {/* WHEN IMAGE IS UPDATED */}
             {/* <img className={`user-img ${navSize =="small"? "mb-5": ""}`} src={avatar} alt="" />
           > */}
-            <h2 className={`user-img ${navSize == "small" ? "mb-5" : ""}`}>
+            <h2
+              className={`user-img ${
+                navSize == "small" ? "mb-5" : ""
+              } uppercase`}
+            >
               {firstInit} {lastInit}
             </h2>
             <div
               className={`details ${navSize == "small" ? "hidden" : "flex"} `}
             >
               <h3>
-                {user.firstName} {user.lastName}
+                {firstName} 
+                {/* {lastName} */}
               </h3>
               <span>@patrick</span>
             </div>
@@ -113,12 +116,13 @@ function Sidebar({ navSize, setNavSize }) {
     ${navSize == "small" ? "" : "mr-4"}
     `}
         >
-  <button className={`upgradeBtn  ${navSize == "small" ? "p-2" : "p-3"} flex 
-  ${navSize == "small" ? "justify-items-end": "justify-items-start"}`}
-   style={{width: `${navSize == "small" ? "auto" : "200px"}`,}}>
+          <button
+            className={`upgradeBtn  ${navSize == "small" ? "p-2" : "p-3"} flex 
+  ${navSize == "small" ? "justify-items-end" : "justify-items-start"}`}
+            style={{ width: `${navSize == "small" ? "auto" : "200px"}` }}
+          >
             <img src={downloadImg} alt="" />
-      <h3 className={` ${navSize == "small" ? "hidden" : "flex"}   `}
-            >
+            <h3 className={` ${navSize == "small" ? "hidden" : "flex"}   `}>
               Upgrade
             </h3>
           </button>

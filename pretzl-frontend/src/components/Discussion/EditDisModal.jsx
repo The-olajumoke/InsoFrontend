@@ -11,12 +11,11 @@ import PostAs from "../EditDisc/PostAs";
 import Scores from "../EditDisc/Scores";
 import Calendar from "../EditDisc/Calendar";
 
-function EditDisModal({ discussio, showEditModal }) {
+function EditDisModal({ discussions, showEditModal }) {
   const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   const [saveState, setSaveState] = useState(false);
   // STARTER PROMPT
-
   const [starterPrompt, setstarterPrompt] = useState(false);
   const [starterPromptMode, setstarterPromptMode] = useState(false);
   const [starterPromptValue, setstarterPromptValue] = useState("");
@@ -27,93 +26,36 @@ function EditDisModal({ discussio, showEditModal }) {
   const [responding, setResponding] = useState(false);
   const [synthesizing, setSynthesizing] = useState(false);
   const [allPostInsp, setAllPostInsp] = useState([
-    {
-      post_inspiration:
-        "Identify course concepts that relate to and/or support your ideas about this topic.",
-    },
-    {
-      post_inspiration:
-        "Ask questions and/or create a poll to generate more discussion and help you and your peers think more deeply about the topic.",
-    },
-    {
-      post_inspiration:
-        "Share ideas about this topic from the perspective of someone who would likely think differently about the topic than you..",
-    },
-    {
-      post_inspiration:
-        "Describe the types of strategies you use to remember important concepts about this topic (for example, attaching note or graphic organizers you have created; share an acrostic, a story, or a rhyme you created to to aid your memory, etc.",
-    },
-    {
-      post_inspiration:
-        "Share a link to a web-based resource that supports your ideas about the topic, explaining the value of that resource for supporting your perspective",
-    },
+    "Identify course concepts that relate to and/or support your ideas about this topic.",
+    "Ask questions and/or create a poll to generate more discussion and help you and your peers think more deeply about the topic.",
+    "Share ideas about this topic from the perspective of someone who would likely think differently about the topic than you..",
+    "Describe the types of strategies you use to remember important concepts about this topic (for example, attaching note or graphic organizers you have created; share an acrostic, a story, or a rhyme you created to to aid your memory, etc.",
+    "Share a link to a web-based resource that supports your ideas about the topic, explaining the value of that resource for supporting your perspective",
   ]);
-
   const [RespInsp, setRespInsp] = useState([
-    {
-      post_inspiration:
-        "Identify similarities and differences between the way you and your peer approached this topic.",
-    },
-    {
-      post_inspiration:
-        "Clarify any misunderstandings or inaccuracies you identified in your peer's post.",
-    },
-    {
-      post_inspiration:
-        "Ask follow-up questions and/or create a poll to generate more discussion and help you and your peers think more deeply about this topic.",
-    },
-    {
-      post_inspiration:
-        "Connect ideas shared by you and your peer with specific course concepts.",
-    },
-    {
-      post_inspiration:
-        "Share a link to a web-based resource that would help expand on the ideas shared by your classmate, explaining the value of the resources for understanding the concepts shared by your peer.",
-    },
+    "Identify similarities and differences between the way you and your peer approached this topic.",
+    "Clarify any misunderstandings or inaccuracies you identified in your peer's post.",
+    "Ask follow-up questions and/or create a poll to generate more discussion and help you and your peers think more deeply about this topic.",
+    "Connect ideas shared by you and your peer with specific course concepts.",
+    "Share a link to a web-based resource that would help expand on the ideas shared by your classmate, explaining the value of the resources for understanding the concepts shared by your peer.",
   ]);
   const [SynInsp, setSynInsp] = useState([
-    {
-      post_inspiration:
-        "Explore the discussion charts to identify frequently used tags that are interesting to you. Identify the tags and explain why you believe those tags were important to the discussion of this topic.",
-    },
-    {
-      post_inspiration:
-        "Explore the discussion charts to identify connections between tags that are interesting to you. Describe the connections you found and explain how those connections might inform how we think about this topic.",
-    },
-    {
-      post_inspiration:
-        "Explore the discussion charts to identify the three most popular threads. Identify common themes and/or tags present in each. Explain how those themes and/or tags might inform how we think about this topic.",
-    },
-    {
-      post_inspiration:
-        "Filter the discussion by tags that interest you and review all the posts containing those tags. Describe common themes from the posts using those tags.",
-    },
-    {
-      post_inspiration:
-        "Filter the discussion by upvotes to identify the three most important posts. Summarize the main points made in each of those posts and explain how those ideas can help the class think better about this topic.",
-    },
-    {
-      post_inspiration:
-        "Explain how lessons learned from this discussion can apply to other related or unrelated topics or situations.",
-    },
+    "Explore the discussion charts to identify frequently used tags that are interesting to you. Identify the tags and explain why you believe those tags were important to the discussion of this topic.",
+    "Explore the discussion charts to identify connections between tags that are interesting to you. Describe the connections you found and explain how those connections might inform how we think about this topic.",
+    "Explore the discussion charts to identify the three most popular threads. Identify common themes and/or tags present in each. Explain how those themes and/or tags might inform how we think about this topic.",
+    "Filter the discussion by tags that interest you and review all the posts containing those tags. Describe common themes from the posts using those tags.",
+    "Filter the discussion by upvotes to identify the three most important posts. Summarize the main points made in each of those posts and explain how those ideas can help the class think better about this topic.",
+    "Explain how lessons learned from this discussion can apply to other related or unrelated topics or situations.",
   ]);
-  // ALL/TOTAL INPISRATION
-  let total_Insp = [allPostInsp, RespInsp, SynInsp];
-  console.log(total_Insp);
   // POST IN
   const [postAs, setpostAs] = useState(false);
   const [postAsMode, setpostAsMode] = useState(false);
   const [allPostAs, setAllPostAs] = useState([
-    {
-      post_in: "questions",
-    },
-    {
-      post_in: "resources",
-    },
-    {
-      post_in: "synthesis",
-    },
+    "questions",
+    "resources",
+    "synthesis",
   ]);
+
   // SCORES
   const [scores, setscores] = useState(false);
   const [scoresMode, setScoresMode] = useState(false);
@@ -121,15 +63,10 @@ function EditDisModal({ discussio, showEditModal }) {
   const [reactionsValue, setReactionsValue] = useState(5);
   const [upvoteValue, setUpvoteValue] = useState(5);
   const [totalValue, setTotalValue] = useState(100);
-  const [allrubric, setAllRubric] = useState([
-    {
-      criteria: "must be white",
-    },
-  ]);
+  const [allrubric, setAllRubric] = useState([" "]);
   const [rubMaxScore, setRubMaxScore] = useState(100);
   let midscore = rubMaxScore / allrubric.length;
   midscore = midscore.toFixed(0);
-
   // CALENDAR
   const [calendar, setCalendar] = useState(false);
   const [calendarMode, setCalendarMode] = useState(false);
@@ -159,48 +96,71 @@ function EditDisModal({ discussio, showEditModal }) {
   //HANDLE SAVE EDITS
   const saveEdit = () => {
     console.log(upvoteValue);
+
     const payload = {
       set_id: `${discussions[0].setId}`,
       updateDiscussions: [
-        allCheckedIDs.map((ids) => ({
+        ...allCheckedIDs.map((ids) => ({
           discussion_id: `${ids}`,
           starterPrompt: `${starterPromptValue}`,
           postInspirations: [
             {
-              type: "posting",
+              type: "Posting",
+              comments: [...allPostInsp],
+            },
+            {
+              type: "Responding",
+              comments: [...RespInsp],
+            },
+            {
+              type: "Synthesizing",
+              comments: [...SynInsp],
             },
           ],
-          postAs: ["lorem", "1234"],
+
+          postAs: [...allPostAs],
           scores: {
-            type: "score",
+            type: `${automatic ? "Automatic" : "Rubric"}`,
             actions: [
               {
                 type: "Scores",
                 score: scoresValue,
-                criteria: ["comments1"],
               },
               {
                 type: "Reactions",
                 score: reactionsValue,
-                criteria: ["comments2"],
               },
               {
                 type: "Upvotes",
                 score: upvoteValue,
-                criteria: ["comments3"],
               },
             ],
-            totalScore: totalValue,
+            // actions: [
+            //   {
+            //     type: "Scores",
+            //     score: scoresValue,
+            //   },
+            //   {
+            //     type: "Reactions",
+            //     score: reactionsValue,
+            //   },
+            //   {
+            //     type: "Upvotes",
+            //     score: upvoteValue,
+            //   },
+            // ],
+
+            totalScore: automatic ? totalValue : rubMaxScore,
           },
-          startDate: "2021-12-15",
-          closeDate: "2021-12-16",
+          startDate: "2022-01-15",
+          closeDate: "2022-01-19",
         })),
       ],
     };
     //hhhjxjjxn
     console.log(JSON.stringify(payload, undefined, 2));
 
-    // dispatch(editDisc(payload));
+    dispatch(editDisc(payload));
     setApplyAll(false);
     showEditModal();
   };
@@ -211,12 +171,12 @@ function EditDisModal({ discussio, showEditModal }) {
     setSaveState(true);
   };
   console.log(allCheckedIDs);
-  let discussions = [
-    "heelo",
-    "heelo how have you been",
-    " hope all is going well",
-    "itsd been a while",
-  ];
+  // let discussions = [
+  //   "heelo",
+  //   "heelo how have you been",
+  //   " hope all is going well",
+  //   "itsd been a while",
+  // ];
   return (
     <div className="editModal">
       <div className="EditDiscont ">
@@ -233,28 +193,41 @@ function EditDisModal({ discussio, showEditModal }) {
         </div>
         <h2 className="EditHeading">Discussions</h2>
         <div className="allCheckDisc " id={discussions[0].setId}>
-          {discussions.map((dis, index) => (
-            <div className="formControl " key={index}>
-              {applyAll ? (
-                <input
-                  type="checkbox"
-                  name="disc"
-                  checked
-                  id={dis.discussionId}
-                  onChange={checkBox}
-                />
-              ) : (
-                <input
-                  type="checkbox"
-                  name="disc"
-                  id={dis.discussionId}
-                  onChange={checkBox}
-                />
-              )}
-              {/* <label htmlFor="">{dis.description}</label> */}
-              <label htmlFor="">{dis}</label>
+          {discussions.length === 1 ? (
+            <div className="formControl">
+              <input
+                type="checkbox"
+                name="disc"
+                checked
+                id={discussions.discussionId}
+                onChange={checkBox}
+              />
+              <label htmlFor="">{discussions[0].title}</label>
             </div>
-          ))}
+          ) : (
+            discussions.map((dis, index) => (
+              <div className="formControl " key={index}>
+                {applyAll ? (
+                  <input
+                    type="checkbox"
+                    name="disc"
+                    checked
+                    id={dis.discussionId}
+                    onChange={checkBox}
+                  />
+                ) : (
+                  <input
+                    type="checkbox"
+                    name="disc"
+                    id={dis.discussionId}
+                    onChange={checkBox}
+                  />
+                )}
+                <label htmlFor="">{dis.description || dis.title}</label>
+                {/* <label htmlFor="">{dis}</label> */}
+              </div>
+            ))
+          )}
         </div>
         {/*  BENEATH BOX */}
         <div className="px-5">
@@ -263,10 +236,12 @@ function EditDisModal({ discussio, showEditModal }) {
         <div className="EditDisBottom">
           <div className="EditDisTop">
             <h2 className="SettingsHeading">Settings</h2>
-            <div className="applyAll">
-              <label htmlFor="">Apply to all discussions</label>
-              <input type="checkbox" name="" id="" onChange={handleChecked} />
-            </div>
+            {discussions.length !== 1 && (
+              <div className="applyAll">
+                <label htmlFor="">Apply to all discussions</label>
+                <input type="checkbox" name="" id="" onChange={handleChecked} />
+              </div>
+            )}
           </div>
 
           <div className="allSettings">
@@ -388,3 +363,42 @@ function EditDisModal({ discussio, showEditModal }) {
 }
 
 export default EditDisModal;
+
+// POST --> http://localhost:8080/api/auth/edit/discussions
+// payload :
+
+// {
+//     "set_id":"m876",
+//     "updateDiscussions":[{
+//     "discussion_id":"discussion1",
+//     "starterPrompt":"Kantheti",
+//     "postInspirations":[
+//     {
+//     "type":"posting",
+//         "comments":["posting1","posting2","posting3"]
+//     }, {
+//     "type":"Responding",
+//         "comments":["Responding1","Responding2","Responding3"]
+//     },{
+//     "type":"Synthesizing",
+//         "comments":["Synthesizing1","Synthesizing2","Synthesizing3"]
+//     }
+//     ],
+//     "postAs":["lorem","1234"],
+//     "scores":{
+//     "type":"score",
+//     "actions":[
+//         {"type":"Scores","score":20},
+//         {"type":"Reactions","score":30},
+//         {"type":"Upvotes","score":50},
+//         {"score":25,"criteria":["Rubric1"]},
+//         {"score":55,"criteria":["Rubric2"]},
+//         {"score":75,"criteria":["Rubric3"]}
+//        ],
+//     "totalScore":100
+//     },
+//     "startDate":"2022-01-15",
+//     "closeDate":"2022-01-19"
+//     }
+//     ]
+// }

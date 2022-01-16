@@ -35,6 +35,9 @@ function BodyWrapper({ children }) {
   const ResponsiveHandleClick = () => {
     setNavOpen((navOpen) => !navOpen);
   };
+  const currentStore = store.getState();
+    const currentSignedState = currentStore.user.user.userName
+  
   return (
     <div className="body-wrapper font-Poppins">
       <SideHeading
@@ -50,6 +53,8 @@ function BodyWrapper({ children }) {
         ) : (
           <Sidebar
             navSize={navSize}
+            firstName={currentSignedState}
+            lastName={currentSignedState}
             // setNavSize={setNavSize}
           />
         )}

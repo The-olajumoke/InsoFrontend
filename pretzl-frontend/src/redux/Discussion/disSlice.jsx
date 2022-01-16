@@ -56,7 +56,7 @@ export const editDisc = createAsyncThunk(
      alert(JSON.stringify(disc, null, 2));
      }
 
-    var apiBaseUrl="http://localhost:8080/api/auth/edit/discussions";
+    var apiBaseUrl = "http://localhost:8080/api/auth/edit/discussions";
 
     axios.defaults.headers.post["Content-Type"] =
       "application/json;charset=utf-8";

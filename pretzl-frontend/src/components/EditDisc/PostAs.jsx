@@ -60,10 +60,10 @@ function PostAs(props) {
                 type="text"
                 className="postAsBtn"
                 placeholder="#channel"
-                value={allPostAs[index].post_in}
+                value={allPostAs[index]}
                 onChange={(e) => {
                   let newpostAs = [...allPostAs];
-                  newpostAs[e.target.id].post_in = e.target.value;
+                  newpostAs[e.target.id] = e.target.value;
                   setAllPostAs(newpostAs);
                   // console.log(allPostInsp);
                 }}
@@ -76,7 +76,7 @@ function PostAs(props) {
               src={addCircle}
               alt=""
               onClick={() => {
-                const data = { post_in: "" };
+                const data = "";
                 setAllPostAs([...allPostAs, data]);
               }}
             />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BodyWrapper from "../components/BodyWrapper";
 import { useParams } from "react-router-dom";
 import "../Styling/viewDiscussion.css";
@@ -18,22 +18,53 @@ import ResponsiveTop from "../components/ResponsiveTop";
 import store from "../redux/store";
 import postInDrop from "../Exports/comment/postIn.svg";
 import ViewPostInsp from "../components/Discussion/ViewPostInsp";
-function ViewDiscussion() {
-  const { code } = useParams();
-  console.log(code);
-  const currentStore = store.getState();
-  const AllDisc = currentStore.disc.discussions;
-  console.log(AllDisc);
-  let discussion = AllDisc.find((disc) => code == disc.discussionId);
-  console.log(discussion);
-  // Get Discussion details by discussionId:
-//  http://localhost:8080/api/auth/discussion?discussionId=a3bdc000-79a8-492c-8727-274d90c5b075
+import axios from "axios";
 
+function ViewDiscussion() {
+  const [showPostInsp, setshowPostInsp] = useState(false);
+  const { code } = useParams();
+  // console.log(code);
+  // const currentStore = store.getState();
+  // const AllDisc = currentStore.disc.discussions;
+  // console.log(AllDisc);
+  // let discussion = AllDisc.find((disc) => code == disc.discussionId);
+  // console.log(discussion);
+
+  // Get Discussion details by discussionId:
+  //  http://localhost:8080/api/auth/discussion?discussionId=a3bdc000-79a8-492c-8727-274d90c5b075
+  const [DiscussionCont, setDiscussionCont] = useState([""]);
+  const getPresentDiscussion = async () => {
+    var apiBaseUrl = `http://localhost:8080/api/auth/discussion?discussionId=${code}`;
+
+    axios.defaults.headers.get["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.get["Access-Control-Allow-Methods"] = "GET";
+    try {
+      const res = await axios.get(apiBaseUrl);
+      const data = res.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log({ ...error });
+    }
+  };
+  useEffect(() => {
+    const fetchDiscussion = async () => {
+      const discussion = await getPresentDiscussion();
+      // dispatch(saveDisc(discussions));
+
+      setDiscussionCont(discussion);
+    };
+    fetchDiscussion();
+  }, []);
+
+  console.log(DiscussionCont);
   return (
     <BodyWrapper>
       <ResponsiveTop title="Discussion" />
       <div className="viewDisCont pt-1">
-      <ViewPostInsp/>
+        {showPostInsp && <ViewPostInsp />}
         {/* HEADING AND TITLE */}
         <div className="viewHeading ">
           <div className="viewHeadText">
@@ -41,7 +72,8 @@ function ViewDiscussion() {
               onClick={() => history.push("../discussions")}
               className="viewIcon"
             />
-            <h3>Type title here</h3>
+            {/* <h3>Type title here</h3> */}
+            <h3>{DiscussionCont[0].description}</h3>
           </div>
           <div className="viewButton">
             <button>Charts</button>
@@ -54,16 +86,15 @@ function ViewDiscussion() {
         </div>
         {/* MAIN DISCUSSION */}
         <ViewDisTemp
-          question="In this discussion we are going to take sides on a topic. 
-You can start a new thread to argue for either of the sides and/pr respond to posts made by your classmates. "
-          name="hello world"
-          username="hello world"
+          question="In this discussion we are going to take sides on a topic."
+          // name="hello world"
+
           // question={discussion.description}
-          // name={discussion.username}
-          // username={discussion.username}
+          name={DiscussionCont[0].username}
+          username={DiscussionCont[0].username}
         />
         {/* Comment Section */}
-        <div className="allCommentCont border">
+        <div className="allCommentCont">
           <ViewCommentTemp
             name="Elvis Collins"
             username="COLLINS"

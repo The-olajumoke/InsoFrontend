@@ -115,8 +115,6 @@ function Scores(props) {
                       placeholder={scoresValue}
                       onChange={(e) => setScoresValue(e.target.value)}
                     />
-
-                    <MdKeyboardArrowDown className="settingsIcon" />
                   </div>
                 </div>
                 <div className="options">
@@ -133,8 +131,6 @@ function Scores(props) {
                       placeholder={reactionsValue}
                       onChange={(e) => setReactionsValue(e.target.value)}
                     />
-
-                    <MdKeyboardArrowDown className="settingsIcon" />
                   </div>
                 </div>
                 <div className="options">
@@ -151,8 +147,6 @@ function Scores(props) {
                       placeholder={upvoteValue}
                       onChange={(e) => setUpvoteValue(e.target.value)}
                     />
-
-                    <MdKeyboardArrowDown className="settingsIcon" />
                   </div>
                 </div>
                 <div className="options TotalOptions">
@@ -169,8 +163,6 @@ function Scores(props) {
                       placeholder={totalValue}
                       onChange={(e) => setTotalValue(e.target.value)}
                     />
-
-                    <MdKeyboardArrowDown className="settingsIcon opacity-0" />
                   </div>
                 </div>
               </div>
@@ -195,7 +187,7 @@ function Scores(props) {
                       placeholder="At least 5 comments"
                       onChange={(e) => {
                         let newrub = [...allrubric];
-                        newrub[e.target.id].criteria = e.target.value;
+                        newrub[e.target.id] = e.target.value;
                         setAllRubric(newrub);
                         // console.log(allPostInsp);
                       }}
@@ -212,7 +204,7 @@ function Scores(props) {
                       src={addCircle}
                       alt=""
                       onClick={() => {
-                        const data = { criteria: "" };
+                        const data = "";
                         setAllRubric([...allrubric, data]);
                       }}
                     />
