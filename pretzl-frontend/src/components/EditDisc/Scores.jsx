@@ -49,6 +49,11 @@ function Scores(props) {
                 onChange={(e) => {
                   setScoresMode(!scoresMode);
                   setSaveState(true);
+                  setscores(!scores);
+                   setstarterPrompt(false);
+                   setPostInsp(false);
+                   setpostAs(false);
+                   setCalendar(false);
                 }}
               />
               <span className="slider round"></span>

@@ -179,17 +179,24 @@ function EditDisModal({ discussio, showEditModal }) {
   ];
   return (
     <div className="editModal">
-      <div className="EditDiscont ">
+      <div className="EditDiscont">
         <div className="EditDisTop">
           <button
-            className={`saveBtn ${saveState ? "bg-primary" : "bg-saveBtn"} 
+            className={`saveSettingBtn${
+              saveState ? "bg-primary" : "bg-saveBtn"
+            } 
                 ${saveState ? "text-white" : "text-desc"}
             `}
             onClick={saveEdit}
           >
             Save
           </button>
-          <img className="canbtn" src={clear} onClick={showEditModal} alt="" />
+          <img
+            className="canbtn border"
+            src={clear}
+            onClick={showEditModal}
+            alt=""
+          />
         </div>
         <h2 className="EditHeading">Discussions</h2>
         <div className="allCheckDisc " id={discussions[0].setId}>

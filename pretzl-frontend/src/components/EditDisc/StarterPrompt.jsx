@@ -9,7 +9,8 @@ import cameraAlt from "../../Exports/comment/camera_alt.svg";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 
 function StarterPrompt(props) {
-  const{ starterPrompt,
+  const {
+    starterPrompt,
     starterPromptMode,
     setstarterPromptMode,
     setstarterPromptValue,
@@ -33,7 +34,11 @@ function StarterPrompt(props) {
               onChange={(e) => {
                 setstarterPromptMode(!starterPromptMode);
                 setSaveState(true);
-                 setstarterPrompt(!starterPrompt
+                setstarterPrompt(!starterPrompt);
+                  setPostInsp(false);
+                  setpostAs(false);
+                  setscores(false);
+                  setCalendar(false);
               }}
             />
             <span className="slider round"></span>

@@ -28,6 +28,11 @@ function PostAs(props) {
               onChange={(e) => {
                 setpostAsMode(!postAsMode);
                 setSaveState(true);
+                setpostAs(!postAs);
+                 setstarterPrompt(false);
+                 setPostInsp(false);
+                 setscores(false);
+                 setCalendar(false);
               }}
             />
             <span className="slider round"></span>

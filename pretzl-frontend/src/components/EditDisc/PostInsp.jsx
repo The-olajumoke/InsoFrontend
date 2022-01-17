@@ -39,6 +39,10 @@ function PostInsp(props) {
                 setPostInspMode(!postInspMode);
                 setSaveState(true);
                 setPostInsp(!postInsp);
+                setstarterPrompt(false);
+                setpostAs(false);
+                setscores(false);
+                setCalendar(false);
               }}
             />
             <span className="slider round"></span>
