@@ -17,21 +17,22 @@ import cameraAlt from "../Exports/comment/camera_alt.svg";
 import ResponsiveTop from "../components/ResponsiveTop";
 import store from "../redux/store";
 import postInDrop from "../Exports/comment/postIn.svg";
+import scores from "../Exports/scores.svg";
+import grade from "../Exports/grade.svg";
+import help_outline from "../Exports/help_outline.svg";
 import ViewPostInsp from "../components/Discussion/ViewPostInsp";
 import axios from "axios";
 
 function ViewDiscussion() {
   const [showPostInsp, setshowPostInsp] = useState(false);
+  const [sendBtn, setSendBtn] = useState(false);
+  const [comment, setcomment] = useState([]);
+  const togglePostInsp = () => {
+    setshowPostInsp(!showPostInsp);
+  };
+  const handleChange = (e) => {};
   const { code } = useParams();
-  // console.log(code);
-  // const currentStore = store.getState();
-  // const AllDisc = currentStore.disc.discussions;
-  // console.log(AllDisc);
-  // let discussion = AllDisc.find((disc) => code == disc.discussionId);
-  // console.log(discussion);
 
-  // Get Discussion details by discussionId:
-  //  http://localhost:8080/api/auth/discussion?discussionId=a3bdc000-79a8-492c-8727-274d90c5b075
   const [DiscussionCont, setDiscussionCont] = useState([""]);
   const getPresentDiscussion = async () => {
     var apiBaseUrl = `http://localhost:8080/api/auth/discussion?discussionId=${code}`;
@@ -64,7 +65,7 @@ function ViewDiscussion() {
     <BodyWrapper>
       <ResponsiveTop title="Discussion" />
       <div className="viewDisCont pt-1">
-        {showPostInsp && <ViewPostInsp />}
+        {showPostInsp && <ViewPostInsp togglePostInsp={togglePostInsp} />}
         {/* HEADING AND TITLE */}
         <div className="viewHeading ">
           <div className="viewHeadText">
@@ -76,12 +77,33 @@ function ViewDiscussion() {
             <h3>{DiscussionCont[0].description}</h3>
           </div>
           <div className="viewButton">
-            <button>Charts</button>
-            <button>Filter</button>
+            <button
+              className={`border ${comment.length !== 0 && " bg-border"}
+              ${comment.length !== 0 ? " text-white" : " text-btnText"}
+              ${comment.length !== 0 ? " border-none" : " border-btnText"}
+            `}
+            >
+              Charts
+            </button>
+            <button
+              className={`border ${comment.length !== 0 && " bg-border"}
+              ${comment.length !== 0 ? " text-white" : " text-btnText"}
+              ${comment.length !== 0 ? " border-none" : " border-btnText"}
+            `}
+            >
+              Filter
+            </button>
           </div>
-          <div className="viewImg">
-            <img src={vec1} alt="" />
-            <img src={vec2} alt="" />
+          <div className="moreInfo">
+            <div className="viewImg">
+              <img src={`${comment.length !== 0 ? scores : vec1}`} alt="" />
+              <h3>Scores</h3>
+            </div>
+            <div className="viewImg">
+              <img src={`${comment.length !== 0 ? grade : vec2}`} alt="" />
+              <h3>Gradesheet</h3>
+            </div>
+            <img src={help_outline} className="helpBtn" alt="" />
           </div>
         </div>
         {/* MAIN DISCUSSION */}
@@ -92,29 +114,21 @@ function ViewDiscussion() {
           // question={discussion.description}
           name={DiscussionCont[0].username}
           username={DiscussionCont[0].username}
+          togglePostInsp={togglePostInsp}
         />
         {/* Comment Section */}
         <div className="allCommentCont">
-          <ViewCommentTemp
-            name="Elvis Collins"
-            username="COLLINS"
-            comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
-          />
-          <ViewCommentTemp
-            name="Elvis Collins"
-            username="COLLINS"
-            comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
-          />
-          <ViewCommentTemp
-            name="Elvis Collins"
-            username="COLLINS"
-            comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
-          />
-          <ViewCommentTemp
-            name="Beth Keen"
-            username="KEEN"
-            comment="I’m more concerned about the opinions of environmentalists."
-          />
+          {comment.length !== 0 ? (
+            <ViewCommentTemp
+              name="Elvis Collins"
+              username="COLLINS"
+              comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+            />
+          ) : (
+            <h2 className="nocomment">
+              Click “Post Inspiration” for ideas on what to post
+            </h2>
+          )}
         </div>
         {/* COMMENT BOX */}
         <div className="commentBoxCont">
@@ -123,6 +137,7 @@ function ViewDiscussion() {
             <textarea
               className="textA"
               name=""
+              onChange={handleChange}
               placeholder="What’s your opinion on the topic?"
             ></textarea>
             <div className="widgetCont">
@@ -136,11 +151,11 @@ function ViewDiscussion() {
                 <img src={assessment} alt="" />
               </div>
               <div className="commentBtnCont ">
-                <button className="commentBtn">
+                <button className="commentBtn" onclick={setshowPostInsp}>
                   Post as
                   <img className="ml-1" src={postInDrop} alt="" />
                 </button>
-                <button className="commentBtn">Send</button>
+                <button className="commentBtn ">Send</button>
               </div>
             </div>
           </div>

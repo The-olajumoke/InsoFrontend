@@ -11,7 +11,7 @@ import PostAs from "../EditDisc/PostAs";
 import Scores from "../EditDisc/Scores";
 import Calendar from "../EditDisc/Calendar";
 
-function EditDisModal({ discussions, showEditModal }) {
+function EditDisModal({ discussio, showEditModal }) {
   const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   const [saveState, setSaveState] = useState(false);
@@ -171,12 +171,12 @@ function EditDisModal({ discussions, showEditModal }) {
     setSaveState(true);
   };
   console.log(allCheckedIDs);
-  // let discussions = [
-  //   "heelo",
-  //   "heelo how have you been",
-  //   " hope all is going well",
-  //   "itsd been a while",
-  // ];
+  let discussions = [
+    "heelo",
+    "heelo how have you been",
+    " hope all is going well",
+    "itsd been a while",
+  ];
   return (
     <div className="editModal">
       <div className="EditDiscont ">

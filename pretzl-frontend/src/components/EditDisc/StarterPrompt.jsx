@@ -33,6 +33,7 @@ function StarterPrompt(props) {
               onChange={(e) => {
                 setstarterPromptMode(!starterPromptMode);
                 setSaveState(true);
+                 setstarterPrompt(!starterPrompt
               }}
             />
             <span className="slider round"></span>

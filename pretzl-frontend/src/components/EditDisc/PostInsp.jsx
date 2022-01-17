@@ -38,6 +38,7 @@ function PostInsp(props) {
               onChange={(e) => {
                 setPostInspMode(!postInspMode);
                 setSaveState(true);
+                setPostInsp(!postInsp);
               }}
             />
             <span className="slider round"></span>
@@ -52,7 +53,7 @@ function PostInsp(props) {
               className="settingsIcon"
               onClick={() => {
                 setstarterPrompt(false);
-                setPostInsp(true);
+                setPostInsp(!postInsp);
                 setpostAs(false);
                 setscores(false);
                 setCalendar(false);
@@ -61,7 +62,7 @@ function PostInsp(props) {
           )}
         </div>
       </div>
-      {postInsp && (
+      {postInsp ? (
         <div className={`postInspMore ${postInspMode ? "" : "unactive"}`}>
           <div className="allPostBtn">
             <button
@@ -192,7 +193,7 @@ function PostInsp(props) {
             <button>Add post inspiration</button>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
