@@ -38,6 +38,11 @@ function PostInsp(props) {
               onChange={(e) => {
                 setPostInspMode(!postInspMode);
                 setSaveState(true);
+                setPostInsp(!postInsp);
+                setstarterPrompt(false);
+                setpostAs(false);
+                setscores(false);
+                setCalendar(false);
               }}
             />
             <span className="slider round"></span>
@@ -52,7 +57,7 @@ function PostInsp(props) {
               className="settingsIcon"
               onClick={() => {
                 setstarterPrompt(false);
-                setPostInsp(true);
+                setPostInsp(!postInsp);
                 setpostAs(false);
                 setscores(false);
                 setCalendar(false);
@@ -61,7 +66,7 @@ function PostInsp(props) {
           )}
         </div>
       </div>
-      {postInsp && (
+      {postInsp ? (
         <div className={`postInspMore ${postInspMode ? "" : "unactive"}`}>
           <div className="allPostBtn">
             <button
@@ -104,10 +109,10 @@ function PostInsp(props) {
                 key={index}
                 id={index}
                 type="text"
-                value={allPostInsp[index].post_inspiration}
+                value={allPostInsp[index]}
                 onChange={(e) => {
                   let newInsp = [...allPostInsp];
-                  newInsp[e.target.id].post_inspiration = e.target.value;
+                  newInsp[e.target.id] = e.target.value;
                   setAllPostInsp(newInsp);
                   // console.log(allPostInsp);
                 }}
@@ -121,10 +126,10 @@ function PostInsp(props) {
                 key={index}
                 id={index}
                 type="text"
-                value={RespInsp[index].post_inspiration}
+                value={RespInsp[index]}
                 onChange={(e) => {
                   let newInsp = [...RespInsp];
-                  newInsp[e.target.id].post_inspiration = e.target.value;
+                  newInsp[e.target.id] = e.target.value;
                   setAllPostInsp(newInsp);
                   // console.log(allPostInsp);
                 }}
@@ -139,10 +144,10 @@ function PostInsp(props) {
                 key={index}
                 id={index}
                 type="text"
-                value={SynInsp[index].post_inspiration}
+                value={SynInsp[index]}
                 onChange={(e) => {
                   let newInsp = [...SynInsp];
-                  newInsp[e.target.id].post_inspiration = e.target.value;
+                  newInsp[e.target.id] = e.target.value;
                   setAllPostInsp(newInsp);
                   // console.log(allPostInsp);
                 }}
@@ -157,9 +162,7 @@ function PostInsp(props) {
                 src={addCircle}
                 alt=""
                 onClick={() => {
-                  const data = {
-                    post_inspiration: "",
-                  };
+                  const data = "";
                   setAllPostInsp([...allPostInsp, data]);
                 }}
               />
@@ -171,9 +174,7 @@ function PostInsp(props) {
                 src={addCircle}
                 alt=""
                 onClick={() => {
-                  const data = {
-                    post_inspiration: "",
-                  };
+                  const data = "";
                   setRespInsp([...RespInsp, data]);
                 }}
               />
@@ -185,9 +186,7 @@ function PostInsp(props) {
                 src={addCircle}
                 alt=""
                 onClick={() => {
-                  const data = {
-                    post_inspiration: "",
-                  };
+                  const data = "";
                   setSynInsp([...SynInsp, data]);
                 }}
               />
@@ -198,7 +197,7 @@ function PostInsp(props) {
             <button>Add post inspiration</button>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

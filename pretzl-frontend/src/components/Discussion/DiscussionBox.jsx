@@ -10,15 +10,28 @@ import img from "../../Exports/DisIcon.svg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import EditDisModal from "./EditDisModal";
 
-function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
+function DiscussionBox(props) {
+  const { title, id, code, name, numberOfPeople, date } = props;
+  const [showModal, setshowModal] = useState(false);
   const [showEdit, setshowEdit] = useState(false);
-  const [trial, setTrial] = useState(false);
+
   const handleEdit = () => {
-    setshowEdit(!showEdit);
+    setshowModal(!showModal);
   };
+   const showEditModal = () => {
+setshowEdit(!showEdit)
+   };
+  const [DiscussionCont, setDiscussionCont] = useState([props]);
   return (
     <div className="discBox ring ring-red">
+      {showEdit && (
+        <EditDisModal
+          showEditModal={showEditModal}
+          discussions={DiscussionCont}
+        />
+      )}
       <div className="boxHead">
         <div className=" box-1">
           <MdChatBubbleOutline className=" mr-1" />
@@ -37,6 +50,24 @@ function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
             />
           </div>
         </div>
+        {showModal && (
+          <div className="editBox">
+            <button onClick={() =>{ setshowEdit(!showEdit)
+            setshowModal(!showModal)
+            }}>
+              <FiEdit />
+              Edit
+            </button>
+            <button>
+              <FiEdit />
+              Archive
+            </button>
+            <button>
+              <FiEdit />
+              Duplicate
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="boxDetail ">
@@ -53,22 +84,6 @@ function DiscussionBox({ title, id, code, name, numberOfPeople, date }) {
           <button>Open</button>
         </Link>
       </div>
-      {showEdit && (
-        <div className="editBox">
-          <span>
-            <FiEdit />
-            Edit
-          </span>
-          <span>
-            <FiEdit />
-            Archive
-          </span>
-          <span>
-            <FiEdit />
-            Duplicate
-          </span>
-        </div>
-      )}
     </div>
   );
 }

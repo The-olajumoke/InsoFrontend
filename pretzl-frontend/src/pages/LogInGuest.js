@@ -31,9 +31,9 @@ function LogInGuest({ activeModal, setactiveModal }) {
     console.log(e.password);
 
     var payload = {
+      email: e.email,
       firstName: e.firstName,
       lastName: e.lastName,
-      email: e.email,
     };
     console.log(payload);
 
@@ -78,12 +78,11 @@ function LogInGuest({ activeModal, setactiveModal }) {
               email: Yup.string()
                 .email("invalid email address")
                 .required("Required"),
-              password: Yup.string()
-                .min(8, "Must be at least 8 characters")
+              firstName: Yup.string()
+                .min(3, "Must be at least 3 characters")
                 .required("Required"),
-
-              repeatPassword: Yup.string()
-                .oneOf([Yup.ref("password"), null], "Passwords must match")
+              lastName: Yup.string()
+                .min(3, "Must be at least 3 characters")
                 .required("Required"),
             })}
           >

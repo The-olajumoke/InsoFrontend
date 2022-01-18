@@ -30,10 +30,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: auto;
+  height: 50px;
   padding: 0 40px;
 }
-.saveBtn {
+.saveSettingBtn {
   padding: 7px 25px;
   width: 95.05px;
   height: 34px;
@@ -164,6 +164,9 @@ hr {
 }
 .settingsWidget {
   column-gap: 15px;
+}
+.settingsWidget img {
+  width: 20px;
 }
 
 /*/ /////////// POST INSPIRATIONS */

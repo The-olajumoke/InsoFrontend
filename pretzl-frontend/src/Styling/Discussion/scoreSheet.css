@@ -1,0 +1,159 @@
+.scoreSheet {
+  background: #ffffff;
+  /* background-color: rgb(206, 205, 205); */
+  box-shadow: 1px 2px 10px rgba(169, 169, 169, 0.12);
+  border-radius: 12px;
+  padding: 30px;
+  /* width: 100%; */
+  flex: 1;
+}
+.scoreSheet-heading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: #07a098;
+}
+.allocated {
+  margin-bottom: 50px;
+}
+.showScoresCont {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.showScoresText {
+  width: 33%;
+  display: flex;
+  gap: 12px;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+}
+.showScoresValue {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #686868;
+}
+.scoreSection {
+  width: 65%;
+  display: flex;
+  gap: 20px;
+  /* justify-content: space-between; */
+}
+.scoreSectionTitle {
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+  justify-content: center;
+  width: 18%;
+}
+.scoreSectionValue {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+}
+.allocatedValue {
+  padding: 10px;
+  width: 70px;
+  height: 50px;
+  background: #f0f0f0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #011b25;
+  justify-content: center;
+  width: 18%;
+}
+.scoreTextArea {
+  width: 65%;
+  height: 134px;
+  background: #ffffff;
+  border: 1px solid #07a098;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 15px 5px 5px 10px;
+  margin-top: 10px;
+}
+.scoreTextArea textarea {
+  width: 100%;
+  resize: none;
+  flex: 1;
+  outline: none;
+}
+
+.feedbackBtn {
+  padding: 7px 25px;
+  color: #9d9d9d;
+  background: #eaeaea;
+  border-radius: 30px;
+  width: fit-content;
+  font-size: 13.19px;
+  line-height: 20px;
+}
+
+/*//////////////////////////// RUBRIC///////////////////////*/
+.RubricSection {
+  width: 65%;
+  display: flex;
+  gap: 20px;
+}
+.RubricTitle {
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+  justify-content: center;
+  width: 18%;
+}
+.RubricInput {
+  width: 60%;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+.RubricInput input {
+  outline: none;
+  background: #ecf4f4;
+  border-radius: 5px;
+  width: 85%;
+  padding: 3px 20px;
+}
+.t-score {
+  color: #07a098;
+}
+.RubricValue {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #07a098;
+}
+.arrowDown {
+  background: #f9f9f9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}

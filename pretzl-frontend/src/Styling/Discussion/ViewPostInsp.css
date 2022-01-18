@@ -1,0 +1,50 @@
+.seeAllPostInsp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  box-shadow: 2px 8px 10px rgba(169, 169, 169, 0.12);
+  border-radius: 8px;
+  width: 680px;
+  height: 340px;
+  padding: 15px 30px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+}
+.seeAllPostInsp h2 {
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+}
+.postInspCont {
+  overflow-y: scroll;
+  flex-direction: column;
+  /* flex: 1; */
+}
+.postInspCont::-webkit-scrollbar {
+  display: none;
+}
+
+.seeAllPostInsp h4 {
+  padding: 5px 20px;
+  background: rgba(7, 160, 152, 0.05);
+  border-radius: 30px;
+  height: 34px;
+  overflow: hidden;
+  margin-bottom: 5px;
+
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 10px 20px;
+  color: #bdbdbd;
+}
+.seeAllPostInsp h4:hover {
+  overflow: visible;
+  height: auto;
+}

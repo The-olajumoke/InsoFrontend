@@ -31,7 +31,6 @@ function Discussion() {
 
     var apiBaseUrl = `http://localhost:8080/api/auth/discussion/discussions?username=${currentUsername}`;
 
-  
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
     axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
@@ -49,29 +48,30 @@ function Discussion() {
   useEffect(() => {
     const fetchDiscussions = async () => {
       const discussions = await getTotalDiscussions();
-      dispatch(saveDisc(discussions))
+      dispatch(saveDisc(discussions));
       setDiscussionCont(discussions);
+      console.log(discussions);
     };
     fetchDiscussions();
   }, []);
 
-let newArray
-  const groupByIds =arr=>{
+  let newArray;
+  const groupByIds = (arr) => {
     console.log(arr);
-    const hash= Object.create(null),
-    result=[];
-    arr.forEach(el=>{
-      if(!hash[el.setId]){
-        hash[el.setId]=[];
+    const hash = Object.create(null),
+      result = [];
+    arr.forEach((el) => {
+      if (!hash[el.setId]) {
+        hash[el.setId] = [];
         result.push(hash[el.setId]);
-      };
+      }
       hash[el.setId].push(el);
     });
-    newArray=result
+    newArray = result;
     return result;
-  }
+  };
   groupByIds(DiscussionCont);
-  
+
   return (
     <BodyWrapper>
       {showMenu && (
@@ -104,56 +104,39 @@ let newArray
 
           <div className="allDisCont">
             {/* DISCUSSION SET */}
-           {
-               DiscussionCont.length < 1 ? (
-                 <NoMessageYet message="It’s lonely in here. Create a new discussion" />
-               ) : (  newArray.map(arr=>{
-                 console.log(arr);
-                 console.log(arr.length);
-                 if(arr.length == 1){
-                   return arr.map((dis,index)=>
-                   <DiscussionBox
-                  key={index}
-                  id={index}
-                  title={dis.description}
-                  date={dis.date}
-                  numberOfPeople={dis.numberOfPeople}
-                  name={dis.username}
-                  code={dis.discussionId}
-                  setID={dis.setId} />
-                  )
-                 }
-                 else{
-          return   <DiscSet
-              key="1"
-              id="1"
-              title="Discussion Set"
-              date="mar 21"
-              numberofDisc="3"
-              name={arr[0].username}
-              discussions={arr}
-            />
-                 }
-               }
-               
-               ))
-}
-               
-              {/* //    console.log(arr);
-              // console.log(arr.length);
-              // if (arr.length == 1) {
-                // <h2>dis</h2>
-              
-            
-              // }
-            //    else {
-            //     console.log(arr);
-            //       
-                
-            //   }
-            // }) */}
-            
-            
+            {DiscussionCont.length < 1 ? (
+              <NoMessageYet message="It’s lonely in here. Create a new discussion" />
+            ) : (
+              newArray.map((arr) => {
+                console.log(arr);
+                console.log(arr.length);
+                if (arr.length == 1) {
+                  return arr.map((dis, index) => (
+                    <DiscussionBox
+                      key={index}
+                      id={index}
+                      title={dis.description}
+                      date={dis.date}
+                      numberOfPeople={dis.numberOfPeople}
+                      name={dis.username}
+                      code={dis.discussionId}
+                      setID={dis.setId}
+                    />
+                  ));
+                } else {
+                  return (
+                    <DiscSet
+                      id="1"
+                      title="Discussion Set"
+                      date="mar 21"
+                      numberofDisc="3"
+                      name={arr[0].username}
+                      discussions={arr}
+                    />
+                  );
+                }
+              })
+            )}
           </div>
         </div>
       </div>

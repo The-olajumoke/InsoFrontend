@@ -8,12 +8,9 @@ import clear from "../../Exports/clear.svg";
 function CalendarTemp({ date, setDate, setShowCalDate }) {
   return (
     <div className=" font-poppins  p-5 calTemp">
-      <img
-        src={clear}
-        alt=""
-        className="closeCalendar"
-        onClick={() => setShowCalDate(false)}
-      />
+      <div className="closeCalendar w-full">
+        <img src={clear} alt="" onClick={() => setShowCalDate(false)} />
+      </div>
       <Calendar
         className="react-calendar"
         onChange={setDate}

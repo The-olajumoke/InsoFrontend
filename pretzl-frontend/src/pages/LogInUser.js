@@ -29,8 +29,6 @@ function LogInUser({ activeModal, setactiveModal }) {
   
   const handleSubmit = async (e) => {
     setLoading(true);
-    console.log(e.password);
-    console.log(e.email);
 
     var payload = {
       username: e.email,
@@ -40,7 +38,6 @@ function LogInUser({ activeModal, setactiveModal }) {
     setLoading(false);
     const currentStore = store.getState();
     const currentSignedState = currentStore.user.isLoggedIn;
-    console.log(currentSignedState);
     {
       currentSignedState ? setShowAlert(true) : setErrorAlert(true);
     }

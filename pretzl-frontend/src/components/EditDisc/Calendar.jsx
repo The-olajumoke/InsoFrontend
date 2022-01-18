@@ -1,7 +1,6 @@
 import React from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
-import { BsClock} from "react-icons/bs";
-
+import { BsClock } from "react-icons/bs";
 
 function Calendar(props) {
   const {
@@ -30,6 +29,11 @@ function Calendar(props) {
               onChange={(e) => {
                 setCalendarMode(!calendarMode);
                 setSaveState(true);
+                setCalendar(!calendar);
+                setstarterPrompt(false);
+                setPostInsp(false);
+                setpostAs(false);
+                setscores(false);
               }}
             />
             <span className="slider round"></span>

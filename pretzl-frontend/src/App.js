@@ -17,15 +17,15 @@ import ViewDiscussion from "./pages/ViewDiscussion";
 import ViewDiscussionSet from "./pages/ViewDiscussionSet";
 // import Charts from "./components/Analytics/Charts";
 import EditDisModal from "./components/Discussion/EditDisModal";
-import CalendarTemp from "./components/EditDisc/CalendarTemp";
+
 
 const App = () => {
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/">
-          {/* <Landing /> */}
-          <EditDisModal/>
+          <Landing />
+          {/* <EditDisModal/> */}
         </Route>
         <Route path="/sign-up">
           <ChooseUser />
