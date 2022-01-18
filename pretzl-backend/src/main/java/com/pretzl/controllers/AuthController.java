@@ -1,8 +1,9 @@
 package com.pretzl.controllers;
 
-import com.pretzl.models.*;
 import com.pretzl.models.Discussion;
+import com.pretzl.models.*;
 import com.pretzl.payload.request.*;
+import com.pretzl.payload.response.GetDiscussionsResponse;
 import com.pretzl.payload.response.JwtResponse;
 import com.pretzl.payload.response.MessageResponse;
 import com.pretzl.repository.DiscussionDetailsRepository;
@@ -12,6 +13,7 @@ import com.pretzl.repository.UserRepository;
 import com.pretzl.security.jwt.JwtUtils;
 import com.pretzl.security.services.UserDetailsImpl;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -69,6 +71,8 @@ public class AuthController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
+                userDetails.getFirstName(),
+                userDetails.getLastName(),
                 roles, String.format("%s_%s", userDetails.getUsername(), userDetails.getId())));
     }
 
@@ -183,11 +187,7 @@ public class AuthController {
 //        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
         return ResponseEntity.ok(discussionRepository.getUserDiscussionsByUserName(username));
     }
-    @GetMapping("/discussion")
-    public ResponseEntity<List<Discussion>> getUserDiscussionById(@RequestParam String discussionId) {
-//        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
-        return ResponseEntity.ok(discussionRepository.getUserDiscussionsById(discussionId));
-    }
+
     @GetMapping("/discussion/post/details")
     public ResponseEntity<List<IDiscussions>> getDiscussionPostDetails(@RequestParam String username) {
         return ResponseEntity.ok(discussionRepository.getDiscussionPostDetails(username));
@@ -250,13 +250,14 @@ public class AuthController {
                 }
 
         );
-
+//        discussionDetails.forEach(discussionDetail -> discussionDetailsRepository.deleteUserDiscussionsById(discussionDetail.getDiscussion_id()));
         List<DiscussionDetail> discussionDetails1 = discussionDetailsRepository.saveAll(discussionDetails);
         discussionDetails1.forEach(discussionDetail1 -> System.out.println("Successfully updated for :" + discussionDetail1.getType() + " " + discussionDetail1.getScore()));
         return ResponseEntity
                 .ok()
                 .body(discussionDetails1);
     }
+
     @PostMapping("/update/discussions")
     public ResponseEntity<List<DiscussionDetail>> updateDiscussions(@Valid @RequestBody UpdateDiscussionsRequest updateDiscussionsRequest) {
         String set_id = updateDiscussionsRequest.getSet_id();
@@ -277,4 +278,59 @@ public class AuthController {
                 .body(discussionDetails1);
     }
 
+    @GetMapping("/discussion")
+    public ResponseEntity<GetDiscussionsResponse> getUserDiscussionById(@RequestParam String discussionId) {
+//        return ResponseEntity.ok(discussionRepository.getUserDiscussions(username));
+        List<Discussion> userDiscussionsById = discussionRepository.getUserDiscussionsById(discussionId);
+        List<DiscussionDetail> userDiscussions = discussionDetailsRepository.getUserDiscussionsById(discussionId);
+        GetDiscussionsResponse getDiscussionsResponse = new GetDiscussionsResponse();
+        UpdateDiscussion updateDiscussion = new UpdateDiscussion();
+        updateDiscussion.setDiscussion_id(discussionId);
+        DiscussionDetail discussionDetail = userDiscussions.stream().findAny().orElse(new DiscussionDetail());
+        updateDiscussion.setCloseDate(discussionDetail.getClose_date());
+        updateDiscussion.setStartDate(discussionDetail.getStart_date());
+        updateDiscussion.setStarterPrompt(discussionDetail.getStarter_prompt());
+        if (discussionDetail.getPost_inspiration() != null) {
+            ArrayList<PostInspiration> postInspirations = new ArrayList<>(Arrays.stream(discussionDetail.getPost_inspiration())
+                    .filter(StringUtils::isNotEmpty).map(post -> {
+                        PostInspiration postInspiration = new PostInspiration();
+                        postInspiration.setType("posting");
+                        List<String> arrayList = new ArrayList<>();
+                        arrayList.add(post);
+                        postInspiration.setComments(arrayList);
+                        return postInspiration;
+                    }).collect(Collectors.toList()));
+            updateDiscussion.setPostInspirations(postInspirations);
+        }
+        List<String> postAs = new ArrayList<>();
+        List<Actions> actionsList = new ArrayList<>();
+        userDiscussions.forEach(discussion -> {
+            if (StringUtils.isNotEmpty(discussion.getPost_as())) {
+                postAs.add(discussion.getPost_as());
+            }
+            Actions actions = new Actions();
+            actions.setScore(discussion.getScore());
+            if (discussion.getType().equalsIgnoreCase("Rubric")) {
+                actions.setCriteria(Arrays.stream(discussion.getCriteria()).collect(Collectors.toList()));
+            } else {
+                if (discussion.getType().equalsIgnoreCase("SS")) {
+                    actions.setType("Scores");
+                } else if (discussion.getType().equalsIgnoreCase("SR")) {
+                    actions.setType("Reactions");
+                } else {
+                    actions.setType("Upvotes");
+                }
+            }
+            actionsList.add(actions);
+        });
+        Score score = new Score();
+        score.setType("score");
+        score.setActions(actionsList);
+        updateDiscussion.setScores(score);
+        updateDiscussion.setPostAs(postAs);
+//        getDiscussionsResponse.setUpdateDiscussions();
+        getDiscussionsResponse.setUpdateDiscussion(updateDiscussion);
+        getDiscussionsResponse.setUserDiscussionsById(userDiscussionsById);
+        return ResponseEntity.ok(getDiscussionsResponse);
+    }
 }

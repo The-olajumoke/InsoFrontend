@@ -30,18 +30,18 @@ public class UpdateDiscussion {
         discussionDetail.setPost_inspiration(getPostInspirations().stream().map(PostInspiration::getType).toArray(String[]::new));
         discussionDetail.setScore(actions.getScore());
         String actionsType = actions.getType();
-        if(actionsType == null){
+        if (actionsType == null) {
             discussionDetail.setType("Rubric");
-        } else if(actionsType.equalsIgnoreCase("Scores")) {
+        } else if (actionsType.equalsIgnoreCase("Scores")) {
             discussionDetail.setType("SS");
-        }else if(actionsType.equalsIgnoreCase("Reactions")){
+        } else if (actionsType.equalsIgnoreCase("Reactions")) {
             discussionDetail.setType("SR");
-        }else {
+        } else {
             discussionDetail.setType("SU");
         }
-        if(actions.getCriteria() != null) {
+        if (actions.getCriteria() != null) {
             discussionDetail.setCriteria(actions.getCriteria().toArray(new String[0]));
-        }else {
+        } else {
             discussionDetail.setCriteria(new String[0]);
         }
         return discussionDetail;
@@ -57,8 +57,8 @@ public class UpdateDiscussion {
         discussionDetail.setType("PA");
         discussionDetail.setStarter_prompt(getStarterPrompt());
         discussionDetail.setCriteria(new String[0]);
-        discussionDetail.setPost_inspiration(getPostInspirations().stream().
-                map(PostInspiration::getType).
+        discussionDetail.setPost_inspiration(getPostInspirations().stream()
+                .map(PostInspiration::getType).
                 toArray(String[]::new));
         discussionDetail.setPost_as(postAs);
         return discussionDetail;
