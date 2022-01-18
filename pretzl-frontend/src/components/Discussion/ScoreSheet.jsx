@@ -7,14 +7,14 @@ import responded from "../../Exports/scores/responded.svg";
 import ScoreBox from "./ScoreBox";
 import RubricBox from "./RubricBox";
 
-function ScoreSheet() {
+function ScoreSheet({ toggleScore }) {
   const users = ["boy", "girl", "good", "bad"];
   const [automatic, setautomatic] = useState(true);
   return (
     <div className="scoreSheet">
       <div className="flex justify-between items-center  mb-20">
         <h2 className="scoreSheet-heading">Scores</h2>
-        <img src={clear} alt="" />
+        <img src={clear} onClick={toggleScore} alt="" />
       </div>
       {/* ALLOCATED */}
       {automatic ? (
