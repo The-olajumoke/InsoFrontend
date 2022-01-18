@@ -22,11 +22,12 @@ import grade from "../Exports/grade.svg";
 import help_outline from "../Exports/help_outline.svg";
 import ViewPostInsp from "../components/Discussion/ViewPostInsp";
 import axios from "axios";
+import ScoreSheet from "../components/Discussion/ScoreSheet";
 
 function ViewDiscussion() {
   const [showPostInsp, setshowPostInsp] = useState(false);
   const [sendBtn, setSendBtn] = useState(false);
-  const [comment, setcomment] = useState([]);
+  const [comment, setcomment] = useState([""]);
   const togglePostInsp = () => {
     setshowPostInsp(!showPostInsp);
   };
@@ -107,58 +108,64 @@ function ViewDiscussion() {
           </div>
         </div>
         {/* MAIN DISCUSSION */}
-        <ViewDisTemp
-          question="In this discussion we are going to take sides on a topic."
-          // name="hello world"
+        <div className="border border-red h-full flex">
+          <div className=" border border-red h-full flex flex-col justify-between w-1/2">
+            <ViewDisTemp
+              question="In this discussion we are going to take sides on a topic."
+              // name="hello world"
 
-          // question={discussion.description}
-          name={DiscussionCont[0].username}
-          username={DiscussionCont[0].username}
-          togglePostInsp={togglePostInsp}
-        />
-        {/* Comment Section */}
-        <div className="allCommentCont">
-          {comment.length !== 0 ? (
-            <ViewCommentTemp
-              name="Elvis Collins"
-              username="COLLINS"
-              comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+              // question={discussion.description}
+              name={DiscussionCont[0].username}
+              username={DiscussionCont[0].username}
+              togglePostInsp={togglePostInsp}
             />
-          ) : (
-            <h2 className="nocomment">
-              Click “Post Inspiration” for ideas on what to post
-            </h2>
-          )}
-        </div>
-        {/* COMMENT BOX */}
-        <div className="commentBoxCont">
-          <div className="commentBox">
-            {/* <h4 className="replyTo">@ {discussion.username}</h4> */}
-            <textarea
-              className="textA"
-              name=""
-              onChange={handleChange}
-              placeholder="What’s your opinion on the topic?"
-            ></textarea>
-            <div className="widgetCont">
-              <div className="widget">
-                <img src={textFormat} alt="" />
-                <img src={smile} alt="" />
-                <img src={attFile} alt="" />
-                <img src={insertPhoto} alt="" />
-                <img src={code} alt="" />
-                <img src={cameraAlt} alt="" />
-                <img src={assessment} alt="" />
-              </div>
-              <div className="commentBtnCont ">
-                <button className="commentBtn" onclick={setshowPostInsp}>
-                  Post as
-                  <img className="ml-1" src={postInDrop} alt="" />
-                </button>
-                <button className="commentBtn ">Send</button>
+            {/* Comment Section */}
+            <div className="allCommentCont">
+              {comment.length !== 0 ? (
+                <ViewCommentTemp
+                  name="Elvis Collins"
+                  username="COLLINS"
+                  comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+                />
+              ) : (
+                <h2 className="nocomment">
+                  Click “Post Inspiration” for ideas on what to post
+                </h2>
+              )}
+            </div>
+            {/* COMMENT BOX */}
+            <div className="commentBoxCont">
+              <div className="commentBox">
+                {/* <h4 className="replyTo">@ {discussion.username}</h4> */}
+                <textarea
+                  className="textA"
+                  name=""
+                  onChange={handleChange}
+                  placeholder="What’s your opinion on the topic?"
+                ></textarea>
+                <div className="widgetCont">
+                  <div className="widget">
+                    <img src={textFormat} alt="" />
+                    <img src={smile} alt="" />
+                    <img src={attFile} alt="" />
+                    <img src={insertPhoto} alt="" />
+                    <img src={code} alt="" />
+                    <img src={cameraAlt} alt="" />
+                    <img src={assessment} alt="" />
+                  </div>
+                  <div className="commentBtnCont ">
+                    <button className="commentBtn" onclick={setshowPostInsp}>
+                      Post as
+                      <img className="ml-1" src={postInDrop} alt="" />
+                    </button>
+                    <button className="commentBtn ">Send</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          {/* SCORING */}
+          <ScoreSheet />
         </div>
       </div>
     </BodyWrapper>

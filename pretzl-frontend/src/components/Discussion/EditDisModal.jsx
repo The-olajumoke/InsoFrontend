@@ -81,7 +81,6 @@ function EditDisModal({ discussio, showEditModal }) {
 
   //   HANDLE CHECKED
   const handleChecked = (e) => {
-    alert(e.target.checked);
     setApplyAll(!applyAll);
     if (e.target.checked) {
       let newar = discussions.filter((dis) => dis.discussionId);
@@ -182,7 +181,7 @@ function EditDisModal({ discussio, showEditModal }) {
       <div className="EditDiscont">
         <div className="EditDisTop">
           <button
-            className={`saveSettingBtn${
+            className={`saveSettingBtn ${
               saveState ? "bg-primary" : "bg-saveBtn"
             } 
                 ${saveState ? "text-white" : "text-desc"}
@@ -191,12 +190,7 @@ function EditDisModal({ discussio, showEditModal }) {
           >
             Save
           </button>
-          <img
-            className="canbtn border"
-            src={clear}
-            onClick={showEditModal}
-            alt=""
-          />
+          <img className="canbtn" src={clear} onClick={showEditModal} alt="" />
         </div>
         <h2 className="EditHeading">Discussions</h2>
         <div className="allCheckDisc " id={discussions[0].setId}>

@@ -4,12 +4,20 @@
 }
 /* CALENDAR */
 .closeCalendar {
-  position: absolute;
-  top: 10px;
-  right: 98px;
+  top: 0;
+  /* right: 15%; */
+  /* position: absolute; */
   color: red;
   font-size: 20px;
   z-index: 5;
+  width: 75%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 15px;
+  transform: translateY(40px);
+}
+.closeCalendar img {
+  width: 30px;
 }
 .calTemp {
   position: absolute;
@@ -22,15 +30,16 @@
   left: 0;
   right: 0;
   text-align: center;
+  padding: 0 40px;
   margin: 0 auto;
-
   translate: transform(-50%);
   background-color: rgb(255, 255, 255, 0.5);
   background-color: rgb(249, 249, 249, 0.8);
 }
 .react-calendar {
   width: 350px;
-  width: 455px;
+  /* width: 455px; */
+  /* width: 80% !important; */
   height: 400px;
   background: #ffffff;
   border-radius: 17px;
@@ -46,6 +55,7 @@
   /* background-color: rebeccapurple; */
   margin-bottom: 30px !important;
   background-color: #ffffff;
+  transform: translateY(20px);
 }
 
 .react-calendar__navigation__prev-button {
@@ -76,11 +86,9 @@
   background: rgb(7, 160, 152, 0.45) !important;
 
   color: white !important;
-  border-radius: 50% !important;
 }
 .react-calendar__tile--rangeEnd,
 .react-calendar__tile--rangeStart {
-  border-radius: 50% !important;
   background: #07a098 !important;
   color: white !important;
 }

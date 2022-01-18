@@ -35,10 +35,10 @@ function StarterPrompt(props) {
                 setstarterPromptMode(!starterPromptMode);
                 setSaveState(true);
                 setstarterPrompt(!starterPrompt);
-                  setPostInsp(false);
-                  setpostAs(false);
-                  setscores(false);
-                  setCalendar(false);
+                setPostInsp(false);
+                setpostAs(false);
+                setscores(false);
+                setCalendar(false);
               }}
             />
             <span className="slider round"></span>
@@ -72,14 +72,7 @@ function StarterPrompt(props) {
               name=""
               placeholder="Get this discussion started"
               onChange={(e) => setstarterPromptValue(e.target.value)}
-            >
-              {/* {`1. In this discussion we are going to be exploring.
-                     2.If you are responding directly to my initial post, you can select a specific channel to post in by selecting the appropriate tag from the "Post in" dropdown menu.
-                    3. For all posts and responses, be sure to #hashtag any keywords or themes.
-                    4. For some ideas on what sorts of things you should post, click Posting Inspiration and explore the prompts for posting, responding and synthesizing.
-
-`} */}
-            </textarea>
+            ></textarea>
             <div className="widgetCont">
               <div className="widget settingsWidget">
                 <img src={textFormat} alt="" />

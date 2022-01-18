@@ -1,0 +1,90 @@
+.scoreSheet {
+  background: #ffffff;
+  /* background-color: rgb(206, 205, 205); */
+  box-shadow: 1px 2px 10px rgba(169, 169, 169, 0.12);
+  border-radius: 12px;
+  padding: 30px;
+  /* width: 100%; */
+  flex: 1;
+}
+.scoreSheet-heading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  color: #07a098;
+}
+.allocated {
+  margin-bottom: 50px;
+}
+.showScoresCont {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.showScoresText {
+  width: 33%;
+  display: flex;
+  gap: 12px;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+}
+.showScoresValue {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+  color: #686868;
+}
+.scoreSection {
+  width: 65%;
+  display: flex;
+  gap: 20px;
+  /* justify-content: space-between; */
+}
+.scoreSectionTitle {
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+  justify-content: center;
+  width: 18%;
+}
+.scoreSectionValue {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+}
+.allocatedValue {
+  padding: 10px;
+  width: 70px;
+  height: 50px;
+  background: #f0f0f0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #011b25;
+  justify-content: center;
+  width: 18%;
+}
+.scoreTextArea {
+  width: 65%;
+  height: 134px;
+  background: #ffffff;
+  border: 1px solid #07a098;
+  box-sizing: border-box;
+  border-radius: 8px;
+  resize: none;
+  padding: 15px 20px;
+  margin-top: 10px;
+}
