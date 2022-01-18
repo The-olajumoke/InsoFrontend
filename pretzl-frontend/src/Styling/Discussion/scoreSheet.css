@@ -84,7 +84,76 @@
   border: 1px solid #07a098;
   box-sizing: border-box;
   border-radius: 8px;
-  resize: none;
-  padding: 15px 20px;
+  padding: 15px 5px 5px 10px;
   margin-top: 10px;
+}
+.scoreTextArea textarea {
+  width: 100%;
+  resize: none;
+  flex: 1;
+  outline: none;
+}
+
+.feedbackBtn {
+  padding: 7px 25px;
+  color: #9d9d9d;
+  background: #eaeaea;
+  border-radius: 30px;
+  width: fit-content;
+  font-size: 13.19px;
+  line-height: 20px;
+}
+
+/*//////////////////////////// RUBRIC///////////////////////*/
+.RubricSection {
+  width: 65%;
+  display: flex;
+  gap: 20px;
+}
+.RubricTitle {
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #686868;
+  justify-content: center;
+  width: 18%;
+}
+.RubricInput {
+  width: 60%;
+  font-size: 13.19px;
+  line-height: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+.RubricInput input {
+  outline: none;
+  background: #ecf4f4;
+  border-radius: 5px;
+  width: 85%;
+  padding: 3px 20px;
+}
+.t-score {
+  color: #07a098;
+}
+.RubricValue {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #07a098;
+}
+.arrowDown {
+  background: #f9f9f9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
 }
