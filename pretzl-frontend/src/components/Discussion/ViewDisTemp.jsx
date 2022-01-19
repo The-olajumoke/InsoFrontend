@@ -24,7 +24,7 @@ function ViewDisTemp({ name, question, username, togglePostInsp }) {
       </div>
       {/* Content */}
       <div className="viewMainText">
-        <h3 className="w-5/6">{question}</h3>
+        <h3 className="prompt">{question}</h3>
       </div>
       <button className="DiscPostInspBtn" onClick={togglePostInsp}>
         <MdChatBubbleOutline />

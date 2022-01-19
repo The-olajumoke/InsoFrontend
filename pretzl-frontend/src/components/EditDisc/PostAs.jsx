@@ -62,6 +62,7 @@ function PostAs(props) {
             {allPostAs.map((pos, index) => (
               <input
                 id={index}
+                key={index}
                 type="text"
                 className="postAsBtn"
                 placeholder="#channel"

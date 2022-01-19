@@ -77,6 +77,7 @@ function Archives() {
           ) : (
             archivesList.map((dis, index) => (
               <DiscussionBox
+              key={index}
                 title={dis.title}
                 date={dis.date}
                 numberOfPeople={dis.numberOfPeople}

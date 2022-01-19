@@ -61,9 +61,10 @@ function ViewPostInsp({ togglePostInsp }) {
         </button>
       </div>
       <div className="postInspCont">
-        {posting && allPostInsp.map((ins, index) => <h4>{ins}</h4>)}
-        {responding && RespInsp.map((ins, index) => <h4>{ins}</h4>)}
-        {synthesizing && SynInsp.map((ins, index) => <h4>{ins}</h4>)}
+        {posting && allPostInsp.map((ins, index) => <h4 key={index}>{ins}</h4>)}
+        {responding && RespInsp.map((ins, index) => <h4 key={index}>{ins}</h4>)}
+        {synthesizing &&
+          SynInsp.map((ins, index) => <h4 key={index}>{ins}</h4>)}
       </div>
     </div>
   );

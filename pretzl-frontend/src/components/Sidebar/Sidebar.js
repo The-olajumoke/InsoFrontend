@@ -12,8 +12,10 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { MdChatBubbleOutline } from "react-icons/md";
 import downloadImg from "../../Exports/downloadimg.svg";
 function Sidebar({ navSize, setNavSize }) {
-  const firstName = localStorage.getItem("username");
-  const lastName = localStorage.getItem("username");
+  // const firstName = localStorage.getItem("username");
+  // const lastName = localStorage.getItem("username");
+  const firstName = "Patrick";
+  const lastName = "Dempsey";
   const firstInit = firstName.split("")[0];
   const lastInit = lastName.split("")[0];
 
@@ -43,7 +45,7 @@ function Sidebar({ navSize, setNavSize }) {
               className={`details ${navSize == "small" ? "hidden" : "flex"} `}
             >
               <h3>
-                {firstName} 
+                {firstName}
                 {/* {lastName} */}
               </h3>
               <span>@patrick</span>

@@ -10,8 +10,9 @@ import StarterPrompt from "../EditDisc/StarterPrompt";
 import PostAs from "../EditDisc/PostAs";
 import Scores from "../EditDisc/Scores";
 import Calendar from "../EditDisc/Calendar";
+import { useEffect } from "react";
 
-function EditDisModal({ discussio, showEditModal }) {
+function EditDisModal({ discussions, showEditModal }) {
   const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   const [saveState, setSaveState] = useState(false);
@@ -97,7 +98,7 @@ function EditDisModal({ discussio, showEditModal }) {
     console.log(upvoteValue);
 
     const payload = {
-      set_id: `${discussions[0].setId}`,
+      set_id: `${discussions[0].setId || discussions[0].setID}`,
       updateDiscussions: [
         ...allCheckedIDs.map((ids) => ({
           discussion_id: `${ids}`,
@@ -169,13 +170,19 @@ function EditDisModal({ discussio, showEditModal }) {
     setallCheckedIDs([...allCheckedIDs, e.target.id]);
     setSaveState(true);
   };
+  let id;
+
+  useEffect(() => {
+    const fetchDiscussions = () => {
+      if (discussions.length === 1) {
+        id = discussions[0].code;
+        setallCheckedIDs([id]);
+      }
+    };
+    fetchDiscussions();
+  }, []);
   console.log(allCheckedIDs);
-  let discussions = [
-    "heelo",
-    "heelo how have you been",
-    " hope all is going well",
-    "itsd been a while",
-  ];
+  console.log(discussions);
   return (
     <div className="editModal">
       <div className="EditDiscont">
@@ -200,8 +207,13 @@ function EditDisModal({ discussio, showEditModal }) {
                 type="checkbox"
                 name="disc"
                 checked
-                id={discussions.discussionId}
+                id={discussions[0].discussionId}
                 onChange={checkBox}
+                onLoad={() => {
+                  setallCheckedIDs(discussions[0].discussionId);
+                  console.log(allCheckedIDs);
+                }}
+                on
               />
               <label htmlFor="">{discussions[0].title}</label>
             </div>

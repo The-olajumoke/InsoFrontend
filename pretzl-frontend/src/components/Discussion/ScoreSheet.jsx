@@ -58,8 +58,8 @@ function ScoreSheet({ toggleScore }) {
           </div>
           {/* VALUES */}
           <div className="flex flex-col gap-y-4 ">
-            {users.map((user) => (
-              <ScoreBox user="Beth Keen" p={2} r={4} u={6} t={12} />
+            {users.map((user,index) => (
+              <ScoreBox key={index} user="Beth Keen" p={2} r={4} u={6} t={12} />
             ))}
           </div>
         </>
@@ -102,8 +102,8 @@ function ScoreSheet({ toggleScore }) {
           </div>
           {/* VALUES */}
           <div className="flex flex-col gap-y-4 ">
-            {users.map((user) => (
-              <RubricBox />
+            {users.map((user,index) => (
+              <RubricBox key={index} />
             ))}
           </div>
         </>
