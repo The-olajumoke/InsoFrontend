@@ -201,14 +201,14 @@ function ViewDiscussion() {
                         id=""
                       >
                         <option className="  bg-btnText" value="">
-                          Post As
+                          Post in
                         </option>
 
                         {DiscussionCont.updateDiscussion.postAs.map(
                           (dis, index) => (
                             <option
                               key={index}
-                              value="volvo"
+                              value={dis}
                             >{` # ${dis}`}</option>
                           )
                         )}
