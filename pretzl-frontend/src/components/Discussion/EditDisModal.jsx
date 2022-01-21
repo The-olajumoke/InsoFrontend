@@ -12,7 +12,8 @@ import Scores from "../EditDisc/Scores";
 import Calendar from "../EditDisc/Calendar";
 import { useEffect } from "react";
 
-function EditDisModal({ discussions, showEditModal }) {
+function EditDisModal({ discussi, showEditModal }) {
+  const discussions = ["hello", "hi", "whatsUp"];
   const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   const [saveState, setSaveState] = useState(false);
@@ -172,17 +173,31 @@ function EditDisModal({ discussions, showEditModal }) {
   };
   let id;
 
-  useEffect(() => {
-    const fetchDiscussions = () => {
-      if (discussions.length === 1) {
-        id = discussions[0].code;
-        setallCheckedIDs([id]);
-      }
-    };
-    fetchDiscussions();
-  }, []);
+  // useEffect(() => {
+  //   const fetchDiscussions = () => {
+  //     if (discussions.length === 1) {
+  //       id = discussions[0].code;
+  //       setallCheckedIDs([id]);
+  //     }
+  //   };
+  //   fetchDiscussions();
+  // }, []);
   console.log(allCheckedIDs);
   console.log(discussions);
+
+  // HANDLE DELETE
+  const DelPostInsp = ({value}) => {
+const items =allPostInsp.filter((item=> item!== value);
+ setAllPostInsp(items)
+  };
+  const DelResInsp = ({value}) => {
+const items =RespInsp.filter((item=> item!== value);
+ setRespInsp(items)
+  };
+  const DelSynInsp = ({value}) => {
+const items =SynInsp.filter((item=> item!== value);
+ setSynInsp(items)
+  };
   return (
     <div className="editModal">
       <div className="EditDiscont">

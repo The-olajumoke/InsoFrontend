@@ -78,7 +78,6 @@ function CreateNewDis({ handleClick, showMenu }) {
       setAllDisc(reset);
       handleClick();
       window.location.reload();
-
     } else {
       setErrorAlert(true);
     }

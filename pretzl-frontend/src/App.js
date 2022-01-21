@@ -19,21 +19,13 @@ import ViewDiscussionSet from "./pages/ViewDiscussionSet";
 import EditDisModal from "./components/Discussion/EditDisModal";
 
 const App = () => {
-  function requireAuth(nextState, replace, next) {
-    if (!authenticated) {
-      replace({
-        pathname: "/login",
-        state: { nextPathname: nextState.location.pathname },
-      });
-    }
-    next();
-  }
+  
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path="/" onEnter={requireAuth}>
-          <Landing />
-          {/* <EditDisModal/> */}
+        <Route exact path="/" >
+          {/* <Landing /> */}
+          <EditDisModal/>
         </Route>
         <Route path="/sign-up">
           <ChooseUser />
@@ -92,3 +84,14 @@ const App = () => {
 };
 
 export default App;
+// "eslintConfig": {
+//   "plugins": ["react-hooks"],
+// "rules": {
+//   "react-hooks/rules-of-hooks":"error",
+//   "react-hooks/exhaustive-deps": "warn"
+// },
+//   "extends": [
+//     "react-app",
+//     "react-app/jest"
+//   ]
+// },
