@@ -7,14 +7,14 @@ import responded from "../../Exports/scores/responded.svg";
 import ScoreBox from "./ScoreBox";
 import RubricBox from "./RubricBox";
 
-function ScoreSheet() {
+function ScoreSheet({ toggleScore }) {
   const users = ["boy", "girl", "good", "bad"];
   const [automatic, setautomatic] = useState(true);
   return (
     <div className="scoreSheet">
       <div className="flex justify-between items-center  mb-20">
         <h2 className="scoreSheet-heading">Scores</h2>
-        <img src={clear} alt="" />
+        <img src={clear} onClick={toggleScore} alt="" />
       </div>
       {/* ALLOCATED */}
       {automatic ? (
@@ -58,8 +58,8 @@ function ScoreSheet() {
           </div>
           {/* VALUES */}
           <div className="flex flex-col gap-y-4 ">
-            {users.map((user) => (
-              <ScoreBox user="Beth Keen" p={2} r={4} u={6} t={12} />
+            {users.map((user,index) => (
+              <ScoreBox key={index} user="Beth Keen" p={2} r={4} u={6} t={12} />
             ))}
           </div>
         </>
@@ -102,8 +102,8 @@ function ScoreSheet() {
           </div>
           {/* VALUES */}
           <div className="flex flex-col gap-y-4 ">
-            {users.map((user) => (
-              <RubricBox />
+            {users.map((user,index) => (
+              <RubricBox key={index} />
             ))}
           </div>
         </>

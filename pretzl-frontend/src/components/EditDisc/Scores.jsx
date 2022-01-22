@@ -187,6 +187,7 @@ function Scores(props) {
                   <div className="rubricMid mb-3">
                     <input
                       id={index}
+                      key={index}
                       type="text"
                       className="rubricInput"
                       placeholder="At least 5 comments"

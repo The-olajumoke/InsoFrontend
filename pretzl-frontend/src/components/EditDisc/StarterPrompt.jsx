@@ -3,7 +3,7 @@ import textFormat from "../../Exports/comment/text_format.svg";
 import attFile from "../../Exports/comment/attach_file.svg";
 import assessment from "../../Exports/comment/assessment.svg";
 import insertPhoto from "../../Exports/comment/insert_photo.svg";
-import code from "../../Exports/comment/icomoon-free_embed2.svg";
+import code from "../../Exports/comment/htmlcode.svg";
 import smile from "../../Exports/comment/sentiment_satisfied_alt.svg";
 import cameraAlt from "../../Exports/comment/camera_alt.svg";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";

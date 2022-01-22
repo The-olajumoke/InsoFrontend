@@ -1,0 +1,48 @@
+.starterOverlay {
+  background-color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  z-index: 50;
+}
+.starterCont {
+  width: 245px;
+  height: 130px;
+  background: #07a098;
+  box-shadow: 1px 2px 10px rgba(169, 169, 169, 0.12);
+  border-radius: 7px;
+  padding: 10px 17px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+
+  /* transform: translate(-50%, -50%); */
+}
+
+.starterCont h4 {
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+.starterCont button {
+  background: rgba(255, 255, 255, 0.17);
+  border-radius: 2px;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  padding: 4px 12px;
+}

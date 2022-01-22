@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function AnalDropdown({ options }) {
   //options is an array of objects

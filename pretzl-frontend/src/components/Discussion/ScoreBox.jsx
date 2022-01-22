@@ -5,6 +5,7 @@ import responded from "../../Exports/scores/responded.svg";
 function ScoreBox(props) {
   const { user, p, r, u, t } = props;
   const [feedbackBox, setfeedbackBox] = useState(false);
+  const [btnActive, setBtnActive] = useState(false);
 
   return (
     <div className="">
@@ -32,8 +33,17 @@ function ScoreBox(props) {
       {feedbackBox && (
         <div className="flex  justify-end">
           <div className=" border scoreTextArea flex flex-col items-end">
-            <textarea className="" placeholder="Give your feedback"></textarea>
-            <button className="feedbackBtn">Send</button>
+            <textarea
+              className=""
+              placeholder="Give your feedback"
+            ></textarea>
+            <button
+              className={`feedbackBtn ${
+                btnActive ? "bg-primary" : " bg-saveBtn"
+              }`}
+            >
+              Send
+            </button>
           </div>
         </div>
       )}

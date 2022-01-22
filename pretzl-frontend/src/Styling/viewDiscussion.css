@@ -85,7 +85,6 @@
 }
 .DiscProp {
   background: #fafafa;
-  /* height: 90px; */
   padding: 10px 45px;
   margin-bottom: 20px;
 }
@@ -158,6 +157,9 @@
   color: #686868;
   margin-bottom: 10px;
 }
+.viewMainText .prompt {
+  width: 80%;
+}
 .DiscPostInspBtn {
   font-weight: normal;
   font-size: 13.19px;
@@ -186,11 +188,13 @@
   line-height: 21px;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: #939393;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 100%;
 }
 
 .commentProp {
@@ -237,7 +241,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 5px 0px 12px 20px;
+  padding: 5px 20px 12px 20px;
   width: 100%;
   height: 122.3px;
   background: #ffffff;
@@ -272,7 +276,8 @@
 }
 .widget {
   display: flex;
-  column-gap: 20px;
+  width: 350px;
+  justify-content: space-between;
 }
 
 .commentBtnCont {
@@ -295,10 +300,26 @@
   line-height: 20px;
   color: #ffffff;
 }
-.commentBtn:last-child {
+.commentSelect {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  width: 130px;
+  /* height: 34px; */
+  background: #07a098;
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13.19px;
+  line-height: 20px;
+  color: #ffffff;
+}
+/* .commentBtn:last-child {
   color: #9d9d9d;
   background: #eaeaea;
-}
+} */
 @media (max-width: 900px) {
   .viewHeading {
     display: none;
@@ -306,7 +327,7 @@
   .DiscProp,
   .commentProp {
     height: auto;
-    padding: 0 15px;
+    padding: 10px 15px;
   }
   .commentBoxCont {
     padding: 0 25px;
@@ -314,7 +335,8 @@
 }
 @media (max-width: 620px) {
   .commentBoxCont {
-    padding: 0;
+    /* padding: 0; */
+    padding: 0 15px;
   }
   .commentBox {
     height: 150px;
@@ -327,8 +349,7 @@
     height: auto;
   }
   .widget {
-    /* column-gap: 2px; */
-    flex: 1;
+    width: 100%;
   }
   .commentBtnCont {
     justify-content: space-between;
@@ -336,5 +357,8 @@
   }
   .topRight {
     display: none;
+  }
+  .viewMainText .prompt {
+    width: 100%;
   }
 }

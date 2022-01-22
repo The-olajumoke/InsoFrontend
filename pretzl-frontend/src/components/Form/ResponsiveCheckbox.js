@@ -7,8 +7,8 @@ function ResponsiveCheckbox({label,checkboxes}) {
         <label className="text-xl text-black">{label}</label>
 
         <div>
-          {checkboxes.map((check) => {
-           <div className="ring flex">
+          {checkboxes.map((check,index) => {
+           <div className="ring flex" key={index}>
              <input type="checkbox" name="" id="" />
              <h5 className="text-xl text-black">check</h5>
            </div>;

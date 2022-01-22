@@ -14,27 +14,34 @@ import assessment from "../Exports/comment/assessment.svg";
 import insertPhoto from "../Exports/comment/insert_photo.svg";
 import smile from "../Exports/comment/sentiment_satisfied_alt.svg";
 import cameraAlt from "../Exports/comment/camera_alt.svg";
+import htmlcode from "../Exports/comment/htmlcode.svg";
 import ResponsiveTop from "../components/ResponsiveTop";
 import store from "../redux/store";
-import postInDrop from "../Exports/comment/postIn.svg";
 import scores from "../Exports/scores.svg";
 import grade from "../Exports/grade.svg";
 import help_outline from "../Exports/help_outline.svg";
 import ViewPostInsp from "../components/Discussion/ViewPostInsp";
 import axios from "axios";
 import ScoreSheet from "../components/Discussion/ScoreSheet";
+import ViewStarterPrompt from "../components/EditDisc/ViewStarterPrompt";
 
 function ViewDiscussion() {
   const [showPostInsp, setshowPostInsp] = useState(false);
   const [sendBtn, setSendBtn] = useState(false);
-  const [comment, setcomment] = useState([""]);
+  const [comment, setcomment] = useState([]);
+  const [showScores, setShowScores] = useState(false);
+  const [viewHelp, setViewHelp] = useState(false);
+  const [DiscussionCont, setDiscussionCont] = useState([]);
+
   const togglePostInsp = () => {
     setshowPostInsp(!showPostInsp);
+  };
+  const togglePrompt = () => {
+    setViewHelp(!viewHelp);
   };
   const handleChange = (e) => {};
   const { code } = useParams();
 
-  const [DiscussionCont, setDiscussionCont] = useState([""]);
   const getPresentDiscussion = async () => {
     var apiBaseUrl = `http://localhost:8080/api/auth/discussion?discussionId=${code}`;
 
@@ -49,24 +56,29 @@ function ViewDiscussion() {
       return data;
     } catch (error) {
       console.log({ ...error });
+      return DiscussionCont;
     }
   };
   useEffect(() => {
     const fetchDiscussion = async () => {
       const discussion = await getPresentDiscussion();
-      // dispatch(saveDisc(discussions));
-
       setDiscussionCont(discussion);
     };
     fetchDiscussion();
   }, []);
 
+  const toggleScore = () => {
+    setShowScores(!showScores);
+  };
   console.log(DiscussionCont);
+
   return (
     <BodyWrapper>
       <ResponsiveTop title="Discussion" />
+
       <div className="viewDisCont pt-1">
         {showPostInsp && <ViewPostInsp togglePostInsp={togglePostInsp} />}
+        {viewHelp && <ViewStarterPrompt togglePrompt={togglePrompt} />}
         {/* HEADING AND TITLE */}
         <div className="viewHeading ">
           <div className="viewHeadText">
@@ -74,8 +86,13 @@ function ViewDiscussion() {
               onClick={() => history.push("../discussions")}
               className="viewIcon"
             />
-            {/* <h3>Type title here</h3> */}
-            <h3>{DiscussionCont[0].description}</h3>
+            {DiscussionCont.length !== 0 ? (
+              <h3>{DiscussionCont.userDiscussionsById[0].description}</h3>
+            ) : (
+              <h3>Discussion Title</h3>
+            )}
+
+            {/* <h3>{DiscussionCont.updateDiscussion.description}</h3> */}
           </div>
           <div className="viewButton">
             <button
@@ -96,45 +113,59 @@ function ViewDiscussion() {
             </button>
           </div>
           <div className="moreInfo">
-            <div className="viewImg">
+            <button className="viewImg " onClick={toggleScore}>
               <img src={`${comment.length !== 0 ? scores : vec1}`} alt="" />
               <h3>Scores</h3>
-            </div>
-            <div className="viewImg">
+            </button>
+            <button className="viewImg">
               <img src={`${comment.length !== 0 ? grade : vec2}`} alt="" />
               <h3>Gradesheet</h3>
-            </div>
-            <img src={help_outline} className="helpBtn" alt="" />
+            </button>
+            <img
+              src={help_outline}
+              onClick={() => setViewHelp(!viewHelp)}
+              className="helpBtn"
+              alt=""
+            />
           </div>
         </div>
         {/* MAIN DISCUSSION */}
-        <div className="border border-red h-full flex">
-          <div className=" border border-red h-full flex flex-col justify-between w-1/2">
-            <ViewDisTemp
-              question="In this discussion we are going to take sides on a topic."
-              // name="hello world"
+        <div className=" h-full flex gap-5 ">
+          <div
+            className={`  h-full flex flex-col justify-between ${
+              showScores ? "w-1/2" : "w-full"
+            }`}
+          >
+            {DiscussionCont.length !== 0 && (
+              <>
+                <ViewDisTemp
+                  // question="In this discussion we are going to take sides on a topic."
+                  // name="hello world"
 
-              // question={discussion.description}
-              name={DiscussionCont[0].username}
-              username={DiscussionCont[0].username}
-              togglePostInsp={togglePostInsp}
-            />
-            {/* Comment Section */}
-            <div className="allCommentCont">
-              {comment.length !== 0 ? (
-                <ViewCommentTemp
-                  name="Elvis Collins"
-                  username="COLLINS"
-                  comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+                  question={DiscussionCont.updateDiscussion.starterPrompt}
+                  name={DiscussionCont.userDiscussionsById[0].username}
+                  username={DiscussionCont.userDiscussionsById[0].username}
+                  togglePostInsp={togglePostInsp}
                 />
-              ) : (
-                <h2 className="nocomment">
-                  Click “Post Inspiration” for ideas on what to post
-                </h2>
-              )}
-            </div>
+                {/* Comment Section */}
+
+                <div className="allCommentCont">
+                  {comment.length !== 0 ? (
+                    <ViewCommentTemp
+                      name="Elvis Collins"
+                      username="COLLINS"
+                      comment="Currently, Government agencies are discussing the dangers of dumping nuclear water into the ocean."
+                    />
+                  ) : (
+                    <h2 className="nocomment">
+                      Click “Post Inspiration” for ideas on what to post
+                    </h2>
+                  )}
+                </div>
+              </>
+            )}
             {/* COMMENT BOX */}
-            <div className="commentBoxCont">
+            <div className="commentBoxCont ">
               <div className="commentBox">
                 {/* <h4 className="replyTo">@ {discussion.username}</h4> */}
                 <textarea
@@ -143,21 +174,46 @@ function ViewDiscussion() {
                   onChange={handleChange}
                   placeholder="What’s your opinion on the topic?"
                 ></textarea>
-                <div className="widgetCont">
+                <div className="widgetCont ">
                   <div className="widget">
                     <img src={textFormat} alt="" />
                     <img src={smile} alt="" />
                     <img src={attFile} alt="" />
                     <img src={insertPhoto} alt="" />
-                    <img src={code} alt="" />
+                    <img src={htmlcode} alt="" />
                     <img src={cameraAlt} alt="" />
                     <img src={assessment} alt="" />
                   </div>
                   <div className="commentBtnCont ">
-                    <button className="commentBtn" onclick={setshowPostInsp}>
-                      Post as
-                      <img className="ml-1" src={postInDrop} alt="" />
-                    </button>
+                    {/* <button className="commentBtn" onClick={setshowPostInsp}>
+                        Post as
+                        <img className="ml-1" src={postInDrop} alt="" />
+                        {DiscussionCont.length !== 0 && (
+                          <PostDropDown
+                          // options={DiscussionCont.updateDiscussion.postAs}
+                          />
+                        )}
+                      </button> */}
+                    {DiscussionCont.length !== 0 && (
+                      <select
+                        className="commentSelect px-3 outline-none"
+                        name=""
+                        id=""
+                      >
+                        <option className="  bg-btnText" value="">
+                          Post in
+                        </option>
+
+                        {DiscussionCont.updateDiscussion.postAs.map(
+                          (dis, index) => (
+                            <option
+                              key={index}
+                              value={dis}
+                            >{` # ${dis}`}</option>
+                          )
+                        )}
+                      </select>
+                    )}
                     <button className="commentBtn ">Send</button>
                   </div>
                 </div>
@@ -165,7 +221,7 @@ function ViewDiscussion() {
             </div>
           </div>
           {/* SCORING */}
-          <ScoreSheet />
+          {showScores && <ScoreSheet toggleScore={toggleScore} />}
         </div>
       </div>
     </BodyWrapper>
