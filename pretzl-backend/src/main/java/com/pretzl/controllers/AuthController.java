@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -304,28 +305,36 @@ public class AuthController {
         }
         List<String> postAs = new ArrayList<>();
         List<Actions> actionsList = new ArrayList<>();
+        AtomicInteger counter = new AtomicInteger(0);
         userDiscussions.forEach(discussion -> {
             if (StringUtils.isNotEmpty(discussion.getPost_as())) {
                 postAs.add(discussion.getPost_as());
             }
             Actions actions = new Actions();
             actions.setScore(discussion.getScore());
+            counter.addAndGet(discussion.getScore());
             if (discussion.getType().equalsIgnoreCase("Rubric")) {
                 actions.setCriteria(Arrays.stream(discussion.getCriteria()).collect(Collectors.toList()));
+                actions.setType("Rubric");
+                actionsList.add(actions);
             } else {
                 if (discussion.getType().equalsIgnoreCase("SS")) {
                     actions.setType("Scores");
+                    actionsList.add(actions);
                 } else if (discussion.getType().equalsIgnoreCase("SR")) {
                     actions.setType("Reactions");
-                } else {
+                    actionsList.add(actions);
+                } else if(discussion.getType().equalsIgnoreCase("SU")){
                     actions.setType("Upvotes");
+                    actionsList.add(actions);
                 }
             }
-            actionsList.add(actions);
+
         });
         Score score = new Score();
         score.setType("score");
         score.setActions(actionsList);
+        score.setTotalScore(counter.get());
         updateDiscussion.setScores(score);
         updateDiscussion.setPostAs(postAs);
 //        getDiscussionsResponse.setUpdateDiscussions();
