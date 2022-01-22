@@ -3,9 +3,9 @@
 }
 
 .editModal {
-  background: rgb(240, 240, 240, 0.7);
-  /* background-color: rebeccapurple; */
-  position: absolute;
+  /* background: rgb(240, 240, 240, 0.7); */
+  /* position: absolute; */
+  background-color: purple;
   top: 0;
   left: 0;
   bottom: 0;
@@ -16,6 +16,7 @@
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
+  height: 100vh;
 }
 .EditDiscont {
   width: 556px;
@@ -196,13 +197,33 @@ hr {
   box-sizing: border-box;
   border-radius: 30px;
 }
+.inputCont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: linear-gradient(
+      0deg,
+      rgba(7, 160, 152, 0.05),
+      rgba(7, 160, 152, 0.05)
+    ),
+    #f9f9f9;
+  border-radius: 30px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+}
 .postInspInput {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 5px 20px;
-  width: 464.01px;
-  height: 34px;
+  height: 32px;
+  width: 95%;
   background: linear-gradient(
       0deg,
       rgba(7, 160, 152, 0.05),
@@ -218,7 +239,23 @@ hr {
   align-items: center;
   /* color: #bdbdbd; */
   outline: none;
+  resize: none;
 }
+.postInspInput::-webkit-scrollbar {
+  display: none;
+}
+.postInspInput:hover {
+  height: auto;
+}
+.deleteIc {
+  position: absolute;
+  right: 10px;
+  opacity: 0;
+}
+.inputCont:hover .deleteIc {
+  opacity: 1;
+}
+
 .inspAddCircle {
   margin: 15px 0;
   display: flex;
@@ -236,18 +273,35 @@ hr {
 }
 /* /////////POST AS */
 .allPostAsBtn {
-  column-gap: 10px;
+  gap: 20px;
   width: 100%;
   height: auto;
   /* padding: 10px 0; */
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
-.postAsBtn {
+.postAsCont {
   width: 100px;
   height: 34px;
+  background: #ecf4f4;
+  border-radius: 16.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* color: #bdbdbd; */
+  outline: none;
+  margin-bottom: 8px;
+  position: relative;
+  /* padding: 5px; */
+  margin-bottom: 8px;
+  padding: 0;
+}
+.postAsBtn {
+  width: 95%;
+  height: 100%;
   background: #ecf4f4;
   border-radius: 16.5px;
   font-size: 14px;
@@ -258,11 +312,18 @@ hr {
   text-align: center;
   /* color: #bdbdbd; */
   outline: none;
-  margin-bottom: 8px;
 
   /* padding: 5px; */
 }
-
+.deletePostIc {
+  position: absolute;
+  right: -12px;
+  opacity: 0;
+  /* top: -10px; */
+}
+.postAsCont:hover .deletePostIc {
+  opacity: 1;
+}
 /* SCORES */
 .scoresBtn {
   display: flex;
@@ -333,6 +394,7 @@ hr {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 .rubricInput {
   display: flex;
@@ -361,6 +423,14 @@ hr {
   align-items: flex-end;
   text-align: center;
   color: #686868;
+}
+.deleterub {
+  position: absolute;
+  right: -15px;
+  opacity: 0;
+}
+.rubricMid:hover .deleterub {
+  opacity: 1;
 }
 .rubricBottom {
   margin-top: 12px;

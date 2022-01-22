@@ -186,21 +186,34 @@ function EditDisModal({ discussi, showEditModal }) {
   console.log(discussions);
 
   // HANDLE DELETE
-  const DelPostInsp = ({value}) => {
-const items =allPostInsp.filter((item=> item!== value);
- setAllPostInsp(items)
+  const DelPostInsp = (value) => {
+    value = +value;
+    const items = allPostInsp.filter((item, index) => index !== value);
+    setAllPostInsp(items);
   };
-  const DelResInsp = ({value}) => {
-const items =RespInsp.filter((item=> item!== value);
- setRespInsp(items)
+  const DelResInsp = (value) => {
+    value = +value;
+    const items = RespInsp.filter((item, index) => index !== value);
+    setRespInsp(items);
   };
-  const DelSynInsp = ({value}) => {
-const items =SynInsp.filter((item=> item!== value);
- setSynInsp(items)
+  const DelSynInsp = (value) => {
+    value = +value;
+    const items = SynInsp.filter((item, index) => index !== value);
+    setSynInsp(items);
+  };
+  const DelPostAs = (value) => {
+    value = +value;
+    const items = allPostAs.filter((item, index) => index !== value);
+    setAllPostAs(items);
+  };
+  const DelRubric = (value) => {
+    value = +value;
+    const items = allrubric.filter((item, index) => index !== value);
+    setAllRubric(items);
   };
   return (
     <div className="editModal">
-      <div className="EditDiscont">
+      <div className="EditDiscont border z-40">
         <div className="EditDisTop">
           <button
             className={`saveSettingBtn ${
@@ -313,6 +326,10 @@ const items =SynInsp.filter((item=> item!== value);
               setpostAs={setpostAs}
               setscores={setscores}
               setCalendar={setCalendar}
+              // DELETE
+              DelPostInsp={DelPostInsp}
+              DelResInsp={DelResInsp}
+              DelSynInsp={DelSynInsp}
             />
 
             {/*POST IN */}
@@ -330,6 +347,7 @@ const items =SynInsp.filter((item=> item!== value);
               setpostAs={setpostAs}
               setscores={setscores}
               setCalendar={setCalendar}
+              DelPostAs={DelPostAs}
             />
 
             {/*SCORES */}
@@ -359,6 +377,7 @@ const items =SynInsp.filter((item=> item!== value);
               setpostAs={setpostAs}
               setscores={setscores}
               setCalendar={setCalendar}
+              DelRubric={DelRubric}
             />
 
             {/*CALENDAR */}

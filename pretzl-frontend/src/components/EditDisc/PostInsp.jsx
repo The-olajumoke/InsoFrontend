@@ -1,5 +1,6 @@
 import React from "react";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
+import deleteIc from "../../Exports/delete.svg";
 function PostInsp(props) {
   const {
     setPostInspMode,
@@ -24,10 +25,13 @@ function PostInsp(props) {
     setRespInsp,
     SynInsp,
     setSynInsp,
+    DelPostInsp,
+    DelResInsp,
+    DelSynInsp,
   } = props;
   return (
     <div className="settingsMainCont">
-      <div className="settingsTop">
+      <div className="settingsTop ">
         <h3 className="settingsName ">Post Inspiration</h3>
         <div className="settingsControl">
           <label className="switch">
@@ -105,55 +109,84 @@ function PostInsp(props) {
           </div>
           {posting &&
             allPostInsp.map((ins, index) => (
-              <input
-                key={index}
-                id={index}
-                type="text"
-                value={allPostInsp[index]}
-                onChange={(e) => {
-                  let newInsp = [...allPostInsp];
-                  newInsp[e.target.id] = e.target.value;
-                  setAllPostInsp(newInsp);
-                  // console.log(allPostInsp);
-                }}
-                className="postInspInput mb-2 "
-                placeholder="Type in post inspirations..."
-              />
+              <div className="inputCont shadow-sm">
+                <textarea
+                  key={index}
+                  id={index}
+                  type="text"
+                  value={allPostInsp[index]}
+                  onChange={(e) => {
+                    let newInsp = [...allPostInsp];
+                    newInsp[e.target.id] = e.target.value;
+                    setAllPostInsp(newInsp);
+                  }}
+                  className="postInspInput"
+                  placeholder="Type in post inspirations..."
+                ></textarea>
+                <img
+                  className="deleteIc"
+                  id={index}
+                  src={deleteIc}
+                  onClick={(e) => {
+                    DelPostInsp(e.target.id);
+                  }}
+                  alt=""
+                />
+              </div>
             ))}
           {responding &&
             RespInsp.map((ins, index) => (
-              <input
-                key={index}
-                id={index}
-                type="text"
-                value={RespInsp[index]}
-                onChange={(e) => {
-                  let newInsp = [...RespInsp];
-                  newInsp[e.target.id] = e.target.value;
-                  setAllPostInsp(newInsp);
-                  // console.log(allPostInsp);
-                }}
-                className="postInspInput mb-2 "
-                // placeholder="Type in post inspirations..."
-                // value={}
-              />
+              <div className="inputCont shadow-sm">
+                <textarea
+                  key={index}
+                  id={index}
+                  type="text"
+                  value={RespInsp[index]}
+                  onChange={(e) => {
+                    let newInsp = [...RespInsp];
+                    newInsp[e.target.id] = e.target.value;
+                    setRespInsp(newInsp);
+                  }}
+                  className="postInspInput"
+                ></textarea>
+                <img
+                  className="deleteIc"
+                  id={index}
+                  src={deleteIc}
+                  onClick={(e) => {
+                    DelResInsp(e.target.id);
+                  }}
+                  alt=""
+                />
+              </div>
             ))}
           {synthesizing &&
             SynInsp.map((ins, index) => (
-              <input
-                key={index}
-                id={index}
-                type="text"
-                value={SynInsp[index]}
-                onChange={(e) => {
-                  let newInsp = [...SynInsp];
-                  newInsp[e.target.id] = e.target.value;
-                  setAllPostInsp(newInsp);
-                  // console.log(allPostInsp);
-                }}
-                className="postInspInput mb-2 "
-                placeholder="Type in post inspirations..."
-              />
+              <div className="inputCont shadow-sm">
+                <textarea
+                  key={index}
+                  id={index}
+                  type="text"
+                  value={SynInsp[index]}
+                  onChange={(e) => {
+                    let newInsp = [...SynInsp];
+                    newInsp[e.target.id] = e.target.value;
+                    setSynInsp(newInsp);
+                    // console.log(allPostInsp);
+                  }}
+                  className="postInspInput"
+                  placeholder="Type in post inspirations..."
+                ></textarea>
+                <img
+                  className="deleteIc"
+                  id={index}
+                  src={deleteIc}
+                  onClick={(e) => {
+                    DelSynInsp(e.target.id);
+                  }}
+                  alt=""
+                />
+              </div>
             ))}
           {/* ADD BUTTON */}
           {posting && (

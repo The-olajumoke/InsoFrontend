@@ -5,6 +5,8 @@ import {
   MdArrowUpward,
   MdBarChart,
 } from "react-icons/md";
+import deleteIc from "../../Exports/delete.svg";
+
 import { BiSmile } from "react-icons/bi";
 
 import { BsChatLeft } from "react-icons/bs";
@@ -34,6 +36,7 @@ function Scores(props) {
     setAllRubric,
     setScoresValue,
     addCircle,
+    DelRubric,
   } = props;
   return (
     <div>
@@ -50,10 +53,10 @@ function Scores(props) {
                   setScoresMode(!scoresMode);
                   setSaveState(true);
                   setscores(!scores);
-                   setstarterPrompt(false);
-                   setPostInsp(false);
-                   setpostAs(false);
-                   setCalendar(false);
+                  setstarterPrompt(false);
+                  setPostInsp(false);
+                  setpostAs(false);
+                  setCalendar(false);
                 }}
               />
               <span className="slider round"></span>
@@ -201,6 +204,15 @@ function Scores(props) {
                     <div className="rubricScores">
                       <h2>{midscore}</h2>
                     </div>
+                    <img
+                      className="deleterub"
+                      id={index}
+                      src={deleteIc}
+                      onClick={(e) => {
+                        DelRubric(e.target.id);
+                      }}
+                      alt=""
+                    />
                   </div>
                 ))}
 

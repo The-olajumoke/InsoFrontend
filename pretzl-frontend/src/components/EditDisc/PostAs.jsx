@@ -1,4 +1,5 @@
 import React from "react";
+import deleteIc from "../../Exports/delete.svg";
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from "react-icons/md";
 function PostAs(props) {
   const {
@@ -14,6 +15,7 @@ function PostAs(props) {
     allPostAs,
     setAllPostAs,
     addCircle,
+    DelPostAs,
   } = props;
   return (
     <div className="settingsMainCont">
@@ -29,10 +31,10 @@ function PostAs(props) {
                 setpostAsMode(!postAsMode);
                 setSaveState(true);
                 setpostAs(!postAs);
-                 setstarterPrompt(false);
-                 setPostInsp(false);
-                 setscores(false);
-                 setCalendar(false);
+                setstarterPrompt(false);
+                setPostInsp(false);
+                setscores(false);
+                setCalendar(false);
               }}
             />
             <span className="slider round"></span>
@@ -58,22 +60,33 @@ function PostAs(props) {
       </div>
       {postAs && (
         <div className={`postInspMore ${postAsMode ? "" : "unactive"}`}>
-          <div className=" allPostAsBtn ">
+          <div className=" allPostAsBtn">
             {allPostAs.map((pos, index) => (
-              <input
-                id={index}
-                key={index}
-                type="text"
-                className="postAsBtn"
-                placeholder="#channel"
-                value={allPostAs[index]}
-                onChange={(e) => {
-                  let newpostAs = [...allPostAs];
-                  newpostAs[e.target.id] = e.target.value;
-                  setAllPostAs(newpostAs);
-                  // console.log(allPostInsp);
-                }}
-              />
+              <div className="postAsCont shadow-md">
+                <input
+                  id={index}
+                  key={index}
+                  type="text"
+                  className="postAsBtn"
+                  placeholder="channel"
+                  value={allPostAs[index]}
+                  onChange={(e) => {
+                    let newpostAs = [...allPostAs];
+                    newpostAs[e.target.id] = e.target.value;
+                    setAllPostAs(newpostAs);
+                    // console.log(allPostInsp);
+                  }}
+                />
+                <img
+                  className="deletePostIc"
+                  id={index}
+                  src={deleteIc}
+                  onClick={(e) => {
+                    DelPostAs(e.target.id);
+                  }}
+                  alt=""
+                />
+              </div>
             ))}
           </div>
           <div className="flex justify-end">
