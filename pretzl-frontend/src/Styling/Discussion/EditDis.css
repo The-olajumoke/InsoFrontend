@@ -3,9 +3,9 @@
 }
 
 .editModal {
-  /* background: rgb(240, 240, 240, 0.7); */
-  /* position: absolute; */
-  background-color: purple;
+  background: rgb(240, 240, 240, 0.7);
+  position: absolute;
+  /* background-color: purple; */
   top: 0;
   left: 0;
   bottom: 0;
@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   overflow-y: scroll;
-  height: 100vh;
+  height: auto;
 }
 .EditDiscont {
   width: 556px;

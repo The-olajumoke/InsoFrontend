@@ -55,6 +55,7 @@ export const editDisc = createAsyncThunk(
      {
      alert(JSON.stringify(disc, null, 2));
      }
+     console.log(disc)
 
     var apiBaseUrl = "http://localhost:8080/api/auth/edit/discussions";
 

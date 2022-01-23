@@ -12,8 +12,7 @@ import Scores from "../EditDisc/Scores";
 import Calendar from "../EditDisc/Calendar";
 import { useEffect } from "react";
 
-function EditDisModal({ discussi, showEditModal }) {
-  const discussions = ["hello", "hi", "whatsUp"];
+function EditDisModal({ discussions, showEditModal }) {
   const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   const [saveState, setSaveState] = useState(false);
@@ -213,7 +212,8 @@ function EditDisModal({ discussi, showEditModal }) {
   };
   return (
     <div className="editModal">
-      <div className="EditDiscont border z-40">
+
+      <div className="EditDiscont  z-40">
         <div className="EditDisTop">
           <button
             className={`saveSettingBtn ${
