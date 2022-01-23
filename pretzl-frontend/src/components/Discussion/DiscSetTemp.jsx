@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FiArrowRight, FiEdit } from "react-icons/fi";
 import { MdChatBubbleOutline, MdContentCopy, MdLock } from "react-icons/md";
@@ -7,8 +7,19 @@ import "../../Styling/Discussion/Discussion.css";
 import imgIcon from "../../Exports/discSet.svg";
 import history from "../../utils/history";
 import img from "../../Exports/DisIcon.svg";
-function DiscSetTemp({ title, id, code, name, numberOfPeople, date,discussions }) {
+import dateFormat from "dateformat";
+function DiscSetTemp({
+  title,
+  id,
+  code,
+  name,
+  numberOfPeople,
+  date,
+  discussions,
+}) {
+    const [showEdit, setshowEdit] = useState(false);
   const discId = discussions[0].setId;
+  date = dateFormat(date, "mmm dS");
   return (
     <div className="discBox">
       <div className="boxHead">
@@ -41,12 +52,17 @@ function DiscSetTemp({ title, id, code, name, numberOfPeople, date,discussions }
           </h3>
 
           {/* <Link to={`discussion-set/${discId}`}> */}
-          <Link to={{pathname:`discussion-set/${discId}`,state:{disc:discussions}}}>
+          <Link
+            to={{
+              pathname: `discussion-set/${discId}`,
+              state: { disc: discussions },
+            }}
+          >
             <FiArrowRight className="text-primary w-6 h-6" />
           </Link>
         </div>
       </div>
-      {/* {showEdit && (
+      {showEdit && (
         <div className="editBox">
           <span>
             <FiEdit />
@@ -61,7 +77,7 @@ function DiscSetTemp({ title, id, code, name, numberOfPeople, date,discussions }
             Duplicate
           </span>
         </div>
-      )} */}
+      )}
     </div>
   );
 }

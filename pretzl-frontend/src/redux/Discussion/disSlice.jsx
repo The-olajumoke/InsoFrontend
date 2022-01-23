@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   createState: false,
-  discussions:[],
+  discussions: [],
 };
 
 const disSlice = createSlice({
@@ -16,18 +16,18 @@ const disSlice = createSlice({
     StopDisc: (state, { payload }) => {
       state.newDiscusssion = [];
     },
-    SaveDiscussions:(state,{payload})=>{
-      state.discussions=payload;
+    SaveDiscussions: (state, { payload }) => {
+      state.discussions = payload;
       console.log(state.discussions);
-    }
+    },
   },
 });
 
 export const createDisc = createAsyncThunk(
   "disc/createDis",
   async (disc, { dispatch }) => {
-    console.log(disc)
-  
+    console.log(disc);
+
     var apiBaseUrl = "http://localhost:8080/api/auth/create/discussions";
 
     axios.defaults.headers.post["Content-Type"] =
@@ -40,22 +40,21 @@ export const createDisc = createAsyncThunk(
       console.log(res);
       console.log(res.status);
       if (res.status) {
-     dispatch(SetCreateState())
+        dispatch(SetCreateState());
       }
     } catch (error) {
       console.log({ ...error });
-
     }
   }
 );
 export const editDisc = createAsyncThunk(
   "disc/createDis",
   async (disc, { dispatch }) => {
-    console.log(disc)
-     {
-     alert(JSON.stringify(disc, null, 2));
-     }
-     console.log(disc)
+    console.log(disc);
+    {
+      alert(JSON.stringify(disc, null, 2));
+    }
+    console.log(disc);
 
     var apiBaseUrl = "http://localhost:8080/api/auth/edit/discussions";
 
@@ -70,7 +69,6 @@ export const editDisc = createAsyncThunk(
       console.log(res.status);
     } catch (error) {
       console.log({ ...error });
-
     }
   }
 );
@@ -82,10 +80,5 @@ export const saveDisc = (disc) => (dispatch) => {
   dispatch(SaveDiscussions(disc));
 };
 
-export const { SetCreateState, StopDisc,SaveDiscussions } = disSlice.actions;
+export const { SetCreateState, StopDisc, SaveDiscussions } = disSlice.actions;
 export default disSlice.reducer;
-
-
-
-
-

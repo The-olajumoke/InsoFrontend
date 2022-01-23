@@ -11,11 +11,13 @@ import PostAs from "../EditDisc/PostAs";
 import Scores from "../EditDisc/Scores";
 import Calendar from "../EditDisc/Calendar";
 import { useEffect } from "react";
+import axios from "axios";
 
 function EditDisModal({ discussions, showEditModal }) {
   const dispatch = useDispatch();
   const [allCheckedIDs, setallCheckedIDs] = useState([]);
   const [saveState, setSaveState] = useState(false);
+  const [previousValue, setPreviousVal] = useState([]);
   // STARTER PROMPT
   const [starterPrompt, setstarterPrompt] = useState(false);
   const [starterPromptMode, setstarterPromptMode] = useState(false);
@@ -172,15 +174,40 @@ function EditDisModal({ discussions, showEditModal }) {
   };
   let id;
 
-  // useEffect(() => {
-  //   const fetchDiscussions = () => {
-  //     if (discussions.length === 1) {
-  //       id = discussions[0].code;
-  //       setallCheckedIDs([id]);
-  //     }
-  //   };
-  //   fetchDiscussions();
-  // }, []);
+  const getPreviousData = async () => {
+    var apiBaseUrl = `http://localhost:8080/api/auth/discussion?discussionId=${discussions[0].code}`;
+
+    axios.defaults.headers.get["Content-Type"] =
+      "application/json;charset=utf-8";
+    axios.defaults.headers.get["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.get["Access-Control-Allow-Methods"] = "GET";
+    try {
+      const res = await axios.get(apiBaseUrl);
+      const data = res.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log({ ...error });
+      // return DiscussionCont;
+    }
+  };
+  useEffect(() => {
+    const fetchDiscussions = async () => {
+      const previousData = await getPreviousData();
+      console.log(previousData);
+      // setPreviousVal(previousData);
+      setstarterPromptValue(previousData.updateDiscussion.starterPrompt);
+
+      setAllPostAs(previousData.updateDiscussion.postAs);
+
+      if (discussions.length === 1) {
+        id = discussions[0].code;
+        setallCheckedIDs([id]);
+      }
+    };
+    fetchDiscussions();
+  }, []);
+
   console.log(allCheckedIDs);
   console.log(discussions);
 
@@ -212,7 +239,6 @@ function EditDisModal({ discussions, showEditModal }) {
   };
   return (
     <div className="editModal">
-
       <div className="EditDiscont  z-40">
         <div className="EditDisTop">
           <button
@@ -291,6 +317,7 @@ function EditDisModal({ discussions, showEditModal }) {
               starterPrompt={starterPrompt}
               starterPromptMode={starterPromptMode}
               setstarterPromptMode={setstarterPromptMode}
+              starterPromptValue={starterPromptValue}
               setSaveState={setSaveState}
               setstarterPromptValue={setstarterPromptValue}
               //general

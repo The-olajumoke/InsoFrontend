@@ -20,6 +20,7 @@ function StarterPrompt(props) {
     setpostAs,
     setscores,
     setCalendar,
+    starterPromptValue,
   } = props;
   return (
     <div className="settingsMainCont ">
@@ -66,10 +67,11 @@ function StarterPrompt(props) {
       </div>
       {starterPrompt && (
         <div className="settingsMore">
-          <div className="commentBox  settingsBox">
+          <div className="commentBox  settingsBox ">
             <textarea
               className="textA"
               name=""
+              value={starterPromptValue}
               placeholder="Get this discussion started"
               onChange={(e) => setstarterPromptValue(e.target.value)}
             ></textarea>
