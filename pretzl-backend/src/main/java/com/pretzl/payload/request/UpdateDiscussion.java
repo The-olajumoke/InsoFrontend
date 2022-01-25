@@ -27,8 +27,9 @@ public class UpdateDiscussion {
         discussionDetail.setSet_id(set_id);
         discussionDetail.setStart_date(getStartDate());
         discussionDetail.setClose_date(getCloseDate());
-        discussionDetail.setPost_inspiration(getPostInspirations().stream().map(PostInspiration::getType).toArray(String[]::new));
+        discussionDetail.setPost_inspiration(new String[0]);
         discussionDetail.setScore(actions.getScore());
+        discussionDetail.setTotal_score(getScores().getTotalScore());
         String actionsType = actions.getType();
         if (actionsType == null) {
             discussionDetail.setType("Rubric");
@@ -57,10 +58,23 @@ public class UpdateDiscussion {
         discussionDetail.setType("PA");
         discussionDetail.setStarter_prompt(getStarterPrompt());
         discussionDetail.setCriteria(new String[0]);
-        discussionDetail.setPost_inspiration(getPostInspirations().stream()
-                .map(PostInspiration::getType).
-                toArray(String[]::new));
+        discussionDetail.setPost_inspiration(new String[0]);
         discussionDetail.setPost_as(postAs);
+        return discussionDetail;
+    }
+
+    public DiscussionDetail getDiscussionDetailPostInspiration(String set_id,
+                                                               PostInspiration postInspiration) {
+
+        DiscussionDetail discussionDetail = new DiscussionDetail();
+        discussionDetail.setDiscussion_id(getDiscussion_id());
+        discussionDetail.setSet_id(set_id);
+        discussionDetail.setStart_date(getStartDate());
+        discussionDetail.setClose_date(getCloseDate());
+        discussionDetail.setType(postInspiration.getType());
+        discussionDetail.setStarter_prompt(getStarterPrompt());
+        discussionDetail.setCriteria(new String[0]);
+        discussionDetail.setPost_inspiration(postInspiration.getComments().toArray(new String[0]));
         return discussionDetail;
     }
 }

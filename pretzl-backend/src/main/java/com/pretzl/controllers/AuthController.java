@@ -248,6 +248,7 @@ public class AuthController {
                             .map(actions -> updateDiscussion.getDiscussionDetail(set_id, actions))
                             .collect(Collectors.toList()));
                     updateDiscussion.getPostAs().forEach(postAs -> discussionDetails.add(updateDiscussion.getDiscussionDetailPostAs(set_id, postAs)));
+            updateDiscussion.getPostInspirations().forEach(postInspiration -> discussionDetails.add(updateDiscussion.getDiscussionDetailPostInspiration(set_id,postInspiration)));
                 }
 
         );
@@ -291,22 +292,31 @@ public class AuthController {
         updateDiscussion.setCloseDate(discussionDetail.getClose_date());
         updateDiscussion.setStartDate(discussionDetail.getStart_date());
         updateDiscussion.setStarterPrompt(discussionDetail.getStarter_prompt());
-        if (discussionDetail.getPost_inspiration() != null) {
+       /* if (discussionDetail.getPost_inspiration() != null) {
+            Arrays.stream(discussionDetail.getPost_inspiration())
             ArrayList<PostInspiration> postInspirations = new ArrayList<>(Arrays.stream(discussionDetail.getPost_inspiration())
                     .filter(StringUtils::isNotEmpty).map(post -> {
                         PostInspiration postInspiration = new PostInspiration();
-                        postInspiration.setType("posting");
+                        postInspiration.setType(post.get);
                         List<String> arrayList = new ArrayList<>();
                         arrayList.add(post);
                         postInspiration.setComments(arrayList);
                         return postInspiration;
                     }).collect(Collectors.toList()));
             updateDiscussion.setPostInspirations(postInspirations);
-        }
+        }*/
         List<String> postAs = new ArrayList<>();
         List<Actions> actionsList = new ArrayList<>();
         AtomicInteger counter = new AtomicInteger(0);
+        List<PostInspiration> postInspirations = new ArrayList<>();
         userDiscussions.forEach(discussion -> {
+            if(discussion.getPost_inspiration()!=null && discussion.getPost_inspiration().length>0){
+                List<String> arrayList = new ArrayList<>(Arrays.asList(discussion.getPost_inspiration()));
+                PostInspiration postInspiration = new PostInspiration();
+                postInspiration.setComments(arrayList);
+                postInspiration.setType(discussion.getType());
+                postInspirations.add(postInspiration);
+            }
             if (StringUtils.isNotEmpty(discussion.getPost_as())) {
                 postAs.add(discussion.getPost_as());
             }
@@ -334,9 +344,11 @@ public class AuthController {
         Score score = new Score();
         score.setType("score");
         score.setActions(actionsList);
-        score.setTotalScore(counter.get());
+        score.setTotalScore(userDiscussions.stream().filter(discussionDetail1 -> discussionDetail1.getTotal_score() > 0)
+                        .findAny().orElse(new DiscussionDetail()).getTotal_score());
         updateDiscussion.setScores(score);
         updateDiscussion.setPostAs(postAs);
+        updateDiscussion.setPostInspirations(postInspirations);
 //        getDiscussionsResponse.setUpdateDiscussions();
         getDiscussionsResponse.setUpdateDiscussion(updateDiscussion);
         getDiscussionsResponse.setUserDiscussionsById(userDiscussionsById);
