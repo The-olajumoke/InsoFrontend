@@ -77,7 +77,7 @@ function ViewDiscussion() {
       <ResponsiveTop title="Discussion" />
 
       <div className="viewDisCont pt-1">
-        {showPostInsp && <ViewPostInsp togglePostInsp={togglePostInsp} />}
+        {showPostInsp && <ViewPostInsp togglePostInsp={togglePostInsp} postInsp={ DiscussionCont} />}
         {viewHelp && <ViewStarterPrompt togglePrompt={togglePrompt} />}
         {/* HEADING AND TITLE */}
         <div className="viewHeading ">

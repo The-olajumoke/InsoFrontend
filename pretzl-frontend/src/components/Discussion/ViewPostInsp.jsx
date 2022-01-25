@@ -3,20 +3,20 @@ import "../../Styling/Discussion/ViewPostInsp.css";
 import "../../Styling/Discussion/EditDis.css";
 import clear from "../../Exports/clear.svg";
 
-function ViewPostInsp({ togglePostInsp }) {
+function ViewPostInsp({ togglePostInsp, postInsp }) {
+  console.log(postInsp);
   const [posting, setPosting] = useState(true);
   const [responding, setResponding] = useState(false);
   const [synthesizing, setSynthesizing] = useState(false);
-  const [allPostInsp, setAllPostInsp] = useState([
-    "Identify similarities and differences between the way you and your peer approached this topic.",
-    "Identify similarities and differences between the way you and your peer approached this topic.",
-  ]);
-  const [RespInsp, setRespInsp] = useState([
-    "Identify similarities and differences between the way you and your peer approached this topic.",
-  ]);
-  const [SynInsp, setSynInsp] = useState([
-    "Identify similarities and differences between the way you and your peer approached this topic.",
-  ]);
+  const [allPostInsp, setAllPostInsp] = useState(
+    postInsp.updateDiscussion.postInspirations[0].comments
+  );
+  const [RespInsp, setRespInsp] = useState(
+    postInsp.updateDiscussion.postInspirations[1].comments
+  );
+  const [SynInsp, setSynInsp] = useState(
+    postInsp.updateDiscussion.postInspirations[2].comments
+  );
 
   return (
     <div className="seeAllPostInsp">
@@ -61,7 +61,7 @@ function ViewPostInsp({ togglePostInsp }) {
         </button>
       </div>
       <div className="postInspCont">
-        {posting && allPostInsp.map((ins, index) => <h4 key={index}>{ins}</h4>)}
+        {posting && allPostInsp.map((ins, index) => <h4 className=" text-textBody" key={index}>{ins}</h4>)}
         {responding && RespInsp.map((ins, index) => <h4 key={index}>{ins}</h4>)}
         {synthesizing &&
           SynInsp.map((ins, index) => <h4 key={index}>{ins}</h4>)}

@@ -102,7 +102,7 @@ function DiscussionBox(props) {
             }}
           />
         </div>
-        <Link to={{ pathname: `/discussion/${code}` }}>
+        <Link to={{ pathname: `/discussion/${code}`}}>
           <button>Open</button>
         </Link>
       </div>

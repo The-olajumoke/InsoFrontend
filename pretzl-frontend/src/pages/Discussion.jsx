@@ -67,9 +67,13 @@ function Discussion() {
       }
       hash[el.setId].push(el);
     });
-    newArray = result;
+
+    // SORT ARRAY
+    newArray = result.reverse();
+    console.log(newArray);
     return result;
   };
+
   groupByIds(DiscussionCont);
 
   return (
@@ -108,8 +112,6 @@ function Discussion() {
               <NoMessageYet message="It’s lonely in here. Create a new discussion" />
             ) : (
               newArray.map((arr) => {
-                console.log(arr);
-                console.log(arr.length);
                 if (arr.length == 1) {
                   return arr.map((dis, index) => (
                     <DiscussionBox
