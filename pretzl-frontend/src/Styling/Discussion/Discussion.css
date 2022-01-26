@@ -368,6 +368,7 @@
   bottom: 0;
   margin: auto;
   z-index: 30;
+  width: 100px;
 }
 .addBtn {
   width: 40px;
@@ -388,7 +389,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 7px 25px;
+  height: 40px;
 }
 /*  */
 @media (max-width: 1064px) {
@@ -418,7 +419,7 @@
   .disMain {
     /* height:100% ; */
   }
-   .allDisCont {
+  .allDisCont {
     column-gap: 5px;
     justify-content: space-evenly;
   }

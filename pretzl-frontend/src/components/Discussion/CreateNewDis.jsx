@@ -7,6 +7,7 @@ import CreateBox from "./CreateBox";
 import { createDisc } from "../../redux/Discussion/disSlice";
 import store from "../../redux/store";
 import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
+import { CgSpinner } from "react-icons/cg";
 import CustomizedSnackbars from "../NotiPopUp";
 function CreateNewDis({ handleClick, showMenu }) {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function CreateNewDis({ handleClick, showMenu }) {
   const [active, setActive] = useState(false);
 
   const [setTitle, setSetTitle] = useState("");
+  const [loading, setLoading] = useState("");
   const [allDisc, setAllDisc] = useState([
     {
       description: "",
@@ -53,6 +55,7 @@ function CreateNewDis({ handleClick, showMenu }) {
     setAllDisc(newArray);
   };
   const handleCreate = async () => {
+    setLoading(true);
     const currentUsername = localStorage.getItem("username");
 
     const payload = {
@@ -62,6 +65,7 @@ function CreateNewDis({ handleClick, showMenu }) {
 
     console.log(payload);
     await dispatch(createDisc(payload));
+    setLoading(false);
     const currentStore = store.getState();
 
     const createdState = currentStore.disc.createState;
@@ -112,7 +116,7 @@ function CreateNewDis({ handleClick, showMenu }) {
                     handleEdit={handleEdit}
                     val={di.description}
                   />
-                  <div className="actionsCont flex ">
+                  <div className="actionsCont flex">
                     <FiPlus
                       className={`addBtn ${
                         active ? "bg-primary" : "bg-dashBtn"
@@ -120,12 +124,19 @@ function CreateNewDis({ handleClick, showMenu }) {
                       onClick={handleplusClick}
                     />
                     <button
-                      className={`creBtn ${
+                      className={`creBtn font-bold ${
                         active ? "bg-primary" : "bg-dashBtn"
                       }  ${active ? "text-white" : "text-desc"}`}
                       onClick={handleCreate}
                     >
-                      Create
+                      {loading ? (
+                        <span className=" flex justify-center items-center">
+                          <CgSpinner className=" w-full animate-spin    mr-1" />
+                          Creating
+                        </span>
+                      ) : (
+                        "Create"
+                      )}
                     </button>
                   </div>
                 </div>

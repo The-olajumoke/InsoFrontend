@@ -77,10 +77,12 @@ function EditDisModal({ discussions, showEditModal }) {
   const [applyAll, setApplyAll] = useState(false);
   const [showCalDate, setShowCalDate] = useState(false);
 
-  const [date, setDate] = useState([
-    new Date(2021, 6, 1),
-    new Date(2021, 6, 10),
-  ]);
+  const today = new Date();
+  let tommorrow = new Date();
+  tommorrow.setDate(today.getDate() + 1);
+  console.log(tommorrow);
+
+  const [date, setDate] = useState([today, tommorrow]);
 
   //   HANDLE CHECKED
   const handleChecked = (e) => {
@@ -98,6 +100,15 @@ function EditDisModal({ discussions, showEditModal }) {
   //HANDLE SAVE EDITS
   const saveEdit = () => {
     console.log(upvoteValue);
+    var firstEvent = date[0];
+
+    let dateOne = JSON.stringify(firstEvent);
+    dateOne = dateOne.slice(1, 11);
+
+    var secondEvent = date[1];
+
+    let dateTwo = JSON.stringify(secondEvent);
+    dateTwo = dateTwo.slice(1, 11);
 
     const payload = {
       set_id: `${discussions[0].setId || discussions[0].setID}`,
@@ -154,28 +165,36 @@ function EditDisModal({ discussions, showEditModal }) {
 
             totalScore: automatic ? totalValue : rubMaxScore,
           },
-          startDate: "2022-01-15",
-          closeDate: "2022-01-19",
+
+          startDate: dateOne,
+          closeDate: dateTwo,
         })),
       ],
     };
     //hhhjxjjxn
     console.log(JSON.stringify(payload, undefined, 2));
 
-    dispatch(editDisc(payload));
-    setApplyAll(false);
-    showEditModal();
+    // dispatch(editDisc(payload));
+    // setApplyAll(false);
+    // showEditModal();
   };
   //HANDLE ChECkBOX
-  const checkBox = (e) => {
+  const checkBox = async (e) => {
     console.log(e.target.id);
     setallCheckedIDs([...allCheckedIDs, e.target.id]);
     setSaveState(true);
+    const currentData = await getPreviousData(e.target.id);
+    setstarterPromptValue(currentData.updateDiscussion.starterPrompt);
+    // setAllPostInsp(currentData.updateDiscussion.postInspirations[0].comments);
+    // setRespInsp(currentData.updateDiscussion.postInspirations[1].comments);
+    // setSynInsp(currentData.updateDiscussion.postInspirations[2].comments);
+
+    setAllPostAs(currentData.updateDiscussion.postAs);
   };
   let id;
 
-  const getPreviousData = async () => {
-    var apiBaseUrl = `http://localhost:8080/api/auth/discussion?discussionId=${discussions[0].code}`;
+  const getPreviousData = async (code) => {
+    var apiBaseUrl = `http://localhost:8080/api/auth/discussion?discussionId=${code}`;
 
     axios.defaults.headers.get["Content-Type"] =
       "application/json;charset=utf-8";
@@ -193,11 +212,15 @@ function EditDisModal({ discussions, showEditModal }) {
   };
   useEffect(() => {
     const fetchDiscussions = async () => {
-      const previousData = await getPreviousData();
+      const previousData = await getPreviousData(discussions[0].code);
       console.log(previousData);
       // setPreviousVal(previousData);
       setstarterPromptValue(previousData.updateDiscussion.starterPrompt);
-
+      // setAllPostInsp(
+      //   previousData.updateDiscussion.postInspirations[0].comments
+      // );
+      // setRespInsp(previousData.updateDiscussion.postInspirations[1].comments);
+      // setSynInsp(previousData.updateDiscussion.postInspirations[2].comments);
       setAllPostAs(previousData.updateDiscussion.postAs);
 
       if (discussions.length === 1) {
